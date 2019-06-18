@@ -17,53 +17,7 @@
 
 <body>
 
-<div class="head" id="fixed">
-	<div class="nav">
-    	<span class="navimg"><a href="index.html"><img border="0" src="images/logo.png"></a></span>
-        <ul class="nag">
-        	<li><a href="courselist.html" class="link1 current">课程</a></li>
-            <li><a href="articlelist.html" class="link1">资讯</a></li>
-            <li><a href="teacherlist.html" class="link1">讲师</a></li>
-            <li><a href="exam_index.html" class="link1" target="_blank">题库</a></li>
-            <li><a href="askarea.html" class="link1" target="_blank">问答</a></li>
-            
-        </ul>
-        <span class="massage">
-            <!--<span class="select">
-        	<a href="#" class="sort">课程</a>
-        	<input type="text" value="关键字"/>
-            <a href="#" class="sellink"></a>
-            <span class="sortext">
-            	<p>课程</p>
-                <p>题库</p>
-                <p>讲师</p>
-            </span>
-        </span>--> 
-        	<!--未登录-->
-        	<span class="exambtn_lore">
-                 <a class="tkbtn tklog" href="login.html">登录</a>
-                 <a class="tkbtn tkreg" href="register.html">注册</a>
-            </span>
-            <!--登录后-->
-            <!--<div class="logined">
-                <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>
-                <span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">
-                    <span style="background:#fff;">
-                        <a href="mycourse.html" style="width:70px; display:block;" class="link2 he ico" target="_blank">sherley</a>
-                    </span>
-                    <div class="clearh"></div>
-                    <ul class="logmine" >
-                        <li><a class="link1" href="#">我的课程</a></li>
-                        <li><a class="link1" href="#">我的题库</a></li>
-                        <li><a class="link1" href="#">我的问答</a></li>
-                        <li><a class="link1" href="#">退出</a></li>
-                    </ul>
-                </span>
-            </div>-->
-            
-        </span>
-    </div>
-</div>
+
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="coursecont">
 <div class="coursepic">
@@ -77,16 +31,16 @@
 		<p class="courstime">讲师：马老师</p>
 		<p class="courstime">课程评价：<img width="71" height="14" src="images/evaluate5.png">&nbsp;&nbsp;<span class="hidden-sm hidden-xs">5.0分（10人评价）</span></p>
         <!--<p><a class="state end">完结</a></p>-->      
-        <span class="coursebtn"><a class="btnlink" href="coursecont1.html">加入学习</a><a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a><a class="codol sc" href="#">收藏课程</a></span> 
+        <span class="coursebtn"><a class="btnlink" href="coursecont1" target="main">加入学习</a><a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a><a class="codol sc" href="#">收藏课程</a></span>
 		<div style="clear:both;"></div>
 		<div id="bds">
             <div class="bdsharebuttonbox">
-				<a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
-				<a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
-				<a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
-				<a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a>
-				<a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
-				<a href="#" class="bds_more" data-cmd="more"></a>
+				<a title="分享到QQ空间" href="#" target="main" class="bds_qzone" data-cmd="qzone"></a>
+				<a title="分享到新浪微博" href="#" target="main" class="bds_tsina" data-cmd="tsina"></a>
+				<a title="分享到腾讯微博" href="#" target="main" class="bds_tqq" data-cmd="tqq"></a>
+				<a title="分享到人人网" href="#" target="main" class="bds_renren" data-cmd="renren"></a>
+				<a title="分享到微信" href="#" target="main" class="bds_weixin" data-cmd="weixin"></a>
+				<a href="#" target="main" class="bds_more" data-cmd="more"></a>
 				<a class="bds_count" data-cmd="count"></a>
 			</div>
             <script>
@@ -104,36 +58,36 @@
 	<div class="clearh"></div>
 	<h3 class="leftit">课程目录</h3>
     <dl class="mulu">
-    	<dt><a href="coursecont1.html" class="graylink">第一章&nbsp;&nbsp;总论</a></dt>
+    	<dt><a href="coursecont1" target="main" class="graylink">第一章&nbsp;&nbsp;总论</a></dt>
         <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
    
     
-    	<dt><a href="#" class="graylink">第二章&nbsp;&nbsp;会计要素与会计等式</a></dt>
+    	<dt><a href="#" target="main" class="graylink">第二章&nbsp;&nbsp;会计要素与会计等式</a></dt>
         <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
     
     
-    	<dt><a href="#" class="graylink">第三章&nbsp;&nbsp;会计科目与账户</a></dt>
+    	<dt><a href="#" target="main" class="graylink">第三章&nbsp;&nbsp;会计科目与账户</a></dt>
         <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
     
-    	<dt><a href="#" class="graylink">第四章&nbsp;&nbsp;会计记账方法</a></dt>
+    	<dt><a href="#" target="main" class="graylink">第四章&nbsp;&nbsp;会计记账方法</a></dt>
         <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
 
-		<dt><a href="#" class="graylink">第五章&nbsp;&nbsp;借贷记账法下主要经济业务的账务处理</a></dt>
+		<dt><a href="#" target="main" class="graylink">第五章&nbsp;&nbsp;借贷记账法下主要经济业务的账务处理</a></dt>
         <dd>介绍ISO/OSI七层模型、TCP/IP四层模型、IP地址、DNS、端口、网关等网络知识，为Linux的网络配置打好基础。</dd>
 
-		<dt><a href="#" class="graylink">第六章&nbsp;&nbsp;会计凭证</a></dt>
+		<dt><a href="#" target="main" class="graylink">第六章&nbsp;&nbsp;会计凭证</a></dt>
         <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
 
-		<dt><a href="#" class="graylink">第七章&nbsp;&nbsp; 会计账簿</a></dt>
+		<dt><a href="#" target="main" class="graylink">第七章&nbsp;&nbsp; 会计账簿</a></dt>
         <dd>介绍ISO/OSI七层模型、TCP/IP四层模型、IP地址、DNS、端口、网关等网络知识，为Linux的网络配置打好基础。</dd>
 
-		<dt><a href="#" class="graylink">第八章&nbsp;&nbsp;账务处理程序</a></dt>
+		<dt><a href="#" target="main" class="graylink">第八章&nbsp;&nbsp;账务处理程序</a></dt>
         <dd>介绍ISO/OSI七层模型、TCP/IP四层模型、IP地址、DNS、端口、网关等网络知识，为Linux的网络配置打好基础。</dd>
 
-		<dt><a href="#" class="graylink">第九章&nbsp;&nbsp; 财产清查</a></dt>
+		<dt><a href="#" target="main"  class="graylink">第九章&nbsp;&nbsp; 财产清查</a></dt>
         <dd>介绍ISO/OSI七层模型、TCP/IP四层模型、IP地址、DNS、端口、网关等网络知识，为Linux的网络配置打好基础。</dd>
 
-		<dt><a href="#" class="graylink">第十章&nbsp;&nbsp;财务报表</a></dt>
+		<dt><a href="#" target="main" class="graylink">第十章&nbsp;&nbsp;财务报表</a></dt>
         <dd>内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列</dd>
     </dl>
 </div>
@@ -144,8 +98,8 @@
     <h3 class="righttit">授课讲师</h3>
     <div class="teacher">
     <div class="teapic ppi">
-    <a href="teacher.html" target="_blank"><img src="images/teacher.png" width="80" class="teapicy" title="张民智"></a>
-    <h3 class="tname"><a href="teacher.html" class="peptitle" target="_blank">张民智</a><p style="font-size:14px;color:#666">会计讲师</p></h3>
+    <a href="teacher" target="main" target="_blank"><img src="images/teacher.png" width="80" class="teapicy" title="张民智"></a>
+    <h3 class="tname"><a href="teacher" class="peptitle" target="main">张民智</a><p style="font-size:14px;color:#666">会计讲师</p></h3>
     </div>
     <div class="clearh"></div>
     <p>十年以上Linux从业经验， 培训经验超过八年。在各 个知名培训机构做过金牌 讲师、学科负责人，培训 学员过万人。曾获红帽认 证讲师，微软认证讲师等 资质认证。教学以逻辑性 强、教学细致、知识点准 确著称。</p>

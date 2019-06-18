@@ -30,53 +30,7 @@ $(function(){
 
 <body>
 
-<div class="head" id="fixed">
-	<div class="nav">
-    	<span class="navimg"><a href="index.html"><img border="0" src="images/logo.png"></a></span>
-        <ul class="nag">
-        	<li><a href="courselist.html" class="link1 current">课程</a></li>
-            <li><a href="articlelist.html" class="link1">资讯</a></li>
-            <li><a href="teacherlist.html" class="link1">讲师</a></li>
-            <li><a href="exam_index.html" class="link1" target="_blank">题库</a></li>
-            <li><a href="askarea.html" class="link1" target="_blank">问答</a></li>
-            
-        </ul>
-        <span class="massage">
-            <!--<span class="select">
-        	<a href="#" class="sort">课程</a>
-        	<input type="text" value="关键字"/>
-            <a href="#" class="sellink"></a>
-            <span class="sortext">
-            	<p>课程</p>
-                <p>题库</p>
-                <p>讲师</p>
-            </span>
-        </span>--> 
-        	<!--未登录-->
-        	<span class="exambtn_lore">
-                 <a class="tkbtn tklog" href="login.html">登录</a>
-                 <a class="tkbtn tkreg" href="register.html">注册</a>
-            </span>
-            <!--登录后-->
-            <!--<div class="logined">
-                <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>
-                <span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">
-                    <span style="background:#fff;">
-                        <a href="mycourse.html" style="width:70px; display:block;" class="link2 he ico" target="_blank">sherley</a>
-                    </span>
-                    <div class="clearh"></div>
-                    <ul class="logmine" >
-                        <li><a class="link1" href="#">我的课程</a></li>
-                        <li><a class="link1" href="#">我的题库</a></li>
-                        <li><a class="link1" href="#">我的问答</a></li>
-                        <li><a class="link1" href="#">退出</a></li>
-                    </ul>
-                </span>
-            </div>-->
-            
-        </span>
-    </div>
-</div>
+
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="clearh"></div>
 <div class="membertab">
@@ -85,18 +39,18 @@ $(function(){
     <div style="text-align:center;"><img src="images/0-0.JPG" width="80" ></div>
     <div style="width:220px;text-align:center;">
     <p class="membUpdate mine">某某某</p> 
-    <p class="membUpdate mine"><a href="mysetting.html">修改信息</a>&nbsp;|&nbsp;<a href="myrepassword.html">修改密码</a></p>
+    <p class="membUpdate mine"><a href="mysetting" target="main">修改信息</a>&nbsp;|&nbsp;<a href="myrepassword" target="main">修改密码</a></p>
     <div class="clearh"></div>
     </div>
     </div>
     <div class="memb">
    
     <ul>
-    	<li class="currnav"><a class="mb1" href="mycourse.html">我的课程</a></li>
-		<li><a class="mb3" href="myask.html">我的问答</a></li>
-		<li><a class="mb4" href="mynote.html">我的笔记</a></li>
-		<li><a class="mb12" href="myhomework.html">我的作业</a></li>
-        <li><a class="mb2" href="training_list.html" target="_blank">我的题库</a></li>
+    	<li class="currnav"><a class="mb1" href="mycourse" target="main">我的课程</a></li>
+		<li><a class="mb3" href="myask" target="main">我的问答</a></li>
+		<li><a class="mb4" href="mynote" target="main">我的笔记</a></li>
+		<li><a class="mb12" href="myhomework" target="main">我的作业</a></li>
+        <li><a class="mb2" href="training_list" target="main" target="_blank">我的题库</a></li>
    </ul>
    
     </div>
@@ -119,32 +73,32 @@ $(function(){
                     	
                         <li>
                             <div class="courseli">
-                            <a href="video.html" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video.html" class="blacklink">会计基础</a></p>
+                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
+                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
                             <div class="mpp">
                                 <div class="lv" style="width:20%;"></div>
                             </div>
-                            <p class="goon"><a href="video.html"><span>继续学习</span></a></p>
+                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
                             </div>
                         </li>
 <li>
                             <div class="courseli">
-                            <a href="video.html" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video.html" class="blacklink">会计基础</a></p>
+                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
+                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
                             <div class="mpp">
                                 <div class="lv" style="width:20%;"></div>
                             </div>
-                            <p class="goon"><a href="video.html"><span>继续学习</span></a></p>
+                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
                             </div>
                         </li>
 <li>
                             <div class="courseli">
-                            <a href="video.html" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video.html" class="blacklink">会计基础</a></p>
+                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
+                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
                             <div class="mpp">
                                 <div class="lv" style="width:20%;"></div>
                             </div>
-                            <p class="goon"><a href="video.html"><span>继续学习</span></a></p>
+                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
                             </div>
                         </li>
                         
@@ -162,22 +116,22 @@ $(function(){
                     	
                         <li>
                             <div class="courseli">
-                            <a href="video.html" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="coursecont.html" class="blacklink">会计基础</a></p>
+                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
+                            <p class="memb_courname"><a href="coursecont" target="main" class="blacklink">会计基础</a></p>
 							<div class="mpp">
                                 <div class="lv" style="width:100%;"></div>
                             </div>
-                            <p class="goon"><a href="coursecont.html"><span>查看课程</span></a></p>
+                            <p class="goon"><a href="coursecont" target="main"><span>查看课程</span></a></p>
                             </div>
                         </li>
                         <li>
                             <div class="courseli">
-                            <a href="video.html" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="coursecont.html" class="blacklink">会计基础</a></p>
+                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
+                            <p class="memb_courname"><a href="coursecont" target="main" class="blacklink">会计基础</a></p>
 							<div class="mpp">
                                 <div class="lv" style="width:100%;"></div>
                             </div>
-                            <p class="goon"><a href="coursecont.html"><span>查看课程</span></a></p>
+                            <p class="goon"><a href="coursecont" target="main"><span>查看课程</span></a></p>
                             </div>
                         </li>
                         
@@ -192,8 +146,8 @@ $(function(){
 					<ul class="memb_course">                   	
                         <li>
                             <div class="courseli mysc">
-                            <a href="video.html" target="_blank"><img width="230" src="images/c8.jpg" class="mm"></a>
-                            <p class="memb_courname"><a href="video.html" class="blacklink">会计基础</a></p>
+                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg" class="mm"></a>
+                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
                             <div class="mpp">
                                 <div class="lv" style="width:20%;"></div>
                             </div>
@@ -203,8 +157,8 @@ $(function(){
                         </li>
                         <li>
                             <div class="courseli mysc">
-                            <a href="video.html" target="_blank"><img width="230" src="images/c8.jpg" class="mm"></a>
-                            <p class="memb_courname"><a href="video.html" class="blacklink">会计基础</a></p>
+                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg" class="mm"></a>
+                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
                             <div class="mpp">
                                 <div class="lv" style="width:20%;"></div>
                             </div>
