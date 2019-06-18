@@ -16,70 +16,24 @@
 
 <body>
 
-<div class="head" id="fixed">
-	<div class="nav">
-    	<span class="navimg"><a href="index.html"><img border="0" src="images/logo.png"></a></span>
-        <ul class="nag">
-        	<li><a href="courselist.html" class="link1 current">课程</a></li>
-            <li><a href="articlelist.html" class="link1">资讯</a></li>
-            <li><a href="teacherlist.html" class="link1">讲师</a></li>
-            <li><a href="exam_index.html" class="link1" target="_blank">题库</a></li>
-            <li><a href="askarea.html" class="link1" target="_blank">问答</a></li>
-            
-        </ul>
-        <span class="massage">
-            <!--<span class="select">
-        	<a href="#" class="sort">课程</a>
-        	<input type="text" value="关键字"/>
-            <a href="#" class="sellink"></a>
-            <span class="sortext">
-            	<p>课程</p>
-                <p>题库</p>
-                <p>讲师</p>
-            </span>
-        </span>--> 
-        	<!--未登录-->
-        	<span class="exambtn_lore">
-                 <a class="tkbtn tklog" href="login.html">登录</a>
-                 <a class="tkbtn tkreg" href="register.html">注册</a>
-            </span>
-            <!--登录后-->
-            <!--<div class="logined">
-                <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>
-                <span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">
-                    <span style="background:#fff;">
-                        <a href="mycourse.html" style="width:70px; display:block;" class="link2 he ico" target="_blank">sherley</a>
-                    </span>
-                    <div class="clearh"></div>
-                    <ul class="logmine" >
-                        <li><a class="link1" href="#">我的课程</a></li>
-                        <li><a class="link1" href="#">我的题库</a></li>
-                        <li><a class="link1" href="#">我的问答</a></li>
-                        <li><a class="link1" href="#">退出</a></li>
-                    </ul>
-                </span>
-            </div>-->
-            
-        </span>
-    </div>
-</div>
+
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="coursecont">
 <div class="coursepic">
 	<h3 class="righttit">全部资讯</h3>
     <div class="clearh"></div>
     <span class="bread nob">
-        <a class="fombtn cur" href="articlelist.html">全部资讯</a>
-        <a class="fombtn" href="articlelist.html">热门资讯</a>
-        <a class="fombtn" href="articlelist.html">考试指导</a>
-        <a class="fombtn" href="articlelist.html">精彩活动</a>
+        <a class="fombtn cur" href="articlelist" target="main">全部资讯</a>
+        <a class="fombtn" href="articlelist" target="main">热门资讯</a>
+        <a class="fombtn" href="articlelist" target="main">考试指导</a>
+        <a class="fombtn" href="articlelist" target="main">精彩活动</a>
     </span>
     
 </div>
 <div class="clearh"></div>
 <div class="coursetext">
 	<div class="articlelist">
-    	<h3><a class="artlink" href="article.html">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
+    	<h3><a class="artlink" href="article" target="main">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
         <p>2015年第一季度山西省会计从业资格考务日程安排已公布，望各位同学周知。 按照《山西省财政厅关于印发会计从业资格无纸化考试管理规定的通知》(晋财会【2014】5号)，现将我省2015年一季度会计从业资格考试考务安排如下。 一、考试时间： 1、网上报名时间：3月2...</p>
         <p class="artilabel">
         <span class="ask_label">热门资讯</span>
@@ -88,7 +42,7 @@
         <div class="clearh"></div>
     </div>
     <div class="articlelist">
-    	<h3><a class="artlink" href="#">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
+    	<h3><a class="artlink" href="#" target="main">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
         <p>2015年第一季度山西省会计从业资格考务日程安排已公布，望各位同学周知。 按照《山西省财政厅关于印发会计从业资格无纸化考试管理规定的通知》(晋财会【2014】5号)，现将我省2015年一季度会计从业资格考试考务安排如下。 一、考试时间： 1、网上报名时间：3月2...</p>
         <p class="artilabel">
         <span class="ask_label">热门资讯</span>
@@ -97,7 +51,7 @@
         <div class="clearh"></div>
     </div>
     <div class="articlelist">
-    	<h3><a class="artlink" href="#">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
+    	<h3><a class="artlink" href="#" target="main">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
         <p>2015年第一季度山西省会计从业资格考务日程安排已公布，望各位同学周知。 按照《山西省财政厅关于印发会计从业资格无纸化考试管理规定的通知》(晋财会【2014】5号)，现将我省2015年一季度会计从业资格考试考务安排如下。 一、考试时间： 1、网上报名时间：3月2...</p>
         <p class="artilabel">
         <span class="ask_label">热门资讯</span>
@@ -106,7 +60,7 @@
         <div class="clearh"></div>
     </div>
     <div class="articlelist">
-    	<h3><a class="artlink" href="#">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
+    	<h3><a class="artlink" href="#" target="main">2015年第一季度山西省会计从业资格考务日程安排</a></h3>
         <p>2015年第一季度山西省会计从业资格考务日程安排已公布，望各位同学周知。 按照《山西省财政厅关于印发会计从业资格无纸化考试管理规定的通知》(晋财会【2014】5号)，现将我省2015年一季度会计从业资格考试考务安排如下。 一、考试时间： 1、网上报名时间：3月2...</p>
         <p class="artilabel">
         <span class="ask_label">热门资讯</span>
@@ -119,15 +73,15 @@
 	<div class="clearh" style="height:20px;"></div>
 	<span class="pagejump">
     	<p class="userpager-list">
-       	   <a href="#" class="page-number">首页</a>
-           <a href="#" class="page-number">上一页</a>
-           <a href="#" class="page-number">1</a>
-           <a href="#" class="page-number pageractive">2</a>
-           <a href="#" class="page-number">3</a>
-            <a href="#" class="page-number">...</a>
-            <a href="#" class="page-number">10</a>
-           <a href="#" class="page-number">下一页</a>
-           <a href="#" class="page-number">末页</a>
+       	   <a href="#" class="page-number" target="main">首页</a>
+           <a href="#" class="page-number" target="main">上一页</a>
+           <a href="#" class="page-number" target="main">1</a>
+           <a href="#" class="page-number pageractive" target="main">2</a>
+           <a href="#" class="page-number" target="main">3</a>
+            <a href="#" class="page-number" target="main">...</a>
+            <a href="#" class="page-number" target="main">10</a>
+           <a href="#" class="page-number" target="main">下一页</a>
+           <a href="#" class="page-number" target="main" >末页</a>
         </p>
     </span>
     <div class="clearh" style="height:10px;"></div>
@@ -139,12 +93,12 @@
     <h3 class="righttit">热门资讯</h3>
     <div class="gonggao">
 	<ul class="hotask">
-        	<li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
+        	<li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
+            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
+            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
+            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
+            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
+            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
         </ul>
     </div>
     </div>
@@ -155,18 +109,18 @@
     <h3 class="righttit">推荐课程</h3>
     <div class="teacher">
     <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c1.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="ask_link" target="_blank">财经法规与财经职业道德</a></h3>
+        <a href="#"  target="main"><img src="images/c1.jpg" height="60" title="财经法规与财经职业道德"></a>
+        <h3 class="courh3"><a href="#" class="ask_link" target="main">财经法规与财经职业道德</a></h3>
     </div>
     <div class="clearh"></div>
     <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c2.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="ask_link" target="_blank">财经法规与财经职业道德</a></h3>
+        <a href="#"  target="main"><img src="images/c2.jpg" height="60" title="财经法规与财经职业道德"></a>
+        <h3 class="courh3"><a href="#" class="ask_link" target="main">财经法规与财经职业道德</a></h3>
     </div>
     <div class="clearh"></div>
     <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c3.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="ask_link" target="_blank">财经法规与财经职业道德</a></h3>
+        <a href="#"  target="main"><img src="images/c3.jpg" height="60" title="财经法规与财经职业道德"></a>
+        <h3 class="courh3"><a href="#" class="ask_link" target="main">财经法规与财经职业道德</a></h3>
     </div>
     <div class="clearh"></div>
     </div>
@@ -193,12 +147,12 @@
                <span>关注微博</span><img width="95" alt="" src="images/wb.png">
 		   </div>	              
       </div>
-      <div class="fmenu">
-	     <p><a href="#">关于我们</a> | <a href="#">联系我们</a> | <a href="#">优秀讲师</a> | <a href="#">帮助中心</a> | <a href="#">意见反馈</a> | <a href="#">加入我们</a></p>
-      </div>
-      <div class="copyright">      
-        <div><a href="/">谋刻网</a>所有&nbsp;晋ICP备12006957号-9</div>
-      </div>
+    <div class="fmenu">
+        <p><a href="#" target="main">关于我们</a> | <a href="#" target="main">联系我们</a> | <a href="#" target="main">优秀讲师</a> | <a href="#" target="main">帮助中心</a> | <a href="#" target="main">意见反馈</a> | <a href="#" target="main">加入我们</a></p>
+    </div>
+    <div class="copyright">
+        <div><a href="/" target="main">谋刻网</a>所有&nbsp;晋ICP备12006957号-9</div>
+    </div>
     </div>
 </div>
 <!--右侧浮动-->

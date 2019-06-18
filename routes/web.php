@@ -42,7 +42,9 @@ Route::prefix('admin')->group(function () {
 //后台登陆
 Route::any('login','admin\login\login@login');
 Route::any('admin','admin\login\login@admin');
+Route::any('adminDo','admin\login\login@admin_add');
 Route::any('admin_show','admin\login\login@admin_show');
+Route::any('admin_del','admin\login\login@admin_del');
 Route::any('admin_update','admin\login\login@admin_update');
 
 //后台首页
@@ -54,10 +56,16 @@ Route::get('main','admin\index\index@main');
 Route::any('goods','admin\goods\goods@goods');
 Route::any('goods_show','admin\goods\goods@goods_show');
 Route::any('goods_update','admin\goods\goods@goods_update');
-//分类模块
+//课程分类模块
 Route::any('cate','admin\cate\cate@cate');
+Route::any('cate_add','admin\cate\cate@cate_add');
 Route::any('cate_show','admin\cate\cate@cate_show');
 Route::any('cate_update','admin\cate\cate@cate_update');
+Route::any('cate_update_do','admin\cate\cate@cate_update_do');
+
+
+
+
 //品牌模块
 Route::any('brand','admin\brand\brand@brand');
 Route::any('brand_show','admin\brand\brand@brand_show');
@@ -77,6 +85,19 @@ Route::any('attr_update','admin\attribute\attribute@attr_update');
 //资讯分类
 Route::get('mationCateAdd','admin\Mation\MationController@mationCateAdd');
 Route::post('mationCateInsert','admin\Mation\MationController@mationCateInsert');
+Route::get('mationCateShow','admin\Mation\MationController@mationCateShow');
+Route::post('isShow','admin\Mation\MationController@isShow');
+Route::post('mationCateDel','admin\Mation\MationController@mationCateDel');
+Route::get('mationCateUpdate','admin\Mation\MationController@mationCateUpdate');
+Route::post('mationCateUpdateDo','admin\Mation\MationController@mationCateUpdateDo');
+//资讯
+Route::get('mationAdd','admin\Mation\MationController@mationAdd');
+Route::post('mationInsert','admin\Mation\MationController@mationInsert');
+Route::get('mationShow','admin\Mation\MationController@mationShow');
+Route::post('mationIsShow','admin\Mation\MationController@mationIsShow');
+Route::post('mationDel','admin\Mation\MationController@mationDel');
+Route::get('mationUpdate','admin\Mation\MationController@mationUpdate');
+Route::post('mationUpdateDo','admin\Mation\MationController@mationUpdateDo');
 
 
 

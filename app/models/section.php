@@ -4,9 +4,8 @@ namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Brand extends Model
+class section extends Model
 {
-    //
-    protected $table='brand';
+    protected $table='section';
     public $timestamps = false;
 }

@@ -17,53 +17,7 @@
 
 <body>
 
-<div class="head" id="fixed">
-	<div class="nav">
-    	<span class="navimg"><a href="index.html"><img border="0" src="images/logo.png"></a></span>
-        <ul class="nag">
-        	<li><a href="courselist.html" class="link1 current">课程</a></li>
-            <li><a href="articlelist.html" class="link1">资讯</a></li>
-            <li><a href="teacherlist.html" class="link1">讲师</a></li>
-            <li><a href="exam_index.html" class="link1" target="_blank">题库</a></li>
-            <li><a href="askarea.html" class="link1" target="_blank">问答</a></li>
-            
-        </ul>
-        <span class="massage">
-            <!--<span class="select">
-        	<a href="#" class="sort">课程</a>
-        	<input type="text" value="关键字"/>
-            <a href="#" class="sellink"></a>
-            <span class="sortext">
-            	<p>课程</p>
-                <p>题库</p>
-                <p>讲师</p>
-            </span>
-        </span>--> 
-        	<!--未登录-->
-        	<span class="exambtn_lore">
-                 <a class="tkbtn tklog" href="login.html">登录</a>
-                 <a class="tkbtn tkreg" href="register.html">注册</a>
-            </span>
-            <!--登录后-->
-            <!--<div class="logined">
-                <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>
-                <span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">
-                    <span style="background:#fff;">
-                        <a href="mycourse.html" style="width:70px; display:block;" class="link2 he ico" target="_blank">sherley</a>
-                    </span>
-                    <div class="clearh"></div>
-                    <ul class="logmine" >
-                        <li><a class="link1" href="#">我的课程</a></li>
-                        <li><a class="link1" href="#">我的题库</a></li>
-                        <li><a class="link1" href="#">我的问答</a></li>
-                        <li><a class="link1" href="#">退出</a></li>
-                    </ul>
-                </span>
-            </div>-->
-            
-        </span>
-    </div>
-</div>
+
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="coursecont">
 <div class="coursepic tecti">
@@ -86,18 +40,18 @@
 <h3 class="righttit" style="padding-left:50px;">在教课程</h3>
 <ul class="tcourseul">
 	<li>
-	    <span class="courseimg tcourseimg"><a href="coursecont.html" target="_blank"><img width="230" src="images/c8.jpg"></a></span>
+	    <span class="courseimg tcourseimg"><a href="coursecont" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a></span>
 	    <span class="tcoursetext">
-	       <h4><a href="coursecont.html" target="_blank" class="teatt">会计从业资格会计基础</a><a class="state">更新中</a></h4>
+	       <h4><a href="coursecont" target="main" target="_blank" class="teatt">会计从业资格会计基础</a><a class="state">更新中</a></h4>
 	       <p class="teadec">会计从业资格会计基础会计从业资格会计基础会计础会计从业资格会计基础会计从业资格会计基础会计础会计从业资格会计基础会计从业资格会计基础会计础</p>
 	       <p class="courselabel clock">30课时 600分钟<span class="courselabel student">2555人学习</span><span class="courselabel pingjia">评价：<img width="71" height="14" src="images/evaluate.png" data-bd-imgshare-binded="1"></span></p>
 	   </span>
 	   <div style="height:0" class="clearh"></div>
 	</li>
 	<li>
-	     <span class="courseimg tcourseimg"><a href="coursecont.html" target="_blank"><img width="230" src="images/c8.jpg"></a></span>
+	     <span class="courseimg tcourseimg"><a href="coursecont" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a></span>
 	     <span class="tcoursetext">
-	        <h4><a href="coursecont.html" target="_blank" class="teatt">会计从业资格会计基础会计从业资格会计基础会计础</a><a class="state end">已完结</a></h4>
+	        <h4><a href="coursecont" target="main" target="_blank" class="teatt">会计从业资格会计基础会计从业资格会计基础会计础</a><a class="state end">已完结</a></h4>
 	        <p class="teadec">会计从业资格会计基础会计从业资格会计基础会计础会计从业资格会计基础会计从业资格会计基础会计础会计从业资格会计基础会计从业资格会计基础会计础</p>
 	        <p class="courselabel clock">30课时 600分钟<span class="courselabel student">2555人学习</span><span class="courselabel pingjia">评价：<img width="71" height="14" src="images/evaluate.png" data-bd-imgshare-binded="1"></span></p>
 	     </span>
