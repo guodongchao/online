@@ -42,7 +42,9 @@ Route::prefix('admin')->group(function () {
 //后台登陆
 Route::any('login','admin\login\login@login');
 Route::any('admin','admin\login\login@admin');
+Route::any('adminDo','admin\login\login@admin_add');
 Route::any('admin_show','admin\login\login@admin_show');
+Route::any('admin_del','admin\login\login@admin_del');
 Route::any('admin_update','admin\login\login@admin_update');
 
 //后台首页

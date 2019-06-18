@@ -25,13 +25,6 @@
                     确认密码：<input type="text" name="a_pwds" class="input1" />
                 </div>
                 <div class="bbD">
-                    上传头像：
-                    <div class="bbDd">
-                        <div class="bbDImg">+</div>
-                        <input type="file" class="file" /> <a class="bbDDel" href="#">删除</a>
-                    </div>
-                </div>
-                <div class="bbD">
                     <p class="bbDP">
                         <button class="btn_ok btn_yes" href="#" onclick="goods_add()">提交</button>
                         <a class="btn_ok btn_no" href="goods">取消</a>

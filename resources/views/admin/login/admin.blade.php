@@ -16,20 +16,13 @@
             </div>
             <div class="baBody">
                 <div class="bbD">
-                    管理员名称：<input type="text" name="a_name" class="input1" />
+                    管理员名称：<input type="text" name="admin_name" class="input1" />
                 </div>
                 <div class="bbD">
-                    管理员密码：<input type="text" name="a_pwd" class="input1" />
+                    管理员密码：<input type="password" name="admin_pwd" class="input1" />
                 </div>
                 <div class="bbD">
-                    确认密码：<input type="text" name="a_pwds" class="input1" />
-                </div>
-                <div class="bbD">
-                    上传头像：
-                    <div class="bbDd">
-                        <div class="bbDImg">+</div>
-                        <input type="file" class="file" /> <a class="bbDDel" href="#">删除</a>
-                    </div>
+                    确认密码：<input type="password" name="admin_pwds" class="input1" />
                 </div>
                 <div class="bbD">
                     <p class="bbDP">
@@ -47,6 +40,33 @@
 </html>
 <script>
     function goods_add() {
-            alert(111);
+        var admin_name = $("input[name='admin_name']").val();
+        var admin_pwd = $("input[name='admin_pwd']").val();
+        var admin_pwds = $("input[name='admin_pwds']").val();
+        if(admin_pwds!==admin_pwd){
+           alert('确认密码必须与密码一致');
+            return false;
+        }
+//        var role_id = "";
+//        $("input:checkbox:checked").each(function () {
+//            role_id+=$(this).val()+',';
+//        })
+//        role_id = role_id.slice(0,role_id.length-1);//去出右边的逗号
+        var data ={};
+        data.admin_name = admin_name;
+        data.admin_pwd = admin_pwd;
+        //data.role_id = role_id;
+        $.ajax({
+            url:"/admin/adminDo",
+            type:"post",
+            data:data,
+            dataType:"json",
+            success:function(data){
+                alert(data.msg);
+                if(data.code ==200){
+                    location.href ="/admin/admin_show";
+                }
+            }
+        })
     }
 </script>

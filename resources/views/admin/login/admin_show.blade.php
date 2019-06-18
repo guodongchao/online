@@ -7,53 +7,37 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="js/page.js" ></script> -->
 </head>
-
 <body>
 <div id="pageAll">
-
-
     <div class="page">
         <!-- banner页面样式 -->
         <div class="connoisseur">
-            {{--<div class="conform">--}}
-                {{--<form>--}}
-                    {{--<div class="cfD">--}}
-                        {{--时间段：<input class="vinput" type="text" />&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;--}}
-                        {{--<input class="vinput vpr" type="text" /> 审核状态：<label><input--}}
-                                    {{--type="radio" checked="checked" name="styleshoice1" />&nbsp;未审核</label> <label><input--}}
-                                    {{--type="radio" name="styleshoice1" />&nbsp;待审核</label> <label><input--}}
-                                    {{--type="radio" name="styleshoice1" />&nbsp;待约见</label> <label><input--}}
-                                    {{--type="radio" name="styleshoice1" />&nbsp;已完成</label> <label class="lar"><input--}}
-                                    {{--type="radio" name="styleshoice1" />&nbsp;已作废</label> 推荐状态：<label><input--}}
-                                    {{--type="radio" checked="checked" name="styleshoice2" />&nbsp;未付款</label> <label><input--}}
-                                    {{--type="radio" name="styleshoice2" />&nbsp;已付款</label>--}}
-                    {{--</div>--}}
-                    {{--<div class="cfD">--}}
-                        {{--<input class="addUser" type="text" placeholder="输入用户名/ID/手机号/城市" />--}}
-                        {{--<button class="button">搜索</button>--}}
-                    {{--</div>--}}
-                {{--</form>--}}
-            {{--</div>--}}
             <!-- banner 表格 显示 -->
             <div class="conShow">
                 <table border="1" cellspacing="0" cellpadding="0">
                     <tr>
                         <td width="66px" class="tdColor tdC">管理员id</td>
                         <td width="355px" class="tdColor">管理员名称</td>
-                        <td width="355px" class="tdColor">管理员密码</td>
-                        <td width="355px" class="tdColor">管理员头像</td>
+                        <td width="355px" class="tdColor">添加时间</td>
+                        <td width="355px" class="tdColor">登陆时间</td>
                         <td width="130px" class="tdColor">操作</td>
                     </tr>
+                    @foreach($list as $v)
                     <tr>
-                        <td width="66px" class="tdColor tdC">管理员id</td>
-                        <td width="355px" class="tdColor">管理员名称</td>
-                        <td width="355px" class="tdColor">管理员密码</td>
-                        <td width="355px" class="tdColor">管理员头像</td>
+                        <td>{{$v['admin_id']}}</td>
+                        <td>{{$v['admin_name']}}</td>
+                        <td>{{date('Y-m-d H:i:s',$v['add_time'])}}</td>
+                        @if($v['last_login_time']=='')
+                            <td></td>
+                        @else
+                            <td>{{date('Y-m-d H:i:s',$v['last_login_time'])}}</td>
+                        @endif
                         <td>
-                            <a href="admin_update"><img class="operation" src="img/update.png"></a>
-                            <img class="operation delban" src="img/delete.png" onclick="admin_del()">
+                            <a href="/admin/admin_update"><img class="operation" src="img/update.png"></a>
+                            <img class="operation delban admin_del" src="img/delete.png" admin_id="{{$v['admin_id']}}">
                         </td>
                     </tr>
+                    @endforeach
                 </table>
             </div>
             <!-- banner 表格 显示 end-->
@@ -67,7 +51,19 @@
 
 </html>
 <script>
-    function admin_del() {
-        alert(111);
-    }
+    $(document).on('click','.admin_del',function(){
+        var admin_id=$(this).attr('admin_id');
+            $.ajax({
+            url:"/admin/admin_del",
+            type:"post",
+            data:{admin_id:admin_id},
+            dataType:"json",
+            success:function(data){
+                alert(data.msg);
+                if(data.code ==200){
+                    location.href ="/admin/admin_show";
+                }
+            }
+        })
+    })
 </script>
