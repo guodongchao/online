@@ -75,6 +75,11 @@ Route::any('attr_update','admin\attribute\attribute@attr_update');
 //资讯分类
 Route::get('mationCateAdd','admin\Mation\MationController@mationCateAdd');
 Route::post('mationCateInsert','admin\Mation\MationController@mationCateInsert');
+Route::get('mationCateShow','admin\Mation\MationController@mationCateShow');
+Route::post('isShow','admin\Mation\MationController@isShow');
+Route::post('mationCateDel','admin\Mation\MationController@mationCateDel');
+Route::get('mationCateUpdate','admin\Mation\MationController@mationCateUpdate');
+Route::post('mationCateUpdateDo','admin\Mation\MationController@mationCateUpdateDo');
 
 
 
