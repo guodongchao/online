@@ -17,34 +17,7 @@
 
 <body>
 
-<div class="head" id="fixed">
-	<div class="nav">
-    	<span class="navimg"><a href="index.html"><img border="0" src="images/logo.png"></a></span>
-        <ul class="nag">
-        	<li><a href="courselist.html" class="link1 current">课程</a></li>
-            <li><a href="articlelist.html" class="link1">资讯</a></li>
-            <li><a href="teacherlist.html" class="link1">讲师</a></li>
-            <li><a href="exam_index.html" class="link1" target="_blank">题库</a></li>
-            <li><a href="askarea.html" class="link1" target="_blank">问答</a></li>
-            
-        </ul>
-        <span class="massage">
-            <!--<span class="select">
-        	<a href="#" class="sort">课程</a>
-        	<input type="text" value="关键字"/>
-            <a href="#" class="sellink"></a>
-            <span class="sortext">
-            	<p>课程</p>
-                <p>题库</p>
-                <p>讲师</p>
-            </span>
-        </span>-->
-        	<a href="login.html" class="link2 he">登录</a>
-            <a href="register.html" class="link2 he">注册</a>
-            <a href="mycourse.html" style="width:70px" class="link2 he ico" target="_blank">个人中心</a>
-        </span>
-    </div>
-</div>
+
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="coursecont">
     <div class="courseleft">
@@ -85,8 +58,8 @@
       <ul class="courseulr">
         <li>
         	<div class="courselist">
-            <a href="coursecont.html" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c1.jpg" title="会计基础"></a>
-            <p class="courTit"><a href="coursecont.html" target="_blank">会计基础</a></p>
+            <a href="coursecont" target="main" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c1.jpg" title="会计基础"></a>
+            <p class="courTit"><a href="coursecont" target="main" target="_blank">会计基础</a></p>
             <div class="gray">
             <span>30课时 600分钟</span>
             <span class="sp1">1255555人学习</span>
@@ -96,8 +69,8 @@
        </li>
         <li>
         	<div class="courselist">
-            <a href="coursecont.html" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c2.jpg" title="会计基础"></a>
-            <p class="courTit"><a href="coursecont.html" target="_blank">HTTP下载课程</a></p>
+            <a href="coursecont" target="main" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c2.jpg" title="会计基础"></a>
+            <p class="courTit"><a href="coursecont" target="main" target="_blank">HTTP下载课程</a></p>
             <div class="gray">
             <span>5课时 60分钟</span>
             <span class="sp1">1255555人学习</span>
@@ -107,8 +80,8 @@
         </li>
         <li>
         	<div class="courselist">
-            <a href="coursecont.html" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c3.jpg" title="会计基础"></a>
-            <p class="courTit"><a href="coursecont.html" target="_blank">HTTP下载课程</a></p>
+            <a href="coursecont" target="main" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c3.jpg" title="会计基础"></a>
+            <p class="courTit"><a href="coursecont" target="main" target="_blank">HTTP下载课程</a></p>
             <div class="gray">
             <span>5课时 60分钟</span>
             <span class="sp1">1255555人学习</span>

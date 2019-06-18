@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/tab.css" media="screen">
     <link rel="stylesheet" type="text/css" href="css/main.css" id="main-css">
     <!--课程选项卡-->
+
     <script type="text/javascript">
         function nTabs(thisObj,Num){
             if(thisObj.className == "current")return;
@@ -39,42 +40,18 @@
 
 <div class="head" id="fixed">
     <div class="nav">
-        <span class="navimg"><a href="index.html"><img border="0" src="images/logo.png"></a></span>
+        <span class="navimg"><a href="index" target="main"><img border="0" src="images/logo.png"></a></span>
         <ul class="nag">
-            <li><a href="courselist.html" class="link1">课程</a></li>
-            <li><a href="articlelist.html" class="link1">资讯</a></li>
-            <li><a href="teacher.html" class="link1">讲师</a></li>
-            <li><a href="exam_index.html" class="link1" target="_blank">题库</a></li>
-            <li><a href="askarea.html" class="link1" target="_blank">问答</a></li>
+            <li><a href="courselist" target="main"  class="link1">课程</a></li>
+            <li><a href="articlelist" target="main" class="link1">资讯</a></li>
+            <li><a href="teacher" target="main" class="link1">讲师</a></li>
+            <li><a href="exam_index" class="link1" target="main">题库</a></li>
+            <li><a href="askarea" class="link1" target="main">问答</a></li>
         </ul>
 
-        <span class="massage">
-        <!--<span class="select">
-        	<a href="#" class="sort">课程</a>
-        	<input type="text" value="关键字"/>
-            <a href="#" class="sellink"></a>
-            <span class="sortext">
-            	<p>课程</p>
-                <p>题库</p>
-                <p>讲师</p>
-            </span>
-        </span>-->
-
-
-
-            <a href="mycourse.html"  onMouseOver="logmine()" style="width:70px" class="link2 he ico" target="_blank">sherley</a>
-            <span id="lne" style="display:none" onMouseOut="logclose()" onMouseOver="logmine()">
-                <span style="background:#fff;">
-                	<a href="mycourse.html" style="width:70px; display:block;" class="link2 he ico" target="_blank">sherley</a>
-                </span>
-                <div class="clearh"></div>
-                <ul class="logmine" >
-                    <li><a class="link1" href="#">我的课程</a></li>
-                    <li><a class="link1" href="#">我的题库</a></li>
-                    <li><a class="link1" href="#">我的问答</a></li>
-                    <li><a class="link1" href="#">退出</a></li>
-                </ul>
-            </span>
+        <span class="massage" style="z-index:999">
+            <a href="mycourse"  style="width:70px" class="link2 he ico" target="main">sherley</a>
+             <a href="mycourse"   style="width:70px" class="link2 he" target="main">退出</a>
         </span>
     </div>
 </div>

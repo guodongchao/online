@@ -60,7 +60,7 @@ $(function(){
 
 <body>
    <div class="linevideo" style="overflow-x:hidden">
-    	<span class="returnindex"><a class="gray" href="coursecont1.html" style="font-size:14px;">返回课程</a></span>   
+    	<span class="returnindex"><a class="gray" href="coursecont1" target="main" style="font-size:14px;">返回课程</a></span>   
         <span class="taskspan"><span class="ts">课时100</span>&nbsp;&nbsp;<b class="tasktit">会计的概念与目标1</b></span> 
         <div style="width:100%;margin-top:20px;">
 			<video width="auto" id="example_video_1" class="video-js vjs-default-skin  vjs-big-play-centered vvi " controls preload="none"  poster="images/c8.jpg" data-setup="{}"><!--poster是视频未播放前的展示图片-->
@@ -160,9 +160,9 @@ $(function(){
                     <div class="c_eform veform" style="margin-top:15px;margin-left:35px;">
 					   <!--四种状态-->
 					   <p>此课时暂无作业</p>
-					   <p>共4道作业题<a href="homework.html" target="_blank"><span class="star_zy">继续做题</span></a></p>
-					   <p>共4道作业题<a href="homework_jiexi.html" target="_blank"><span class="star_zy">查看解析</span></a></p>
-					   <p>共4道作业题<a href="homework.html" target="_blank"><span class="star_zy">开始作业</span></a></p>                                 
+					   <p>共4道作业题<a href="homework" target="main" target="_blank"><span class="star_zy">继续做题</span></a></p>
+					   <p>共4道作业题<a href="homework_jiexi" target="main" target="_blank"><span class="star_zy">查看解析</span></a></p>
+					   <p>共4道作业题<a href="homework" target="main" target="_blank"><span class="star_zy">开始作业</span></a></p>                                 
 				</div>
 				</div>				
 			</div>
