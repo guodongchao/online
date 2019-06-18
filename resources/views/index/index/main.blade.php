@@ -38,7 +38,7 @@
 </head>
 
 <body>
-<div class="content">
+<div class="content" style="z-index:11">
     <div class="fullwidthbanner-container" >
         <div id="revolution-slider"  style="max-height:500px !important; background:#46B0AC;">
             <ul>
@@ -308,7 +308,7 @@
             <span class="tdtext">
         	<h3>完全免费课程</h3>
             <p>精心录制视频课程与讲解，全部课程完全免费。</p><br/>
-            <p><a href="courselist.html" class="btninto">开始学习</a></p>
+            <p><a href="courselist" target="main" class="btninto">开始学习</a></p>
         </span>
             <div style="clear:both"></div>
         </div>
@@ -320,7 +320,7 @@
         	<h3 class="co1">智能评估题库</h3>
             <p>智能能力评估，学员可以通过具体题目，匹配相
 关知识点,文字解析与视频解析相结合。</p><br/>
-			<p><a href="training.html" class="btninto">点击测评</a></p>
+			<p><a href="training" target="main" class="btninto">点击测评</a></p>
         </span>
             <div style="clear:both"></div>
         </div>
@@ -332,7 +332,7 @@
         	<h3 class="co2">智能匹配练习</h3>
             <p class="tex1">跟随视频课程同步练习，紧扣重点难
 点，点点精通。</p><br/>
-			<p><a href="training.html" class="btninto">开始练习</a></p>
+			<p><a href="training" target="main" class="btninto">开始练习</a></p>
         </span>
             <div style="clear:both"></div>
         </div>
@@ -343,7 +343,7 @@
             <span class="tdtext1" style="margin-top:100px;">
         	<h3 class="co3">全天答疑解惑</h3>
             <p class="tex1">谋刻答疑社区，老师学员共同交流，我们的讲师更是倾囊相授，有问必答。</p><br/>
-            <p><a href="#" class="btninto">提问问题</a></p>
+            <p><a href="#" target="main" class="btninto">提问问题</a></p>
         </span>
             <div style="clear:both"></div>
         </div>
@@ -580,10 +580,10 @@
                 </div>
             </div>
             <div class="fmenu">
-                <p><a href="#">关于我们</a> | <a href="#">联系我们</a> | <a href="#">优秀讲师</a> | <a href="#">帮助中心</a> | <a href="#">意见反馈</a> | <a href="#">加入我们</a></p>
+                <p><a href="#" target="main">关于我们</a> | <a href="#" target="main">联系我们</a> | <a href="#" target="main">优秀讲师</a> | <a href="#" target="main">帮助中心</a> | <a href="#" target="main">意见反馈</a> | <a href="#" target="main">加入我们</a></p>
             </div>
             <div class="copyright">
-                <div><a href="/">谋刻网</a>所有&nbsp;晋ICP备12006957号-9</div>
+                <div><a href="/" target="main">谋刻网</a>所有&nbsp;晋ICP备12006957号-9</div>
             </div>
         </div>
     </div>
