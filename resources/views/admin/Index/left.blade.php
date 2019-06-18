@@ -194,6 +194,18 @@
                 <a class="cks" href="mationCateShow" target="main">资讯分类展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
+            <dd>
+                <img class="coin11" src="/img/coin111.png" />
+                <img class="coin22" src="/img/coin222.png" />
+                <a class="cks" href="mationAdd" target="main">资讯添加</a>
+                <img class="icon5" src="/img/coin21.png" />
+            </dd>
+            <dd>
+                <img class="coin11" src="/img/coin111.png" />
+                <img class="coin22" src="/img/coin222.png" />
+                <a class="cks" href="mationShow" target="main">资讯展示</a>
+                <img class="icon5" src="/img/coin21.png" />
+            </dd>
 
         </dl>
 
