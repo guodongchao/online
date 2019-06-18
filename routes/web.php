@@ -81,6 +81,14 @@ Route::post('isShow','admin\Mation\MationController@isShow');
 Route::post('mationCateDel','admin\Mation\MationController@mationCateDel');
 Route::get('mationCateUpdate','admin\Mation\MationController@mationCateUpdate');
 Route::post('mationCateUpdateDo','admin\Mation\MationController@mationCateUpdateDo');
+//资讯
+Route::get('mationAdd','admin\Mation\MationController@mationAdd');
+Route::post('mationInsert','admin\Mation\MationController@mationInsert');
+Route::get('mationShow','admin\Mation\MationController@mationShow');
+Route::post('mationIsShow','admin\Mation\MationController@mationIsShow');
+Route::post('mationDel','admin\Mation\MationController@mationDel');
+Route::get('mationUpdate','admin\Mation\MationController@mationUpdate');
+Route::post('mationUpdateDo','admin\Mation\MationController@mationUpdateDo');
 
 
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
+
 class MationController extends Controller
 {
     //资讯分类添加页面
@@ -87,4 +88,49 @@ class MationController extends Controller
             echo json_encode(['msg'=>'未修改','code'=>1]);
         }
     }
+    //资讯添加页面
+    public function mationAdd(){
+        $mationdata = DB::table('mation_cate')->where('is_del',1)->get()->toArray();
+        return view('admin.mation.mationadd',['mationdata'=>$mationdata]);
+    }
+    //资讯执行添加
+    public function mationInsert(Request $request){
+        $mation_name = $request->input('mation_name');
+        $news_content = $request->input('news_content');
+        $mcate_id = $request->input('mcate_id');
+
+        if(empty($mation_name)){
+            return json_encode(['msg'=>'名称不能为空','code'=>1]);
+        }
+        if(empty($news_content)){
+            return json_encode(['msg'=>'内容不能为空','code'=>1]);
+        }
+        if(empty($mcate_id)){
+            return json_encode(['msg'=>'分类不能为空','code'=>1]);
+        }
+        $datainfo=[
+            'mation_title'=>$mation_name,
+            'mation_content'=>$news_content,
+            'create_time'=>time()
+        ];
+        DB::beginTransaction();
+        $res = DB::table('mation')->insertGetId($datainfo);
+        if(!empty($res)){
+            $where = [
+                'mation_id'=>$res,
+                'mcate_id'=>$mcate_id
+            ];
+            $sql = DB::table('mation_cate_rela')->insert($where);
+            if($sql){
+                DB::commit();
+                echo json_encode(['msg'=>'添加成功','code'=>0]);
+            }else{
+                echo json_encode(['msg'=>'添加失败','code'=>1]);
+            }
+        }else{
+            DB::rollBack();
+        }
+
+    }
+    
 }
