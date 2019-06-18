@@ -93,7 +93,7 @@ Route::post('mationCateUpdateDo','admin\Mation\MationController@mationCateUpdate
 //资讯
 Route::get('mationAdd','admin\Mation\MationController@mationAdd');
 Route::post('mationInsert','admin\Mation\MationController@mationInsert');
-Route::get('mationShow','admin\Mation\MationController@mationShow');
+Route::any('mationShow','admin\Mation\MationController@mationShow');
 Route::post('mationIsShow','admin\Mation\MationController@mationIsShow');
 Route::post('mationDel','admin\Mation\MationController@mationDel');
 Route::get('mationUpdate','admin\Mation\MationController@mationUpdate');
