@@ -84,11 +84,29 @@ Route::post('mationCateInsert','admin\Mation\MationController@mationCateInsert')
 
 
 Route::prefix('index')->group(function () {
+    //首页
     Route::any('index','index\index\indexController@index');
     Route::any('header1','index\index\indexController@header1');
     Route::any('header2','index\index\indexController@header2');
-    Route::any('foot','index\index\indexController@foot');
-
+    Route::any('main','index\index\indexController@main');
+    //关于我们
+    Route::any('page','index\page\pageController@page');
+    Route::any('pagecontact','index\page\pageController@pagecontact');
+    //咨询
+    Route::any('article','index\article\articleController@article');
+    Route::any('articlelist','index\article\articleController@articlelist');
+    //课程
+    Route::any('mycourse','index\course\courseController@mycourse');//我的信息
+    Route::any('coursecont','index\course\courseController@coursecont');
+    Route::any('coursecont1','index\course\courseController@coursecont1');
+    Route::any('courselist','index\course\courseController@courselist');
+    Route::any('video','index\course\courseController@video');//视频播放
+    //登陆注册
+    Route::any('login','index\login\loginController@login');
+    Route::any('register','index\login\loginController@register');
+    //讲师
+    Route::any('teacher','index\teacher\teacherController@teacher');
+    Route::any('teacherlist','index\teacher\teacherController@teacherlist');
 });
 
 

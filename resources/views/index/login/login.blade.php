@@ -16,11 +16,7 @@
 <!-- InstanceEndEditable -->
 
 </head>
-<style>
-    body::-webkit-scrollbar {
-        display: none;
-    }
-</style>
+
 <body>
 
 <div class="head" id="fixed">
