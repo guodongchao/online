@@ -12,14 +12,17 @@
         <!-- 上传广告页面样式 -->
         <div class="banneradd bor">
             <div class="baTop">
-                <span>商品分类添加</span>
+                <span>视频分类添加</span>
             </div>
             <div class="baBody">
                 <div class="bbD">
-                    商品分类名称：<input type="text" name="cate_name" class="input1" />
+                    视频分类名称：<input type="text" name="c_cate_name" class="input1" />
                 </div>
                 <div class="bbD">
-                    商品分类选择框：<select class="input3"><option>请选择</option></select>
+                    视频分类等级：
+                    <select class="input3" name="c_parent_id">
+                        <option value="0">顶级</option>
+                    </select>
                 </div>
                 <div class="bbD">
                     <p class="bbDP">
@@ -37,6 +40,20 @@
 </html>
 <script>
     function goods_add() {
-            alert(111);
+        var data = {};
+        var url = "/index/cate_add";
+        data.c_cate_name = $("[name='c_cate_name']").val();
+        data.parent_id = $("[name='c_parent_id']").val();
+
+        $.ajax({
+            type:"post",
+            data:data,
+            url:url,
+            success:function(msg){
+
+            }
+        })
+
+
     }
 </script>

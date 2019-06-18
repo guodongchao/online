@@ -54,8 +54,9 @@ Route::get('main','admin\index\index@main');
 Route::any('goods','admin\goods\goods@goods');
 Route::any('goods_show','admin\goods\goods@goods_show');
 Route::any('goods_update','admin\goods\goods@goods_update');
-//分类模块
+//课程分类模块
 Route::any('cate','admin\cate\cate@cate');
+Route::any('cate_add','admin\cate\cate@cate_add');
 Route::any('cate_show','admin\cate\cate@cate_show');
 Route::any('cate_update','admin\cate\cate@cate_update');
 //品牌模块
