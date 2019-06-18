@@ -35,19 +35,27 @@ function nTabs(thisObj,Num){
 
 
 </head>
+<frameset rows="100,*" cols="*" scrolling="No" framespacing="0" frameborder="no" border="0">
+	<frame src="header1" name="headmenu" id="mainFrame" title="mainFrame"><!-- 引用头部 -->
+	<!-- 引用左边和主体部分 -->
+	<frameset rows="100*" scrolling="No" framespacing="0" frameborder="no" border="0">
+		<frame src="main" name="main" scrolling="yes" noresize="noresize" id="rightFrame" title="rightFrame">
+	</frameset>
+
+</frameset>
 
 <body>
 
 <?php
-if($_SERVER['PHP_SELF']!="index/index"){
-	$file_path = 'http://192.168.126.129:8080/index/header1';
-
-}else{
-	$file_path ="http://192.168.126.129:8080/index/header2";
-
-}
-echo file_get_contents($file_path);
-?>
+//if($_SERVER['PHP_SELF']!="index/index"){
+//	$file_path = 'http://192.168.126.129:8080/index/header1';
+//
+//}else{
+//	$file_path ="http://192.168.126.129:8080/index/header2";
+//
+//}
+//echo file_get_contents($file_path);
+//?>
 {{--<div class="head" id="fixed">--}}
 	{{--<div class="nav">--}}
     	{{--<span class="navimg"><a href="index.html"><img border="0" src="images/logo.png"></a></span>--}}
@@ -621,7 +629,7 @@ echo file_get_contents($file_path);
 <span class="morecourse"><a href="courselist.html" class="btnlink">更多课程</a></span>
 
 </div>
-	<?php echo file_get_contents("http://192.168.126.129:8080/index/foot")?>
+<!--	--><?php //echo file_get_contents("http://192.168.126.129:8080/index/foot")?>
 {{--<div class="foot">--}}
 {{--<div class="fcontainer">--}}
       {{--<div class="fwxwb"> --}}

@@ -32,7 +32,7 @@
         <span class="massage">
         @if(empty($u_id))
                 <span class="exambtn_lore" style="padding-left:450px;">
-                 <a class="tkbtn tklog" href="login.html">登录</a>
+                 <a class="tkbtn tklog" href="foot" target="main">登录</a>
                  <a class="tkbtn tkreg" href="register.html">注册</a>
             </span>
                 @else

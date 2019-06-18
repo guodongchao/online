@@ -13,5 +13,5 @@
     <frameset rows="100*" cols="220,*" scrolling="No" framespacing="0" frameborder="no" border="0">
     <frame src="left" name="leftmenu" id="mainFrame" title="mainFrame">
     <frame src="main" name="main" scrolling="yes" noresize="noresize" id="rightFrame" title="rightFrame"></frameset>
-    </frameset>
+</frameset>
 </html>
