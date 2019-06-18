@@ -175,6 +175,27 @@
             </dd>
 
         </dl>
+        <dl class="system_log">
+            <dt>
+                <img class="icon1" src="/img/coin15.png" />
+                <img class="icon2" src="/img/coin16.png" />资讯模块
+                <img class="icon3" src="/img/coin19.png" />
+                <img class="icon4" src="/img/coin20.png" />
+            </dt>
+            <dd>
+                <img class="coin11" src="/img/coin111.png" />
+                <img class="coin22" src="/img/coin222.png" />
+                <a class="cks" href="mationCateAdd" target="main">资讯分类添加</a>
+                <img class="icon5" src="/img/coin21.png" />
+            </dd>
+            <dd>
+                <img class="coin11" src="/img/coin111.png" />
+                <img class="coin22" src="/img/coin222.png" />
+                <a class="cks" href="mationCateShow" target="main">资讯分类展示</a>
+                <img class="icon5" src="/img/coin21.png" />
+            </dd>
+
+        </dl>
 
     </div>
 
