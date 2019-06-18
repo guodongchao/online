@@ -25,6 +25,12 @@
                     确认密码：<input type="password" name="admin_pwds" class="input1" />
                 </div>
                 <div class="bbD">
+                    管理员角色：
+                    @foreach($roleInfo as $k=>$v)
+                        <input type="checkbox" name="role_id" value="{{$v['role_id']}}">{{$v['role_name']}}
+                    @endforeach
+                </div>
+                <div class="bbD">
                     <p class="bbDP">
                         <button class="btn_ok btn_yes" href="#" onclick="goods_add()">提交</button>
                         <a class="btn_ok btn_no" href="goods">取消</a>
@@ -47,15 +53,16 @@
            alert('确认密码必须与密码一致');
             return false;
         }
-//        var role_id = "";
-//        $("input:checkbox:checked").each(function () {
-//            role_id+=$(this).val()+',';
-//        })
-//        role_id = role_id.slice(0,role_id.length-1);//去出右边的逗号
+        var role_id = "";
+        $("input:checkbox:checked").each(function () {
+            role_id+=$(this).val()+',';
+        })
+        role_id = role_id.slice(0,role_id.length-1);//去出右边的逗号
         var data ={};
         data.admin_name = admin_name;
         data.admin_pwd = admin_pwd;
-        //data.role_id = role_id;
+        data.role_id = role_id;
+        //alert(data.role_id);
         $.ajax({
             url:"/admin/adminDo",
             type:"post",

@@ -41,12 +41,21 @@ Route::prefix('admin')->group(function () {
 
 //后台登陆
 Route::any('login','admin\login\login@login');
+//管理员添加
 Route::any('admin','admin\login\login@admin');
 Route::any('adminDo','admin\login\login@admin_add');
+//管理员展示
 Route::any('admin_show','admin\login\login@admin_show');
+//管理员删除
 Route::any('admin_del','admin\login\login@admin_del');
-Route::any('admin_update','admin\login\login@admin_update');
-
+//管理员修改
+Route::any('admin_update/{admin_id}','admin\login\login@admin_update');
+Route::any('admin_update_do','admin\login\login@admin_update_do');
+//管理员角色展示
+Route::any('adminrole/{admin_id}','admin\login\login@adminrole');
+//角色添加
+Route::any('role','admin\login\login@role');
+Route::any('roleDo','admin\login\login@role_add');
 //后台首页
 Route::get('index','admin\index\index@index');
 Route::get('left','admin\index\index@left');
