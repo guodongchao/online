@@ -57,120 +57,141 @@
         <dl class="system_log">
             <dt>
                 <img class="icon1" src="/img/coin05.png" />
-                <img class="icon2" src="/img/coin06.png" /> 商品模块
+                <img class="icon2" src="/img/coin06.png" /> 课程模块
                 <img class="icon3" src="/img/coin19.png" />
                 <img class="icon4" src="/img/coin20.png" />
             </dt>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="goods" target="main">商品添加</a>
+                <a class="cks" href="goods" target="main">课程添加</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="goods_show" target="main">商品展示</a>
+                <a class="cks" href="goods_show" target="main">课程展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
         </dl>
         <dl class="system_log">
             <dt>
                 <img class="icon1" src="/img/coin07.png" />
-                <img class="icon2" src="/img/coin08.png" /> 分类模块
+                <img class="icon2" src="/img/coin08.png" /> 课程分类模块
                 <img class="icon3" src="/img/coin19.png" />
                 <img class="icon4" src="/img/coin20.png" />
             </dt>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="cate" target="main">分类添加</a>
+                <a class="cks" href="cate" target="main">课程分类添加</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="cate_show" target="main">分类展示</a>
+                <a class="cks" href="cate_show" target="main">课程分类展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
         </dl>
         <dl class="system_log">
             <dt>
                 <img class="icon1" src="/img/coin10.png" />
-                <img class="icon2" src="/img/coin09.png" /> 品牌模块
+                <img class="icon2" src="/img/coin09.png" /> 题库模块
                 <img class="icon3" src="/img/coin19.png" />
                 <img class="icon4" src="/img/coin20.png" />
             </dt>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a href="brand" target="main" class="cks">品牌添加</a>
+                <a href="brand" target="main" class="cks">题库添加</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a href="brand_show" target="main" class="cks">品牌展示</a>
+                <a href="brand_show" target="main" class="cks">题库展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
         </dl>
         <dl class="system_log">
             <dt>
                 <img class="icon1" src="/img/coin11.png" />
-                <img class="icon2" src="/img/coin12.png" /> 商品类型模块
+                <img class="icon2" src="/img/coin12.png" /> 权限管理
                 <img class="icon3" src="/img/coin19.png" />
                 <img class="icon4" src="/img/coin20.png" />
             </dt>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a href="type" target="main" class="cks">商品类型添加</a>
+                <a href="type" target="main" class="cks">添加权限</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a href="type_show" target="main" class="cks">商品类型展示</a>
+                <a href="type_show" target="main" class="cks">权限展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
         </dl>
         <dl class="system_log">
             <dt>
                 <img class="icon1" src="/img/coin14.png" />
-                <img class="icon2" src="/img/coin13.png" /> 商品属性模块
+                <img class="icon2" src="/img/coin13.png" /> 节点管理
                 <img class="icon3" src="/img/coin19.png" />
                 <img class="icon4" src="/img/coin20.png" />
             </dt>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="attr" target="main">商品属性添加</a>
+                <a class="cks" href="attr" target="main">节点添加</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="attr_show" target="main">商品属性展示</a>
+                <a class="cks" href="attr_show" target="main">节点展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
         </dl>
         <dl class="system_log">
             <dt>
                 <img class="icon1" src="/img/coin15.png" />
-                <img class="icon2" src="/img/coin16.png" /> 活动模块
+                <img class="icon2" src="/img/coin16.png" /> 教师模块
                 <img class="icon3" src="/img/coin19.png" />
                 <img class="icon4" src="/img/coin20.png" />
             </dt>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="message" target="main">活动添加</a>
+                <a class="cks" href="message" target="main">教师添加</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="sign" target="main">活动展示</a>
+                <a class="cks" href="sign" target="main">教师展示</a>
+                <img class="icon5" src="/img/coin21.png" />
+            </dd>
+
+        </dl>
+        <dl class="system_log">
+            <dt>
+                <img class="icon1" src="/img/coin15.png" />
+                <img class="icon2" src="/img/coin16.png" />资讯模块
+                <img class="icon3" src="/img/coin19.png" />
+                <img class="icon4" src="/img/coin20.png" />
+            </dt>
+            <dd>
+                <img class="coin11" src="/img/coin111.png" />
+                <img class="coin22" src="/img/coin222.png" />
+                <a class="cks" href="mationCateAdd" target="main">资讯分类添加</a>
+                <img class="icon5" src="/img/coin21.png" />
+            </dd>
+            <dd>
+                <img class="coin11" src="/img/coin111.png" />
+                <img class="coin22" src="/img/coin222.png" />
+                <a class="cks" href="mationCateShow" target="main">资讯分类展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
 
