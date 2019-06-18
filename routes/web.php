@@ -59,6 +59,11 @@ Route::any('cate','admin\cate\cate@cate');
 Route::any('cate_add','admin\cate\cate@cate_add');
 Route::any('cate_show','admin\cate\cate@cate_show');
 Route::any('cate_update','admin\cate\cate@cate_update');
+Route::any('cate_update_do','admin\cate\cate@cate_update_do');
+
+
+
+
 //品牌模块
 Route::any('brand','admin\brand\brand@brand');
 Route::any('brand_show','admin\brand\brand@brand_show');
