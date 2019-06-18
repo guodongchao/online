@@ -71,6 +71,15 @@ Route::any('attr','admin\attribute\attribute@attr');
 Route::any('attr_show','admin\attribute\attribute@attr_show');
 Route::any('attr_update','admin\attribute\attribute@attr_update');
 
+
+//资讯分类
+Route::get('mationCateAdd','admin\Mation\MationController@mationCateAdd');
+Route::post('mationCateInsert','admin\Mation\MationController@mationCateInsert');
+
+
+
+
+
 });
 
 
