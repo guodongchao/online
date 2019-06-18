@@ -50,6 +50,12 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资讯标题：<input type="text" name="mation_name" class="input3" />
                 </div>
                 <br>
+                <form  class="layui-form">
+                    <div class="bbD">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;是否展示：
+                        &nbsp;<input type="checkbox" checked  name="like[write]"   title="是否展示">
+                    </div>
+                </form>
                 <div class="bbD">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资讯内容：
                     <div class="row cl">
@@ -113,9 +119,15 @@
             var mation_name = $("input[name='mation_name']").val();
             var news_content=layedit.getContent(news_contents);
             var mcate_id = $("select[name='modules']").val();
+            var aa = $('.layui-unselect').hasClass('layui-form-checked');
+            if(aa == false){
+                var is_show = 0;
+            }else{
+                var is_show = 1;
+            }
             $.post(
                 'mationInsert',
-                {mation_name:mation_name,news_content:news_content,mcate_id:mcate_id},
+                {mation_name:mation_name,news_content:news_content,mcate_id:mcate_id,is_show:is_show},
                 function(res){
                     if(res.code==0) {
                         layer.open({
