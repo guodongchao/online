@@ -12,8 +12,9 @@ class brand extends Controller
         return view("admin.brand.brand");
     }
     //商品添加执行
-    public function brand_add(){
-
+    public function brand_add(Request $request){
+        $data=$request->input();
+        
     }
     //商品展示
     public function brand_show(){
