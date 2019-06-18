@@ -69,7 +69,8 @@ class cate extends Controller
     }
     //商品修改视图
     public function cate_update(Request $request){
-        $c_cate_id = $request->input("c_cate_id");
+        $c_cate_id = $request->input("cate_id");
+        echo $c_cate_id;
         $data = CourseCate::where("c_status",1)->where("c_parent_id",0)->get();
         return view("admin.cate.cate_update",['data'=>$data]);
     }
