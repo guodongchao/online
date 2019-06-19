@@ -16,6 +16,9 @@
             </div>
             <div class="baBody">
                 <div class="bbD">
+                    角色名称：{{$admin_name}}
+                </div>
+                <div class="bbD">
                     管理员角色：
                     @foreach($roleInfo as $k=>$v)
                         @if(in_array($v['role_id'],$adminInfo)==true)
