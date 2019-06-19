@@ -80,10 +80,16 @@ Route::get('index','admin\index\index@index');
 Route::get('left','admin\index\index@left');
 Route::get('head','admin\index\index@head');
 Route::get('main','admin\index\index@main');
+
+
+
 //商品模块
 Route::any('goods','admin\goods\goods@goods');
 Route::any('goods_show','admin\goods\goods@goods_show');
 Route::any('goods_update','admin\goods\goods@goods_update');
+Route::any('uploadajax','admin\goods\goods@uploadajax');
+
+
 //课程分类模块
 Route::any('cate','admin\cate\cate@cate');
 Route::any('cate_add','admin\cate\cate@cate_add');
@@ -92,8 +98,13 @@ Route::any('cate_update','admin\cate\cate@cate_update');
 Route::any('cate_update_do','admin\cate\cate@cate_update_do');
 Route::any('cate_del','admin\cate\cate@cate_del');
 Route::any('cate_search','admin\cate\cate@cate_search');
-
-
+//讲师模块
+Route::any('teacher','admin\Teacher\TeacherController@teacher');
+Route::any('teacher_do','admin\Teacher\TeacherController@teacher_do');
+Route::any('teacher_list','admin\Teacher\TeacherController@teacher_list');
+Route::any('teacher_del','admin\Teacher\TeacherController@teacher_del');
+Route::any('teacher_update','admin\Teacher\TeacherController@teacher_update');
+Route::any('teacher_update_do','admin\Teacher\TeacherController@teacher_update_do');
 
 
 //品牌模块
@@ -151,6 +162,9 @@ Route::prefix('index')->group(function () {
     //咨询
     Route::any('article','index\article\articleController@article');
     Route::any('articlelist','index\article\articleController@articlelist');
+    Route::any('articlecatelist','index\article\articleController@articlecatelist');
+    Route::any('articleTop','index\article\articleController@articleTop');
+    Route::any('articlexia','index\article\articleController@articlexia');
     //课程
     Route::any('mycourse','index\course\courseController@mycourse');//我的信息
     Route::any('coursecont','index\course\courseController@coursecont');
