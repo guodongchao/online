@@ -130,6 +130,9 @@ Route::prefix('index')->group(function () {
     //咨询
     Route::any('article','index\article\articleController@article');
     Route::any('articlelist','index\article\articleController@articlelist');
+    Route::any('articlecatelist','index\article\articleController@articlecatelist');
+    Route::any('articleTop','index\article\articleController@articleTop');
+    Route::any('articlexia','index\article\articleController@articlexia');
     //课程
     Route::any('mycourse','index\course\courseController@mycourse');//我的信息
     Route::any('coursecont','index\course\courseController@coursecont');

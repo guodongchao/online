@@ -149,10 +149,19 @@
 </body>
 </html>
 <script src="layui/layui.js"></script>
-<script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script>
     $(function(){
+        $(".pagination li a").each(function(i,v){
+            var href=$(this).attr('href');
+            href=href.replace("http://","");
+            var sss=href.indexOf("/");
+            href="http://www.online.com/"+href.substring(sss);
+            $(this).attr("href",href);
+        });
+
+
+
         layui.use(['layer','form'], function() {
             var layer = layui.layer;
             var form = layui.form;
