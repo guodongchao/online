@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>约见管理-有点</title>
-    <link rel="stylesheet" type="text/css" href="css/css.css" />
-    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/css.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="js/page.js" ></script> -->
 </head>
 <body>
@@ -33,8 +33,9 @@
                             <td>{{date('Y-m-d H:i:s',$v['last_login_time'])}}</td>
                         @endif
                         <td>
-                            <a href="/admin/admin_update"><img class="operation" src="img/update.png"></a>
+                            <a href="/admin/admin_update/{{$v['admin_id']}}"><img class="operation" src="img/update.png"></a>
                             <img class="operation delban admin_del" src="img/delete.png" admin_id="{{$v['admin_id']}}">
+                            <a href="/admin/adminrole/{{$v['admin_id']}}">角色</a>
                         </td>
                     </tr>
                     @endforeach

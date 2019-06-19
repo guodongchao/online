@@ -98,6 +98,7 @@ class MationController extends Controller
         $mation_name = $request->input('mation_name');
         $news_content = $request->input('news_content');
         $mcate_id = $request->input('mcate_id');
+        $is_show = $request->input('is_show');
 
         if(empty($mation_name)){
             return json_encode(['msg'=>'名称不能为空','code'=>1]);
@@ -111,6 +112,7 @@ class MationController extends Controller
         $datainfo=[
             'mation_title'=>$mation_name,
             'mation_content'=>$news_content,
+            'is_show'=>$is_show,
             'create_time'=>time()
         ];
         DB::beginTransaction();
@@ -132,5 +134,41 @@ class MationController extends Controller
         }
 
     }
-    
+    //资讯展示
+    public function mationShow(Request $request){
+        date_default_timezone_set('PRC');
+        $search=$request->input("search","");
+        $cate_id=$request->input("cate_id","");
+
+        $catedata = DB::table('mation_cate')->where('is_del',1)->get();
+
+        $where=[];
+
+        if(!empty($cate_id)){
+            $where['mation_cate_rela.mcate_id']=$cate_id;
+        }
+        if($search==""){
+            $mationInfo=DB::table('mation')->where('mation.is_del',1)
+                ->where($where)
+                ->join('mation_cate_rela','mation.mation_id','=','mation_cate_rela.mation_id')
+                ->paginate(5);
+        }else{
+            $mationInfo=DB::table('mation')->where('mation.is_del',1)
+                ->where("mation_title","like","%$search%")
+                ->join('mation_cate_rela','mation.mation_id','=','mation_cate_rela.mation_id')
+                ->paginate(5);
+        }
+        return view('admin.mation.mationshow',['mationInfo'=>$mationInfo,'catedata'=>$catedata,'search'=>$search,'cate_id'=>$cate_id]);
+    }
+
+    public function mationIsShow(Request $request){
+        $is_show = $request->input('is_show');
+        $mation_id = $request->input('mation_id');
+        $res = DB::table('mation')->where('mation_id',$mation_id)->update(['is_show'=>$is_show]);
+        if($res){
+            return json_encode(['msg'=>'修改成功','code'=>1]);
+        }else{
+            return json_encode(['msg'=>'修改失败','code'=>0]);
+        }
+    }
 }
