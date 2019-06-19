@@ -69,7 +69,12 @@ Route::any('rolepower/{role_id}','admin\role\RoleController@rolePower');
 Route::any('poweradd','admin\role\PowerController@powerAdd');
 Route::any('poweraddDo','admin\role\PowerController@powerAddDo');
 //权限展示
-Route::any('powershow','admin\role\RoleController@powerlist');
+Route::any('powershow','admin\role\PowerController@powerlist');
+//权限删除
+Route::any('powerdel','admin\role\PowerController@powerDel');
+//权限修改
+Route::any('powerupdate/{power_id}','admin\role\PowerController@powerUpdate');
+Route::any('powerUpdateDo','admin\role\PowerController@powerUpdateDo');
 //后台首页
 Route::get('index','admin\index\index@index');
 Route::get('left','admin\index\index@left');
