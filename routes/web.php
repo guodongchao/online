@@ -71,6 +71,8 @@ Route::any('cate_add','admin\cate\cate@cate_add');
 Route::any('cate_show','admin\cate\cate@cate_show');
 Route::any('cate_update','admin\cate\cate@cate_update');
 Route::any('cate_update_do','admin\cate\cate@cate_update_do');
+Route::any('cate_del','admin\cate\cate@cate_del');
+Route::any('cate_search','admin\cate\cate@cate_search');
 
 
 
