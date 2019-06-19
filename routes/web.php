@@ -73,8 +73,13 @@ Route::any('cate_update','admin\cate\cate@cate_update');
 Route::any('cate_update_do','admin\cate\cate@cate_update_do');
 Route::any('cate_del','admin\cate\cate@cate_del');
 Route::any('cate_search','admin\cate\cate@cate_search');
-
-
+//讲师模块
+Route::any('teacher','admin\Teacher\TeacherController@teacher');
+Route::any('teacher_do','admin\Teacher\TeacherController@teacher_do');
+Route::any('teacher_list','admin\Teacher\TeacherController@teacher_list');
+Route::any('teacher_del','admin\Teacher\TeacherController@teacher_del');
+Route::any('teacher_update','admin\Teacher\TeacherController@teacher_update');
+Route::any('teacher_update_do','admin\Teacher\TeacherController@teacher_update_do');
 
 
 //品牌模块
