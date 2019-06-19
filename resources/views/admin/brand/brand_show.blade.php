@@ -38,21 +38,35 @@
             <div class="conShow">
                 <table border="1" cellspacing="0" cellpadding="0">
                     <tr>
-                        <td width="66px" class="tdColor tdC">商品品牌id</td>
-                        <td width="355px" class="tdColor">商品品牌名称</td>
-                        <td width="355px" class="tdColor">商品品牌logo</td>
-                        <td width="355px" class="tdColor">商品品牌状态</td>
-                        <td width="130px" class="tdColor">操作</td>
+                        <td width="66px" class="tdColor tdC">id</td>
+                        <td width="66px" class="tdColor">题名</td>
+                        <td width="66px" class="tdColor">题类型</td>
+                        <td width="66px" class="tdColor">题分类</td>
+                        <td width="66px" class="tdColor">题选择答案</td>
+                        <td width="66px" class="tdColor">题正确答案</td>
+                        <td width="66px" class="tdColor">添加人</td>
+                        <td width="66px" class="tdColor">操作</td>
                     </tr>
+                    @foreach($arr as $k=>$v)
                     <tr>
-                        <td width="66px" class="tdColor tdC">商品品牌id</td>
-                        <td width="355px" class="tdColor">商品品牌名称</td>
-                        <td width="355px" class="tdColor">商品品牌logo</td>
-                        <td width="355px" class="tdColor">商品品牌状态</td>
-                        <td><a href="brand_update"><img class="operation" src="img/update.png"></a>
-                            <img class="operation delban" src="img/delete.png" onclick="brand_del()">
-                        </td>
+                            <td width="66px" class="tdColor tdC">{{$v['q_id']}}</td>
+                            <td width="66px" class="tdColor">{{$v['q_name']}}</td>
+                            <td width="66px" class="tdColor">
+                                @if($v['q_type']==1)
+                                        选择题
+                                @else
+                                    判断
+                                @endif
+                            </td>
+                            <td width="66px" class="tdColor">{{$v['q_class']}}</td>
+                            <td width="66px" class="tdColor">{{$v['q_answer']}}</td>
+                            <td width="66px" class="tdColor">{{$v['q_result']}}</td>
+                            <td width="66px" class="tdColor">{{$v['u_id']}}</td>
+                            <td><a href="brand_update?q_id={{$v['q_id']}}"><img class="operation" src="img/update.png"></a>
+                                <img class="operation delban" src="img/delete.png" onclick="brand_del({{$v['q_id']}})">
+                            </td>
                     </tr>
+                    @endforeach
                 </table>
             </div>
             <!-- banner 表格 显示 end-->
@@ -66,7 +80,22 @@
 
 </html>
 <script>
-    function brand_del() {
-        alert(111);
+    function brand_del(q_id) {
+        var data={
+            q_id:q_id
+        }
+        $.ajax({
+            type:'post',
+            data:data,
+            url:'http://online.com/admin/brand_del',
+            dataType:'json',
+            success:function(data){
+                alert(data.msg)
+                if(data.error==0){
+                    window.location.reload();
+                }
+
+            }
+        })
     }
 </script>

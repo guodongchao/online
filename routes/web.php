@@ -69,8 +69,11 @@ Route::any('cate_update_do','admin\cate\cate@cate_update_do');
 //品牌模块
 Route::any('brand','admin\brand\brand@brand');
 Route::any('brand_show','admin\brand\brand@brand_show');
-Route::any('brand_update','admin\brand\brand@brand_update');
+Route::get('brand_update','admin\brand\brand@brand_update');
+Route::post('brand_update_do','admin\brand\brand@brand_update_do');
 Route::post('brand_add','admin\brand\brand@brand_add');
+Route::post('brand_del','admin\brand\brand@brand_del');
+
 
 //商品类型模块
 Route::any('type','admin\type\type@type');

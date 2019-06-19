@@ -88,7 +88,10 @@
             url:'http://online.com/admin/brand_add',
             dataType:'json',
             success:function(data){
-             alert(data);
+                alert(data.msg)
+                if(data.error==0){
+                    window.location.reload();
+                }
             }
         })
     }
