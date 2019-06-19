@@ -5,6 +5,14 @@
     <title>约见管理-有点</title>
     <link rel="stylesheet" type="text/css" href="css/css.css" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script src="layui/css/layui.css"></script>
+    <script src="layui/layui.js"></script>
+    <script src="admin/css/page3.css"></script>
+    <style>
+        input[type="checkbox"]{width:20px;height:20px;display: inline-block;text-align: center;vertical-align: middle; line-height: 20px;position: relative;}
+        input[type="checkbox"]::before{content: "";position: absolute;top: 0;left: 0;background: #fff;width: 100%;height: 100%;border: 1px solid #d9d9d9}
+        input[type="checkbox"]:checked::before{content: "\2713";background-color: #fff;position: absolute;top: 0;left: 0;width:100%;border: 1px solid #ff4e00;color: #ff4e00;font-size: 13px;font-weight: bold;}
+    </style>
     <!-- <script type="text/javascript" src="js/page.js" ></script> -->
 </head>
 
@@ -28,46 +36,73 @@
                                     {{--type="radio" checked="checked" name="styleshoice2" />&nbsp;未付款</label> <label><input--}}
                                     {{--type="radio" name="styleshoice2" />&nbsp;已付款</label>--}}
                     {{--</div>--}}
-                    {{--<div class="cfD">--}}
-                        {{--<input class="addUser" type="text" placeholder="输入用户名/ID/手机号/城市" />--}}
-                        {{--<button class="button">搜索</button>--}}
-                    {{--</div>--}}
+                    <div class="cfD">
+                        <input class="addUser" type="text" placeholder="输入课程名称/课程分类" />
+                        <button class="button">搜索</button>
+                    </div>
                 {{--</form>--}}
             {{--</div>--}}
             <!-- banner 表格 显示 -->
             <div class="conShow">
                 <table border="1" cellspacing="0" cellpadding="0">
+                    <thead>
                     <tr>
-                        <td width="66px" class="tdColor tdC">商品id</td>
-                        <td width="355px" class="tdColor">商品名称</td>
-                        <td width="260px" class="tdColor">商品价格</td>
-                        <td width="275px" class="tdColor">商品介绍</td>
-                        <td width="290px" class="tdColor">商品状态</td>
-                        <td width="290px" class="tdColor">商品库存</td>
-                        <td width="290px" class="tdColor">商品推荐</td>
-                        <td width="290px" class="tdColor">商家备注</td>
-                        <td width="290px" class="tdColor">库存警告</td>
-                        <td width="290px" class="tdColor">商品重量</td>
-                        <td width="290px" class="tdColor">购买商品所赠送的积分</td>
+                        <td width="100px" class="tdColor tdC">课程id</td>
+                        <td width="200px" class="tdColor">课程名称</td>
+                        <td width="260px" class="tdColor">课程价格</td>
+                        <td width="275px" class="tdColor">所需学时</td>
+                        <td width="290px" class="tdColor">所属分类</td>
+                        <td width="290px" class="tdColor">课程图片</td>
+                        <td width="290px" class="tdColor">讲师</td>
+                        <td width="290px" class="tdColor">课程简介</td>
+                        <td width="290px" class="tdColor">是否上架</td>
+                        <td width="290px" class="tdColor">已完结</td>
                         <td width="130px" class="tdColor">操作</td>
                     </tr>
+                    </thead>
+                    <tbody>
+                    @if($data)
+                    @foreach($data as $key=>$val)
                     <tr>
-                        <td width="66px" class="tdColor tdC">商品id</td>
-                        <td width="355px" class="tdColor">商品名称</td>
-                        <td width="260px" class="tdColor">商品价格</td>
-                        <td width="275px" class="tdColor">商品介绍</td>
-                        <td width="290px" class="tdColor">商品状态</td>
-                        <td width="290px" class="tdColor">商品库存</td>
-                        <td width="290px" class="tdColor">商品推荐</td>
-                        <td width="290px" class="tdColor">商家备注</td>
-                        <td width="290px" class="tdColor">库存警告</td>
-                        <td width="290px" class="tdColor">商品重量</td>
-                        <td width="290px" class="tdColor">购买商品所赠送的积分</td>
-                        <td><a href="goods_update"><img class="operation" src="img/update.png"></a>
-                            <img class="operation delban" src="img/delete.png" onclick="goods_del()">
+                        <td width="100px" class="tdColor tdC">{{$val->culum_id}}</td>
+                        <td width="200px" class="tdColor">{{$val->culum_name}}</td>
+                        <td width="260px" class="tdColor">{{$val->culum_price}}</td>
+                        <td width="275px" class="tdColor">{{$val->culum_hours}}</td>
+                        <td width="290px" class="tdColor">{{$val->c_cate_name}}</td>
+                        <form  class="layui-form">
+                        <td width="290px" class="tdColor">
+                            <img style="height:100px;width: 100px;" src="{{$val->culum_img}}" alt="">
+                        </td>
+                        </form>
+                        <td width="290px" class="tdColor">{{$val->teacher_name}}</td>
+                        <td width="290px" class="tdColor">{{$val->culum_desc}}</td>
+                        <td width="290px" class="tdColor layui-form">
+                            @if($val->culum_show==1)
+                            <input type="checkbox"  value="1" checked>
+                            @else
+                            <input type="checkbox"  value="2">
+                            @endif
+                        </td>
+                        <td width="290px" class="tdColor">
+                            @if($val->culum_status==1)
+                                <input type="checkbox"  value="1" checked>
+                            @else
+                                <input type="checkbox"  value="2">
+                            @endif
+                        </td>
+                        <td><a href="goods_update?id={{$val->culum_id}}"><img class="operation" src="img/update.png"></a>
+                            <img class="operation delban" src="img/delete.png" onclick="goods_del($(this),{{$val->culum_id}})">
                         </td>
                     </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
                 </table>
+                {{--<div id="pull_right">--}}
+                    {{--<div class="pull-right">--}}
+                        {{--{!! $data->render() !!}--}}
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
             <!-- banner 表格 显示 end-->
         </div>
@@ -80,7 +115,47 @@
 
 </html>
 <script>
-    function goods_del() {
-        alert(111);
+
+    function goods_del(obj,id) {
+        layui.use('layer', function() { //独立版的layer无需执行这一句
+            var layer = layui.layer;
+            var url = "goods_del";
+            layer.confirm('您确定要删除么?', {icon: 3, title:'提示'}, function(index){
+                $.ajax({
+                    type: "post",
+                    data: {id: id},
+                    url: url,
+                    success: function (msg) {
+                        layer.msg(msg.msg,{icon: 6})
+                        if (msg.code == 100) {
+                            obj.parent().parent().empty()
+                        }
+                    }
+                })
+
+                layer.close(index);
+            });
+        })
     }
+    $(".button").click(function(){
+        layui.use('layer', function() { //独立版的layer无需执行这一句
+            var layer = layui.layer;
+            var search = $(".addUser").val();
+            var url = "/admin/culum_search";
+            $.ajax({
+                type: "post",
+                url: url,
+                data: {search: search},
+                success: function (msg) {
+                    if (msg.code==201){
+                        layer.msg("请填写您要搜索的内容");
+                    }else{
+                        $("tbody").empty();
+                        $("tbody").append(msg.msg);
+
+                    }
+                }
+            })
+        })
+    })
 </script>

@@ -78,11 +78,15 @@ Route::get('main','admin\index\index@main');
 
 
 
-//商品模块
+//课程模块
 Route::any('goods','admin\goods\goods@goods');
+Route::any('goods_add','admin\goods\goods@goods_add');
 Route::any('goods_show','admin\goods\goods@goods_show');
 Route::any('goods_update','admin\goods\goods@goods_update');
+Route::any('goods_update_do','admin\goods\goods@goods_update_do');
 Route::any('uploadajax','admin\goods\goods@uploadajax');
+Route::any('goods_del','admin\goods\goods@goods_del');
+Route::any('culum_search','admin\goods\goods@culum_search');
 
 
 //课程分类模块
@@ -110,6 +114,7 @@ Route::post('brand_del','admin\brand\brand@brand_del');
 Route::any('type','admin\type\type@type');
 Route::any('type_show','admin\type\type@type_show');
 Route::any('type_update','admin\type\type@type_update');
+
 //商品属性添加
 Route::any('attr','admin\attribute\attribute@attr');
 Route::any('attr_show','admin\attribute\attribute@attr_show');

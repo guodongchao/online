@@ -6,6 +6,8 @@
     <link rel="stylesheet" type="text/css" href="css/css.css" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
+    <script src="layui/css/layui.css"></script>
+    <script src="layui/layui.js"></script>
 </head>
 <body>
 <div id="pageAll">
@@ -17,7 +19,7 @@
             </div>
             <div class="baBody">
                 <div class="bbD">
-                    课程名称：<input type="text" name=culum_name" class="input1" />
+                    课程名称：<input type="text" name="culum_name" class="input1" />
                 </div>
                 <div class="bbD">
                     课程分类选择框：<select class="input3" name="c_cate_id">
@@ -28,7 +30,7 @@
                     </select>
                 </div>
                 <div class="bbD">
-                    课程学时：<input type="text" name="culum_name" class="input1" />
+                    课程学时：<input type="text" name="culum_hours" class="input1" />
                 </div>
                 <div class="bbD">
                     授课讲师：<select class="input3" name="teacher_id">
@@ -46,7 +48,7 @@
                 </div>
                 <div class="bbD">
                     课程状态：<input type="radio" name="culum_status" checked value="1">上架
-                              <input type="radio" name="culum_status" value="0">不上架
+                              <input type="radio" name="culum_status" value="2">不上架
                 </div>
                 <div class="bbD">
                     课程图片：
@@ -92,26 +94,31 @@
         })
     })
     function goods_add() {
-       var data={};
-        data.culum_name = $("[name='culum_name']").val();
-        data.c_cate_id = $("[name='c_cate_id']").val();
-        data.culum_name = $("[name='culum_name']").val();
-        data.culum_price = $("[name='culum_price']").val();
-        data.teacher_id = $("[name='teacher_id']").val();
-        data.culum_desc = $("[name='culum_desc']").val();
-        data.culum_status = $("[name='culum_status']").val();
-        data.img = $(".uplo").val();
-        console.log(data)
-        var url="goods_add";
-        $.ajax({
-            type:"post",
-            data:data,
-            url:url,
-            success:function(msg){
+        layui.use('layer', function() { //独立版的layer无需执行这一句
+            var layer = layui.layer;
+            var data = {};
+            data.culum_name = $("[name='culum_name']").val();
+            data.c_cate_id = $("[name='c_cate_id']").val();
+            data.culum_price = $("[name='culum_price']").val();
+            data.teacher_id = $("[name='teacher_id']").val();
+            data.culum_hours = $("[name='culum_hours']").val();
+            data.culum_desc = $("[name='culum_desc']").val();
+            data.culum_status = $("[name='culum_status']").val();
+            data.culum_img = $(".uplo").val();
+            console.log(data)
+            var url = "goods_add";
+            $.ajax({
+                type: "post",
+                data: data,
+                url: url,
+                success: function (msg) {
+                    layer.msg(msg.msg);
+                    if(msg.code==100){
+                        window.location.href="goods_show";
+                    }
+                }
+            })
 
-            }
         })
-
-
     }
 </script>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin\cate;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\admin\CourseCate;
+use App\models\admin\CourseCate;
 
 class cate extends Controller
 {
