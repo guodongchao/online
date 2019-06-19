@@ -20,9 +20,9 @@
                 <div class="bbD">
                     视频分类名称：<input type="text" name="c_cate_name" value="{{$info->c_cate_name}}" class="input1" />
                 </div>
-                <div class="bbD">
-                    视频分类排序：<input type="text" value="{{$info->c_cate_sort}}" placeholder="请填写1-100的整型,数值大,排序大" name="c_cate_sort" class="input1" />
-                </div>
+                {{--<div class="bbD">--}}
+                    {{--视频分类排序：<input type="text" value="{{$info->c_cate_sort}}" placeholder="请填写1-100的整型,数值大,排序大" name="c_cate_sort" class="input1" />--}}
+                {{--</div>--}}
                 <div class="bbD">
                     视频分类等级：
                     <select class="input3" name="c_parent_id">
@@ -56,7 +56,7 @@
         data.cate_id = $("#cate_id").val();
         data.c_cate_name = $("[name='c_cate_name']").val();
         data.parent_id = $("[name='c_parent_id']").val();
-        data.sort = $("[name='c_cate_sort']").val();
+//        data.sort = $("[name='c_cate_sort']").val();
         if(!data.cate_id){
             alert("非法操作");
             window.location.href="/admin/cate_show";
@@ -66,23 +66,22 @@
             alert("请填写分类名称");
             return false;
         }
-        if(isNaN(data.sort)){
-            alert("排序请填写纯数字");
-            return false;
-        }
+//        if(isNaN(data.sort)){
+//            alert("排序请填写纯数字");
+//            return false;
+//        }
 
         $.ajax({
             type:"post",
             data:data,
             url:url,
             success:function(msg){
-                console.log(msg)
                 alert(msg.msg);
-//                if(msg.code==200){
-//                    window.location.reload();
-//                }else{
-//                    window.location.href="/admin/cate_show";
-//                }
+                if(msg.code==200){
+                    window.location.reload();
+                }else{
+                    window.location.href="/admin/cate_show";
+                }
             }
         })
 

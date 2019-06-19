@@ -87,7 +87,7 @@
         $.ajax({
             type:'post',
             data:data,
-            url:'http://online.com/admin/brand_update_do',
+            url:'/admin/brand_update_do',
             dataType:'json',
             success:function(data){
                 alert(data.msg)

@@ -54,25 +54,52 @@ Route::any('admin_update_do','admin\login\login@admin_update_do');
 //管理员角色展示
 Route::any('adminrole/{admin_id}','admin\login\login@adminrole');
 //角色添加
-Route::any('role','admin\login\login@role');
-Route::any('roleDo','admin\login\login@role_add');
+Route::any('role','admin\role\RoleController@role');
+Route::any('roleDo','admin\role\RoleController@role_add');
+//角色展示
+Route::any('role_show','admin\role\RoleController@rolelist');
+//角色删除
+Route::any('role_del','admin\role\RoleController@roleDel');
+//角色修改
+Route::any('role_update/{role_id}','admin\role\RoleController@roleUpdate');
+Route::any('roleUpdateDo','admin\role\RoleController@roleUpdateDo');
+//管理员角色展示
+Route::any('rolepower/{role_id}','admin\role\RoleController@rolePower');
+//权限添加
+Route::any('poweradd','admin\role\PowerController@powerAdd');
+Route::any('poweraddDo','admin\role\PowerController@powerAddDo');
+//权限展示
+Route::any('powershow','admin\role\RoleController@powerlist');
 //后台首页
 Route::get('index','admin\index\index@index');
 Route::get('left','admin\index\index@left');
 Route::get('head','admin\index\index@head');
 Route::get('main','admin\index\index@main');
+
+
+
 //商品模块
 Route::any('goods','admin\goods\goods@goods');
 Route::any('goods_show','admin\goods\goods@goods_show');
 Route::any('goods_update','admin\goods\goods@goods_update');
+Route::any('uploadajax','admin\goods\goods@uploadajax');
+
+
 //课程分类模块
 Route::any('cate','admin\cate\cate@cate');
 Route::any('cate_add','admin\cate\cate@cate_add');
 Route::any('cate_show','admin\cate\cate@cate_show');
 Route::any('cate_update','admin\cate\cate@cate_update');
 Route::any('cate_update_do','admin\cate\cate@cate_update_do');
-
-
+Route::any('cate_del','admin\cate\cate@cate_del');
+Route::any('cate_search','admin\cate\cate@cate_search');
+//讲师模块
+Route::any('teacher','admin\Teacher\TeacherController@teacher');
+Route::any('teacher_do','admin\Teacher\TeacherController@teacher_do');
+Route::any('teacher_list','admin\Teacher\TeacherController@teacher_list');
+Route::any('teacher_del','admin\Teacher\TeacherController@teacher_del');
+Route::any('teacher_update','admin\Teacher\TeacherController@teacher_update');
+Route::any('teacher_update_do','admin\Teacher\TeacherController@teacher_update_do');
 
 
 //品牌模块
@@ -145,6 +172,8 @@ Route::prefix('index')->group(function () {
     //讲师
     Route::any('teacher','index\teacher\teacherController@teacher');
     Route::any('teacherlist','index\teacher\teacherController@teacherlist');
+    //题库
+    Route::any('question1','index\question\questionController@question1');
 });
 
 

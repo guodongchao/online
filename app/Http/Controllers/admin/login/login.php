@@ -135,12 +135,14 @@ class login extends Controller
         $where=[
             'admin_id'=>$admin_id
         ];
-        $adminInfo=AdminRole::where($where)->pluck('role_id')->toarray();
+        $info=admin::where($where)->first()->toarray();
+        $adminInfo=adminrole::where($where)->pluck('role_id')->toarray();
         $roleInfo=role::get()->toarray();
         $data=[
+            'admin_name'=>$info['admin_name'],
             'roleInfo'=>$roleInfo,
             'adminInfo'=>$adminInfo,
         ];
-        return view("admin.login.admin_update",$data);
+        return view("admin.login.admin_role",$data);
     }
 }
