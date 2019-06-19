@@ -145,7 +145,7 @@
                         </td>
                         <td><?php echo date("Y-m-d H:i:s",$v->create_time)?></td>
                         <td mation_id={{$v->mation_id}}>
-                            <a href="newsUpdate?mation_id={{$v->mation_id}}"><img class="operation" src="img/update.png"></a>
+                            <a href="mationUpdate?mation_id={{$v->mation_id}}"><img class="operation" src="img/update.png"></a>
                             <img class="operation delban" src="img/delete.png">
                         </td>
                     </tr>
@@ -212,7 +212,7 @@
         $('.delban').click(function(){
             var _this = $(this);
 //            alert(111)
-            var news_id = $(this).parent().attr('news_id');
+            var mation_id = $(this).parent().attr('mation_id');
 
             layer.open({
                 type:0,
@@ -220,11 +220,15 @@
                 btn:['确认','取消'],
                 yes:function(index,layero){
                     $.post(
-                        'newsDel',
-                        {news_id:news_id},
+                        'mationDel',
+                        {mation_id:mation_id},
                         function(res){
-                            layer.msg(res.msg);
-                            _this.parents('tr').remove();
+                            if(res.code==0){
+                                layer.msg(res.msg);
+                                _this.parents('tr').remove();
+                            }else{
+                                layer.msg(res.msg);
+                            }
                         },'json'
                     )
                 },

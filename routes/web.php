@@ -85,6 +85,8 @@ Route::any('cate_add','admin\cate\cate@cate_add');
 Route::any('cate_show','admin\cate\cate@cate_show');
 Route::any('cate_update','admin\cate\cate@cate_update');
 Route::any('cate_update_do','admin\cate\cate@cate_update_do');
+Route::any('cate_del','admin\cate\cate@cate_del');
+Route::any('cate_search','admin\cate\cate@cate_search');
 
 
 
@@ -92,8 +94,11 @@ Route::any('cate_update_do','admin\cate\cate@cate_update_do');
 //品牌模块
 Route::any('brand','admin\brand\brand@brand');
 Route::any('brand_show','admin\brand\brand@brand_show');
-Route::any('brand_update','admin\brand\brand@brand_update');
+Route::get('brand_update','admin\brand\brand@brand_update');
+Route::post('brand_update_do','admin\brand\brand@brand_update_do');
 Route::post('brand_add','admin\brand\brand@brand_add');
+Route::post('brand_del','admin\brand\brand@brand_del');
+
 
 //商品类型模块
 Route::any('type','admin\type\type@type');
@@ -153,6 +158,8 @@ Route::prefix('index')->group(function () {
     //讲师
     Route::any('teacher','index\teacher\teacherController@teacher');
     Route::any('teacherlist','index\teacher\teacherController@teacherlist');
+    //题库
+    Route::any('question1','index\question\questionController@question1');
 });
 
 

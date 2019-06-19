@@ -131,6 +131,7 @@ class MationController extends Controller
             }
         }else{
             DB::rollBack();
+            echo json_encode(['msg'=>'添加失败','code'=>1]);
         }
 
     }
@@ -160,7 +161,7 @@ class MationController extends Controller
         }
         return view('admin.mation.mationshow',['mationInfo'=>$mationInfo,'catedata'=>$catedata,'search'=>$search,'cate_id'=>$cate_id]);
     }
-
+    //资讯是否展示
     public function mationIsShow(Request $request){
         $is_show = $request->input('is_show');
         $mation_id = $request->input('mation_id');
@@ -169,6 +170,50 @@ class MationController extends Controller
             return json_encode(['msg'=>'修改成功','code'=>1]);
         }else{
             return json_encode(['msg'=>'修改失败','code'=>0]);
+        }
+    }
+    //资讯的删除
+    public function mationDel(Request $request){
+        $mation_id = $request->input('mation_id');
+        $is_del=[
+            'is_del'=>0
+        ];
+        $res = DB::table('mation')->where('mation_id',$mation_id)->update($is_del);
+        if($res){
+            echo json_encode(['msg'=>'删除成功','code'=>0]);
+        }else{
+            echo json_encode(['msg'=>'删除失败','code'=>1]);
+        }
+    }
+    //资讯的修改页面
+    public function mationUpdate(Request $request){
+        $mation_id = $request->input('mation_id');
+        $mationdata = DB::table('mation')
+            ->where('mation.mation_id',$mation_id)
+            ->join('mation_cate_rela','mation.mation_id','=','mation_cate_rela.mation_id')
+
+            ->first();
+        $catedata = DB::table('mation_cate')->where('is_del',1)->get()->toArray();
+        return view('admin.mation.mationupdate',['catedata'=>$catedata,'mationdata'=>$mationdata]);
+    }
+    //资讯的执行修改
+    public function mationUpdateDo(Request $request){
+        $mation_id = $request->input('mation_id');
+        $mcate_id = $request->input('mcate_id');
+        $mation_title = $request->input('mation_title');
+        $mation_content = $request->input('mation_content');
+        $is_show = $request->input('is_show');
+        $data = [
+            'mation_title'=>$mation_title,
+            'mation_content'=>$mation_content,
+            'is_show'=>$is_show
+        ];
+        $res = DB::table('mation')->where('mation_id',$mation_id)->update($data);
+        $sql = DB::table('mation_cate_rela')->where('mation_id',$mation_id)->update(['mcate_id'=>$mcate_id]);
+        if($res){
+            echo json_encode(['msg'=>'修改成功','code'=>0]);
+        }else{
+            echo json_encode(['msg'=>'未修改','code'=>1]);
         }
     }
 }
