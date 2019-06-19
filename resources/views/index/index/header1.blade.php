@@ -45,7 +45,7 @@
             <li><a href="courselist" target="main"  class="link1">课程</a></li>
             <li><a href="articlelist" target="main" class="link1">资讯</a></li>
             <li><a href="teacher" target="main" class="link1">讲师</a></li>
-            <li><a href="exam_index" class="link1" target="main">题库</a></li>
+            <li><a href="question1" class="link1" target="main">题库</a></li>
             <li><a href="askarea" class="link1" target="main">问答</a></li>
         </ul>
 

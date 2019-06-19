@@ -124,33 +124,33 @@
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a href="type" target="main" class="cks">添加权限</a>
+                <a href="poweradd" target="main" class="cks">添加权限</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a href="type_show" target="main" class="cks">权限展示</a>
+                <a href="powershow" target="main" class="cks">权限展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
         </dl>
         <dl class="system_log">
             <dt>
                 <img class="icon1" src="/img/coin14.png" />
-                <img class="icon2" src="/img/coin13.png" /> 节点管理
+                <img class="icon2" src="/img/coin13.png" /> 角色管理
                 <img class="icon3" src="/img/coin19.png" />
                 <img class="icon4" src="/img/coin20.png" />
             </dt>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="attr" target="main">节点添加</a>
+                <a class="cks" href="role" target="main">角色添加</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
             <dd>
                 <img class="coin11" src="/img/coin111.png" />
                 <img class="coin22" src="/img/coin222.png" />
-                <a class="cks" href="attr_show" target="main">节点展示</a>
+                <a class="cks" href="role_show" target="main">角色展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
         </dl>
