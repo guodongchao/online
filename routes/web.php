@@ -69,7 +69,12 @@ Route::any('rolepower/{role_id}','admin\role\RoleController@rolePower');
 Route::any('poweradd','admin\role\PowerController@powerAdd');
 Route::any('poweraddDo','admin\role\PowerController@powerAddDo');
 //权限展示
-Route::any('powershow','admin\role\RoleController@powerlist');
+Route::any('powershow','admin\role\PowerController@powerlist');
+//权限删除
+Route::any('powerdel','admin\role\PowerController@powerDel');
+//权限修改
+Route::any('powerupdate/{power_id}','admin\role\PowerController@powerUpdate');
+Route::any('powerUpdateDo','admin\role\PowerController@powerUpdateDo');
 //后台首页
 Route::get('index','admin\index\index@index');
 Route::get('left','admin\index\index@left');
@@ -97,8 +102,13 @@ Route::any('cate_update','admin\cate\cate@cate_update');
 Route::any('cate_update_do','admin\cate\cate@cate_update_do');
 Route::any('cate_del','admin\cate\cate@cate_del');
 Route::any('cate_search','admin\cate\cate@cate_search');
-
-
+//讲师模块
+Route::any('teacher','admin\Teacher\TeacherController@teacher');
+Route::any('teacher_do','admin\Teacher\TeacherController@teacher_do');
+Route::any('teacher_list','admin\Teacher\TeacherController@teacher_list');
+Route::any('teacher_del','admin\Teacher\TeacherController@teacher_del');
+Route::any('teacher_update','admin\Teacher\TeacherController@teacher_update');
+Route::any('teacher_update_do','admin\Teacher\TeacherController@teacher_update_do');
 
 
 //品牌模块
@@ -157,6 +167,9 @@ Route::prefix('index')->group(function () {
     //咨询
     Route::any('article','index\article\articleController@article');
     Route::any('articlelist','index\article\articleController@articlelist');
+    Route::any('articlecatelist','index\article\articleController@articlecatelist');
+    Route::any('articleTop','index\article\articleController@articleTop');
+    Route::any('articlexia','index\article\articleController@articlexia');
     //课程
     Route::any('mycourse','index\course\courseController@mycourse');//我的信息
     Route::any('coursecont','index\course\courseController@coursecont');

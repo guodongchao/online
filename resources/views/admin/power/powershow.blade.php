@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>约见管理-有点</title>
     <link rel="stylesheet" type="text/css" href="/css/css.css" />
+    <link rel="stylesheet" type="text/css" href="/admin/css/page3.css" />
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <!-- <script type="text/javascript" src="js/page.js" ></script> -->
 </head>
@@ -16,22 +17,30 @@
             <div class="conShow">
                 <table border="1" cellspacing="0" cellpadding="0">
                     <tr>
-                        <td width="66px" class="tdColor tdC">角色id</td>
-                        <td width="355px" class="tdColor">角色名称</td>
+                        <td width="66px" class="tdColor tdC">权限id</td>
+                        <td width="355px" class="tdColor">功能名称</td>
+                        <td width="355px" class="tdColor">方法路由</td>
+                        <td width="355px" class="tdColor">是否在导航栏展示</td>
                         <td width="130px" class="tdColor">操作</td>
                     </tr>
-                    @foreach($roleInfo as $v)
+                    @foreach($powerInfo as $v)
                     <tr>
-                        <td>{{$v['role_id']}}</td>
-                        <td>{{$v['role_name']}}</td>
+                        <td>{{$v['power_id']}}</td>
+                        <td>{{$v['power_name']}}</td>
+                        <td>{{$v['power_url']}}</td>
+                        @if($v['is_show']==1)
+                            <td>是</td>
+                        @else
+                            <td>否</td>
+                        @endif
                         <td>
-                            <a href="/admin/role_update/{{$v['role_id']}}"><img class="operation" src="img/update.png"></a>
-                            <img class="operation delban role_del" src="img/delete.png" role_id="{{$v['role_id']}}">
-                            <a href="/admin/rolepower/{{$v['role_id']}}">权限</a>
+                            <a href="/admin/powerupdate/{{$v['power_id']}}"><img class="operation" src="img/update.png"></a>
+                            <img class="operation delban power_del" src="img/delete.png" power_id="{{$v['power_id']}}">
                         </td>
                     </tr>
                     @endforeach
                 </table>
+                {!! $powerInfo->render() !!}
             </div>
             <!-- banner 表格 显示 end-->
         </div>
@@ -44,17 +53,17 @@
 
 </html>
 <script>
-    $(document).on('click','.role_del',function(){
-        var role_id=$(this).attr('role_id');
+    $(document).on('click','.power_del',function(){
+        var power_id=$(this).attr('power_id');
         $.ajax({
-            url:"/admin/role_del",
+            url:"/admin/powerdel",
             type:"post",
-            data:{role_id:role_id},
+            data:{power_id:power_id},
             dataType:"json",
             success:function(data){
                 alert(data.msg);
                 if(data.code ==200){
-                    location.href ="/admin/role_show";
+                    location.href ="/admin/powershow";
                 }
             }
         })

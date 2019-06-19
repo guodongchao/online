@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
-
 class MationController extends Controller
 {
     //资讯分类添加页面
@@ -152,12 +151,12 @@ class MationController extends Controller
             $mationInfo=DB::table('mation')->where('mation.is_del',1)
                 ->where($where)
                 ->join('mation_cate_rela','mation.mation_id','=','mation_cate_rela.mation_id')
-                ->paginate(5);
+                ->paginate(4);
         }else{
             $mationInfo=DB::table('mation')->where('mation.is_del',1)
                 ->where("mation_title","like","%$search%")
                 ->join('mation_cate_rela','mation.mation_id','=','mation_cate_rela.mation_id')
-                ->paginate(5);
+                ->paginate(4);
         }
         return view('admin.mation.mationshow',['mationInfo'=>$mationInfo,'catedata'=>$catedata,'search'=>$search,'cate_id'=>$cate_id]);
     }
