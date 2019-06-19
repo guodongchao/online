@@ -39,7 +39,7 @@ class brand extends Controller
     }
     //展示
     public function brand_show(){
-        $arr=question::where(['is_status'=>1])->get();
+        $arr=question::where(['is_status'=>1])->paginate(1);
         return view("admin.brand.brand_show",['arr'=>$arr]);
     }
     //删除
@@ -59,13 +59,13 @@ class brand extends Controller
         }
         return $info;
     }
-    //商品修改视图
+    //修改视图
     public function brand_update(Request $request){
         $q_id=$request->input('q_id');
         $arr=question::where(['q_id'=>$q_id])->first();
         return view("admin.brand.brand_update",['arr'=>$arr]);
     }
-    //商品修改执行
+    //修改执行
     public function brand_update_do(Request $request){
         $arr=$request->input();
         $where=[
