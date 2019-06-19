@@ -61,10 +61,16 @@ Route::get('index','admin\index\index@index');
 Route::get('left','admin\index\index@left');
 Route::get('head','admin\index\index@head');
 Route::get('main','admin\index\index@main');
+
+
+
 //商品模块
 Route::any('goods','admin\goods\goods@goods');
 Route::any('goods_show','admin\goods\goods@goods_show');
 Route::any('goods_update','admin\goods\goods@goods_update');
+Route::any('uploadajax','admin\goods\goods@uploadajax');
+
+
 //课程分类模块
 Route::any('cate','admin\cate\cate@cate');
 Route::any('cate_add','admin\cate\cate@cate_add');

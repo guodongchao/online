@@ -46,19 +46,35 @@ class cate extends Controller
     public function cate_show(){
         $data = CourseCate::where("c_status",1)->get()->toArray();
         $sortData = $this->recursion($data);
-
-        return view("admin.cate.cate_show",["data"=>$data]);
+        return view("admin.cate.cate_show",["data"=>$sortData]);
     }
 
     //递归
-    public function recursion($data,$parent_id=0,$level=0){
+//    public function recursion($data,$parent_id=0,$level=0){
+//        static $tmp;
+//        foreach($data as $key=>$val){
+//            if($val['c_parent_id'] == $parent_id){
+//                $val['level']=$level;
+//                $tmp[] = $val;
+//
+//                $this->recursion($data,$val['c_cate_id'],$level+1);
+//            }
+//        }
+//        return $tmp;
+//
+//    }
+    public function recursion($data){
         static $tmp;
         foreach($data as $key=>$val){
-            if($val['c_parent_id'] == $parent_id){
-                $val['level']=$level;
+            if($val['c_parent_id'] == 0){
                 $tmp[] = $val;
-
-                $this->recursion($data,$val['c_cate_id'],$level+1);
+            }
+        }
+        foreach($tmp as $key=>$val){
+            foreach($data as $k=>$v){
+                if($v['c_parent_id']==$val['c_cate_id']){
+                    $tmp[$key]['son'][] = $v;
+                }
             }
         }
         return $tmp;
