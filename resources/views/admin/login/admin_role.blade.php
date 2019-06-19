@@ -12,10 +12,9 @@
         <!-- 上传广告页面样式 -->
         <div class="banneradd bor">
             <div class="baTop">
-                <span>管理员修改</span>
+                <span>管理员角色</span>
             </div>
             <div class="baBody">
-                <input type="hidden" value="{{$admin_id}}" id="admin_id">
                 <div class="bbD">
                     管理员角色：
                     @foreach($roleInfo as $k=>$v)
@@ -26,12 +25,6 @@
                         @endif
                     @endforeach
                 </div>
-                <div class="bbD">
-                    <p class="bbDP">
-                        <button class="btn_ok btn_yes" href="#" onclick="goods_add()">提交</button>
-                        <a class="btn_ok btn_no" href="goods">取消</a>
-                    </p>
-                </div>
             </div>
         </div>
 
@@ -41,25 +34,4 @@
 </body>
 </html>
 <script>
-    function goods_add() {
-        var admin_id=$('#admin_id').val();
-        var role_id = "";
-        $("input:checkbox:checked").each(function () {
-            role_id+=$(this).val()+',';
-        })
-        role_id = role_id.slice(0,role_id.length-1);//去出右边的逗号
-
-        $.ajax({
-            url:"/admin/admin_update_do",
-            type:"post",
-            data:{admin_id:admin_id,role_id:role_id},
-            dataType:"json",
-            success:function(data){
-                alert(data.msg);
-                if(data.code ==200){
-                    location.href ="/admin/admin_show";
-                }
-            }
-        })
-    }
 </script>

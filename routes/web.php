@@ -41,10 +41,21 @@ Route::prefix('admin')->group(function () {
 
 //后台登陆
 Route::any('login','admin\login\login@login');
+//管理员添加
 Route::any('admin','admin\login\login@admin');
+Route::any('adminDo','admin\login\login@admin_add');
+//管理员展示
 Route::any('admin_show','admin\login\login@admin_show');
-Route::any('admin_update','admin\login\login@admin_update');
-
+//管理员删除
+Route::any('admin_del','admin\login\login@admin_del');
+//管理员修改
+Route::any('admin_update/{admin_id}','admin\login\login@admin_update');
+Route::any('admin_update_do','admin\login\login@admin_update_do');
+//管理员角色展示
+Route::any('adminrole/{admin_id}','admin\login\login@adminrole');
+//角色添加
+Route::any('role','admin\login\login@role');
+Route::any('roleDo','admin\login\login@role_add');
 //后台首页
 Route::get('index','admin\index\index@index');
 Route::get('left','admin\index\index@left');
@@ -69,7 +80,12 @@ Route::any('cate_search','admin\cate\cate@cate_search');
 //品牌模块
 Route::any('brand','admin\brand\brand@brand');
 Route::any('brand_show','admin\brand\brand@brand_show');
-Route::any('brand_update','admin\brand\brand@brand_update');
+Route::get('brand_update','admin\brand\brand@brand_update');
+Route::post('brand_update_do','admin\brand\brand@brand_update_do');
+Route::post('brand_add','admin\brand\brand@brand_add');
+Route::post('brand_del','admin\brand\brand@brand_del');
+
+
 //商品类型模块
 Route::any('type','admin\type\type@type');
 Route::any('type_show','admin\type\type@type_show');
@@ -88,6 +104,14 @@ Route::post('isShow','admin\Mation\MationController@isShow');
 Route::post('mationCateDel','admin\Mation\MationController@mationCateDel');
 Route::get('mationCateUpdate','admin\Mation\MationController@mationCateUpdate');
 Route::post('mationCateUpdateDo','admin\Mation\MationController@mationCateUpdateDo');
+//资讯
+Route::get('mationAdd','admin\Mation\MationController@mationAdd');
+Route::post('mationInsert','admin\Mation\MationController@mationInsert');
+Route::any('mationShow','admin\Mation\MationController@mationShow');
+Route::post('mationIsShow','admin\Mation\MationController@mationIsShow');
+Route::post('mationDel','admin\Mation\MationController@mationDel');
+Route::get('mationUpdate','admin\Mation\MationController@mationUpdate');
+Route::post('mationUpdateDo','admin\Mation\MationController@mationUpdateDo');
 
 
 
