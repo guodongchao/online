@@ -144,6 +144,8 @@ Route::prefix('index')->group(function () {
     //讲师
     Route::any('teacher','index\teacher\teacherController@teacher');
     Route::any('teacherlist','index\teacher\teacherController@teacherlist');
+    //题库
+    Route::any('question1','index\question\questionController@question1');
 });
 
 

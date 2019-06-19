@@ -69,11 +69,7 @@
                     @endforeach
                 </table>
             </div>
-            <div id="pull_right">
-                <div class="pull-right">
-                    {!! $users->render() !!}
-                </div>
-            </div>
+                    <div class="pull-right">{{$arr->links()}}</div>
             <!-- banner 表格 显示 end-->
         </div>
         <!-- banner页面样式end -->
