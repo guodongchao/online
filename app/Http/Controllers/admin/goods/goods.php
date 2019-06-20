@@ -128,12 +128,10 @@ class goods extends Controller
             if($val['c_parent_id'] == $parent_id){
                 $val['level']=$level;
                 $tmp[] = $val;
-
                 $this->recursion($data,$val['c_cate_id'],$level+1);
             }
         }
         return $tmp;
-
     }
     public function uploadAjax(Request $request)
     {

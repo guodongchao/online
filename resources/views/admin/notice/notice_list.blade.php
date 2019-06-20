@@ -88,64 +88,68 @@
             <span>
                 <a href="#">首页</a>
                 &nbsp;-&nbsp;
-                <a href="#">讲师管理</a>
+                <a href="#">公告管理</a>
                 &nbsp;-
             </span>
-            &nbsp;讲师管理
+            &nbsp;公告展示
         </div>
     </div>
     <div class="page ">
         <!-- 上传广告页面样式 -->
         {{--<div class="banneradd bor">--}}
         <div class="baTopNo">
-            <span>讲师管理</span>
+            <span>公告展示</span>
         </div>
         <div class="baBody">
 
             <table border="1" cellspacing="0" cellpadding="0">
                 <tr>
                 <tr>
-                    <td width="66px" class="tdColor tdC">讲师id</td>
-                    <td width="200px" class="tdColor">讲师名称</td>
-                    <td width="200px" class="tdColor">讲师涉及能力</td>
-                    <td width="220px" class="tdColor">讲师简介</td>
-                    <td width="220px" class="tdColor">讲师授课风格</td>
-                    <td width="220px" class="tdColor">讲师头像</td>
-                    <td width="220px" class="tdColor">讲师状态</td>
-                    <td width="220px" class="tdColor">讲师入职时间</td>
+                    <td width="66px" class="tdColor tdC">公告id</td>
+                    <td width="200px" class="tdColor">公告内容</td>
+                    <td width="200px" class="tdColor">选择分类</td>
+                    <td width="200px" class="tdColor">公告分类展示</td>
+                    <td width="220px" class="tdColor">公告添加时间</td>
                     <td width="250px" class="tdColor">操作</td>
                 </tr>
-                @foreach($data as $v)
-                    <tr >
-                        <td class="abc" height="60">{{$v['teacher_id']}}</td>
-                        <td class="abc">{{$v['teacher_name']}}</td>
-                        <td class="abc">{{$v['teacher_type']}}</td>
-                        <td class="abc">{{$v['teacher_desc']}}</td>
-                        <td class="abc">{{$v['teacher_style']}}</td>
-                        <td class="abc"><img src="{{$v['teacher_img']}}" alt="" width="200px" height="100px"></td>
-                        <td class="abc">@if($v['teacher_status']==1)
-                                            在职
-                            @else
-                                            离职
-                            @endif
-                        </td>
-                        <td><?php echo date("Y-m-d H:i:s",$v['teacher_time'])?></td>
+                @foreach($data['data'] as $v)
+                    <tr>
+                        <td class="abc" height="60">{{$v['n_id']}}</td>
+                        <td class="abc">{{$v['n_name']}}</td>
                         <td>
-                            <a href="teacher_update?teacher_id={{$v['teacher_id']}}"><img class="operation" src="img/update.png"></a>
-                            <img class="operation delban" teacher_id="{{$v['teacher_id']}}" src="img/delete.png">
+                            <div class="bbD">
+                                课程分类选择框：<select class="input3" name="c_cate_id">
+                                    <option value="0">请选择</option>
+                                    @foreach($arr as $key=>$val)
+                                        <option value="{{$val['c_cate_id']}}"><?php echo str_repeat("&nbsp;&nbsp;",$val['level'])?>{{$val['c_cate_name']}}</option>
+                                    @endforeach
+                                </select>
+                                    <button class="btn_ok btn_yes" onclick="cate({{$v['n_id']}},$(this))" style="width: 100px;height: 30px;background-color: blue; border: none;color: white;" id="btn" href="#" >提交</button>
+                            </div>
+                        </td>
+                        <td>
+                            @foreach($v['cate_id'] as $kk=>$vv)
+                                {{$vv['c_cate_name']}}
+                                <img class="operation"  onclick="cate_del({{$v['n_id']}},{{$vv['c_cate_id']}})" src="img/delete.png"><br>
+                            @endforeach
+                        </td>
+                        <td><?php echo date("Y-m-d H:i:s",$v['n_time'])?></td>
+                        <td>
+                            <a href="notice_update?n_id={{$v['n_id']}}"><img class="operation" src="img/update.png"></a>
+                            <img class="operation delban" n_id="{{$v['n_id']}}" src="img/delete.png">
                         </td>
                     </tr>
                 @endforeach
             </table>
         </div>
     </div>
-    <div class="paging">
-        <div id="pull_right">
-            <div class="pull-right">
-                {!! $data->render() !!}
-            </div>
-        </div>
-    </div>
+    {{--<div class="paging">--}}
+        {{--<div id="pull_right">--}}
+            {{--<div class="pull-right">--}}
+                {{--{!! $data->render() !!}--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</div>--}}
     <!-- 上传广告页面样式end -->
     {{--</div>--}}
 </div>
@@ -155,6 +159,30 @@
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script>
+    //添加分类
+    function cate(n_id,aa){
+        var n_id=n_id;
+        var c_cate_id=aa.siblings('select').val();
+        var data={};
+        data.n_id=n_id;
+        data.c_cate_id=c_cate_id;
+        $.post('n_cate',{data:data},function (res) {
+                alert(res.msg);
+                window.location.href="notice_list";
+        },'json')
+    }
+    //删除分类
+    function cate_del(n_id,c_cate_id){
+        var n_id=n_id;
+        var c_cate_id=c_cate_id;
+        var data={};
+        data.n_id=n_id;
+        data.c_cate_id=c_cate_id;
+        $.post('cate_del',{data:data},function (res) {
+            alert(res.msg);
+            window.location.href="notice_list";
+        },'json')
+    }
     $(function(){
         layui.use(['layer','form'], function() {
             var layer = layui.layer;
@@ -170,15 +198,15 @@
             var layer = layui.layer;
             $('.delban').click(function(){
                 var _this = $(this);
-                var teacher_id = $(this).attr('teacher_id');
+                var n_id = $(this).attr('n_id');
                 layer.open({
                     type:0,
                     content: '是否确认删除？',
                     btn:['确认','取消'],
                     yes:function(index,layero){
                         $.post(
-                            'teacher_del',
-                            {teacher_id:teacher_id},
+                            'notice_del',
+                            {n_id:n_id},
                             function(res){
                                 if(res.code==0){
                                     layer.msg(res.msg);
@@ -193,7 +221,7 @@
                         return true;
                     }
                 })
-            })
+            });
         })
     })
 </script>
