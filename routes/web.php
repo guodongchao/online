@@ -169,17 +169,17 @@ Route::post('mationUpdateDo','admin\Mation\MationController@mationUpdateDo');
 //课程章节
 Route::get('chapterAdd','admin\Mation\MationController@chapterAdd');
 Route::post('chapterInsert','admin\Mation\MationController@chapterInsert');
-<<<<<<< HEAD
+
 //上传视频
 Route::any('uploadShiping','admin\shiping\shiping@uploadShiping');
 Route::any('upd','admin\shiping\shiping@upd');
 
-=======
+
 Route::post('sectionInsert','admin\Mation\MationController@sectionInsert');
 Route::get('chapterShow','admin\Mation\MationController@chapterShow');
 Route::get('sectionAdd','admin\Mation\MationController@sectionAdd');
 Route::get('sectionShow','admin\Mation\MationController@sectionShow');
->>>>>>> 1ea7ef1d619613c98fb3f2219b59f815661145c4
+
 
 
 
