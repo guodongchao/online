@@ -105,7 +105,7 @@
         </div>
         <div class="baBody">
             <div class="bbD">
-                <div class="cfD" style="text-align: center;">
+                <div class="cfD" style="text-align: center; margin-left: -500px;">
                     <form action="mationShow" method="post">
                         <select class="input3" name="cate_id">
                             <option value="0">请选择</option>
