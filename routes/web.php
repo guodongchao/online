@@ -146,6 +146,10 @@ Route::prefix('index')->group(function () {
     Route::any('teacherlist','index\teacher\teacherController@teacherlist');
     //题库
     Route::any('question1','index\question\questionController@question1');
+    Route::any('question2','index\question\questionController@question2');
+    Route::any('question3','index\question\questionController@question3');
+    Route::any('question4','index\question\questionController@question4');
+    Route::any('question5','index\question\questionController@question5');
 });
 
 

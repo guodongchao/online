@@ -16,7 +16,11 @@
             </div>
             <div class="baBody">
                 <div class="bbD">
-                    题库分类：<select class="input3" name="q_class"><option value="">请选择</option></select>
+                    题库分类：<select class="input3" id="q_class">
+                        @foreach($arr as $k=>$v)
+                        <option value="{{$v['c_cate_id']}}">{{$v['c_cate_name']}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="bbD" >
                     题库类型：<input type="radio" name="q_type" value="1" onclick="check_type(1)"/>选择题<input type="radio" value="2" name="q_type" onclick="check_type(2)"/>判断题
@@ -54,12 +58,17 @@
     function goods_add() {
         var q_type=$("input[name='q_type']:checked").val();
         var q_name=$("input[name='q_name']").val();
+        var q_class=$("#q_class").val();
         if(q_type==1){
             var q_answer=$("input[name='q_answer']").val();
         }else{
             q_answer="√,×";
         }
         var q_result=$("input[name='q_result']").val();
+        if(q_class==""){
+            alert('分类不能为空')
+            return false;
+        }
         if(q_type==undefined){
             alert('请选择题类型');
             return false;
@@ -76,10 +85,12 @@
             alert('正确答案不能为空')
             return false;
         }
+
        var data={
            q_type:q_type,
            q_name:q_name,
            q_answer:q_answer,
+           q_class:q_class,
            q_result:q_result
         }
         $.ajax({
