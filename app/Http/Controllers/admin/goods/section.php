@@ -4,27 +4,27 @@ namespace App\Http\Controllers\admin\goods;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Storage;
 use App\models\admin\CourseCate;
 use App\models\culum;
+use App\models\chapter;
 
 
-class goods extends Controller
+class section extends Controller
 {
     //课程添加视图
-    public function goods(){
+    public function sectionAdd(){
         $teacher = [
             [ "teacher_id"=>1,
-              "teacher_name"=>"张三"
+                "teacher_name"=>"张三"
             ]
         ];
         $data = CourseCate::where("c_status",1)->get()->toArray();
         $info = $this->recursion($data);
 //        print_r($info);die;
-        return view("admin.goods.goods",['data'=>$info,"teacher"=>$teacher]);
+        return view("admin.section.sectionAdd",['data'=>$info,"teacher"=>$teacher]);
     }
     //课程添加执行
-    public function goods_add(Request $request){
+    public function sectionAddDo(Request $request){
 
         $data = $request->input();
         $culum_name = $request->input("culum_name");
@@ -49,17 +49,17 @@ class goods extends Controller
 
     }
     //课程展示
-    public function goods_show(){
-       $data =  culum::join("teacher_details","culum.teacher_id","=","teacher_details.teacher_id")
-             ->join("course_cate","culum.c_cate_id","=","course_cate.c_cate_id")
-             ->select("culum.*","teacher_details.teacher_name","course_cate.c_cate_name")
-             ->where("is_del",1)
-             ->paginate(1);
+    public function section(){
+        $data =  culum::join("teacher_details","culum.teacher_id","=","teacher_details.teacher_id")
+            ->join("course_cate","culum.c_cate_id","=","course_cate.c_cate_id")
+            ->select("culum.*","teacher_details.teacher_name","course_cate.c_cate_name")
+            ->where("is_del",1)
+            ->get();
 //        print_r($data);
         return view("admin.goods.goods_show",['data'=>$data]);
     }
     //课程删除
-    public function goods_del(Request $request){
+    public function sectionDel(Request $request){
         $id = $request->input("id");
 
         $search = culum::where("culum_id",$id)->select("culum_img")->first();
@@ -76,7 +76,7 @@ class goods extends Controller
         }
     }
     //课程修改视图
-    public function goods_update(Request $request){
+    public function sectionUpd(Request $request){
         $id = $request->input("id");
         $search = culum::where("culum_id",$id)->first();
         $teacher = [
@@ -90,7 +90,7 @@ class goods extends Controller
         return view("admin.goods.goods_update",['data'=>$info,"teacher"=>$teacher,'info'=>$search]);
     }
     //课程修改执行
-    public function goods_update_do(Request $request){
+    public function sectionUpdDo(Request $request){
         $data = $request->input();
         $culum_name = $request->input("culum_name");
         $culum_id = $request->input("culum_id");
@@ -128,10 +128,12 @@ class goods extends Controller
             if($val['c_parent_id'] == $parent_id){
                 $val['level']=$level;
                 $tmp[] = $val;
+
                 $this->recursion($data,$val['c_cate_id'],$level+1);
             }
         }
         return $tmp;
+
     }
     public function uploadAjax(Request $request)
     {
@@ -162,7 +164,7 @@ class goods extends Controller
             ->orwhere("c_cate_name","like","%$search%")
             ->select("culum.*","teacher_details.teacher_name","course_cate.c_cate_name")
 //            ->paginate(5);
-        ->get();
+            ->get();
         $view = view("admin.goods.culum_search",['data'=>$data]);
         $content = response($view)->getContent();
         return ["code"=>200,"msg"=>$content];

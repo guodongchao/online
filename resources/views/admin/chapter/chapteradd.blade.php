@@ -19,22 +19,35 @@
             <span>
                 <a href="#">首页</a>
                 &nbsp;-&nbsp;
-                <a href="#">讲师管理</a>
+                <a href="#">课程管理</a>
                 &nbsp;-
             </span>
-            &nbsp;公告修改
+            &nbsp;章节添加
         </div>
     </div>
     <div class="page ">
         <!-- 上传广告页面样式 -->
         <div class="banneradd bor">
             <div class="baTopNo">
-                <span>公告修改</span>
+                <span>章节添加</span>
             </div>
             <div class="baBody">
+                <input type="hidden" id="qweqf" value="{{$culum_id}}">
+                <input type="hidden" id="qwe" value="{{$culum_name}}">
                 <div class="bbD">
-                    <input type="hidden" name="n_id" value="{{$data['n_id']}}">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;讲师名称：<input type="text" name="notice_name" value="{{$data['n_name']}}"  style="width: 500px;height: 40px;"/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;章节名称：<input type="text" name="chapter_name" class="input3" />
+                </div>
+                <br>
+                <div class="bbD">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;章节简介：
+                    <div class="row cl">
+                        <label class="form-label col-xs-4 col-sm-2"></label>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block"style="width: 73%;margin-left: 8%">
+                                <textarea id="LAY_demo1" style="display: none;" name="file"></textarea>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="bbD">
                     <p class="bbDP">
@@ -49,7 +62,6 @@
 </div>
 </body>
 </html>
-
 <script>
     layui.use(['layer','form','layedit'], function() {
         var layer = layui.layer;
@@ -69,19 +81,29 @@
 
 
         $('#btn').click(function(){
-            var n_id=$("[name='n_id']").val()
-            var n_name = $("[name='notice_name']").val();
-            var data={};
-            data.n_id=n_id;
-            data.n_name=n_name;
+            var chapter_name = $("input[name='chapter_name']").val();
+            var chapter_desc=layedit.getContent(news_contents);
+            var culum_id = $('#qweqf').val();
+            var culum_name = $('#qwe').val();
+
             $.post(
-                'notice_update_do',
-                {data:data},
+                'chapterInsert',
+                {chapter_name:chapter_name,chapter_desc:chapter_desc,culum_id:culum_id,culum_name:culum_name},
                 function(res){
                     if(res.code==0) {
-                        layer.msg(res.msg,{time:3000},function () {
-                            window.location.href="notice_list";
-                        });
+                        layer.open({
+                            type:0,
+                            content:'添加成功',
+                            btn:['确定'],
+//                            yes:function(index,layero){
+//                                location.href="chapterAdd";
+//                                return true;
+//                            },
+                            yes:function(){
+                                location.href="chapterShow?culum_id="+res.culum_id+"&culum_name="+res.culum_name;
+                                return true;
+                            }
+                        })
                     }else if(res.code==1){
                         layer.msg(res.msg);
                     }

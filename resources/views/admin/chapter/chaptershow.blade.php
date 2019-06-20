@@ -88,65 +88,56 @@
             <span>
                 <a href="#">首页</a>
                 &nbsp;-&nbsp;
-                <a href="#">公告管理</a>
+                <a href="#">章节管理</a>
                 &nbsp;-
             </span>
-            &nbsp;公告展示
+            &nbsp;章节展示
         </div>
     </div>
     <div class="page ">
         <!-- 上传广告页面样式 -->
         {{--<div class="banneradd bor">--}}
         <div class="baTopNo">
-            <span>公告展示</span>
+            <span>课程：{{$culum_name}}</span>
         </div>
+        @if(count($chapter)!='')
         <div class="baBody">
-
+            <a href="chapterAdd?culum_id={{$culum_id}}&culum_name={{$culum_name}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加章节</button></a>
+            <br>
+            <br>
             <table border="1" cellspacing="0" cellpadding="0">
                 <tr>
                 <tr>
-                    <td width="66px" class="tdColor tdC">公告id</td>
-                    <td width="200px" class="tdColor">公告内容</td>
-                    <td width="200px" class="tdColor">选择分类</td>
-                    <td width="200px" class="tdColor">公告分类展示</td>
-                    <td width="220px" class="tdColor">公告添加时间</td>
+                    <td width="66px" class="tdColor tdC">序号</td>
+                    <td width="200px" class="tdColor">章节标题</td>
+                    <td width="200px" class="tdColor">章节简介</td>
+                    <td width="220px" class="tdColor">添加时间</td>
                     <td width="250px" class="tdColor">操作</td>
                 </tr>
-                @foreach($data['data'] as $v)
-                    <tr>
-                        <td class="abc" height="60">{{$v['n_id']}}</td>
-                        <td class="abc">{{$v['n_name']}}</td>
-                        <td>
-                            <div class="bbD">
-                                课程分类选择框：<select class="input3" name="c_cate_id">
-                                    <option value="0">请选择</option>
-                                    @foreach($arr as $key=>$val)
-                                        <option value="{{$val['c_cate_id']}}"><?php echo str_repeat("&nbsp;&nbsp;",$val['level'])?>{{$val['c_cate_name']}}</option>
-                                    @endforeach
-                                </select>
-                                    <button class="btn_ok btn_yes" onclick="cate({{$v['n_id']}},$(this))" style="width: 100px;height: 30px;background-color: blue; border: none;color: white;" id="btn" href="#" >提交</button>
-                            </div>
-                        </td>
-                        <td>
-                            @foreach($v['cate_id'] as $kk=>$vv)
-                                {{$vv['c_cate_name']}}
-                                <img class="operation"  onclick="cate_del({{$v['n_id']}},{{$vv['c_cate_id']}})" src="img/delete.png"><br>
-                            @endforeach
-                        </td>
-                        <td><?php echo date("Y-m-d H:i:s",$v['n_time'])?></td>
-                        <td>
-                            <a href="notice_update?n_id={{$v['n_id']}}"><img class="operation" src="img/update.png"></a>
-                            <img class="operation delban" n_id="{{$v['n_id']}}" src="img/delete.png">
+                @foreach($chapter as $v)
+                    <tr chapter_id={{$v['chapter_id']}}>
+                        <td class="abc" height="60">{{$v['chapter_id']}}</td>
+                        <td class="abc">{{$v['chapter_name']}}</td>
+                        <td class="abc">{{$v['chapter_desc']}}</td>
+                        <td><?php echo date("Y-m-d H:i:s",$v['create_time'])?></td>
+                        <td chapter_id={{$v['chapter_id']}}>
+                            <a href="sectionShow?chapter_id={{$v['chapter_id']}}&culum_name={{$culum_name}}&chapter_name={{$v['chapter_name']}}"><button class="layui-btn layui-btn-sm layui-btn-normal">小结目录</button></a>
+                            <a href="mationCateUpdate?chapter_id={{$v['chapter_id']}}"><img class="operation" src="img/update.png"></a>
+                            <img class="operation delban" src="img/delete.png">
                         </td>
                     </tr>
                 @endforeach
             </table>
         </div>
+        @else
+            <a href="chapterAdd?culum_id={{$culum_id}}&culum_name={{$culum_name}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加章节</button></a>
+            暂无数据
+        @endif
     </div>
     {{--<div class="paging">--}}
         {{--<div id="pull_right">--}}
             {{--<div class="pull-right">--}}
-                {{--{!! $data->render() !!}--}}
+                {{--{!! $chapter->render() !!}--}}
             {{--</div>--}}
         {{--</div>--}}
     {{--</div>--}}
@@ -156,38 +147,44 @@
 </body>
 </html>
 <script src="layui/layui.js"></script>
-<script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script>
-    //添加分类
-    function cate(n_id,aa){
-        var n_id=n_id;
-        var c_cate_id=aa.siblings('select').val();
-        var data={};
-        data.n_id=n_id;
-        data.c_cate_id=c_cate_id;
-        $.post('n_cate',{data:data},function (res) {
-                alert(res.msg);
-                window.location.href="notice_list";
-        },'json')
-    }
-    //删除分类
-    function cate_del(n_id,c_cate_id){
-        var n_id=n_id;
-        var c_cate_id=c_cate_id;
-        var data={};
-        data.n_id=n_id;
-        data.c_cate_id=c_cate_id;
-        $.post('cate_del',{data:data},function (res) {
-            alert(res.msg);
-            window.location.href="notice_list";
-        },'json')
-    }
     $(function(){
+        $(".pagination li a").each(function(i,v){
+            var href=$(this).attr('href');
+            href=href.replace("http://","");
+            var sss=href.indexOf("/");
+            href="http://www.online.com/"+href.substring(sss);
+            $(this).attr("href",href);
+        });
+
+
+
         layui.use(['layer','form'], function() {
             var layer = layui.layer;
             var form = layui.form;
-
+            //是否展示
+            $('.layui-unselect').click(function(){
+                var _this = $(this);
+                var aa = _this.hasClass('layui-form-checked');
+                var mcate_id = _this.parents('tr').attr('mcate_id');
+                if(aa == false){
+                    var is_show = 0;
+                }else{
+                    var is_show = 1;
+                }
+                $.post(
+                    'isShow',
+                    {is_show:is_show,mcate_id:mcate_id},
+                    function(res){
+                        if(res.code==0){
+                            layer.msg(res.msg);
+                        }else{
+                            layer.msg(res.msg);
+                        }
+                    },'json'
+                )
+            })
         });
 
 
@@ -198,15 +195,17 @@
             var layer = layui.layer;
             $('.delban').click(function(){
                 var _this = $(this);
-                var n_id = $(this).attr('n_id');
+//            alert(111)
+                var mcate_id = $(this).parent().attr('mcate_id');
+
                 layer.open({
                     type:0,
                     content: '是否确认删除？',
                     btn:['确认','取消'],
                     yes:function(index,layero){
                         $.post(
-                            'notice_del',
-                            {n_id:n_id},
+                            'mationCateDel',
+                            {mcate_id:mcate_id},
                             function(res){
                                 if(res.code==0){
                                     layer.msg(res.msg);
@@ -221,7 +220,7 @@
                         return true;
                     }
                 })
-            });
+            })
         })
     })
 </script>
