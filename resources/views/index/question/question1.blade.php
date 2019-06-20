@@ -242,7 +242,6 @@ $(function(){
         }else{
             q_id=q_id-2
         }
-        alert(q_id)
         check_begin(c_id,q_id)
     }
     function check_btn(q_id){
