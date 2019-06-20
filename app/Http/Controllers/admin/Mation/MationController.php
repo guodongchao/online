@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\Mation;
 
 use App\models\culum;
+use App\models\section;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -219,15 +220,17 @@ class MationController extends Controller
     }
 
     //章节添加
-    public function chapterAdd(){
-       $culumdata =  culum::where('is_del',1)->get();
-        return view('admin.chapter.chapteradd',['culumdata'=>$culumdata]);
+    public function chapterAdd(Request $request){
+        $culum_id = $request->input('culum_id');
+        $culum_name = $request->input('culum_name');
+        return view('admin.chapter.chapteradd',['culum_id'=>$culum_id,'culum_name'=>$culum_name]);
     }
     //章节执行添加
     public function chapterInsert(Request $request){
         $chapter_name = $request->input('chapter_name');
         $chapter_desc = $request->input('chapter_desc');
         $culum_id = $request->input('culum_id');
+        $culum_name = $request->input('culum_name');
 
         if(empty($chapter_name)){
             return json_encode(['msg'=>'名称不能为空','code'=>1]);
@@ -235,23 +238,73 @@ class MationController extends Controller
         if(empty($chapter_desc)){
             return json_encode(['msg'=>'内容不能为空','code'=>1]);
         }
-        if(empty($culum_id)){
-            return json_encode(['msg'=>'课程不能为空','code'=>1]);
-        }
         $data = [
             'chapter_name'=>$chapter_name,
             'chapter_desc'=>$chapter_desc,
-            'culum_id'=>$culum_id
+            'culum_id'=>$culum_id,
+            'create_time'=>time()
         ];
         $res = chapter::insert($data);
         if($res){
-            echo json_encode(['msg'=>'添加成功','code'=>0]);
+            echo json_encode(['msg'=>'添加成功','code'=>0,'culum_id'=>$culum_id,'culum_name'=>$culum_name]);
         }else {
             echo json_encode(['msg' => '添加失败', 'code' => 1]);
         }
     }
     //章节展示
-    public function chapterShow(){
-        return view('admin.chapter.chaptershow');
+    public function chapterShow(Request $request){
+        $culum_id = $request->input('culum_id');
+        $culum_name = $request->input('culum_name');
+        $cate_name = $request->input('cate_name');
+
+        $where = [
+            'culum_id'=>$culum_id,
+            'chapter_status'=>1
+        ];
+        $chapter = chapter::where($where)->get()->toArray();
+//        print_r($chapter);exit;
+        return view('admin.chapter.chaptershow',['chapter'=>$chapter,'culum_name'=>$culum_name,'cate_name'=>$cate_name,'culum_id'=>$culum_id]);
     }
+    //小结添加页面
+    public function sectionAdd(Request $request){
+        $chapter_id = $request->input('chapter_id');
+        $culum_name = $request->input('culum_name');
+        $chapter_name = $request->input('chapter_name');
+        return view('admin.chapter.sectionadd',['chapter_id'=>$chapter_id,'culum_name'=>$culum_name,'chapter_name'=>$chapter_name]);
+    }
+    //小结展示
+    public function sectionShow(Request $request){
+        $chapter_id = $request->input('chapter_id');
+        $culum_name = $request->input('culum_name');
+        $chapter_name = $request->input('chapter_name');
+        $where = [
+            'chapter_id'=>$chapter_id,
+            'is_del'=>1
+        ];
+        $section = section::where($where)->get()->toarray();
+        return view('admin.chapter.sectionshow',['section'=>$section,'culum_name'=>$culum_name,'chapter_name'=>$chapter_name,'chapter_id'=>$chapter_id]);
+    }
+    //小结执行添加
+    public function sectionInsert(Request $request){
+        $chapter_name = $request->input('chapter_name');
+        $chapter_id = $request->input('chapter_id');
+        $culum_name = $request->input('culum_name');
+        $section_name = $request->input('section_name');
+
+        if(empty($section_name)){
+            return json_encode(['msg'=>'名称不能为空','code'=>1]);
+        }
+        $data = [
+            'section_name'=>$section_name,
+            'chapter_id'=>$chapter_id,
+            'create_time'=>time()
+        ];
+        $res = section::insert($data);
+        if($res){
+            echo json_encode(['msg'=>'添加成功','code'=>0,'chapter_id'=>$chapter_id,'culum_name'=>$culum_name,'chapter_name'=>$chapter_name]);
+        }else {
+            echo json_encode(['msg' => '添加失败', 'code' => 1]);
+        }
+    }
+
 }

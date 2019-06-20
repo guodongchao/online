@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>新闻添加-有点</title>
+    <title>资讯添加-有点</title>
     <link rel="stylesheet" type="text/css" href="css/css.css" />
     <link rel="stylesheet" href="layui/css/layui.css">
     <script src="layui/layui.js"></script>
@@ -91,17 +91,17 @@
             <span>
                 <a href="#">首页</a>
                 &nbsp;-&nbsp;
-                <a href="#">新闻管理</a>
+                <a href="#">资讯管理</a>
                 &nbsp;-
             </span>
-            &nbsp;新闻展示
+            &nbsp;资讯展示
         </div>
     </div>
     <div class="page ">
         <!-- 上传广告页面样式 -->
         {{--<div class="banneradd bor">--}}
         <div class="baTopNo">
-            <span>新闻展示</span>
+            <span>资讯展示</span>
         </div>
         <div class="baBody">
             <div class="bbD">

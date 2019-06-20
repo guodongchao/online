@@ -32,22 +32,11 @@
                 <span>章节添加</span>
             </div>
             <div class="baBody">
-                <input type="hidden" id="qweqf" value="{{$culum_id}}">
+                <input type="hidden" id="qweqf" value="{{$chapter_id}}">
                 <input type="hidden" id="qwe" value="{{$culum_name}}">
+                <input type="hidden" id="qweacvadv" value="{{$chapter_name}}">
                 <div class="bbD">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;章节名称：<input type="text" name="chapter_name" class="input3" />
-                </div>
-                <br>
-                <div class="bbD">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;章节简介：
-                    <div class="row cl">
-                        <label class="form-label col-xs-4 col-sm-2"></label>
-                        <div class="layui-form-item">
-                            <div class="layui-input-block"style="width: 73%;margin-left: 8%">
-                                <textarea id="LAY_demo1" style="display: none;" name="file"></textarea>
-                            </div>
-                        </div>
-                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小结名称：<input type="text" name="section_name" class="input3" />
                 </div>
                 <div class="bbD">
                     <p class="bbDP">
@@ -68,27 +57,15 @@
         var form = layui.form;
         var layedit = layui.layedit;
 
-        //富文本编辑器的文件上传
-        layedit.set({
-            uploadImage:{
-                url:"unitimagesadd"//接口url
-                ,type:'post'//默认post
-            }
-        });
-
-        //构建一个默认的编辑器
-        var news_contents=layedit.build('LAY_demo1');
-
-
         $('#btn').click(function(){
-            var chapter_name = $("input[name='chapter_name']").val();
-            var chapter_desc=layedit.getContent(news_contents);
-            var culum_id = $('#qweqf').val();
+            var section_name = $("input[name='section_name']").val();
+            var chapter_id = $('#qweqf').val();
             var culum_name = $('#qwe').val();
+            var chapter_name = $('#qweacvadv').val();
 
             $.post(
-                'chapterInsert',
-                {chapter_name:chapter_name,chapter_desc:chapter_desc,culum_id:culum_id,culum_name:culum_name},
+                'sectionInsert',
+                {chapter_name:chapter_name,chapter_id:chapter_id,culum_name:culum_name,section_name:section_name},
                 function(res){
                     if(res.code==0) {
                         layer.open({
@@ -100,7 +77,7 @@
 //                                return true;
 //                            },
                             yes:function(){
-                                location.href="chapterShow?culum_id="+res.culum_id+"&culum_name="+res.culum_name;
+                                location.href="sectionShow?chapter_id="+res.chapter_id+"&culum_name="+res.culum_name+"&chapter_name="+res.chapter_name;
                                 return true;
                             }
                         })

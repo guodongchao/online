@@ -66,7 +66,7 @@ $(function(){
 				<li>已学完</li>
 				<li>收藏</li>
 			</ul>
-			<div class="tab_box">
+			<div class="tab_box" id="test">
 				<div>
 					<ul class="memb_course">
                     	@foreach($arr as $k=>$v)
@@ -77,7 +77,7 @@ $(function(){
                             <div class="mpp">
                                 <div class="lv" style="width:20%;"></div>
                             </div>
-                            <p class="goon"><a href="javascript:;" onclick="check_begin({{$v['c_cate_id']}})" target="main"><span>开始练习</span></a></p>
+                            <p class="goon"><a href="javascript:;" onclick="check_begin({{$v['c_cate_id']}},0)" target="main"><span>开始练习</span></a></p>
                             </div>
                         </li>
                         @endforeach
@@ -194,9 +194,14 @@ $(function(){
 </div>
 </body>
 <script>
-    function check_begin(c_id){
+    $('#top').hide();
+    function check_begin(c_id,q_id){
+
+        var _tr='';
+        var _input='';
         var data={
-            c_id:c_id
+            c_id:c_id,
+            q_id:q_id
         }
         $.ajax({
             type:'post',
@@ -204,9 +209,56 @@ $(function(){
             url:'/index/question11',
             dataType:'json',
             success:function(msg){
-              
+                $.each(msg.data,function(i,value){
+                    _tr+= "<input type='hidden'name='hidden' value='"+value.q_result+"'>"+
+                         "<input type='hidden'name='hiddens' value='"+msg.c_id+"'>"+
+                         "<h3>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
+                         "<h3>题目:"+value.q_name+"</h3>"+
+                         "<h3 id='box'>"+  $.each(value.q_answer,function(ii,values){
+                                 _input+="<tr><td><input type='radio'name='radio'value='"+values+"'>"+values+"</td></tr>"
+                            }) +"</h3><br><br><br><br><br><br>"+
+                         "<h3><input type='submit'value='上一题' id='top' onclick='check_btns("+msg.q_id+")'> <input type='submit'value='确认(下一题)'id='button' onclick='check_btn("+msg.q_id+")'></h3>"
+                })
+                $('#test').html(_tr);
+                $('#box').html(_input);
+                if(msg.q_id==1){
+                    $('#top').hide();
+                }else{
+                    $('#top').show();
+                }
+                if(msg.q_id==msg.num){
+                    $('#button').hide();
+                }else{
+                    $('#button').show();
+                }
             }
         })
+    }
+    function check_btns(q_id){
+        var c_id=$("input[name='hiddens']").val();
+
+        if(q_id-2==0){
+            q_id=0.1;
+        }else{
+            q_id=q_id-2
+        }
+        check_begin(c_id,q_id)
+    }
+    function check_btn(q_id){
+        var hidden=$("input[name='hidden']").val();
+        var c_id=$("input[name='hiddens']").val();
+        var radio=$("input[name='radio']:checked").val();
+        if(radio==undefined){
+            alert("请选择答案")
+            return false;
+        }
+        if(hidden!=radio){
+            alert("笨蛋,错了吧!")
+        }
+        if(hidden==radio){
+            alert("恭喜,答对了!")
+        }
+        check_begin(c_id,q_id)
     }
 </script>
 <!-- InstanceEnd --></html>
