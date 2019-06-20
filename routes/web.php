@@ -109,7 +109,13 @@ Route::any('teacher_list','admin\Teacher\TeacherController@teacher_list');
 Route::any('teacher_del','admin\Teacher\TeacherController@teacher_del');
 Route::any('teacher_update','admin\Teacher\TeacherController@teacher_update');
 Route::any('teacher_update_do','admin\Teacher\TeacherController@teacher_update_do');
-
+//公告模块
+Route::any('notice','admin\Notice\NoticeController@notice');
+Route::any('notice_do','admin\Notice\NoticeController@notice_do');
+Route::any('notice_list','admin\Notice\NoticeController@notice_list');
+Route::any('notice_del','admin\Notice\NoticeController@notice_del');
+Route::any('notice_update','admin\Notice\NoticeController@notice_update');
+Route::any('notice_update_do','admin\Notice\NoticeController@notice_update_do');
 
 //品牌模块
 Route::any('brand','admin\brand\brand@brand');
@@ -147,8 +153,9 @@ Route::post('mationIsShow','admin\Mation\MationController@mationIsShow');
 Route::post('mationDel','admin\Mation\MationController@mationDel');
 Route::get('mationUpdate','admin\Mation\MationController@mationUpdate');
 Route::post('mationUpdateDo','admin\Mation\MationController@mationUpdateDo');
-
-
+//课程章节
+Route::get('chapterAdd','admin\Mation\MationController@chapterAdd');
+Route::post('chapterInsert','admin\Mation\MationController@chapterInsert');
 
 
 
@@ -184,6 +191,10 @@ Route::prefix('index')->group(function () {
     Route::any('teacherlist','index\teacher\teacherController@teacherlist');
     //题库
     Route::any('question1','index\question\questionController@question1');
+    Route::any('question11','index\question\questionController@question11');
+    Route::any('question2','index\question\questionController@question2');
+    Route::any('question3','index\question\questionController@question3');
+    Route::any('question4','index\question\questionController@question4');
 });
 
 

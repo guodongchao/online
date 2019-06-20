@@ -37,13 +37,9 @@
                         <label class="layui-form-label"> 资讯分类 :</label>&nbsp;&nbsp;
                         <div class="layui-input-inline">
                             <select name="modules" class="selects" lay-verify="required" lay-search="">
-                                <option value="">选择资讯</option>
-                                @foreach($catedata as $v)
-                                    @if($mationdata->mcate_id == $v->mcate_id)
-                                        <option value="{{$v->mcate_id}}" selected>{{$v->mcate_name}}</option>
-                                    @else
-                                        <option value="{{$v->mcate_id}}">{{$v->mcate_name}}</option>
-                                    @endif
+                                <option value="">选择课程</option>
+                                @foreach($culumdata as $v)
+                                    <option value="{{$v->culum_id}}">{{$v->culum_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -51,27 +47,16 @@
                 </form>
                 <br>
                 <div class="bbD">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资讯标题：<input type="text" name="mation_name" value="{{$mationdata->mation_title}}" class="input3" />
-                    <input type="hidden" value="{{$mationdata->mation_id}}" id="qwertyu">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;章节名称：<input type="text" name="chapter_name" class="input3" />
                 </div>
                 <br>
-                <form  class="layui-form">
-                    <div class="bbD">
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;是否展示：
-                        @if($mationdata->is_show == 1)
-                        &nbsp;  <input type="checkbox" checked  name="like[write]"   title="是否展示">
-                        @else
-                            <input type="checkbox"  name="like[write]"   title="是否展示">
-                        @endif
-                    </div>
-                </form>
                 <div class="bbD">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资讯内容：
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;章节简介：
                     <div class="row cl">
                         <label class="form-label col-xs-4 col-sm-2"></label>
                         <div class="layui-form-item">
                             <div class="layui-input-block"style="width: 73%;margin-left: 8%">
-                                <textarea id="LAY_demo1" style="display: none;" name="file">{{$mationdata->mation_content}}</textarea>
+                                <textarea id="LAY_demo1" style="display: none;" name="file"></textarea>
                             </div>
                         </div>
                     </div>
@@ -89,23 +74,6 @@
 </div>
 </body>
 </html>
-<script>
-    $(".bbDd").change(function(){
-        $.ajaxFileUpload({
-            url: 'upload',
-            type: 'post',
-            secureuri: false, //是否需要安全协议，一般设置为false
-            fileElementId: 'file', //文件上传域的ID
-            dataType: 'json',
-            success: function (resule)
-            {
-                $(".bbDImg").html("<img src='"+resule.filename+"'width='160px;' height='180px;' id='logo' style='cursor:pointer'>");
-                $('#asd').val(resule.filename);
-//                console.log(resule)
-            }
-        })
-    })
-</script>
 <script>
     layui.use(['layer','form','layedit'], function() {
         var layer = layui.layer;
@@ -125,37 +93,35 @@
 
 
         $('#btn').click(function(){
-            var mation_title = $("input[name='mation_name']").val();
-            var mation_content=layedit.getContent(news_contents);
-            var mcate_id = $("select[name='modules']").val();
+            var chapter_name = $("input[name='chapter_name']").val();
+            var chapter_desc=layedit.getContent(news_contents);
+            var culum_id = $("select[name='modules']").val();
             var aa = $('.layui-unselect').hasClass('layui-form-checked');
-            var mation_id = $('#qwertyu').val();
             if(aa == false){
                 var is_show = 0;
             }else{
                 var is_show = 1;
             }
             $.post(
-                'mationUpdateDo',
-                {mation_title:mation_title,mation_content:mation_content,mcate_id:mcate_id,is_show:is_show,mation_id:mation_id},
+                'chapterInsert',
+                {chapter_name:chapter_name,chapter_desc:chapter_desc,culum_id:culum_id,is_show:is_show},
                 function(res){
-                    if(res.code==0){
+                    if(res.code==0) {
                         layer.open({
                             type:0,
-                            content:'修改成功',
-                            btn:['返回列表','继续修改'],
-                            btn1:function(){
-                                location.href="mationShow";
+                            content:'添加成功',
+                            btn:['继续添加','列表展示'],
+                            yes:function(index,layero){
+                                location.href="chapterAdd";
                                 return true;
                             },
                             btn2:function(){
-//                                location.href="adminList";
+                                location.href="chapterShow";
                                 return true;
                             }
-
                         })
-                    }else{
-                        layer.msg(res.msg)
+                    }else if(res.code==1){
+                        layer.msg(res.msg);
                     }
                 },'json'
             )
