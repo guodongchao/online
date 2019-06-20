@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\admin\Mation;
 
+use App\models\culum;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\models\chapter;
 
 class MationController extends Controller
 {
@@ -214,5 +216,42 @@ class MationController extends Controller
         }else{
             echo json_encode(['msg'=>'未修改','code'=>1]);
         }
+    }
+
+    //章节添加
+    public function chapterAdd(){
+       $culumdata =  culum::where('is_del',1)->get();
+        return view('admin.chapter.chapteradd',['culumdata'=>$culumdata]);
+    }
+    //章节执行添加
+    public function chapterInsert(Request $request){
+        $chapter_name = $request->input('chapter_name');
+        $chapter_desc = $request->input('chapter_desc');
+        $culum_id = $request->input('culum_id');
+
+        if(empty($chapter_name)){
+            return json_encode(['msg'=>'名称不能为空','code'=>1]);
+        }
+        if(empty($chapter_desc)){
+            return json_encode(['msg'=>'内容不能为空','code'=>1]);
+        }
+        if(empty($culum_id)){
+            return json_encode(['msg'=>'课程不能为空','code'=>1]);
+        }
+        $data = [
+            'chapter_name'=>$chapter_name,
+            'chapter_desc'=>$chapter_desc,
+            'culum_id'=>$culum_id
+        ];
+        $res = chapter::insert($data);
+        if($res){
+            echo json_encode(['msg'=>'添加成功','code'=>0]);
+        }else {
+            echo json_encode(['msg' => '添加失败', 'code' => 1]);
+        }
+    }
+    //章节展示
+    public function chapterShow(){
+        return view('admin.chapter.chaptershow');
     }
 }

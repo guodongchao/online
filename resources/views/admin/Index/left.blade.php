@@ -73,6 +73,18 @@
                 <a class="cks" href="goods_show" target="main">课程展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
+            <dd>
+                <img class="coin11" src="/img/coin111.png" />
+                <img class="coin22" src="/img/coin222.png" />
+                <a class="cks" href="chapterAdd" target="main">章节添加</a>
+                <img class="icon5" src="/img/coin21.png" />
+            </dd>
+            <dd>
+                <img class="coin11" src="/img/coin111.png" />
+                <img class="coin22" src="/img/coin222.png" />
+                <a class="cks" href="chapterShow" target="main">章节展示</a>
+                <img class="icon5" src="/img/coin21.png" />
+            </dd>
         </dl>
         <dl class="system_log">
             <dt>
@@ -93,6 +105,7 @@
                 <a class="cks" href="cate_show" target="main">课程分类展示</a>
                 <img class="icon5" src="/img/coin21.png" />
             </dd>
+
         </dl>
         <dl class="system_log">
             <dt>
