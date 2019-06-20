@@ -46,10 +46,10 @@ $(function(){
     <div class="memb">
    
     <ul>
-		<li class="currnav"><a class="mb3" href="question1" target="main">模拟练习</a></li>
+		<li><a class="mb3" href="question1" target="main">模拟练习</a></li>
 		<li><a class="mb4" href="question2" target="main">模拟考试</a></li>
 		<li><a class="mb12" href="question3" target="main">考试记录</a></li>
-        <li><a class="mb2" href="question4" target="main" target="_blank">错题集</a></li>
+        <li  class="currnav"><a class="mb2" href="question4" target="main" target="_blank">错题集</a></li>
    </ul>
    
     </div>
@@ -69,19 +69,42 @@ $(function(){
 			<div class="tab_box">
 				<div>
 					<ul class="memb_course">
-                    	@foreach($arr as $k=>$v)
+                    	
                         <li>
                             <div class="courseli">
                             <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">{{$v['c_cate_name']}}</a></p>
+                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
                             <div class="mpp">
                                 <div class="lv" style="width:20%;"></div>
                             </div>
-                            <p class="goon"><a href="javascript:;" onclick="check_begin({{$v['c_cate_id']}})" target="main"><span>开始练习</span></a></p>
+                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
                             </div>
                         </li>
-                        @endforeach
-
+<li>
+                            <div class="courseli">
+                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
+                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
+                            <div class="mpp">
+                                <div class="lv" style="width:20%;"></div>
+                            </div>
+                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
+                            </div>
+                        </li>
+<li>
+                            <div class="courseli">
+                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
+                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
+                            <div class="mpp">
+                                <div class="lv" style="width:20%;"></div>
+                            </div>
+                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
+                            </div>
+                        </li>
+                        
+                        
+						
+                        
+                       
                         <div style="height:10px;" class="clearfix"></div>
                     </ul>
                     
@@ -193,20 +216,5 @@ $(function(){
 	<span class="barico top" id="top">置顶</span>	
 </div>
 </body>
-<script>
-    function check_begin(c_id){
-        var data={
-            c_id:c_id
-        }
-        $.ajax({
-            type:'post',
-            data:data,
-            url:'/index/question11',
-            dataType:'json',
-            success:function(msg){
-              
-            }
-        })
-    }
-</script>
+
 <!-- InstanceEnd --></html>

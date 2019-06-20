@@ -5,11 +5,13 @@ namespace App\Http\Controllers\admin\brand;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\question;
+use App\models\admin\CourseCate;
 class brand extends Controller
 {
     //分类添加视图
     public function brand(){
-        return view("admin.brand.brand");
+        $arr=CourseCate::get();
+        return view("admin.brand.brand",['arr'=>$arr]);
     }
     //添加执行
     public function brand_add(Request $request){
@@ -17,7 +19,7 @@ class brand extends Controller
         $where=[
             'q_name'=>$data['q_name'],
             'q_type'=>$data['q_type'],
-            'q_class'=>1,
+            'q_class'=>$data['q_class'],
             'q_answer'=>$data['q_answer'],
             'q_result'=>$data['q_result'],
             'u_id'=>1,
@@ -39,7 +41,10 @@ class brand extends Controller
     }
     //展示
     public function brand_show(){
-        $arr=question::where(['is_status'=>1])->paginate(1);
+        $arr=question::where(['is_status'=>1])->paginate(3);
+        foreach($arr as $k=>$v){
+            $v['q_class']=CourseCate::where(['c_cate_id'=>$v['q_class']])->value('c_cate_name');
+        }
         return view("admin.brand.brand_show",['arr'=>$arr]);
     }
     //删除

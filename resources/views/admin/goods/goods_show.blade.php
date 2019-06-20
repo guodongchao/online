@@ -52,11 +52,12 @@
                         <td width="260px" class="tdColor">课程价格</td>
                         <td width="275px" class="tdColor">所需学时</td>
                         <td width="290px" class="tdColor">所属分类</td>
-                        <td width="290px" class="tdColor">课程图片</td>
+                        <td width="200px" class="tdColor">课程图片</td>
                         <td width="290px" class="tdColor">讲师</td>
+                        <td width="200px" class="tdColor">学习人数</td>
                         <td width="290px" class="tdColor">课程简介</td>
-                        <td width="290px" class="tdColor">是否上架</td>
-                        <td width="290px" class="tdColor">已完结</td>
+                        <td width="200px" class="tdColor">是否上架</td>
+                        <td width="200px" class="tdColor">已完结</td>
                         <td width="130px" class="tdColor">操作</td>
                     </tr>
                     </thead>
@@ -75,15 +76,16 @@
                         </td>
                         </form>
                         <td width="290px" class="tdColor">{{$val->teacher_name}}</td>
+                        <td width="200px" class="tdColor">{{$val->study_num}}</td>
                         <td width="290px" class="tdColor">{{$val->culum_desc}}</td>
-                        <td width="290px" class="tdColor layui-form">
+                        <td width="200px" class="tdColor layui-form">
                             @if($val->culum_show==1)
                             <input type="checkbox"  value="1" checked>
                             @else
                             <input type="checkbox"  value="2">
                             @endif
                         </td>
-                        <td width="290px" class="tdColor">
+                        <td width="200px" class="tdColor">
                             @if($val->culum_status==1)
                                 <input type="checkbox"  value="1" checked>
                             @else

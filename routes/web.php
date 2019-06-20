@@ -155,8 +155,9 @@ Route::post('mationIsShow','admin\Mation\MationController@mationIsShow');
 Route::post('mationDel','admin\Mation\MationController@mationDel');
 Route::get('mationUpdate','admin\Mation\MationController@mationUpdate');
 Route::post('mationUpdateDo','admin\Mation\MationController@mationUpdateDo');
-
-
+//课程章节
+Route::get('chapterAdd','admin\Mation\MationController@chapterAdd');
+Route::post('chapterInsert','admin\Mation\MationController@chapterInsert');
 
 
 
@@ -192,6 +193,10 @@ Route::prefix('index')->group(function () {
     Route::any('teacherlist','index\teacher\teacherController@teacherlist');
     //题库
     Route::any('question1','index\question\questionController@question1');
+    Route::any('question11','index\question\questionController@question11');
+    Route::any('question2','index\question\questionController@question2');
+    Route::any('question3','index\question\questionController@question3');
+    Route::any('question4','index\question\questionController@question4');
 });
 
 
