@@ -10,6 +10,7 @@ class TeacherController extends Controller
 {
     //添加讲师视图
     public function teacher(Request $request){
+
         return view('admin.teacher.teacher');
     }
     //添加讲师执行
@@ -37,7 +38,7 @@ class TeacherController extends Controller
     //删除讲师
     public function teacher_del(Request $request){
         $teacher_id=$request->input('teacher_id');
-        $res=teacherdetails::where('teacher_id',$teacher_id)->update(['teacher_status'=>2]);
+        $res=teacherdetails::where('teacher_id',$teacher_id)->update(['teacher_status'=>2,'taecher_del_time'=>time()]);
         if($res){
             $teacher_img=teacherdetails::where('teacher_id',$teacher_id)->value('teacher_img');
             if(!empty($teacher_img)){
