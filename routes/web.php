@@ -182,9 +182,15 @@ Route::prefix('index')->group(function () {
     Route::any('coursecont1','index\course\courseController@coursecont1');
     Route::any('courselist','index\course\courseController@courselist');
     Route::any('video','index\course\courseController@video');//视频播放
-    //登陆注册
-    Route::any('login','index\login\loginController@login');
+    //注册
     Route::any('register','index\login\loginController@register');
+    Route::any('registerDo','index\login\loginController@registerDo');
+    //验证唯一
+    Route::any('only','index\login\loginController@only');
+    Route::any('emailOnly','index\login\loginController@emailOnly');
+    //登录
+    Route::any('login','index\login\loginController@login');
+    Route::any('loginDo','index\login\loginController@loginDo');
     //讲师
     Route::any('teacher','index\teacher\teacherController@teacher');
     Route::any('teacherlist','index\teacher\teacherController@teacherlist');
