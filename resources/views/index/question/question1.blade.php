@@ -195,7 +195,18 @@ $(function(){
 </body>
 <script>
     function check_begin(c_id){
-        alert(c_id)
+        var data={
+            c_id:c_id
+        }
+        $.ajax({
+            type:'post',
+            data:data,
+            url:'/index/question11',
+            dataType:'json',
+            success:function(msg){
+              
+            }
+        })
     }
 </script>
 <!-- InstanceEnd --></html>
