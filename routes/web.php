@@ -124,6 +124,8 @@ Route::any('teacher_update_do','admin\Teacher\TeacherController@teacher_update_d
 Route::any('notice','admin\Notice\NoticeController@notice');
 Route::any('notice_do','admin\Notice\NoticeController@notice_do');
 Route::any('notice_list','admin\Notice\NoticeController@notice_list');
+Route::any('n_cate','admin\Notice\NoticeController@n_cate');
+Route::any('cate_del','admin\Notice\NoticeController@cate_del');
 Route::any('notice_del','admin\Notice\NoticeController@notice_del');
 Route::any('notice_update','admin\Notice\NoticeController@notice_update');
 Route::any('notice_update_do','admin\Notice\NoticeController@notice_update_do');
@@ -167,10 +169,17 @@ Route::post('mationUpdateDo','admin\Mation\MationController@mationUpdateDo');
 //课程章节
 Route::get('chapterAdd','admin\Mation\MationController@chapterAdd');
 Route::post('chapterInsert','admin\Mation\MationController@chapterInsert');
+<<<<<<< HEAD
 //上传视频
 Route::any('uploadShiping','admin\shiping\shiping@uploadShiping');
 Route::any('upd','admin\shiping\shiping@upd');
 
+=======
+Route::post('sectionInsert','admin\Mation\MationController@sectionInsert');
+Route::get('chapterShow','admin\Mation\MationController@chapterShow');
+Route::get('sectionAdd','admin\Mation\MationController@sectionAdd');
+Route::get('sectionShow','admin\Mation\MationController@sectionShow');
+>>>>>>> 1ea7ef1d619613c98fb3f2219b59f815661145c4
 
 
 

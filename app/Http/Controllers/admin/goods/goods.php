@@ -54,7 +54,7 @@ class goods extends Controller
              ->join("course_cate","culum.c_cate_id","=","course_cate.c_cate_id")
              ->select("culum.*","teacher_details.teacher_name","course_cate.c_cate_name")
              ->where("is_del",1)
-             ->get();
+             ->paginate(1);
 //        print_r($data);
         return view("admin.goods.goods_show",['data'=>$data]);
     }
@@ -128,12 +128,10 @@ class goods extends Controller
             if($val['c_parent_id'] == $parent_id){
                 $val['level']=$level;
                 $tmp[] = $val;
-
                 $this->recursion($data,$val['c_cate_id'],$level+1);
             }
         }
         return $tmp;
-
     }
     public function uploadAjax(Request $request)
     {

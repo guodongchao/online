@@ -19,22 +19,24 @@
             <span>
                 <a href="#">首页</a>
                 &nbsp;-&nbsp;
-                <a href="#">讲师管理</a>
+                <a href="#">课程管理</a>
                 &nbsp;-
             </span>
-            &nbsp;公告修改
+            &nbsp;章节添加
         </div>
     </div>
     <div class="page ">
         <!-- 上传广告页面样式 -->
         <div class="banneradd bor">
             <div class="baTopNo">
-                <span>公告修改</span>
+                <span>章节添加</span>
             </div>
             <div class="baBody">
+                <input type="hidden" id="qweqf" value="{{$chapter_id}}">
+                <input type="hidden" id="qwe" value="{{$culum_name}}">
+                <input type="hidden" id="qweacvadv" value="{{$chapter_name}}">
                 <div class="bbD">
-                    <input type="hidden" name="n_id" value="{{$data['n_id']}}">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;讲师名称：<input type="text" name="notice_name" value="{{$data['n_name']}}"  style="width: 500px;height: 40px;"/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小结名称：<input type="text" name="section_name" class="input3" />
                 </div>
                 <div class="bbD">
                     <p class="bbDP">
@@ -49,39 +51,36 @@
 </div>
 </body>
 </html>
-
 <script>
     layui.use(['layer','form','layedit'], function() {
         var layer = layui.layer;
         var form = layui.form;
         var layedit = layui.layedit;
 
-        //富文本编辑器的文件上传
-        layedit.set({
-            uploadImage:{
-                url:"unitimagesadd"//接口url
-                ,type:'post'//默认post
-            }
-        });
-
-        //构建一个默认的编辑器
-        var news_contents=layedit.build('LAY_demo1');
-
-
         $('#btn').click(function(){
-            var n_id=$("[name='n_id']").val()
-            var n_name = $("[name='notice_name']").val();
-            var data={};
-            data.n_id=n_id;
-            data.n_name=n_name;
+            var section_name = $("input[name='section_name']").val();
+            var chapter_id = $('#qweqf').val();
+            var culum_name = $('#qwe').val();
+            var chapter_name = $('#qweacvadv').val();
+
             $.post(
-                'notice_update_do',
-                {data:data},
+                'sectionInsert',
+                {chapter_name:chapter_name,chapter_id:chapter_id,culum_name:culum_name,section_name:section_name},
                 function(res){
                     if(res.code==0) {
-                        layer.msg(res.msg,{time:3000},function () {
-                            window.location.href="notice_list";
-                        });
+                        layer.open({
+                            type:0,
+                            content:'添加成功',
+                            btn:['确定'],
+//                            yes:function(index,layero){
+//                                location.href="chapterAdd";
+//                                return true;
+//                            },
+                            yes:function(){
+                                location.href="sectionShow?chapter_id="+res.chapter_id+"&culum_name="+res.culum_name+"&chapter_name="+res.chapter_name;
+                                return true;
+                            }
+                        })
                     }else if(res.code==1){
                         layer.msg(res.msg);
                     }
