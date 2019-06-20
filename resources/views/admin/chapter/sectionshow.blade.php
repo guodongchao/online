@@ -98,30 +98,27 @@
         <!-- 上传广告页面样式 -->
         {{--<div class="banneradd bor">--}}
         <div class="baTopNo">
-            <span>课程：{{$culum_name}}</span>
+            <span>课程：{{$culum_name}} / {{$chapter_name}}</span>
         </div>
-        @if(count($chapter)!='')
+        @if(count($section)!='')
         <div class="baBody">
-            <a href="chapterAdd?culum_id={{$culum_id}}&culum_name={{$culum_name}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加章节</button></a>
+            <a href="sectionAdd?chapter_id={{$chapter_id}}&culum_name={{$culum_name}}&chapter_name={{$chapter_name}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加小结</button></a>
             <br>
             <br>
             <table border="1" cellspacing="0" cellpadding="0">
                 <tr>
                 <tr>
                     <td width="66px" class="tdColor tdC">序号</td>
-                    <td width="200px" class="tdColor">章节标题</td>
-                    <td width="200px" class="tdColor">章节简介</td>
+                    <td width="200px" class="tdColor">小结标题</td>
                     <td width="220px" class="tdColor">添加时间</td>
                     <td width="250px" class="tdColor">操作</td>
                 </tr>
-                @foreach($chapter as $v)
-                    <tr chapter_id={{$v['chapter_id']}}>
-                        <td class="abc" height="60">{{$v['chapter_id']}}</td>
-                        <td class="abc">{{$v['chapter_name']}}</td>
-                        <td class="abc">{{$v['chapter_desc']}}</td>
+                @foreach($section as $v)
+                    <tr section_id={{$v['section_id']}}>
+                        <td class="abc" height="60">{{$v['section_id']}}</td>
+                        <td class="abc">{{$v['section_name']}}</td>
                         <td><?php echo date("Y-m-d H:i:s",$v['create_time'])?></td>
-                        <td chapter_id={{$v['chapter_id']}}>
-                            <a href="sectionShow?chapter_id={{$v['chapter_id']}}&culum_name={{$culum_name}}&chapter_name={{$v['chapter_name']}}"><button class="layui-btn layui-btn-sm layui-btn-normal">小结目录</button></a>
+                        <td section_id={{$v['section_id']}}>
                             <a href="mationCateUpdate?chapter_id={{$v['chapter_id']}}"><img class="operation" src="img/update.png"></a>
                             <img class="operation delban" src="img/delete.png">
                         </td>
@@ -130,18 +127,18 @@
             </table>
         </div>
         @else
-            <a href="chapterAdd?culum_id={{$culum_id}}&culum_name={{$culum_name}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加章节</button></a>
+            <a href="sectionAdd?chapter_id={{$chapter_id}}&culum_name={{$culum_name}}&chapter_name={{$chapter_name}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加小结</button></a>
             暂无数据
         @endif
     </div>
-    {{--<div class="paging">--}}
-        {{--<div id="pull_right">--}}
-            {{--<div class="pull-right">--}}
-                {{--{!! $chapter->render() !!}--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-    <!-- 上传广告页面样式end -->
+{{--<div class="paging">--}}
+{{--<div id="pull_right">--}}
+{{--<div class="pull-right">--}}
+{{--{!! $chapter->render() !!}--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--</div>--}}
+<!-- 上传广告页面样式end -->
     {{--</div>--}}
 </div>
 </body>

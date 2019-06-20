@@ -54,7 +54,7 @@ class goods extends Controller
              ->join("course_cate","culum.c_cate_id","=","course_cate.c_cate_id")
              ->select("culum.*","teacher_details.teacher_name","course_cate.c_cate_name")
              ->where("is_del",1)
-             ->get();
+             ->paginate(1);
 //        print_r($data);
         return view("admin.goods.goods_show",['data'=>$data]);
     }
