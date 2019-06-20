@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Storage;
 use App\models\admin\CourseCate;
 use App\models\culum;
-use App\models\teacherdetails;
+
 
 class goods extends Controller
 {

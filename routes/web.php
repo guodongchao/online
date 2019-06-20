@@ -83,7 +83,7 @@ Route::get('main','admin\index\index@main');
 
 
 
-//课程模块
+//课程模块goods
 Route::any('goods','admin\goods\goods@goods');
 Route::any('goods_add','admin\goods\goods@goods_add');
 Route::any('goods_show','admin\goods\goods@goods_show');
@@ -102,6 +102,17 @@ Route::any('cate_update','admin\cate\cate@cate_update');
 Route::any('cate_update_do','admin\cate\cate@cate_update_do');
 Route::any('cate_del','admin\cate\cate@cate_del');
 Route::any('cate_search','admin\cate\cate@cate_search');
+
+
+//课程小节操作goods文件夹下
+Route::any('section','admin\goods\section@section');
+Route::any('sectionAdd','admin\goods\section@sectionAdd');
+Route::any('sectionAddDo','admin\goods\section@sectionAddDo');
+Route::any('sectionUpd','admin\goods\section@sectionUpd');
+Route::any('sectionUpdDo','admin\goods\section@sectionUpdDo');
+Route::any('sectionDel','admin\goods\section@sectionDel');
+Route::any('sectionSearch','admin\goods\section@sectionSearch');
+
 //讲师模块
 Route::any('teacher','admin\Teacher\TeacherController@teacher');
 Route::any('teacher_do','admin\Teacher\TeacherController@teacher_do');
@@ -156,6 +167,10 @@ Route::post('mationUpdateDo','admin\Mation\MationController@mationUpdateDo');
 //课程章节
 Route::get('chapterAdd','admin\Mation\MationController@chapterAdd');
 Route::post('chapterInsert','admin\Mation\MationController@chapterInsert');
+//上传视频
+Route::any('uploadShiping','admin\shiping\shiping@uploadShiping');
+Route::any('upd','admin\shiping\shiping@upd');
+
 
 
 
@@ -177,6 +192,7 @@ Route::prefix('index')->group(function () {
     Route::any('articlecatelist','index\article\articleController@articlecatelist');
     Route::any('articleTop','index\article\articleController@articleTop');
     Route::any('articlexia','index\article\articleController@articlexia');
+    Route::any('articlePage','index\article\articleController@articlePage');
     //课程
     Route::any('mycourse','index\course\courseController@mycourse');//我的信息
     Route::any('coursecont','index\course\courseController@coursecont');
