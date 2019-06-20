@@ -14,17 +14,17 @@
             <span>
                 <a href="#">首页</a>
                 &nbsp;-&nbsp;
-                <a href="#">管理员管理</a>
+                <a href="#">资讯分类管理</a>
                 &nbsp;-
             </span>
-            &nbsp;管理员修改
+            &nbsp;资讯分类修改
         </div>
     </div>
     <div class="page ">
         <!-- 上传广告页面样式 -->
         <div class="banneradd bor">
             <div class="baTopNo">
-                <span>管理员修改</span>
+                <span>资讯分类修改</span>
             </div>
             <div class="baBody">
 

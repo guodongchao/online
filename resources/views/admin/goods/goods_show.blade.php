@@ -64,26 +64,26 @@
                     @if($data)
                     @foreach($data as $key=>$val)
                     <tr>
-                        <td width="100px" class="tdColor tdC">{{$val->culum_id}}</td>
-                        <td width="200px" class="tdColor">{{$val->culum_name}}</td>
-                        <td width="260px" class="tdColor">{{$val->culum_price}}</td>
-                        <td width="275px" class="tdColor">{{$val->culum_hours}}</td>
-                        <td width="290px" class="tdColor">{{$val->c_cate_name}}</td>
+                        <td width="100px" >{{$val->culum_id}}</td>
+                        <td width="200px" >{{$val->culum_name}}</td>
+                        <td width="260px">{{$val->culum_price}}</td>
+                        <td width="275px">{{$val->culum_hours}}</td>
+                        <td width="290px">{{$val->c_cate_name}}</td>
                         <form  class="layui-form">
-                        <td width="290px" class="tdColor">
+                        <td width="290px">
                             <img style="height:100px;width: 100px;" src="{{$val->culum_img}}" alt="">
                         </td>
                         </form>
-                        <td width="290px" class="tdColor">{{$val->teacher_name}}</td>
-                        <td width="290px" class="tdColor">{{$val->culum_desc}}</td>
-                        <td width="290px" class="tdColor layui-form">
+                        <td width="290px">{{$val->teacher_name}}</td>
+                        <td width="290px">{{$val->culum_desc}}</td>
+                        <td width="150px" class="layui-form">
                             @if($val->culum_show==1)
                             <input type="checkbox"  value="1" checked>
                             @else
                             <input type="checkbox"  value="2">
                             @endif
                         </td>
-                        <td width="290px" class="tdColor">
+                        <td width="150px">
                             @if($val->culum_status==1)
                                 <input type="checkbox"  value="1" checked>
                             @else

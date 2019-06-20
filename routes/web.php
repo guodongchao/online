@@ -156,6 +156,7 @@ Route::post('mationUpdateDo','admin\Mation\MationController@mationUpdateDo');
 //课程章节
 Route::get('chapterAdd','admin\Mation\MationController@chapterAdd');
 Route::post('chapterInsert','admin\Mation\MationController@chapterInsert');
+Route::get('chapterShow','admin\Mation\MationController@chapterShow');
 
 
 

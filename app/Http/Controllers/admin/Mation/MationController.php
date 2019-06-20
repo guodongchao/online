@@ -252,6 +252,9 @@ class MationController extends Controller
     }
     //章节展示
     public function chapterShow(){
-        return view('admin.chapter.chaptershow');
+        $chapter = chapter::where('is_del',1)
+            ->join('culum','chapter.culum_id','=','culum.culum_id')
+            ->get();
+        return view('admin.chapter.chaptershow',['chapter'=>$chapter]);
     }
 }

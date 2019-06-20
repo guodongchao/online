@@ -19,17 +19,17 @@
             <span>
                 <a href="#">首页</a>
                 &nbsp;-&nbsp;
-                <a href="#">新闻管理</a>
+                <a href="#">课程管理</a>
                 &nbsp;-
             </span>
-            &nbsp;新闻添加
+            &nbsp;章节添加
         </div>
     </div>
     <div class="page ">
         <!-- 上传广告页面样式 -->
         <div class="banneradd bor">
             <div class="baTopNo">
-                <span>新闻添加</span>
+                <span>章节添加</span>
             </div>
             <div class="baBody">
                 <form  class="layui-form">
