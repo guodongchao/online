@@ -88,48 +88,51 @@
             <span>
                 <a href="#">首页</a>
                 &nbsp;-&nbsp;
-                <a href="#">导航栏管理</a>
+                <a href="#">讲师管理</a>
                 &nbsp;-
             </span>
-            &nbsp;导航栏展示
+            &nbsp;讲师管理
         </div>
     </div>
     <div class="page ">
         <!-- 上传广告页面样式 -->
         {{--<div class="banneradd bor">--}}
         <div class="baTopNo">
-            <span>导航栏展示</span>
+            <span>讲师管理</span>
         </div>
         <div class="baBody">
 
             <table border="1" cellspacing="0" cellpadding="0">
                 <tr>
                 <tr>
-                    <td width="66px" class="tdColor tdC">序号</td>
-                    <td width="200px" class="tdColor">分类标题</td>
-                    <td width="200px" class="tdColor">是否展示</td>
-                    <td width="220px" class="tdColor">添加时间</td>
+                    <td width="66px" class="tdColor tdC">讲师id</td>
+                    <td width="200px" class="tdColor">讲师名称</td>
+                    <td width="200px" class="tdColor">讲师涉及能力</td>
+                    <td width="220px" class="tdColor">讲师简介</td>
+                    <td width="220px" class="tdColor">讲师授课风格</td>
+                    <td width="220px" class="tdColor">讲师头像</td>
+                    <td width="220px" class="tdColor">讲师状态</td>
+                    <td width="220px" class="tdColor">讲师入职时间</td>
                     <td width="250px" class="tdColor">操作</td>
                 </tr>
-                @foreach($catedata as $v)
-                    <tr mcate_id={{$v->mcate_id}}>
-                        <td class="abc" height="60">{{$v->mcate_id}}</td>
-                        <td class="abc">{{$v->mcate_name}}</td>
-                        <td class="abc" width="50px">
-                            <form  class="layui-form">
-                                <div class="layui-form-item sdasd" >
-                                    @if($v->is_show == 1)
-                                        <input type="checkbox" checked  name="like[write]"   title="是否展示">
-                                    @else
-                                        <input type="checkbox"  name="like[write]"   title="是否展示">
-                                    @endif
-                                </div>
-                            </form>
+                @foreach($data as $v)
+                    <tr >
+                        <td class="abc" height="60">{{$v['teacher_id']}}</td>
+                        <td class="abc">{{$v['teacher_name']}}</td>
+                        <td class="abc">{{$v['teacher_type']}}</td>
+                        <td class="abc">{{$v['teacher_desc']}}</td>
+                        <td class="abc">{{$v['teacher_style']}}</td>
+                        <td class="abc"><img src="{{$v['teacher_img']}}" alt="" width="200px" height="100px"></td>
+                        <td class="abc">@if($v['teacher_status']==1)
+                                            在职
+                            @else
+                                            离职
+                            @endif
                         </td>
-                        <td><?php echo date("Y-m-d H:i:s",$v->create_time)?></td>
-                        <td mcate_id={{$v->mcate_id}}>
-                            <a href="mationCateUpdate?mcate_id={{$v->mcate_id}}"><img class="operation" src="img/update.png"></a>
-                            <img class="operation delban" src="img/delete.png">
+                        <td><?php echo date("Y-m-d H:i:s",$v['teacher_time'])?></td>
+                        <td>
+                            <a href="teacher_update?teacher_id={{$v['teacher_id']}}"><img class="operation" src="img/update.png"></a>
+                            <img class="operation delban" teacher_id="{{$v['teacher_id']}}" src="img/delete.png">
                         </td>
                     </tr>
                 @endforeach
@@ -139,7 +142,7 @@
     <div class="paging">
         <div id="pull_right">
             <div class="pull-right">
-                {!! $catedata->render() !!}
+                {!! $data->render() !!}
             </div>
         </div>
     </div>
@@ -149,44 +152,14 @@
 </body>
 </html>
 <script src="layui/layui.js"></script>
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script>
     $(function(){
-        $(".pagination li a").each(function(i,v){
-            var href=$(this).attr('href');
-            href=href.replace("http://","");
-            var sss=href.indexOf("/");
-            href="http://www.online.com/"+href.substring(sss);
-            $(this).attr("href",href);
-        });
-
-
-
         layui.use(['layer','form'], function() {
             var layer = layui.layer;
             var form = layui.form;
-            //是否展示
-            $('.layui-unselect').click(function(){
-                var _this = $(this);
-                var aa = _this.hasClass('layui-form-checked');
-                var mcate_id = _this.parents('tr').attr('mcate_id');
-                if(aa == false){
-                    var is_show = 0;
-                }else{
-                    var is_show = 1;
-                }
-                $.post(
-                    'isShow',
-                    {is_show:is_show,mcate_id:mcate_id},
-                    function(res){
-                        if(res.code==0){
-                            layer.msg(res.msg);
-                        }else{
-                            layer.msg(res.msg);
-                        }
-                    },'json'
-                )
-            })
+
         });
 
 
@@ -197,17 +170,15 @@
             var layer = layui.layer;
             $('.delban').click(function(){
                 var _this = $(this);
-//            alert(111)
-                var mcate_id = $(this).parent().attr('mcate_id');
-
+                var teacher_id = $(this).attr('teacher_id');
                 layer.open({
                     type:0,
                     content: '是否确认删除？',
                     btn:['确认','取消'],
                     yes:function(index,layero){
                         $.post(
-                            'mationCateDel',
-                            {mcate_id:mcate_id},
+                            'teacher_del',
+                            {teacher_id:teacher_id},
                             function(res){
                                 if(res.code==0){
                                     layer.msg(res.msg);

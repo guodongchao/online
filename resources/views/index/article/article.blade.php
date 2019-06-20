@@ -23,23 +23,25 @@
 	<h3 class="righttit">全部资讯</h3>
     <div class="clearh"></div>
     <span class="bread">
-    <a class="ask_link" href="articlelist" target="main">全部资讯</a>&nbsp;/&nbsp;<a class="ask_link" href="articlelist" target="main">热门资讯</a>&nbsp;/&nbsp;2015年第一季度山西省会计从业资格考务日程安排
+    <a class="ask_link" href="articlelist" target="main">全部资讯</a>&nbsp;/&nbsp;<a class="ask_link" href="articlelist" target="main">{{$data->mcate_name}}</a>&nbsp;/&nbsp;{{$data->mation_title}}
     </span>
     
 </div>
 <div class="clearh"></div>
 <div class="coursetext">
 	<span class="articletitle">
-        <h2>2015年第一季度山西省会计从业资格考务日程安排</h2>
-        <p class="gray">2015-02-02</p>
+        <h2>{{$data->mation_title}}</h2>
+        <p class="gray"><?php echo date('Y-m-d',$data->create_time);?></p>
     </span>
-    <p class="coutex">本课程主要针对重新改版后的新大纲会计从业资格考试的学习，主要为零基础学生顺利通过会计从业考试而设立！内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。 本教程为2014最新版教材课程详细讲解，学完后可以直接考证，也可以提高会计业务基础知识</p>
-    <p class="coutex">本课程主要针对重新改版后的新大纲会计从业资格考试的学习，主要为零基础学生顺利通过会计从业考试而设立！内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。 本教程为2014最新版教材课程详细讲解，学完后可以直接考证，也可以提高会计业务基础知识</p>
-    <p class="coutex">本课程主要针对重新改版后的新大纲会计从业资格考试的学习，主要为零基础学生顺利通过会计从业考试而设立！内容包括会计基础、财经法规和职业道德、电算化三科视频课程全系列。 本教程为2014最新版教材课程详细讲解，学完后可以直接考证，也可以提高会计业务基础知识</p>
+    <p class="coutex" style="height: 600px;">{{$data->mation_content}}</p>
 	<div class="clearh" style="height:30px;"></div>
 	<span class="pagejump">
-    	<a class="pagebtn lpage" title="上一篇" href="#" target="main">上一篇</a>
-        <a class="pagebtn npage" title="下一篇" href="#" target="main">下一篇</a>
+        @if($data->mation_id > 1)
+    	    <a class="pagebtn lpage" title="上一篇" href="article?mation_id={{$data->mation_id}}&top=1" target="main">上一篇</a>
+        @endif
+        @if($data->mation_id < $daid)
+            <a class="pagebtn npage" title="下一篇" href="article?mation_id={{$data->mation_id}}" target="main">下一篇</a>
+        @endif
     </span>
     
 </div>
@@ -50,12 +52,9 @@
     <h3 class="righttit">热门资讯</h3>
     <div class="gonggao">
 	<ul class="hotask">
-        	<li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
-            <li><a class="ask_link" href="#" target="main"><strong>●</strong>请问女子监狱人民狱人民警察?</a></li>
+        @foreach($catesdata as $v)
+            <li><a class="ask_link" href="article?mation_id={{$v->mation_id}}&mcate_id={{$v->mcate_id}}" target="main"><strong>●</strong>{{$v->mation_title}}</a></li>
+        @endforeach
         </ul>
     </div>
     </div>
