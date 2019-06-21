@@ -101,7 +101,6 @@
                         $('#email_span').html("<img src='/img/dui.png'>");
                         flag = true;
                     }
-
                 }
             })
             return flag;
@@ -136,12 +135,10 @@
                         $('#name_span').html("<img src='/img/dui.png'>");
                          flag = true;
                     }
-
                 }
             })
             return flag;
         }
-
     }
     $('#u_name').focus(function(){
         $('#name_span').html("中、英文均可，最长14个英文或7个汉字");
@@ -188,7 +185,6 @@
     })
     $('#btn').click(function(){
          var email=check_email();
-        alert(email)
          var dd=check_name();
          var aa=check_pwd();
         var cc= check_pwds();

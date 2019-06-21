@@ -12,26 +12,13 @@
 <script src="js/mine.js"></script>
 <script type="text/javascript">
 $(function(){
-
-	
 	$('.demo2').Tabs({
 		event:'click'
 	});
-	
-	
-	
 });	
 </script>
-<!-- InstanceEndEditable -->
-<!-- InstanceBeginEditable name="head" -->
-<!-- InstanceEndEditable -->
-
 </head>
-
 <body>
-
-
-<!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="clearh"></div>
 <div class="membertab">
 <div class="memblist">
@@ -44,7 +31,6 @@ $(function(){
     </div>
     </div>
     <div class="memb">
-   
     <ul>
     	<li class="currnav"><a class="mb1" href="mycourse" target="main">我的课程</a></li>
 		<li><a class="mb3" href="myask" target="main">我的问答</a></li>

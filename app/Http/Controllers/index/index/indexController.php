@@ -19,7 +19,10 @@ class indexController extends Controller
     public function main(){
         return view("index.index.main");
     }
-
+    public function quit(){
+        session()->flush('acount');
+        header('refresh:0.2,/index/index');
+    }
 
 
 }

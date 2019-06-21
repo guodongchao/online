@@ -78,11 +78,13 @@ class loginController extends Controller
             ];
             echo json_encode($resopnse);die;
         }else{
+            $request->session()->put('account',$account);
             $resopnse=[
                 'code'=>200,
                 'msg'=>'登陆成功！'
             ];
             echo json_encode($resopnse);
+
         }
     }
 }

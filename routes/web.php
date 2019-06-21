@@ -217,6 +217,8 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     //登录
     Route::any('login','index\login\loginController@login');
     Route::any('loginDo','index\login\loginController@loginDo');
+    //退出
+    Route::any('quit','index\index\indexController@quit');
     //讲师
     Route::any('teacher','index\teacher\teacherController@teacher');
     Route::any('teacherlist','index\teacher\teacherController@teacherlist');
