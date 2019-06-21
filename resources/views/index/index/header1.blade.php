@@ -36,7 +36,7 @@
 
 <div class="head" id="fixed">
     <div class="nav">
-        <span class="navimg"><a href="index" target="main"><img border="0" src="images/logo.png"></a></span>
+        <span class="navimg"><a href="main" target="main"><img border="0" src="images/logo.png"></a></span>
         <ul class="nag">
             <li><a href="courselist" target="main"  class="link1">课程</a></li>
             <li><a href="articlelist" target="main" class="link1">资讯</a></li>
