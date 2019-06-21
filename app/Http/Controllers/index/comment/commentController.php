@@ -12,16 +12,19 @@ class commentController extends Controller
     public function comment(Request $request){
         $redis=new \redis();
         $redis->connect('127.0.0.1','6379');
-
         $comment_id=$request->input('comment_id');
+
         $all=$redis->hGetAll($comment_id);
         if($all){
+            $com_id=$request->input('com_id');
             $all['comment_id']=$comment_id;
+            $all['com_id']=$com_id;
             $comment=$redis->lRange("com$comment_id",0,-1);
             if($comment){
                 foreach($comment as $k=>$v){
                     $arr[]=$redis->hGetAll($v);
                     $arr[$k]['comment_id']=$v;
+                    $arr[$k]['count']=$redis->lLen("com$v");
                 }
                 return view("index.comment.comment",['all'=>$all,'arr'=>$arr]);
             }else{
@@ -32,6 +35,7 @@ class commentController extends Controller
             foreach($comment as $k=>$v){
                 $arr[]=$redis->hGetAll($v);
                 $arr[$k]['comment_id']=$v;
+                $arr[$k]['count']=$redis->llen("com$v");
             }
             if(isset($arr)){
                 return view("index.comment.comment",['arr'=>$arr]);
