@@ -105,6 +105,24 @@
             data.culum_desc = $("[name='culum_desc']").val();
             data.culum_status = $("[name='culum_status']").val();
             data.culum_img = $(".uplo").val();
+            if(data.culum_name==""){
+                layer.msg("请添加课程名称");
+                return false;
+            }
+            if(data.c_cate_id=="0"){
+                layer.msg("请选择分类");
+                return false;
+            }
+            if(data.teacher_id=="0"){
+                layer.msg("请选择讲师");
+                return false;
+            }
+
+            var ret = /((^[1-9]\d*)|^0)(\.\d{0,2}){0,1}$/;
+            if(!ret.test(data.culum_price)){
+                layer.msg("课程价格必须是数字哦");
+            }
+
             console.log(data)
             var url = "goods_add";
             $.ajax({

@@ -139,9 +139,17 @@ class cate extends Controller
     public function cate_search(Request $request){
         $search = $request->input("search");
 
+        $data = CourseCate::where("c_status",1)->where("c_cate_name",'like',"%$search%")->get()->toArray();
 
-        $data = CourseCate::where("c_status",1)->where("c_cate_name",'like',"%$search%")->get();
-        $view = view("admin.cate.cate_search",['data'=>$data]);
+        if(!$search){
+            $data = $this->recursion($data);
+            $view = view("admin.cate.cate_search",['data'=>$data]);
+        }else{
+            $view = view("admin.cate.cate_searchsome",['data'=>$data]);
+        }
+
+//        $view = view("admin.cate.cate_search",['data'=>$data]);
+
         $content = response($view)->getContent();
         return ["code"=>200,"msg"=>$content];
 

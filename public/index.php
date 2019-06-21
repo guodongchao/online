@@ -5,7 +5,6 @@
 //$redis->set("aaa",123);
 //var_dump($redis->get("aaa"));
 //phpinfo();die;
-
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

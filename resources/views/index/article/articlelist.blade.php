@@ -33,7 +33,7 @@
     
 </div>
 <div class="clearh"></div>
-<div class="coursetext">
+<div class="coursetext coursetpage">
     @foreach($mationdata as $v)
 	<div class="articlelist" >
     	<h3><a class="artlink" href="article?mation_id={{$v->mation_id}}&mcate_id={{$v->mcate_id}}" target="main">{{$v->mation_title}}</a></h3>
@@ -47,17 +47,21 @@
     @endforeach
 	<div class="clearh" style="height:20px;"></div>
 	<span class="pagejump">
-    	<p class="userpager-list">
+    	<p class="userpager-list" mcate_id="{{$mcate_id}}">
 
-       	   <a href="#" class="page-number" target="main">首页</a>
-           <a href="#" class="page-number" target="main">上一页</a>
-           <a href="#" class="page-number" target="main">1</a>
-           <a href="#" class="page-number pageractive" target="main">2</a>
-           <a href="#" class="page-number" target="main">3</a>
-            <a href="#" class="page-number" target="main">...</a>
-            <a href="#" class="page-number" target="main">10</a>
-           <a href="#" class="page-number" target="main">下一页</a>
-           <a href="#" class="page-number" target="main" >末页</a>
+       	   <a href="javascript:;" class="page-number" page="1">首页</a>
+            @if($page>1)
+           <a href="#" class="page-number" page="{{$page-1}}" >上一页</a>
+            @endif
+           {{--<a href="#" class="page-number" target="main">1</a>--}}
+           {{--<a href="#" class="page-number pageractive" target="main">2</a>--}}
+           {{--<a href="#" class="page-number" target="main">3</a>--}}
+            {{--<a href="#" class="page-number" target="main">...</a>--}}
+            {{--<a href="#" class="page-number" target="main">10</a>--}}
+            @if($page<$total)
+           <a href="javascript:;" class="page-number" page = {{$page+1}} >下一页</a>
+            @endif
+           <a href="javascript:;" class="page-number" page = {{$total}}  >末页</a>
         </p>
     </span>
     <div class="clearh" style="height:10px;"></div>
@@ -146,3 +150,21 @@
 </body>
 
 <!-- InstanceEnd --></html>
+<script>
+    $(document).on("click",".page-number",function(){
+//    $(".page-number").click(function(){
+        var mcate_id = $(this).parent().attr("mcate_id");
+        var page = $(this).attr("page");
+        var url="articlePage";
+        $.ajax({
+            type:"post",
+            data:{mcate_id:mcate_id,page:page},
+            url:url,
+            success:function(msg){
+                $(".coursetpage").empty();
+                $(".coursetpage").append(msg);
+            }
+        })
+    })
+</script>
+

@@ -5,9 +5,82 @@
     <title>约见管理-有点</title>
     <link rel="stylesheet" type="text/css" href="css/css.css" />
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script src="layui/css/layui.css"></script>
+    <link rel="stylesheet" href="layui/css/layui.css">
     <script src="layui/layui.js"></script>
-    <script src="admin/css/page3.css"></script>
+    <style type="text/css">
+        #pull_right{
+            text-align:center;
+        }
+        .pull-right {
+            /*float: left!important;*/
+        }
+        .pagination {
+            display: inline-block;
+            padding-left: 0;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .pagination > li {
+            display: inline;
+        }
+        .pagination > li > a,
+        .pagination > li > span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #428bca;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        .pagination > li:first-child > a,
+        .pagination > li:first-child > span {
+            margin-left: 0;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        .pagination > li:last-child > a,
+        .pagination > li:last-child > span {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        .pagination > li > a:hover,
+        .pagination > li > span:hover,
+        .pagination > li > a:focus,
+        .pagination > li > span:focus {
+            color: #2a6496;
+            background-color: #eee;
+            border-color: #ddd;
+        }
+        .pagination > .active > a,
+        .pagination > .active > span,
+        .pagination > .active > a:hover,
+        .pagination > .active > span:hover,
+        .pagination > .active > a:focus,
+        .pagination > .active > span:focus {
+            z-index: 2;
+            color: #fff;
+            cursor: default;
+            background-color: #428bca;
+            border-color: #428bca;
+        }
+        .pagination > .disabled > span,
+        .pagination > .disabled > span:hover,
+        .pagination > .disabled > span:focus,
+        .pagination > .disabled > a,
+        .pagination > .disabled > a:hover,
+        .pagination > .disabled > a:focus {
+            color: #777;
+            cursor: not-allowed;
+            background-color: #fff;
+            border-color: #ddd;
+        }
+        .clear{
+            clear: both;
+        }
+    </style>
     <style>
         input[type="checkbox"]{width:20px;height:20px;display: inline-block;text-align: center;vertical-align: middle; line-height: 20px;position: relative;}
         input[type="checkbox"]::before{content: "";position: absolute;top: 0;left: 0;background: #fff;width: 100%;height: 100%;border: 1px solid #d9d9d9}
@@ -52,11 +125,11 @@
                         <td width="260px" class="tdColor">课程价格</td>
                         <td width="275px" class="tdColor">所需学时</td>
                         <td width="290px" class="tdColor">所属分类</td>
-                        <td width="290px" class="tdColor">课程图片</td>
+                        <td width="200px" class="tdColor">课程图片</td>
                         <td width="290px" class="tdColor">讲师</td>
-                        <td width="290px" class="tdColor">课程简介</td>
-                        <td width="290px" class="tdColor">是否上架</td>
-                        <td width="290px" class="tdColor">已完结</td>
+                        <td width="200px" class="tdColor">学习人数</td>
+                        <td width="200px" class="tdColor">是否上架</td>
+                        <td width="200px" class="tdColor">已完结</td>
                         <td width="130px" class="tdColor">操作</td>
                     </tr>
                     </thead>
@@ -64,33 +137,36 @@
                     @if($data)
                     @foreach($data as $key=>$val)
                     <tr>
-                        <td width="100px" class="tdColor tdC">{{$val->culum_id}}</td>
-                        <td width="200px" class="tdColor">{{$val->culum_name}}</td>
-                        <td width="260px" class="tdColor">{{$val->culum_price}}</td>
-                        <td width="275px" class="tdColor">{{$val->culum_hours}}</td>
-                        <td width="290px" class="tdColor">{{$val->c_cate_name}}</td>
+                        <td width="100px" >{{$val->culum_id}}</td>
+                        <td width="200px" >{{$val->culum_name}}</td>
+                        <td width="260px">{{$val->culum_price}}</td>
+                        <td width="275px">{{$val->culum_hours}}</td>
+                        <td width="290px">{{$val->c_cate_name}}</td>
                         <form  class="layui-form">
-                        <td width="290px" class="tdColor">
+                        <td width="290px">
                             <img style="height:100px;width: 100px;" src="{{$val->culum_img}}" alt="">
                         </td>
                         </form>
-                        <td width="290px" class="tdColor">{{$val->teacher_name}}</td>
-                        <td width="290px" class="tdColor">{{$val->culum_desc}}</td>
-                        <td width="290px" class="tdColor layui-form">
+                        <td width="290px">{{$val->teacher_name}}</td>
+                        <td width="200px">{{$val->study_num}}</td>
+                        <td width="200px" class="layui-form">
                             @if($val->culum_show==1)
                             <input type="checkbox"  value="1" checked>
                             @else
                             <input type="checkbox"  value="2">
                             @endif
                         </td>
-                        <td width="290px" class="tdColor">
+                        <td width="200px">
+
                             @if($val->culum_status==1)
                                 <input type="checkbox"  value="1" checked>
                             @else
                                 <input type="checkbox"  value="2">
                             @endif
                         </td>
-                        <td><a href="goods_update?id={{$val->culum_id}}"><img class="operation" src="img/update.png"></a>
+                        <td>
+                            <a href="chapterShow?culum_id={{$val->culum_id}}&culum_name={{$val->culum_name}}&cate_name={{$val->c_cate_name}}"><button class="layui-btn layui-btn-sm layui-btn-normal">章节目录</button></a>
+                            <a href="goods_update?id={{$val->culum_id}}"><img class="operation" src="img/update.png"></a>
                             <img class="operation delban" src="img/delete.png" onclick="goods_del($(this),{{$val->culum_id}})">
                         </td>
                     </tr>
@@ -98,11 +174,11 @@
                         @endif
                     </tbody>
                 </table>
-                {{--<div id="pull_right">--}}
-                    {{--<div class="pull-right">--}}
-                        {{--{!! $data->render() !!}--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+                <div id="pull_right">
+                    <div class="pull-right">
+                        {!! $data->render() !!}
+                    </div>
+                </div>
             </div>
             <!-- banner 表格 显示 end-->
         </div>
