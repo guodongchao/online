@@ -220,6 +220,9 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('question2','index\question\questionController@question2');
     Route::any('question3','index\question\questionController@question3');
     Route::any('question4','index\question\questionController@question4');
+    //问答
+    Route::any('comment','index\comment\commentController@comment');
+    Route::any('comment_do','index\comment\commentController@comment_do');
 });
 
 
