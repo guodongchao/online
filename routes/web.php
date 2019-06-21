@@ -186,7 +186,7 @@ Route::get('sectionShow','admin\Mation\MationController@sectionShow');
 });
 
 
-Route::prefix('index')->group(function () {
+Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     //首页
     Route::any('index','index\index\indexController@index');
     Route::any('header1','index\index\indexController@header1');
@@ -221,6 +221,7 @@ Route::prefix('index')->group(function () {
     Route::any('question3','index\question\questionController@question3');
     Route::any('question4','index\question\questionController@question4');
 });
+
 
 
 
