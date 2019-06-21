@@ -218,6 +218,7 @@ Route::prefix('index')->group(function () {
     Route::any('question1','index\question\questionController@question1');
     Route::any('question11','index\question\questionController@question11');
     Route::any('question2','index\question\questionController@question2');
+    Route::any('question22','index\question\questionController@question22');
     Route::any('question3','index\question\questionController@question3');
     Route::any('question4','index\question\questionController@question4');
 });
