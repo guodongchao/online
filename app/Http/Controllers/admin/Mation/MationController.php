@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin\Mation;
 
 use App\models\culum;
+use App\models\hour;
 use App\models\section;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -222,15 +223,13 @@ class MationController extends Controller
     //章节添加
     public function chapterAdd(Request $request){
         $culum_id = $request->input('culum_id');
-        $culum_name = $request->input('culum_name');
-        return view('admin.chapter.chapteradd',['culum_id'=>$culum_id,'culum_name'=>$culum_name]);
+        return view('admin.chapter.chapteradd',['culum_id'=>$culum_id]);
     }
     //章节执行添加
     public function chapterInsert(Request $request){
         $chapter_name = $request->input('chapter_name');
         $chapter_desc = $request->input('chapter_desc');
         $culum_id = $request->input('culum_id');
-        $culum_name = $request->input('culum_name');
 
         if(empty($chapter_name)){
             return json_encode(['msg'=>'名称不能为空','code'=>1]);
@@ -246,7 +245,7 @@ class MationController extends Controller
         ];
         $res = chapter::insert($data);
         if($res){
-            echo json_encode(['msg'=>'添加成功','code'=>0,'culum_id'=>$culum_id,'culum_name'=>$culum_name]);
+            echo json_encode(['msg'=>'添加成功','code'=>0,'culum_id'=>$culum_id]);
         }else {
             echo json_encode(['msg' => '添加失败', 'code' => 1]);
         }
@@ -275,20 +274,16 @@ class MationController extends Controller
     //小结展示
     public function sectionShow(Request $request){
         $chapter_id = $request->input('chapter_id');
-        $culum_name = $request->input('culum_name');
-        $chapter_name = $request->input('chapter_name');
         $where = [
             'chapter_id'=>$chapter_id,
             'is_del'=>1
         ];
         $section = section::where($where)->get()->toarray();
-        return view('admin.chapter.sectionshow',['section'=>$section,'culum_name'=>$culum_name,'chapter_name'=>$chapter_name,'chapter_id'=>$chapter_id]);
+        return view('admin.chapter.sectionshow',['section'=>$section,'chapter_id'=>$chapter_id]);
     }
     //小结执行添加
     public function sectionInsert(Request $request){
-        $chapter_name = $request->input('chapter_name');
         $chapter_id = $request->input('chapter_id');
-        $culum_name = $request->input('culum_name');
         $section_name = $request->input('section_name');
 
         if(empty($section_name)){
@@ -301,10 +296,44 @@ class MationController extends Controller
         ];
         $res = section::insert($data);
         if($res){
-            echo json_encode(['msg'=>'添加成功','code'=>0,'chapter_id'=>$chapter_id,'culum_name'=>$culum_name,'chapter_name'=>$chapter_name]);
+            echo json_encode(['msg'=>'添加成功','code'=>0,'chapter_id'=>$chapter_id]);
         }else {
             echo json_encode(['msg' => '添加失败', 'code' => 1]);
         }
     }
+    //章节删除
+    public function chapterDel(Request $request){
+        $chapter_id = $request->input('chapter_id');
+        $where = [
+            'chapter_id'=>$chapter_id,
+            'is_del'=>1
+        ];
+        $section = section::where($where)->first();
+        if($section){
+            echo json_encode(['msg' => '该章节下有小节', 'code' => 1]);exit;
+        }
+        $is_del=[
+            'chapter_status'=>0
+        ];
+        $res = chapter::where('chapter_id',$chapter_id)->update($is_del);
+        if($res){
+            echo json_encode(['msg' => '删除成功', 'code' =>0]);
+        }else{
+            echo json_encode(['msg' => '删除失败', 'code' => 1]);
+        }
+    }
+    //课时展示页面
+    public function hourShow(Request $request){
+        $section_id = $request->input('section_id');
+        $data = $request->input();
+        $hour = hour::where('is_del',1)->get()->toArray();
+//        print_r($hour);exit;
+        return view('admin.chapter.hourshow',['hour'=>$hour,'section_id'=>$section_id,'data'=>$data]);
+    }
+    //课时添加
+    public function houradd(Request $request){
+        $section_id = $request->input('section_id');
+        return view('admin.chapter.houradd',['section_id'=>$section_id]);
 
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin\goods;
 
+use App\models\chapter;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Storage;
@@ -61,7 +62,14 @@ class goods extends Controller
     //课程删除
     public function goods_del(Request $request){
         $id = $request->input("id");
-
+        $where = [
+            'culum_id'=>$id,
+            'chapter_status'=>1
+        ];
+        $chapterdata = chapter::where($where)->first();
+        if($chapterdata){
+            return ["code"=>200,"msg"=>"该课程下有章节不能删除"];
+        }
         $search = culum::where("culum_id",$id)->select("culum_img")->first();
         $arr = [
             "is_del"=>2,
