@@ -179,6 +179,9 @@ Route::post('sectionInsert','admin\Mation\MationController@sectionInsert');
 Route::get('chapterShow','admin\Mation\MationController@chapterShow');
 Route::get('sectionAdd','admin\Mation\MationController@sectionAdd');
 Route::get('sectionShow','admin\Mation\MationController@sectionShow');
+Route::post('chapterDel','admin\Mation\MationController@chapterDel');
+Route::get('hourShow','admin\Mation\MationController@hourShow');
+Route::get('hourAdd','admin\Mation\MationController@hourAdd');
 
 
 

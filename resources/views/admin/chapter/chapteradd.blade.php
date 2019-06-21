@@ -33,7 +33,6 @@
             </div>
             <div class="baBody">
                 <input type="hidden" id="qweqf" value="{{$culum_id}}">
-                <input type="hidden" id="qwe" value="{{$culum_name}}">
                 <div class="bbD">
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;章节名称：<input type="text" name="chapter_name" class="input3" />
                 </div>
@@ -84,11 +83,10 @@
             var chapter_name = $("input[name='chapter_name']").val();
             var chapter_desc=layedit.getContent(news_contents);
             var culum_id = $('#qweqf').val();
-            var culum_name = $('#qwe').val();
 
             $.post(
                 'chapterInsert',
-                {chapter_name:chapter_name,chapter_desc:chapter_desc,culum_id:culum_id,culum_name:culum_name},
+                {chapter_name:chapter_name,chapter_desc:chapter_desc,culum_id:culum_id},
                 function(res){
                     if(res.code==0) {
                         layer.open({
@@ -100,7 +98,7 @@
 //                                return true;
 //                            },
                             yes:function(){
-                                location.href="chapterShow?culum_id="+res.culum_id+"&culum_name="+res.culum_name;
+                                location.href="chapterShow?culum_id="+res.culum_id;
                                 return true;
                             }
                         })

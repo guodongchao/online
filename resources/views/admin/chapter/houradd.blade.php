@@ -22,7 +22,7 @@
                 <a href="#">课程管理</a>
                 &nbsp;-
             </span>
-            &nbsp;小节添加
+            &nbsp;章节添加
         </div>
     </div>
     <div class="page ">
@@ -32,9 +32,8 @@
                 <span>章节添加</span>
             </div>
             <div class="baBody">
-                <input type="hidden" id="qweqf" value="{{$chapter_id}}">
                 <div class="bbD">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小结名称：<input type="text" name="section_name" class="input3" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;课时名称：<input type="text" name="section_name" class="input3" />
                 </div>
                 <div class="bbD">
                     <p class="bbDP">
@@ -58,10 +57,12 @@
         $('#btn').click(function(){
             var section_name = $("input[name='section_name']").val();
             var chapter_id = $('#qweqf').val();
+            var culum_name = $('#qwe').val();
+            var chapter_name = $('#qweacvadv').val();
 
             $.post(
                 'sectionInsert',
-                {chapter_id:chapter_id,section_name:section_name},
+                {chapter_name:chapter_name,chapter_id:chapter_id,culum_name:culum_name,section_name:section_name},
                 function(res){
                     if(res.code==0) {
                         layer.open({
