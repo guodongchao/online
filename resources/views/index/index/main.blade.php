@@ -320,7 +320,7 @@
         	<h3 class="co1">智能评估题库</h3>
             <p>智能能力评估，学员可以通过具体题目，匹配相
 关知识点,文字解析与视频解析相结合。</p><br/>
-			<p><a href="training" target="main" class="btninto">点击测评</a></p>
+			<p><a href="question1" target="main" class="btninto">点击测评</a></p>
         </span>
             <div style="clear:both"></div>
         </div>
