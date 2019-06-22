@@ -14,6 +14,7 @@ class commentController extends Controller
         $redis->connect('127.0.0.1','6379');
 
         $comment_id=$request->input('comment_id');
+
         $all=$redis->hGetAll($comment_id);
         if($all){
             $all['comment_id']=$comment_id;

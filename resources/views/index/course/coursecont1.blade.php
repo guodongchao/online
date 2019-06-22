@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="css/tab.css" media="screen">
 <script src="js/jquery.tabs.js"></script>
 <script src="js/mine.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script src="./layui/css/layui.css"></script>
 <script type="text/javascript">
 $(function(){
 
@@ -69,6 +71,10 @@ $(function(){
 
 <div class="clearh"></div>
 <div class="coursetext">
+    {{--存放用户的u_id,课程culum_id--}}
+    <input type="hidden" value="1" id="u_id">
+    <input type="hidden" value="1" id="culum_id">
+
 	<div class="box demo2" style="position:relative">
 			<ul class="tab_menu">
 				<li class="current course1">章节</li>
@@ -141,34 +147,32 @@ $(function(){
                     </ul>
 				</div>
 				</div>
-                <div class="hide">
+                <div class="hide answer">
 					<div>
                      <h3 class="pingjia">提问题</h3>
-                    <div class="c_eform">
-                        <input type="text" class="pingjia_con" value="请输入问题标题" onblur="if (this.value =='') this.value='请输入问题标题';this.className='pingjia_con'" onclick="if (this.value=='请输入问题标题') this.value='';this.className='pingjia_con_on'"/><br/>
-                        <textarea rows="7" class="pingjia_con" onblur="if (this.value =='') this.value='请输入问题的详细内容';this.className='pingjia_con'" onclick="if (this.value=='请输入问题的详细内容') this.value='';this.className='pingjia_con_on'">请输入问题的详细内容</textarea>
-                       <a href="#" class="fombtn">发布</a>
+                    <div class="c_eform" quest_id="{{$quest_id}}" >
+                        <input type="text" class="pingjia_con" id="quest" value="请输入问题标题" onblur="if (this.value =='') this.value='请输入问题标题';this.className='pingjia_con'" onclick="if (this.value=='请输入问题标题') this.value='';this.className='pingjia_con_on'"/><br/>
+                        <textarea rows="7" class="pingjia_con" id="questInfo" onblur="if (this.value =='') this.value='请输入问题的详细内容';this.className='pingjia_con'" onclick="if (this.value=='请输入问题的详细内容') this.value='';this.className='pingjia_con_on'">请输入问题的详细内容</textarea>
+                       <a href="#" class="fombtn quest" >发布</a>
                        <div class="clearh"></div>
                     </div>
 					<ul class="evalucourse">
-                    	<li>
+                    @foreach($data as $key=>$val)
+                    	<li >
                         	<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-							<p class="pepname">候候</p>                             
+							<p class="pepname">{{$val['u_name']}}</p>
                             </span>
                             <span class="pepcont">
-                            <p><a href="#" class="peptitle" target="_blank">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>
-                            <p class="peptime pswer"><span class="pepask">回答(<strong><a class="bluelink" href="#">10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;浏览(<strong><a class="bluelink" href="#">10</a></strong>)</span>2015-01-02</p>                        
+                            <p><a href="#" class="peptitle" onclick="see($(this),'{{$val['quest_id']}}')">{{$val['quest_title']}}</a></p>
+                            <p class="peptime pswer">
+                                <span class="pepask" quest_id="{{$quest_id}}">
+                                    回答(<strong><a class="bluelink" onclick="see($(this),'{{$val['quest_id']}}')" href="#">10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;
+                                    浏览(<strong><a class="bluelink" href="#">10</a></strong>)
+                                </span>{{date("Y-m-d H:i",$val['time'])}}
+                            </p>
                             </span>
                         </li>
-                        <li>
-                        	<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-							<p class="pepname">候候</p>                             
-                            </span>
-                            <span class="pepcont">
-							<p><a href="#" class="peptitle" target="_blank">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>
-                            <p class="peptime pswer"><span class="pepask">回答(<strong><a class="bluelink" href="#">10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;浏览(<strong><a class="bluelink" href="#">10</a></strong>)</span>2015-01-02</p>                              
-                            </span>
-                        </li>                                 
+                        @endforeach
                     </ul>
                     
 				</div>
@@ -392,3 +396,93 @@ $(function(){
 </body>
 
 <!-- InstanceEnd --></html>
+<script>
+    layui.use('layer', function() { //独立版的layer无需执行这一句
+        var layer = layui.layer; //独立版的layer无需执行这一句
+        $(document).on("click",".quest",function(){
+//        $(".quest").click(function () {
+            var u_id = $("#u_id").val();
+
+            if (!u_id) {
+                layer.msg("请先登录后再发评论!");
+                return false;
+            }
+            var data = {};
+            data.content = $("#quest").val();
+            data.contentInfo = $("#questInfo").val();
+            if (data.contentInfo=="请输入问题") {
+                layer.msg("请填写问题!");
+                return false;
+            }
+            data.u_id = u_id;
+            data.quest_id = $(this).parent().attr("quest_id");
+            data.culum_id = $('#culum_id').val();
+            var url = "quest";
+            $.ajax({
+                type: "post",
+                data: data,
+                url: url,
+                success: function (msg) {
+                    layer.msg(msg.msg);
+                    console.log(msg);
+                    if(msg.code==100){   //发送成功
+                        setTimeout(function(){
+//                            var str="";
+//                            str+="<li >" +
+//                                    "<span class='pephead'><img src='images/0-0.JPG' width='50' title='候候'>" +
+//                                    "<p class='pepname'>"+msg.arr.u_name+"</p></span>" +
+//                                    "<span class='pepcont'>" +
+//                                    "<p><a href='#' class='peptitle' onclick='see($(this),"+msg.arr.quest_id+")'>"+msg.arr.quest_title+"</a></p><p class='peptime pswer'>"+
+//                                    "<span class='pepask' quest_id='"+msg.arr.quest_id+"'>"+
+//                                    "回答(<strong><a class='bluelink' onclick='see($(this),"+msg.arr.quest_id+")' href='#'>10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;"+
+//                                    "浏览(<strong><a class='bluelink' href='#'>10</a></strong>)"+
+//                                    "</span>"<date("Y-m-d H:i",$val['time'])}}
+//                            </p>
+//                            </span>
+//                            </li>"
+                            window.location.reload();
+                        },1000)
+//                        layer.open({
+//                            type:0,
+//                            content:'发布成功',
+//                            btn:['查看列表'],
+//                            yes:function(index,layero){
+//
+//                                return true;
+//                            },
+//
+//                        })
+                    }
+                }
+            })
+
+
+        })
+
+    })
+
+        function see(obj,quest_id) {
+//            layui.use('layer', function() { //独立版的layer无需执行这一句
+//                var layer = layui.layer; //独立版的layer无需执行这一句
+                var url = "questSecord";
+            console.log(quest_id);
+                if(!quest_id){
+                    layer.msg("非法!!");
+                }
+                var u_id = $("#u_id").val();
+                $.ajax({
+                    type:"post",
+                    data:{u_id:u_id,quest_id:quest_id},
+                    url:url,
+                    success:function(msg){
+                        $(".answer").empty();
+                        $(".answer").append(msg);
+
+
+                    }
+                })
+//            })
+        }
+
+
+</script>
