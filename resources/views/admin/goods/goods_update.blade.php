@@ -106,7 +106,7 @@
         })
     })
     function goods_add() {
-        alert(0);
+//        alert(0);
         layui.use('layer', function() { //独立版的layer无需执行这一句
             var layer = layui.layer;
             var data = {};
@@ -120,18 +120,18 @@
             data.culum_show = $("[name='culum_show']").val();
             data.culum_status = $("[name='culum_status']").val();
             data.culum_img = $(".uplo").val();
-            console.log(data)
+//            console.log(data)
             var url = "goods_update_do";
             $.ajax({
                 type: "post",
                 data: data,
                 url: url,
                 success: function (msg) {
-                    layer.msg(msg.msg);
-                    if(msg.code==100 | msg.code==200){
-                        window.location.href="goods_show";
-                    }
-
+                    layer.msg(msg.msg,{time:2000},function(){
+                        if(msg.code==100 | msg.code==200){
+                            window.location.href="goods_show";
+                        }
+                    });
                 }
             })
 

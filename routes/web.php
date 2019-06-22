@@ -179,6 +179,9 @@ Route::post('sectionInsert','admin\Mation\MationController@sectionInsert');
 Route::get('chapterShow','admin\Mation\MationController@chapterShow');
 Route::get('sectionAdd','admin\Mation\MationController@sectionAdd');
 Route::get('sectionShow','admin\Mation\MationController@sectionShow');
+Route::post('chapterDel','admin\Mation\MationController@chapterDel');
+Route::get('hourShow','admin\Mation\MationController@hourShow');
+Route::get('hourAdd','admin\Mation\MationController@hourAdd');
 
 
 
@@ -208,12 +211,25 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('coursecont1','index\course\courseController@coursecont1');   //章节,问答,资料区
     Route::any('courselist','index\course\courseController@courselist');//课程展示
     Route::any('video','index\course\courseController@video');//视频播放
+<<<<<<< HEAD
     Route::any('quest','index\course\courseController@quest');//课程下的问答
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
 
     //登陆注册
     Route::any('login','index\login\loginController@login');
+=======
+    //注册
+>>>>>>> 0455dbb389b88cb24590d44d26aa7d43dab5067a
     Route::any('register','index\login\loginController@register');
+    Route::any('registerDo','index\login\loginController@registerDo');
+    //验证唯一
+    Route::any('only','index\login\loginController@only');
+    Route::any('emailOnly','index\login\loginController@emailOnly');
+    //登录
+    Route::any('login','index\login\loginController@login');
+    Route::any('loginDo','index\login\loginController@loginDo');
+    //退出
+    Route::any('quit','index\index\indexController@quit');
     //讲师
     Route::any('teacher','index\teacher\teacherController@teacher');
     Route::any('teacherlist','index\teacher\teacherController@teacherlist');
@@ -221,6 +237,7 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('question1','index\question\questionController@question1');
     Route::any('question11','index\question\questionController@question11');
     Route::any('question2','index\question\questionController@question2');
+    Route::any('question22','index\question\questionController@question22');
     Route::any('question3','index\question\questionController@question3');
     Route::any('question4','index\question\questionController@question4');
     //问答

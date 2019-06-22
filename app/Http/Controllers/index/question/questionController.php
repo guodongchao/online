@@ -18,30 +18,32 @@ class questionController extends Controller
         $u_id=1;
         $c_id=$request->input('c_id');
         $q_id=$request->input('q_id');
+        $key='question';
+        $keys='questions';
         if($q_id==0){
-            $q_id=Redis::get('questions'.$u_id.$c_id);
+            $q_id=Redis::get($keys.$u_id.$c_id);
             if($q_id==null){
-                Redis::set('questions'.$u_id.$c_id,$q_id);
+                Redis::set($keys.$u_id.$c_id,$q_id);
             }
         }else{
-            $qq_id=Redis::get('questions'.$u_id.$c_id,$q_id);
+            $qq_id=Redis::get($keys.$u_id.$c_id,$q_id);
             if($qq_id<=$q_id){
-                Redis::set('questions'.$u_id.$c_id,$q_id);
+                Redis::set($keys.$u_id.$c_id,$q_id);
             }
         }
         if($q_id==0.1){
             $q_id=0;
         }
-        $info1=Redis::zrange('question'.$u_id.$c_id,0,0);
+        $info1=Redis::zrange($key.$u_id.$c_id,0,0);
         if($info1==false){
             $arr=question::where(['q_class'=>$c_id])->get()->toArray();
             $nums=count($arr);
             for($i=0;$i<$nums;$i++){
                 $val=array_shift($arr);
                 $val=json_encode($val);
-                Redis::zadd('question'.$u_id.$c_id,$i+1,$val);
+                Redis::zadd($key.$u_id.$c_id,$i+1,$val);
             }
-            $info1=Redis::zrange('question'.$u_id.$c_id,$q_id,$q_id);
+            $info1=Redis::zrange($key.$u_id.$c_id,$q_id,$q_id);
             foreach($info1 as $k=>$v){
                 $data[]=json_decode($v);
             }
@@ -56,7 +58,7 @@ class questionController extends Controller
                 $v->q_answer=explode(',',$v->q_answer);
             }
         }
-        $num=Redis::ZCARD('question'.$u_id.$c_id);
+        $num=Redis::ZCARD($key.$u_id.$c_id);
 
         $info=[
             'data'=>$data,
@@ -65,11 +67,69 @@ class questionController extends Controller
             "c_id"=>$c_id
         ];
 
-       return $info;
+        return $info;
     }
     public function question2(Request $request){
         $arr=CourseCate::get();
         return view("index.question.question2",['arr'=>$arr]);
+    }
+    public function question22(Request $request){
+        $u_id=1;
+        $c_id=$request->input('c_id');
+        $q_id=$request->input('q_id');
+        $key='examination';
+        $keys='examinations';
+        if($q_id==0){
+            $q_id=Redis::get($keys.$u_id.$c_id);
+            if($q_id==null){
+                Redis::set($keys.$u_id.$c_id,$q_id);
+            }
+        }else{
+            $qq_id=Redis::get($keys.$u_id.$c_id,$q_id);
+            if($qq_id<=$q_id){
+                Redis::set($keys.$u_id.$c_id,$q_id);
+            }
+        }
+        if($q_id==0.1){
+            $q_id=0;
+        }
+        $info1=Redis::zrange($key.$u_id.$c_id,0,0);
+        if($info1==false){
+            $arr=question::where(['q_class'=>$c_id])->get()->toArray();
+            $nums=count($arr);
+            for($i=0;$i<10;$i++){
+                $val=array_rand($arr);
+                var_dump($val);
+                var_dump($nums);exit;
+                $val=$arr[$val];
+                $val=json_encode($val);
+                Redis::zadd($key.$u_id.$c_id,$i+1,$val);
+            }
+            $info1=Redis::zrange($key.$u_id.$c_id,$q_id,$q_id);
+            foreach($info1 as $k=>$v){
+                $data[]=json_decode($v);
+            }
+            foreach($data as $k=>$v){
+                $v->q_answer=explode(',',$v->q_answer);
+            }
+        }else{
+            foreach($info1 as $k=>$v){
+                $data[]=json_decode($v);
+            }
+            foreach($data as $k=>$v){
+                $v->q_answer=explode(',',$v->q_answer);
+            }
+        }
+        $num=Redis::ZCARD($key.$u_id.$c_id);
+
+        $info=[
+            'data'=>$data,
+            'num' =>$num,
+            "q_id"=>$q_id+1,
+            "c_id"=>$c_id
+        ];
+
+        return $info;
     }
     public function question3(Request $request){
         $arr=CourseCate::get();
