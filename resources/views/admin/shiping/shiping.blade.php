@@ -12,6 +12,8 @@
 <div id="content"  >
     <p class="_p"><span>视频标题</span>：<input id="title" type="text" class="form-control" placeholder="请输入视频名称"></p>
     <p class="_p">
+        <input type="hidden" id="agvagva" value="{{$section_id}}">
+        <input type="hidden" id="waqesdrfygu">
         <span>选择视频： </span>
         <!--文件选择按钮-->
         <a class="list" href="javascript:;">
@@ -145,7 +147,25 @@
         //服务断接收完文件返回的结果  注意返回的字符串要去掉双引号
         if(evt.target.responseText){
              str = "/admin/shiping/"+evt.target.responseText;
-            alert("上传成功！");
+//             console.log(evt);
+            $('#waqesdrfygu').val(str);
+            var hour_name = $('#title').val();
+            var section_id = $('#agvagva').val();
+            var video_desc = $('#waqesdrfygu').val();
+                $.post(
+                    'hourInsert',
+                    {hour_name:hour_name,section_id:section_id,video_desc:video_desc},
+                    function(res){
+                        console.log(res)
+                        if(res.code==0){
+                            alert('添加成功');
+                            window.location.href = 'hourShow?section_id='+res.section_id;
+                        }else{
+                            alert('添加失败');
+                        }
+                    },'json'
+                )
+//            alert("上传成功！");
             $(".preview").append("<video  controls='' autoplay='' name='media'><source src="+str+" type='video/mp4'></video>");
         }else{
             alert("上传失败");

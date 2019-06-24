@@ -38,6 +38,7 @@
 
 Route::prefix('admin')->group(function () {
 
+Route::any('weinxin','admin\weixin\weiXinController@weinxin');//微信配置
 
 //后台登陆
 Route::any('login','admin\login\login@login');
@@ -173,6 +174,7 @@ Route::post('chapterInsert','admin\Mation\MationController@chapterInsert');
 //上传视频
 Route::any('uploadShiping','admin\shiping\shiping@uploadShiping');
 Route::any('upd','admin\shiping\shiping@upd');
+Route::any('hourInsert','admin\shiping\shiping@hourInsert');
 
 
 Route::post('sectionInsert','admin\Mation\MationController@sectionInsert');
@@ -182,6 +184,11 @@ Route::get('sectionShow','admin\Mation\MationController@sectionShow');
 Route::post('chapterDel','admin\Mation\MationController@chapterDel');
 Route::get('hourShow','admin\Mation\MationController@hourShow');
 Route::get('hourAdd','admin\Mation\MationController@hourAdd');
+Route::post('sectionDels','admin\Mation\MationController@sectionDels');
+Route::get('chapterUpdate','admin\Mation\MationController@chapterUpdate');
+Route::post('chapterUpdateDo','admin\Mation\MationController@chapterUpdateDo');
+Route::get('sectionUpdate','admin\Mation\MationController@sectionUpdate');
+Route::post('sectionUpdateDo','admin\Mation\MationController@sectionUpdateDo');
 
 
 
@@ -206,13 +213,13 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('articlexia','index\article\articleController@articlexia');
     Route::any('articlePage','index\article\articleController@articlePage');
     //课程
-    //我的信息
-    Route::any('mycourse','index\course\courseController@mycourse');
-    Route::any('coursecont','index\course\courseController@coursecont');
-    Route::any('coursecont1','index\course\courseController@coursecont1');
-    Route::any('courselist','index\course\courseController@courselist');
-    //视频播放
-    Route::any('video','index\course\courseController@video');
+    Route::any('mycourse','index\course\courseController@mycourse');//我的信息
+    Route::any('coursecont','index\course\courseController@coursecont');  //详细课程
+    Route::any('coursecont1','index\course\courseController@coursecont1');   //章节,问答,资料区
+    Route::any('courselist','index\course\courseController@courselist');//课程展示
+    Route::any('video','index\course\courseController@video');//视频播放
+    Route::any('quest','index\course\courseController@quest');//课程下的问答
+    Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
     //修改密码
     Route::any('myrepassword','index\course\courseController@myrepassword');
     Route::any('myrepasswordDo','index\course\courseController@myrepasswordDo');
@@ -228,6 +235,8 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     //登录
     Route::any('login','index\login\loginController@login');
     Route::any('loginDo','index\login\loginController@loginDo');
+    Route::any('send','index\login\loginController@send');  //微信第三方登录回调地址
+
     //退出
     Route::any('quit','index\index\indexController@quit');
     //讲师

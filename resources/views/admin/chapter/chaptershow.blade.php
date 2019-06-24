@@ -122,7 +122,7 @@
                         <td><?php echo date("Y-m-d H:i:s",$v['create_time'])?></td>
                         <td chapter_id={{$v['chapter_id']}}>
                             <a href="sectionShow?chapter_id={{$v['chapter_id']}}"><button class="layui-btn layui-btn-sm layui-btn-normal">小结目录</button></a>
-                            <a href="mationCateUpdate?chapter_id={{$v['chapter_id']}}"><img class="operation" src="img/update.png"></a>
+                            <a href="chapterUpdate?chapter_id={{$v['chapter_id']}}&culum_id={{$culum_id}}"><img class="operation" src="img/update.png"></a>
                             <img class="operation delban" src="img/delete.png">
                         </td>
                     </tr>
