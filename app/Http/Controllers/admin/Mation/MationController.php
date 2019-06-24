@@ -322,6 +322,27 @@ class MationController extends Controller
             echo json_encode(['msg' => '删除失败', 'code' => 1]);
         }
     }
+    //小结删除
+    public function sectionDels(Request $request){
+        $section_id = $request->input('section_id');
+        $where = [
+            'section_id'=>$section_id,
+            'is_del'=>1
+        ];
+        $hour = hour::where($where)->first();
+        if($hour){
+            echo json_encode(['msg' => '该小节下有课时', 'code' => 1]);exit;
+        }
+        $is_del = [
+            'is_del'=>0
+        ];
+        $res = section::where('section_id',$section_id)->update($is_del);
+        if($res){
+            echo json_encode(['msg' => '删除成功', 'code' =>0]);
+        }else{
+            echo json_encode(['msg' => '删除失败', 'code' => 1]);
+        }
+    }
     //课时展示页面
     public function hourShow(Request $request){
         $section_id = $request->input('section_id');
@@ -336,4 +357,53 @@ class MationController extends Controller
         return view('admin.chapter.houradd',['section_id'=>$section_id]);
 
     }
+    //章节修改页面
+    public function chapterUpdate(Request $request){
+        $culum_id = $request->input('culum_id');
+        $chapter_id = $request->input('chapter_id');
+        $chapterdata = chapter::where('chapter_id',$chapter_id)->first();
+        return view('admin.chapter.chapterupdate',['chapterdata'=>$chapterdata,'culum_id'=>$culum_id]);
+    }
+    //章节执行修改
+    public function chapterUpdateDo(Request $request){
+        $culum_id = $request->input('culum_id');
+        $chapter_id = $request->input('chapter_id');
+        $chapter_name = $request->input('chapter_name');
+        $chapter_desc = $request->input('chapter_desc');
+
+        $where = [
+            'chapter_name'=>$chapter_name,
+            'chapter_desc'=>$chapter_desc,
+        ];
+        $res = chapter::where('chapter_id',$chapter_id)->update($where);
+        if($res){
+            echo json_encode(['msg'=>'修改成功','code'=>0,'culum_id'=>$culum_id]);
+        }else {
+            echo json_encode(['msg' =>'未修改','code'=>1]);
+        }
+    }
+    //小节修改页面
+    public function sectionUpdate(Request $request){
+        $chapter_id = $request->input('chapter_id');
+        $section_id = $request->input('section_id');
+        $sectiondata = section::where('section_id',$section_id)->first();
+        return view('admin.chapter.sectionupdate',['sectiondata'=>$sectiondata,'chapter_id'=>$chapter_id]);
+    }
+    //小节执行修改
+    public function sectionUpdateDo(Request $request){
+        $chapter_id = $request->input('chapter_id');
+        $section_name = $request->input('section_name');
+        $section_id = $request->input('section_id');
+        $where = [
+            'section_name'=>$section_name
+        ];
+        $res = section::where('section_id',$section_id)->update($where);
+        if($res){
+            echo json_encode(['msg'=>'修改成功','code'=>0,'chapter_id'=>$chapter_id]);
+        }else {
+            echo json_encode(['msg' =>'未修改','code'=>1]);
+        }
+    }
+
+
 }
