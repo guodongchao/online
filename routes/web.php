@@ -38,6 +38,7 @@
 
 Route::prefix('admin')->group(function () {
 
+Route::any('weinxin','admin\weixin\winXinController@weinxin');//微信配置
 
 //后台登陆
 Route::any('login','admin\login\login@login');
@@ -216,22 +217,19 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('coursecont1','index\course\courseController@coursecont1');   //章节,问答,资料区
     Route::any('courselist','index\course\courseController@courselist');//课程展示
     Route::any('video','index\course\courseController@video');//视频播放
-<<<<<<< HEAD
 
-=======
->>>>>>> 05a8de1b71aae2b70fbe1d9a26c397de0af49ec0
     Route::any('quest','index\course\courseController@quest');//课程下的问答
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
 
     //登陆注册
     Route::any('login','index\login\loginController@login');
-<<<<<<< HEAD
+
 
     //注册
 
-=======
+
     //注册
->>>>>>> 05a8de1b71aae2b70fbe1d9a26c397de0af49ec0
+
     Route::any('register','index\login\loginController@register');
     Route::any('registerDo','index\login\loginController@registerDo');
     //验证唯一
