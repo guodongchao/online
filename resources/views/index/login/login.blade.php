@@ -43,7 +43,7 @@
     <span class="hezuo">使用合作网站账号登录</span>
     <div class="hezuoimg">
         <a href="#"><img src="images/hezuoqq.png" class="hzqq" title="QQ" width="40" height="40"/></a>
-        <a href="#"><img src="images/weixin.png" class="hzqq" title="QQ" width="40" height="40"/></a>
+        <a href="{{$url}}"><img src="images/weixin.png" class="hzwx" title="微信" width="40" height="40"/></a>
         <a href="#"><img src="images/hezuowb.png" class="hzwb" title="微博" width="40" height="40"/></a>
     </div>
     

@@ -11,4 +11,5 @@ class weiXinController extends Controller
         $echostr  = $request->input("echostr");
         echo $echostr;
     }
+
 }

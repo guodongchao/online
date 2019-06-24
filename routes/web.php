@@ -231,6 +231,8 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     //登录
     Route::any('login','index\login\loginController@login');
     Route::any('loginDo','index\login\loginController@loginDo');
+    Route::any('send','index\login\loginController@send');  //微信第三方登录回调地址
+
     //退出
     Route::any('quit','index\index\indexController@quit');
     //讲师
