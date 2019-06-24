@@ -85,12 +85,12 @@
         var email_reg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
         if (email_reg.test(u_email) == false) {
             var str = "<font color='red'><img src='/img/cuo.png'>请正确输入邮箱格式</font>";
-            $('#name_span').html(str);
+            $('#email_span').html(str);
             return false;
         } else {
             $.ajax({
                 url:"/index/emailOnly",
-                data:{u_email:u_email},
+                data:{type:1,u_email:u_email},
                 type:"post",
                 dataType:"json",
                 success:function(msg){
@@ -124,7 +124,7 @@
         }else{
             $.ajax({
                 url:"/index/only",
-                data:{u_name:u_name},
+                data:{type:1,u_name:u_name},
                 type:"post",
                 dataType:"json",
                 success:function(msg){

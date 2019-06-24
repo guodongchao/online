@@ -13,10 +13,16 @@ class loginController extends Controller
     }
     public function only(Request $request){
         $u_name=$request->input('u_name');
-        $where=[
-            'u_name'=>$u_name
-        ];
-        $res=user::where($where)->first();
+        $old_name=$request->input('old_name');
+        $type=$request->input('type');
+        if($type==1){
+            $where=[
+                'u_name'=>$u_name
+            ];
+            $res=user::where($where)->first();
+        }else{
+            $res=user::where('u_name','!=',$old_name)->where(['u_name'=>$u_name])->first();
+        }
         if($res){
             return 1;
         }else{
@@ -25,10 +31,17 @@ class loginController extends Controller
     }
     public function emailOnly(Request $request){
         $u_email=$request->input('u_email');
-        $where=[
-            'u_email'=>$u_email
-        ];
-        $res=user::where($where)->first();
+        $old_email=$request->input('old_email');
+        $type=$request->input('type');
+        if($type==1){
+            $where=[
+                'u_email'=>$u_email
+            ];
+            $res=user::where($where)->first();
+        }else{
+            $res=user::where('u_email','!=',$old_email)->where(['u_email'=>$u_email])->first();
+        }
+
         if($res){
             return 1;
         }else{
@@ -79,6 +92,7 @@ class loginController extends Controller
             echo json_encode($resopnse);die;
         }else{
             $request->session()->put('account',$account);
+            $request->session()->put('u_id',$data['u_id']);
             $resopnse=[
                 'code'=>200,
                 'msg'=>'登陆成功！'

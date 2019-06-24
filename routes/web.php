@@ -206,11 +206,19 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('articlexia','index\article\articleController@articlexia');
     Route::any('articlePage','index\article\articleController@articlePage');
     //课程
-    Route::any('mycourse','index\course\courseController@mycourse');//我的信息
+    //我的信息
+    Route::any('mycourse','index\course\courseController@mycourse');
     Route::any('coursecont','index\course\courseController@coursecont');
     Route::any('coursecont1','index\course\courseController@coursecont1');
     Route::any('courselist','index\course\courseController@courselist');
-    Route::any('video','index\course\courseController@video');//视频播放
+    //视频播放
+    Route::any('video','index\course\courseController@video');
+    //修改密码
+    Route::any('myrepassword','index\course\courseController@myrepassword');
+    Route::any('myrepasswordDo','index\course\courseController@myrepasswordDo');
+    //修改信息
+    Route::any('mysetting','index\course\courseController@detail');
+    Route::any('mysettingDo','index\course\courseController@detailDo');
     //注册
     Route::any('register','index\login\loginController@register');
     Route::any('registerDo','index\login\loginController@registerDo');
