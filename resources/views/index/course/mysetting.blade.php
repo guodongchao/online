@@ -12,8 +12,12 @@
     <script src="js/jquery.tabs.js"></script>
     <script src="js/mine.js"></script>
     <script src="js/jquery-1.8.0.min.js"></script>
-    <!--End Framework-->
     <script src="/js/jquery.ffform.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
+    <script src="/layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/css.css" />
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/ajaxfileupload.js"></script>
 </head>
 <body>
 <div class="container" style="border-bottom: 0;">
@@ -28,12 +32,12 @@
                     头像
                 </label>
             </div>
-            <div class="ctrl">
-                @if(empty($userInfo['u_img']))
-                    <div style="text-align:left;"><img src="images/0-0.JPG" width="80" ></div>
-                @else
-                    <div style="text-align:left;"><img src="{{$userInfo['u_img']}}" width="80" ></div>
-                @endif
+            <div class="bbD">
+                <div class="bbDd">
+                    <div class="bbDImg">+</div>
+                    <input type="hidden" class="uplo" value="">
+                    <input type="file" class="file" id="file" name="file" />
+                </div>
             </div>
         </div>
         <div class="row clearfix">
@@ -149,6 +153,43 @@
             return flag;
         }
     }
+    $("#file").change(function(){
+        $.ajaxFileUpload({
+            type : "post",          //上传类型
+            url: '/admin/uploadajax',     //用于文件上传的服务器端请求地址
+            secureuri: false,   //是否需要安全协议，一般设置为false
+            fileElementId: 'file',  //文件上传域的ID
+            dataType: 'json',   //返回值类型 一般设置为json
+            success: function (data)  //服务器成功响应处理函数
+            {
+                $('.bbDImg').html("<img src='"+data+"' height=180px'>")
+                $(".uplo").val(data);
+            }
+        })
+    })
+    $('#submit').click(function(){
+        var email=check_email();
+        var name=check_name();
+        if(email&&name==true) {
+            var u_email = $('#u_email').val();
+            var u_name = $('#u_name').val();
+            var u_tel = $('#u_tel').val();
+            var u_img = $('.uplo').val();
+            var u_id = $('#u_id').val();
+            $.ajax({
+                url: "/index/mysettingDo",
+                data: {u_email: u_email, u_name: u_name, u_tel: u_tel,u_img:u_img,u_id:u_id},
+                type: "post",
+                dataType: "json",
+                success: function (data) {
+                    alert(data.msg);
+                    if (data.code == 200) {
+                        location.href = "/index/mycourse";
+                    }
+                }
+            })
+        }
+    })
 </script>
 
 
