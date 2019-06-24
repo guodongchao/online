@@ -182,6 +182,11 @@ Route::get('sectionShow','admin\Mation\MationController@sectionShow');
 Route::post('chapterDel','admin\Mation\MationController@chapterDel');
 Route::get('hourShow','admin\Mation\MationController@hourShow');
 Route::get('hourAdd','admin\Mation\MationController@hourAdd');
+Route::post('sectionDels','admin\Mation\MationController@sectionDels');
+Route::get('chapterUpdate','admin\Mation\MationController@chapterUpdate');
+Route::post('chapterUpdateDo','admin\Mation\MationController@chapterUpdateDo');
+Route::get('sectionUpdate','admin\Mation\MationController@sectionUpdate');
+Route::post('sectionUpdateDo','admin\Mation\MationController@sectionUpdateDo');
 
 
 
@@ -211,6 +216,7 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('coursecont1','index\course\courseController@coursecont1');   //章节,问答,资料区
     Route::any('courselist','index\course\courseController@courselist');//课程展示
     Route::any('video','index\course\courseController@video');//视频播放
+
     Route::any('quest','index\course\courseController@quest');//课程下的问答
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
     //登陆注册
