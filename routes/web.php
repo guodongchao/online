@@ -222,17 +222,7 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
     //登陆注册
     Route::any('login','index\login\loginController@login');
-<<<<<<< HEAD
 
-
-    //注册
-
-
-    //注册
-
-=======
-    //注册
->>>>>>> 871be6c2f81b0708721f5aab45e64ce41956485d
     Route::any('register','index\login\loginController@register');
     Route::any('registerDo','index\login\loginController@registerDo');
     //验证唯一
