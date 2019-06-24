@@ -182,6 +182,11 @@ Route::get('sectionShow','admin\Mation\MationController@sectionShow');
 Route::post('chapterDel','admin\Mation\MationController@chapterDel');
 Route::get('hourShow','admin\Mation\MationController@hourShow');
 Route::get('hourAdd','admin\Mation\MationController@hourAdd');
+Route::post('sectionDels','admin\Mation\MationController@sectionDels');
+Route::get('chapterUpdate','admin\Mation\MationController@chapterUpdate');
+Route::post('chapterUpdateDo','admin\Mation\MationController@chapterUpdateDo');
+Route::get('sectionUpdate','admin\Mation\MationController@sectionUpdate');
+Route::post('sectionUpdateDo','admin\Mation\MationController@sectionUpdateDo');
 
 
 
