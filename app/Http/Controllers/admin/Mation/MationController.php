@@ -351,12 +351,6 @@ class MationController extends Controller
 //        print_r($hour);exit;
         return view('admin.chapter.hourshow',['hour'=>$hour,'section_id'=>$section_id,'data'=>$data]);
     }
-    //课时添加
-    public function houradd(Request $request){
-        $section_id = $request->input('section_id');
-        return view('admin.chapter.houradd',['section_id'=>$section_id]);
-
-    }
     //章节修改页面
     public function chapterUpdate(Request $request){
         $culum_id = $request->input('culum_id');

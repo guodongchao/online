@@ -174,6 +174,7 @@ Route::post('chapterInsert','admin\Mation\MationController@chapterInsert');
 //上传视频
 Route::any('uploadShiping','admin\shiping\shiping@uploadShiping');
 Route::any('upd','admin\shiping\shiping@upd');
+Route::any('hourInsert','admin\shiping\shiping@hourInsert');
 
 
 Route::post('sectionInsert','admin\Mation\MationController@sectionInsert');
