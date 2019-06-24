@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\admin\shiping;
 
+use App\models\hour;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class shiping extends Controller
 {
-    public function upd(){
-        return view("admin.shiping.shiping");
+    public function upd(Request $request){
+        $section_id = $request->input('section_id');
+        return view("admin.shiping.shiping",['section_id'=>$section_id]);
     }
     //视频上传
    public function uploadShiping(){
@@ -38,5 +40,22 @@ class shiping extends Controller
             }
         }
     }
-
+    //课时执行添加
+    public function hourInsert(Request $request){
+       $hour_name = $request->input('hour_name');
+       $section_id = $request->input('section_id');
+       $video_desc = $request->input('video_desc');
+       $data = [
+           'hour_name'=>$hour_name,
+           'section_id'=>$section_id,
+           'video_desc'=>$video_desc,
+           'create_time'=>time()
+       ];
+       $res = hour::insert($data);
+        if($res){
+            echo json_encode(['msg' => '添加成功', 'code' =>0,'section_id'=>$section_id]);
+        }else{
+            echo json_encode(['msg' => '添加失败', 'code' =>1]);
+        }
+    }
 }

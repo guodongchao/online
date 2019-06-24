@@ -102,7 +102,7 @@
         </div>
         @if(!empty($hour))
             <div class="baBody">
-                <a href="hourAdd?section_id={{$section_id}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加课时</button></a>
+                <a href="upd?section_id={{$section_id}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加课时</button></a>
                 <br>
                 <br>
                 <table border="1" cellspacing="0" cellpadding="0">
@@ -127,7 +127,7 @@
                 </table>
             </div>
         @else
-            <a href="hourAdd?section_id={{$section_id}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加课时</button></a>
+            <a href="upd?section_id={{$section_id}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加课时</button></a>
             暂无数据
         @endif
     </div>
