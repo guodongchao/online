@@ -55,8 +55,9 @@ class loginController extends Controller
     //登陆
     public function login(){
         $appid = "wx31275c9ac738c18a";
-        $redirect_uri = "http://dc.qianqianya.xyz/index/send";   //回调地址
-        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$redirect_uri&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+        $redirect_uri = urlEncode("http://dc.qianqianya.xyz/index/send");   //回调地址
+        $scope = "snsapi_userinfo";
+        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$redirect_uri&response_type=code&scope=$scope&state=STATE#wechat_redirect";
         return view("index.login.login",['url'=>$url]);
 
     }
@@ -70,7 +71,10 @@ class loginController extends Controller
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$secret&code=$code&grant_type=authorization_code";
         $jsonData = file_get_contents($url);
         $data = json_decode($jsonData,true);
-        dump($data);
+        $openid = $data['openid'];
+        if($openid){
+            return redirect("/index/index");
+        }
 
     }
     public function loginDo(Request $request){
