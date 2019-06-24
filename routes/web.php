@@ -38,7 +38,7 @@
 
 Route::prefix('admin')->group(function () {
 
-Route::any('weinxin','admin\weixin\winXinController@weinxin');//微信配置
+Route::any('weinxin','admin\weixin\weiXinController@weinxin');//微信配置
 
 //后台登陆
 Route::any('login','admin\login\login@login');
