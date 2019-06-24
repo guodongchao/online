@@ -56,7 +56,7 @@ class loginController extends Controller
     public function login(){
         $appid = "wx31275c9ac738c18a";
         $redirect_uri = urlEncode("http://dc.qianqianya.xyz/index/send");   //回调地址
-        $scope = "snsapi_userinfo";
+        $scope ="snsapi_userinfo";
         $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$appid&redirect_uri=$redirect_uri&response_type=code&scope=$scope&state=STATE#wechat_redirect";
         return view("index.login.login",['url'=>$url]);
 
@@ -72,8 +72,11 @@ class loginController extends Controller
         $jsonData = file_get_contents($url);
         $data = json_decode($jsonData,true);
         $openid = $data['openid'];
-        if($openid){
+        $userInfo = user::where("u_openid",$openid)->first();
+        if($userInfo){
             return redirect("/index/index");
+        }else{
+            return "<script>alert('登录的微信号未绑定账号,请先绑定后再用此方式登录')</script>>";
         }
 
     }
