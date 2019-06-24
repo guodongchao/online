@@ -40,7 +40,7 @@
         <ul class="nag">
             <li><a href="courselist" target="main"  class="link1">课程</a></li>
             <li><a href="articlelist" target="main" class="link1">资讯</a></li>
-            <li><a href="teacher" target="main" class="link1">讲师</a></li>
+            <li><a href="teacherlist" target="main" class="link1">讲师</a></li>
             <li><a href="question1" class="link1" target="main">题库</a></li>
             <li><a href="comment" class="link1" target="main">问答</a></li>
         </ul>
