@@ -17,7 +17,6 @@ class courseController extends Controller
         $culum_id =$request->input("culum_id",1);   //课程id
         $quest_id = $request->input("quest_id");    //查看问题的id
 
-//        $secKey = "req".$quest_id;  //第二及以后的key值
         if($quest_id){
             $data = Redis::lrange($quest_id,0,-1);
 
@@ -34,7 +33,7 @@ class courseController extends Controller
             $arr=[];
         }
 
-        return view("index.course.coursecont1",['data'=>$arr,'quest_id'=>$quest_id]);
+        return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
     public function courselist(Request $request){       //课程展示
         return view("index.course.courselist");
@@ -66,7 +65,6 @@ class courseController extends Controller
             Redis::lpush($strKey,$hashKey);
 
         }
-        echo $hashKey;
         $data = [
             'quest_title'=>$content,
             'quest_info'=>$contentInfo,
@@ -76,7 +74,6 @@ class courseController extends Controller
         $quest_id = $hashKey;
         $arr = array_merge($userInfo,$data);
 
-        dump($arr);
         $res = Redis::hMset($hashKey,$arr);  //将问题存入哈希里
 
         if($res){
@@ -87,14 +84,23 @@ class courseController extends Controller
 
     }
 
-    public function questSecord(Request $request){   //第二次问题
+    public function questSecord(Request $request){   //第二次问题查看
         $quest_id = $request->input("quest_id");
-
+        $culum_id = $request->input("culum_id");
+//        $beforQuest_id = $request->input("beforQuest_id");
         $u_id = $request->input("u_id",1);
-        $secKey = "req".$quest_id;  //第二及以后的key值
-        $questData = Redis::hgetall($quest_id);
+        if(!$quest_id){
+            $strKey = "clum_$culum_id";  //第一层
+            $data = Redis::lrange($strKey,0,-1);
+            $questData ="";
+        }else{
+            $secKey = "req".$quest_id;  //第二及以后的key值
+            $questData = Redis::hgetall($quest_id);
 
-        $data = Redis::lrange($secKey,0,-1);
+            $data = Redis::lrange($secKey,0,-1);
+        }
+
+
 //        dump($data);
 
         if($data) {
@@ -106,6 +112,7 @@ class courseController extends Controller
             $arr = [];
         }
 //        dump($arr);
+//        dump($questData);
         $view = view("index.course.courseAjax",['data'=>$arr,'quest'=>$questData,'quest_id'=>$quest_id]);
         $content = response($view)->getContent();
         return $content;
