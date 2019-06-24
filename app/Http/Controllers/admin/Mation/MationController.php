@@ -404,4 +404,6 @@ class MationController extends Controller
             echo json_encode(['msg' =>'未修改','code'=>1]);
         }
     }
+
+
 }
