@@ -98,11 +98,11 @@
         <!-- 上传广告页面样式 -->
         {{--<div class="banneradd bor">--}}
         <div class="baTopNo">
-            <span>课程：{{$culum_name}}</span>
+            <span>课程章节展示</span>
         </div>
         @if(count($chapter)!='')
         <div class="baBody">
-            <a href="chapterAdd?culum_id={{$culum_id}}&culum_name={{$culum_name}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加章节</button></a>
+            <a href="chapterAdd?culum_id={{$culum_id}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加章节</button></a>
             <br>
             <br>
             <table border="1" cellspacing="0" cellpadding="0">
@@ -121,8 +121,8 @@
                         <td class="abc">{{$v['chapter_desc']}}</td>
                         <td><?php echo date("Y-m-d H:i:s",$v['create_time'])?></td>
                         <td chapter_id={{$v['chapter_id']}}>
-                            <a href="sectionShow?chapter_id={{$v['chapter_id']}}&culum_name={{$culum_name}}&chapter_name={{$v['chapter_name']}}"><button class="layui-btn layui-btn-sm layui-btn-normal">小结目录</button></a>
-                            <a href="mationCateUpdate?chapter_id={{$v['chapter_id']}}"><img class="operation" src="img/update.png"></a>
+                            <a href="sectionShow?chapter_id={{$v['chapter_id']}}"><button class="layui-btn layui-btn-sm layui-btn-normal">小结目录</button></a>
+                            <a href="chapterUpdate?chapter_id={{$v['chapter_id']}}&culum_id={{$culum_id}}"><img class="operation" src="img/update.png"></a>
                             <img class="operation delban" src="img/delete.png">
                         </td>
                     </tr>
@@ -130,7 +130,7 @@
             </table>
         </div>
         @else
-            <a href="chapterAdd?culum_id={{$culum_id}}&culum_name={{$culum_name}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加章节</button></a>
+            <a href="chapterAdd?culum_id={{$culum_id}}"><button class="layui-btn layui-btn-sm layui-btn-normal">添加章节</button></a>
             暂无数据
         @endif
     </div>
@@ -163,29 +163,7 @@
         layui.use(['layer','form'], function() {
             var layer = layui.layer;
             var form = layui.form;
-            //是否展示
-            $('.layui-unselect').click(function(){
-                var _this = $(this);
-                var aa = _this.hasClass('layui-form-checked');
-                var mcate_id = _this.parents('tr').attr('mcate_id');
-                if(aa == false){
-                    var is_show = 0;
-                }else{
-                    var is_show = 1;
-                }
-                $.post(
-                    'isShow',
-                    {is_show:is_show,mcate_id:mcate_id},
-                    function(res){
-                        if(res.code==0){
-                            layer.msg(res.msg);
-                        }else{
-                            layer.msg(res.msg);
-                        }
-                    },'json'
-                )
-            })
-        });
+        })
 
 
 
@@ -196,7 +174,7 @@
             $('.delban').click(function(){
                 var _this = $(this);
 //            alert(111)
-                var mcate_id = $(this).parent().attr('mcate_id');
+                var chapter_id = $(this).parent().attr('chapter_id');
 
                 layer.open({
                     type:0,
@@ -204,8 +182,8 @@
                     btn:['确认','取消'],
                     yes:function(index,layero){
                         $.post(
-                            'mationCateDel',
-                            {mcate_id:mcate_id},
+                            'chapterDel',
+                            {chapter_id:chapter_id},
                             function(res){
                                 if(res.code==0){
                                     layer.msg(res.msg);

@@ -115,7 +115,7 @@
 
 <div class="comments">
 	@if(isset($all))
-		<a href="comment" style="color: black;font-size: 20px;"> <<-返回 </a>
+		<a href="comment?comment_id={{$all['com_id']}}" style="color: black;font-size: 20px;"> <<-返回 </a>
 	<div class="comment-wrap" >
 		<div class="photo">
 			<div class="avatar" style="background-image: url({{$all['u_img']}})"></div>
@@ -155,9 +155,15 @@
 			<p class="comment-text">{{$v['content']}}</p>
 			<div class="bottom-comment">
 				<div class="comment-date"><?php echo date("Y-m-d H:i:s",$v['time'])?></div>
+				<div class="comment-date">&nbsp;&nbsp;&nbsp;&nbsp;（{{$v['count']}}条）</div>
 				<ul class="comment-actions">
+					@if(isset($all))
+					<li class="reply"><a href="comment?comment_id={{$v['comment_id']}}&com_id={{$all['comment_id']}}">查看</a></li>
+					<li class="reply"><a href="comment?comment_id={{$v['comment_id']}}&com_id={{$all['comment_id']}}">评论</a></li>
+					@else
 					<li class="reply"><a href="comment?comment_id={{$v['comment_id']}}">查看</a></li>
 					<li class="reply"><a href="comment?comment_id={{$v['comment_id']}}">评论</a></li>
+					@endif
 				</ul>
 			</div>
 		</div>
@@ -171,10 +177,11 @@
 		function comment(com) {
 			var content=$('.content').val();
 			var comment_id=com.attr('comment_id');
+			var com_id=GetQueryString("com_id");
 			if(comment_id){
 				$.post("comment_do",{content:content,comment_id:comment_id},function (res) {
 					alert(res.msg);
-					window.location.href="comment?comment_id="+comment_id;
+					window.location.href="comment?comment_id="+comment_id+"&com_id="+com_id;
 				},'json');
 			}else{
 				$.post("comment_do",{content:content},function (res) {
@@ -183,5 +190,12 @@
 				},'json');
 			}
 
+		}
+		//获取地址栏参数
+		function GetQueryString(name)
+		{
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if(r!=null)return  unescape(r[2]); return null;
 		}
 </script>

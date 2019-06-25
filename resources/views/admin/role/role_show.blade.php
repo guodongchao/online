@@ -16,9 +16,9 @@
             <div class="conShow">
                 <table border="1" cellspacing="0" cellpadding="0">
                     <tr>
-                        <td width="66px" class="tdColor tdC">角色id</td>
-                        <td width="355px" class="tdColor">角色名称</td>
-                        <td width="130px" class="tdColor">操作</td>
+                        <td width="300px" class="tdColor tdC">角色id</td>
+                        <td width="395px" class="tdColor">角色名称</td>
+                        <td width="380px" class="tdColor">操作</td>
                     </tr>
                     @foreach($roleInfo as $v)
                     <tr>

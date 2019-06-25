@@ -11,36 +11,27 @@
 <link rel="stylesheet" href="css/tab.css" media="screen">
 <script src="js/jquery.tabs.js"></script>
 <script src="js/mine.js"></script>
-<!-- InstanceEndEditable -->
-<!-- InstanceBeginEditable name="head" -->
-<!-- InstanceEndEditable -->
-
 </head>
-
 <body>
-
-
-<!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="login" style="background:url(images/12.jpg) right center no-repeat #fff">
 <h2>登录</h2>
-<form style="width:600px">
+
 <div>
     <p class="formrow">
     <label class="control-label" for="register_email">帐号</label>
-    <input type="text">
+    <input type="text" placeholder="请输入Email地址 / 用户昵称" id="u_name">
     </p>
-    <span class="text-danger">请输入Email地址 / 用户昵称</span>
+
 </div>
 <div>
     <p class="formrow">
     <label class="control-label" for="register_email">密码</label>
-    <input type="password">
+    <input type="password" id="u_pwd">
     </p>
-    <p class="help-block"><span class="text-danger">密码错误</span></p>
 </div>
 <div class="loginbtn">
 	<label><input type="checkbox"  checked="checked"> <span class="jzmm">记住密码</span> </label>&nbsp;&nbsp;
-    <button type="submit" class="uploadbtn ub1">登录</button>
+    <button type="submit" class="uploadbtn ub1" id="btn">登录</button>
     
 </div>
 <div class="loginbtn lb">
@@ -48,12 +39,12 @@
    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>   
    <a href="forgetpassword" target="main" class="link-muted">找回密码</a>
 </div>
-</form>
 <div class="hezuologo">
     <span class="hezuo">使用合作网站账号登录</span>
     <div class="hezuoimg">
-    <img src="images/hezuoqq.png" class="hzqq" title="QQ" width="40" height="40"/>
-    <img src="images/hezuowb.png" class="hzwb" title="微博" width="40" height="40"/>
+        <a href="#"><img src="images/hezuoqq.png" class="hzqq" title="QQ" width="40" height="40"/></a>
+        <a href="{{$url}}"><img src="images/weixin.png" class="hzwx" title="微信" width="40" height="40"/></a>
+        <a href="#"><img src="images/hezuowb.png" class="hzwb" title="微博" width="40" height="40"/></a>
     </div>
     
   </div>
@@ -96,5 +87,30 @@
 	<span class="barico top" id="top">置顶</span>	
 </div>
 </body>
-
-<!-- InstanceEnd --></html>
+</html>
+<script>
+    $('#btn').click(function(){
+        var u_name=$('#u_name').val();
+        if(u_name==''){
+            alert('账号不能为空');
+            return false;
+        }
+        var u_pwd=$('#u_pwd').val();
+        if(u_pwd==''){
+            alert('密码不能为空');
+            return false;
+        }
+        $.ajax({
+            url:"/index/loginDo",
+            type:"post",
+            data:{u_name:u_name,u_pwd:u_pwd},
+            dataType:"json",
+            success:function(data){
+                alert(data.msg);
+                if(data.code ==200){
+                    location.href ="/index/index";
+                }
+            }
+        })
+    })
+</script>
