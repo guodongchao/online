@@ -22,6 +22,9 @@ class shiping extends Controller
         exit;*/
         //设置预览目录,上传成功的路径
         $previewPath = "./admin/shiping/";
+        if(!is_dir($previewPath)){
+            mkdir($previewPath);
+        }
         $ext = pathinfo($fileArr['name'], PATHINFO_EXTENSION);//获取当前上传文件扩展名
         $arrExt = array('3gp','rmvb','flv','wmv','avi','mkv','mp4','mp3','wav',);
 
