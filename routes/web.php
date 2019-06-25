@@ -218,12 +218,15 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('coursecont1','index\course\courseController@coursecont1');   //章节,问答,资料区
     Route::any('courselist','index\course\courseController@courselist');//课程展示
     Route::any('video','index\course\courseController@video');//视频播放
-
     Route::any('quest','index\course\courseController@quest');//课程下的问答
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
-    //登陆注册
-    Route::any('login','index\login\loginController@login');
-
+    //修改密码
+    Route::any('myrepassword','index\course\courseController@myrepassword');
+    Route::any('myrepasswordDo','index\course\courseController@myrepasswordDo');
+    //修改信息
+    Route::any('mysetting','index\course\courseController@detail');
+    Route::any('mysettingDo','index\course\courseController@detailDo');
+    //注册
     Route::any('register','index\login\loginController@register');
     Route::any('registerDo','index\login\loginController@registerDo');
     //验证唯一

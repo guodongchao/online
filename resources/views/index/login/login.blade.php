@@ -108,7 +108,7 @@
             success:function(data){
                 alert(data.msg);
                 if(data.code ==200){
-                    location.href ="/index/main";
+                    location.href ="/index/index";
                 }
             }
         })
