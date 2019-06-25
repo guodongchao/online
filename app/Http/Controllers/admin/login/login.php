@@ -12,11 +12,87 @@ class login extends Controller
 {
     //登陆视图
     public function login(){
-        return view("admin.login.login");
+        session_start();
+        $sid = session_id();
+        //$url = $_SERVER['SHOP_URL'].'/admin/codelist/'.$sid;
+
+        print_r($_SERVER);die;
+        $data = [
+            'sid'   =>  $sid,
+            'url'   =>  $url
+        ];
+        return view("admin.login.login",$data);
+    }
+    //生成验证码
+    public function showCode(Request $request,$sid){
+        session_id($sid);
+        session_start();
+        $str="2345678abcdefhijkmnpqrstuvwxyzABCDEFGHJKLMNPQRTUVWXY";
+        $b=substr(str_shuffle($str),rand(4,20),4);
+        $rand = $b ;
+        $_SESSION = [
+            'rand'  =>  $b
+        ];
+        // Set the content-type
+        header('Content-Type: image/png');
+        // Create the image
+        $im = imagecreatetruecolor(120, 50);
+        // Create some colors
+        $white = imagecolorallocate($im, 255, 255, 255);
+        $black = imagecolorallocate($im, 0, 0, 0);
+        imagefilledrectangle($im, 0, 0, 399, 50, $white);
+        // The text to draw
+        //$text = $rand;
+        // Replace path by your own font path
+        $font = '/usr/local/fonts/CAMBRIA.TTF';
+        // Add some shadow to the text
+        //imagettftext($im, 20, 0, 11, 21, $grey, $font, $text);
+        $len = strlen($rand);
+        $i = 0;
+        while($i<$len){
+            // Add the text
+            if(is_numeric($rand[$i])){
+                imagettftext($im, 20, rand(-20,20), 20*$i, 40, $black, $font, $rand[$i]);
+            }else{
+                imagettftext($im, 20, 0 , 20*$i, 40, $black, $font, $rand[$i]);
+            }
+            $i++;
+        }
+        // Using imagepng() results in clearer text compared with imagejpeg()
+        imagepng($im);
+        imagedestroy($im);
+        exit;
     }
     //登陆执行
-    public function login_do(){
-
+    public function login_do(Request $request){
+        $sid=$request->input('sid');
+        $code=$request->input('code');
+        session_id($sid);
+        session_start();
+        $count = $_SESSION['rand'];
+        if($count!=$code){
+            $response = [
+                'status'    =>  400,
+                'msg'       =>  '验证码错误',
+            ];
+            return json_encode($response);die;
+        }
+        $admin_name=$request->input('admin_name');
+        $admin_pwd=$request->input('admin_pwd');
+        $adminInfo=admin::where(['admin_name'=>$admin_name])->first()->toarray();
+        if(md5($admin_pwd)!=$adminInfo['admin_pwd']){
+            $response = [
+                'status'    =>  400,
+                'msg'       =>  '账号或密码错误',
+            ];
+            return json_encode($response);die;
+        }else{
+            $response = [
+                'status'    =>  200,
+                'msg'       =>  '登陆成功',
+            ];
+            return json_encode($response);
+        }
     }
     //管理员添加视图
     public function admin(){

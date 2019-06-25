@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/tab.css" media="screen">
 <script src="js/jquery-1.8.0.min.js"></script>
 <script src="js/jquery.tabs.js"></script>
+<link rel="stylesheet" href="css/article.css">
 <script src="js/mine.js"></script>
 <!-- InstanceEndEditable -->
 <!-- InstanceBeginEditable name="head" -->
@@ -22,140 +23,33 @@
 <div class="coursecont">
     <div class="courseleft">
 	<span class="select">     	
-      <input type="text" value="请输入关键字" class="pingjia_con"/>
+      <input type="text" placeholder="请输入关键字" class="pingjia_con"/>
       <a href="#" class="sellink"></a>        
     </span>
     <ul class="courseul">
     <li class="curr" style="border-radius:3px 3px 0 0;background:#fb5e55;"><h3 style="color:#fff;"><a href="#" class="whitea">全部课程</a></h3>
+    @foreach($cateData as $key=>$val)
     <li>
-    <h4>财会金融</h4>
+    <h4>{{$val['c_cate_name']}}</h4>
+
         <ul class="sortul">
-        <li class="course_curr"><a href="#">会计从业证</a></li>
-        <li><a href="#">初级会计职称</a></li>
-        <li><a href="#">中级会计职称</a></li>
-        <li><a href="#">会计高级职称</a></li>
-        <li><a href="#">注册会计师</a></li>
-        <li><a href="#">经济师</a></li>
+         @foreach($val['son'] as$k=>$v)
+            <li @if($k==0 && $key==0 )class="course_curr"@endif c_cate_id="{{$v['c_cate_id']}}"><a href="javascript:;" class="culum" >{{$v['c_cate_name']}}</a></li>
+         @endforeach
         </ul>
     <div class="clearh"></div>
     </li>
-    <li>
-    <h4>计算机</h4>
-        <ul class="sortul">
-        <li><a href="#">C语言</a></li>
-        <li><a href="#">JAVA</a></li>
-        <li><a href="#">.NET</a></li>
-        <li><a href="#">PHP</a></li>
-        
-        </ul>
-    <div class="clearh"></div>
-    </li>
+    @endforeach
     </ul>
     <div style="height:20px;border-radius:0 0 5px 5px; background:#fff;box-shadow:0 2px 4px rgba(0, 0, 0, 0.1)"></div>
     </div>
     <div class="courseright">
         <div class="clearh"></div>
       <ul class="courseulr">
-        <li>
-        	<div class="courselist">
-            <a href="coursecont" target="main" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c1.jpg" title="会计基础"></a>
-            <p class="courTit"><a href="coursecont" target="main" target="_blank">会计基础</a></p>
-            <div class="gray">
-            <span>30课时 600分钟</span>
-            <span class="sp1">1255555人学习</span>
-            <div style="clear:both"></div>
-            </div>
-            </div>
-       </li>
-        <li>
-        	<div class="courselist">
-            <a href="coursecont" target="main" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c2.jpg" title="会计基础"></a>
-            <p class="courTit"><a href="coursecont" target="main" target="_blank">HTTP下载课程</a></p>
-            <div class="gray">
-            <span>5课时 60分钟</span>
-            <span class="sp1">1255555人学习</span>
-            <div style="clear:both"></div>
-            </div>
-            </div>
-        </li>
-        <li>
-        	<div class="courselist">
-            <a href="coursecont" target="main" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="images/c3.jpg" title="会计基础"></a>
-            <p class="courTit"><a href="coursecont" target="main" target="_blank">HTTP下载课程</a></p>
-            <div class="gray">
-            <span>5课时 60分钟</span>
-            <span class="sp1">1255555人学习</span>
-            <div style="clear:both"></div>
-            </div>
-            </div>
-       </li>
-       <li>
-        	<div class="courselist">
-            <img style="border-radius:3px 3px 0 0;" width="240" src="images/c4.jpg" >
-            <p class="courTit">HTTP下载课程</p>
-            <div class="gray">
-            <span>5课时 60分钟</span>
-            <span class="sp1">1255555人学习</span>
-            <div style="clear:both"></div>
-            </div>
-            </div>
-       </li>
-       <li>
-        	<div class="courselist">
-            <img style="border-radius:3px 3px 0 0;" width="240" src="images/c5.jpg" >
-            <p class="courTit">HTTP下载课程</p>
-            <div class="gray">
-            <span>5课时 60分钟</span>
-            <span class="sp1">1255555人学习</span>
-            <div style="clear:both"></div>
-            </div>
-            </div>
-       </li>
-       <li>
-        	<div class="courselist">
-            <img style="border-radius:3px 3px 0 0;" width="240" src="images/c6.jpg" >
-            <p class="courTit">HTTP下载课程</p>
-            <div class="gray">
-            <span>5课时 60分钟</span>
-            <span class="sp1">1255555人学习</span>
-            <div style="clear:both"></div>
-            </div>
-            </div>
-       </li>
-       <li>
-        	<div class="courselist">
-            <img style="border-radius:3px 3px 0 0;" width="240" src="images/c7.jpg" >
-            <p class="courTit">HTTP下载课程</p>
-            <div class="gray">
-            <span>5课时 60分钟</span>
-            <span class="sp1">1255555人学习</span>
-            <div style="clear:both"></div>
-            </div>
-            </div>
-       </li>
-       <li>
-        	<div class="courselist">
-            <img style="border-radius:3px 3px 0 0;" width="240" src="images/c8.jpg" >
-            <p class="courTit">HTTP下载课程</p>
-            <div class="gray">
-            <span>5课时 60分钟</span>
-            <span class="sp1">1255555人学习</span>
-            <div style="clear:both"></div>
-            </div>
-            </div>
-       </li>
-       <li>
-        	<div class="courselist">
-            <img style="border-radius:3px 3px 0 0;" width="240" src="images/c9.jpg" >
-            <p class="courTit">HTTP下载课程</p>
-            <div class="gray">
-            <span>5课时 60分钟</span>
-            <span class="sp1">1255555人学习</span>
-            <div style="clear:both"></div>
-            </div>
-            </div>
-       </li>
-    </ul>
+
+          {{--课程内容--}}
+
+      </ul>
     </div>
     <div class="clearh"></div>
 </div>
@@ -200,3 +94,71 @@
 </body>
 
 <!-- InstanceEnd --></html>
+<script>
+    $(document).ready(function(){
+       var c_cate_id = $(".course_curr").attr("c_cate_id");
+        var page=1;
+        getCulum(c_cate_id,page);
+
+    })
+
+//    点击分类获取课程
+    $(".culum").click(function(){
+        $(".pingjia_con").val("");
+        //修改样式class
+        $(".course_curr").removeClass();
+        $(this).parent().addClass("course_curr")
+        var page = 1;
+        var c_cate_id = $(this).parent().attr("c_cate_id");
+        getCulum(c_cate_id,page);
+    })
+
+    //分页
+    $(document).on("click",".page-number",function(){
+        var cate_id = $(this).parent().attr("cate_id");
+        var page = $(this).attr("page");
+        var search = $(".pingjia_con").val();
+
+        if(search=="") {
+            getCulum(cate_id, page);
+        }else{
+
+            searchCulum(cate_id,page,search);
+        }
+
+    })
+
+    //搜索
+    $(".sellink").click(function(){
+        var c_cate_id = $(".course_curr").attr("c_cate_id");
+        var search = $(".pingjia_con").val();
+        var page = 1;
+        searchCulum(c_cate_id,page,search);
+
+    })
+    function searchCulum(c_cate_id,page,search){
+        var url = "courseSearch";
+        $.ajax({
+            type:"post",
+            data:{cate_id:c_cate_id,page:page,search:search},
+            url:url,
+            success:function(msg){
+                $(".courseulr").empty();
+                $(".courseulr").append(msg);
+            }
+        })
+    }
+
+    function getCulum(c_cate_id,page){
+        var url = "courselistData";
+        $.ajax({
+            type:"post",
+            data:{cate_id:c_cate_id,page:page},
+            url:url,
+            success:function(msg){
+                $(".courseulr").empty();
+                $(".courseulr").append(msg);
+            }
+        })
+    }
+</script>
