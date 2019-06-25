@@ -75,6 +75,7 @@ class cate extends Controller
                 if($v['c_parent_id']==$val['c_cate_id']){
                     $tmp[$key]['son'][] = $v;
                 }
+
             }
         }
         return $tmp;
