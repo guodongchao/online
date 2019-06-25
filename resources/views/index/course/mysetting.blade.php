@@ -24,7 +24,7 @@
     修改信息
 </div>
 <div class="container">
-    <div  class="contact"  id="form">
+    <div  class="contact"  >
         <input type="hidden" id="u_id" value="{{$userInfo['u_id']}}">
         <div class="row clearfix">
             <div class="lbl">
@@ -76,7 +76,7 @@
         </div>
         <div class="row  clearfix">
             <div class="span10 offset2">
-                <input type="submit" name="submit" id="submit" class="submit" value="确定">
+                <input type="submit"  id="btn"  value="确定">
             </div>
         </div>
         <div id="validation">
@@ -95,7 +95,6 @@
             return false;
         }
         var email_reg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g;
-        var flag;
         if (email_reg.test(u_email) == false) {
             var str = "<font color='red'><img src='/img/cuo.png'>请正确输入邮箱格式</font>";
             $('#email_span').html(str);
@@ -129,7 +128,6 @@
             return false;
         }
         var name_reg = /^[\u4e00-\u9fa5]{1,7}$|^[A-Za-z]{1,14}$/;
-        var flag;
         if (name_reg.test(u_name) == false) {
             var str = "<font color='red'><img src='/img/cuo.png'>中、英文均可，最长14个英文或7个汉字</font>";
             $('#name_span').html(str);
@@ -167,7 +165,7 @@
             }
         })
     })
-    $('#submit').click(function(){
+    $('#btn').click(function(){
         var email=check_email();
         var name=check_name();
         if(email&&name==true) {
