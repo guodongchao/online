@@ -4,6 +4,7 @@ namespace App\Http\Controllers\index\course;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\models\user;
 use App\models\detailed;
 use Illuminate\Support\Facades\Redis;
@@ -240,25 +241,37 @@ class courseController extends Controller
         ];
         return view('index.course.mysetting',$data);
     }
-    public function detailDo(Request $request){
-        $u_id=$request->input('uid');
-        $u_email=$request->input('u_email');
-        $u_name=$request->input('u_name');
-        $u_tel=$request->input('u_tel');
-        $u_img=$request->input('u_img');
-        $where=[
-            'u_id'=>$u_id
-        ];
-        $userData=[
-            'u_name'=>$u_name,
-            'u_email'=>$u_email,
-            'u_img'=>$u_img
-        ];
-        $userData=[
-            'u_tel'=>$u_tel,
-        ];
-        $res =user::where($where)->update($userData);
-        $detailres=detailed::where($where)->update();
+    public function detailDo(Request $request)
+    {
+        $u_id = $request->input('u_id');
+        $u_email = $request->input('u_email');
+        $u_name = $request->input('u_name');
+        $u_tel = $request->input('u_tel');
+        $u_img = $request->input('u_img');
+        DB::beginTransaction();
+        try {
+            $where = [
+                'u_id' => $u_id
+            ];
+            $userData = [
+                'u_name' => $u_name,
+                'u_email' => $u_email,
+                'u_img' => $u_img
+            ];
+            $detailData = [
+                'u_tel' => $u_tel,
+            ];
+             user::where($where)->update($userData);
+             detailed::where($where)->update($detailData);
+            //提交事务
+            DB::commit();
+            return json_encode(['code' => 200, 'msg' => '修改成功']);
+
+        } catch (\Exception $e) {
+            //回滚
+            DB::rollback();
+            throw $e;
+        }
     }
 }
 

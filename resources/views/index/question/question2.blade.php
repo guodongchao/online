@@ -22,6 +22,48 @@
 
         });
     </script>
+    <style type="text/css">
+        .yuan a{
+
+            width: 30px;
+
+            height: 30px;
+
+            line-height: 30px;
+
+            text-align: center;
+
+            display: inline-block;
+
+            background: white;
+
+            text-decoration: none;
+
+            color: #000000;
+
+            border-radius: 50%;
+            background: #99FFFF;
+
+        }
+
+        /*.yuan a:hover{*/
+
+            /*background: red;*/
+
+            /*color: #fff;*/
+
+        /*}*/
+        /*.progress{*/
+            /*width: 100px;*/
+            /*height:100px;*/
+            /*background-color: #CCFFFF;*/
+            /*border-radius:50%;*/
+            /*-moz-border-radius:50%;*/
+            /*-webkit-border-radius: 50%;*/
+            /*font-size: 20px;*/
+            /*text-align:center;*/
+        /*}*/
+    </style>
     <!-- InstanceEndEditable -->
     <!-- InstanceBeginEditable name="head" -->
     <!-- InstanceEndEditable -->
@@ -57,7 +99,7 @@
 
     </div>
 
-
+    <input type="hidden" id="score" value="0">
     <div class="membcont">
         <h3 class="mem-h3">我的课程</h3>
         <div class="box demo2" style="width:820px;">
@@ -66,6 +108,9 @@
                 <li>已学完</li>
                 <li>收藏</li>
             </ul>
+            <div id="remainTime" style="font-size:20px;font-weight:800;color:#FF9900" align="right"></div>
+            <input type='hidden'name='num' value='10'>
+            <input type='hidden'name='q_id' value='1'>
             <div class="tab_box" id="test">
                 <div>
                     <ul class="memb_course">
@@ -184,6 +229,9 @@
         <p>官方客服QQ:<br>335049335</p>
     </div>
 	</span>
+
+`
+
 	<span class="barico em" style="position:relative">
 	  <img src="images/num.png" width="75" class="showem">
 	</span>
@@ -195,13 +243,82 @@
 </body>
 <script>
     $('#top').hide();
-    function check_begin(c_id,q_id){
+  function  check_time(){
+        var now=new Date();
+        // alert(now);
+        var end=new Date();//结束的时间：年，月，日，分，秒（月的索引是0~11）
+        end=Number(end)+900000;
+        /*两个时间相减,得到的是毫秒ms,变成秒*/
+        var result=Math.floor(end-now)/1000;
+        var interval=setInterval(sub,1000); //定时器 调度对象
+        /*封装减1秒的函数*/
+        function sub(){
+            if (result>1) {
+                result = result - 1;
+                var second = Math.floor(result % 60);     // 计算秒 ，取余
+                var minite = Math.floor((result / 60) % 60); //计算分 ，换算有多少分，取余，余出多少秒
+                var hour = Math.floor((result / 3600) % 24); //计算小时，换算有多少小时，取余，24小时制除以24，余出多少小时
+                var day = Math.floor(result / (3600*24));  //计算天 ，换算有多少天
 
+                $("#remainTime").html( "倒计时:" + minite + "分" + second + "秒");
+            } else{
+                alert("倒计时结束！");
+                window.clearInterval(interval);//这里可以添加倒计时结束后需要执行的事件
+            }
+        };
+    }
+    function check_begin(c_id,q_id){
+        if(q_id==0){
+          //  alert(q_id)
+            check_time()
+        }
         var _tr='';
         var _input='';
+        var _progress='';
         var data={
             c_id:c_id,
             q_id:q_id
+        }
+        var num=$("input[name='num']").val();
+        var q_id=$("input[name='q_id']").val();
+        if(num==q_id){
+            var score=$('#score').val();
+            var c_id=$("input[name='hiddens']").val();
+            if( confirm("您本次得分"+score+"是否保存记录？")){
+                var type=1;
+                var data={
+                    c_id:c_id,
+                    score:score,
+                    type:type
+                }
+                $.ajax({
+                    type: 'post',
+                    data: data,
+                    url: '/index/question24',
+                    dataType: 'json',
+                    success: function (msg) {
+                        window.location.reload();
+                    }
+                })
+            }else{
+                var type=2;
+                var data={
+                    c_id:c_id,
+                    type:type
+                }
+                $.ajax({
+                    type: 'post',
+                    data: data,
+                    url: '/index/question24',
+                    dataType: 'json',
+                    success: function (msg) {
+                        window.location.reload();
+                    }
+                })
+            }
+
+           // alert("您本次得分"+score)
+            return false;
         }
         $.ajax({
             type:'post',
@@ -210,33 +327,67 @@
             dataType:'json',
             success:function(msg){
                 $.each(msg.data,function(i,value){
+                   var namedis=''
                     _tr+= "<input type='hidden'name='hidden' value='"+value.q_result+"'>"+
                             "<input type='hidden'name='hiddens' value='"+msg.c_id+"'>"+
-                            "<h3>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
+                            "<h3 id='progres'>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
+                            "<h3 id='progress'class='yuan'>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
                             "<h3>题目:"+value.q_name+"</h3>"+
-                            "<h3 id='box'>"+  $.each(value.q_answer,function(ii,values){
-                                _input+="<tr><td><input type='radio'name='radio'value='"+values+"'>"+values+"</td></tr>"
+                            "<h3 class='boxx'>"+  $.each(value.q_answer,function(ii,values){
+                                if(values==value.t_result){
+                                    check="checked";
+                                }else{
+                                    check="";
+                                }
+                                if(value.t_result!=null){
+                                     namedis="disabled";
+                                }else{
+                                     namedis='';
+                                }
+                                _input+="<tr><td><input type='radio'name='radio'value='"+ values+ "' "+check+" "+namedis+">"+values+"</td></tr>"
+
                             }) +"</h3><br><br><br><br><br><br>"+
-                            "<h3><input type='submit'value='上一题' id='top' onclick='check_btns("+msg.q_id+")'> <input type='submit'value='确认(下一题)'id='button' onclick='check_btn("+msg.q_id+")'></h3>"
+                            "<h3><input type='submit'value='上一题' id='top' onclick='check_btns("+msg.q_id+")' "+namedis+" > <input type='submit'value='确认(下一题)'id='button'  onclick='check_btn("+msg.q_id+")'"+namedis+" ></h3>"
                 })
+                for(var i=1;i<=msg.num;i++){
+                    _progress+="<a href='javascript:;' class='progress' style='margin-left:20px;' onclick='check_random("+i+")'>"+i+"</a>";
+                }
+                if(msg.q_id>msg.num){
+                    alert(msg.q_id)
+                    alert(msg.num)
+                }
+                $("input[name='num']").val(msg.num);
+                $("input[name='q_id']").val(msg.q_id);
                 $('#test').html(_tr);
-                $('#box').html(_input);
+                $('.boxx').html(_input);
+                $('#progress').html(_progress);
+                $('.progress').each(function(){
+                    if( $(this).html()==msg.q_id){
+                        $(this).css('color','red');
+                    }
+                })
+
                 if(msg.q_id==1){
                     $('#top').hide();
-                }else{
-                    $('#top').show();
                 }
                 if(msg.q_id==msg.num){
-                    $('#button').hide();
-                }else{
-                    $('#button').show();
+
                 }
+
             }
         })
     }
+    function check_random(q_id){
+        var c_id=$("input[name='hiddens']").val();
+        if(q_id-1==0){
+            q_id=0.1;
+        }else{
+            q_id=q_id-1
+        }
+        check_begin(c_id,q_id)
+    }
     function check_btns(q_id){
         var c_id=$("input[name='hiddens']").val();
-
         if(q_id-2==0){
             q_id=0.1;
         }else{
@@ -244,6 +395,7 @@
         }
         check_begin(c_id,q_id)
     }
+
     function check_btn(q_id){
         var hidden=$("input[name='hidden']").val();
         var c_id=$("input[name='hiddens']").val();
@@ -257,8 +409,30 @@
         }
         if(hidden==radio){
             alert("恭喜,答对了!")
+            var score=$('#score').val();
+            score =Number(score)+10;
+            $('#score').val(score);
+           // alert(score)
         }
+        check_radio(c_id,q_id,radio)
         check_begin(c_id,q_id)
+
+    }
+    function check_radio(c_id,q_id,radio){
+        var data={
+            c_id:c_id,
+            q_id:q_id,
+            radio:radio
+        }
+        $.ajax({
+            type: 'post',
+            data: data,
+            url: '/index/question23',
+            dataType: 'json',
+            success: function (msg) {
+
+            }
+        })
     }
 </script>
 <!-- InstanceEnd --></html>
