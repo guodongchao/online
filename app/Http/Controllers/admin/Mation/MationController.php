@@ -398,6 +398,18 @@ class MationController extends Controller
             echo json_encode(['msg' =>'未修改','code'=>1]);
         }
     }
-
+    //课时删除
+    public function hourDel(Request $request){
+        $hour_id = $request->input('hour_id');
+        $res = hour::where('hour_id',$hour_id)->update(['is_del'=>0]);
+        if($res){
+            $video_desc = hour::where('hour_id',$hour_id)->value('video_desc');
+//            print_r($video_desc);exit;
+            unlink('.'.$video_desc);
+            echo json_encode(['msg'=>'删除成功','code'=>0]);
+        }else {
+            echo json_encode(['msg'=>'删除失败','code'=>1]);
+        }
+    }
 
 }

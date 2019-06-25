@@ -189,6 +189,7 @@ Route::get('chapterUpdate','admin\Mation\MationController@chapterUpdate');
 Route::post('chapterUpdateDo','admin\Mation\MationController@chapterUpdateDo');
 Route::get('sectionUpdate','admin\Mation\MationController@sectionUpdate');
 Route::post('sectionUpdateDo','admin\Mation\MationController@sectionUpdateDo');
+Route::post('hourDel','admin\Mation\MationController@hourDel');
 
 
 

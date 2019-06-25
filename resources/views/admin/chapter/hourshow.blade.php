@@ -119,7 +119,6 @@
                             <td class="abc">{{$v['hour_name']}}</td>
                             <td><?php echo date("Y-m-d H:i:s",$v['create_time'])?></td>
                             <td hour_id={{$v['hour_id']}}>
-                                <a href="mationCateUpdate?hour_id={{$v['hour_id']}}"><img class="operation" src="img/update.png"></a>
                                 <img class="operation delban" src="img/delete.png">
                             </td>
                         </tr>
@@ -147,41 +146,9 @@
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script>
     $(function(){
-        $(".pagination li a").each(function(i,v){
-            var href=$(this).attr('href');
-            href=href.replace("http://","");
-            var sss=href.indexOf("/");
-            href="http://www.online.com/"+href.substring(sss);
-            $(this).attr("href",href);
-        });
-
-
-
         layui.use(['layer','form'], function() {
             var layer = layui.layer;
             var form = layui.form;
-            //是否展示
-            $('.layui-unselect').click(function(){
-                var _this = $(this);
-                var aa = _this.hasClass('layui-form-checked');
-                var mcate_id = _this.parents('tr').attr('mcate_id');
-                if(aa == false){
-                    var is_show = 0;
-                }else{
-                    var is_show = 1;
-                }
-                $.post(
-                    'isShow',
-                    {is_show:is_show,mcate_id:mcate_id},
-                    function(res){
-                        if(res.code==0){
-                            layer.msg(res.msg);
-                        }else{
-                            layer.msg(res.msg);
-                        }
-                    },'json'
-                )
-            })
         });
 
 
@@ -193,7 +160,7 @@
             $('.delban').click(function(){
                 var _this = $(this);
 //            alert(111)
-                var mcate_id = $(this).parent().attr('mcate_id');
+                var hour_id = $(this).parent().attr('hour_id');
 
                 layer.open({
                     type:0,
@@ -201,8 +168,8 @@
                     btn:['确认','取消'],
                     yes:function(index,layero){
                         $.post(
-                            'mationCateDel',
-                            {mcate_id:mcate_id},
+                            'hourDel',
+                            {hour_id:hour_id},
                             function(res){
                                 if(res.code==0){
                                     layer.msg(res.msg);
