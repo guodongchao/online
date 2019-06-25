@@ -211,7 +211,8 @@ class questionController extends Controller
         }
     }
     public function question3(Request $request){
-        $arr=records::where(['is_status'=>1])->paginate(5);
+        $u_id=session('u_id');
+        $arr=records::where(['is_status'=>1,'u_id'=>$u_id])->paginate(5);
         return view("index.question.question3",['arr'=>$arr]);
     }
     public function question33(Request $request){
