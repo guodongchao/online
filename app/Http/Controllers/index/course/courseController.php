@@ -7,10 +7,16 @@ use App\Http\Controllers\Controller;
 use App\models\user;
 use App\models\detailed;
 use Illuminate\Support\Facades\Redis;
+use App\models\admin\CourseCate;
+use App\models\culum;
+use App\models\userculum;
 
 class courseController extends Controller
 {
     public function coursecont(Request $request){ //详细课程介绍
+        //接课程的id
+        $culum_id = $request->input("culum_id");
+
         return view("index.course.coursecont");
     }
     public function coursecont1(Request $request){    //章节,问答,资料区
@@ -36,9 +42,75 @@ class courseController extends Controller
 
         return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
-    public function courselist(Request $request){       //课程展示
-        return view("index.course.courselist");
+    public function courselist(Request $request){       //课程展示(主要查询分类)
+        $data = CourseCate::where("c_status",1)->get()->toArray();
+        $sortData = recursionSon($data);
+
+        return view("index.course.courselist",['cateData'=>$sortData]);
     }
+
+    public function courselistData(Request $request){       //课程展示(中间位置)
+        $page = empty($request->input("page"))?1:$request->input("page");
+        $pageSize = 3;
+        $offset = ($page-1)*$pageSize;
+        $cate_id = $request->input("cate_id");
+        if(!$cate_id){
+            return ["code"=>200,"msg"=>"非法操作"];
+        }
+        $culumData = culum::where("c_cate_id",$cate_id)->where("culum_show",1);
+
+        $data = $culumData->get();
+        $total = ceil(count($data)/$pageSize);
+
+        $culumData = $culumData
+                   ->offset($offset)
+                   ->limit($pageSize)
+                   ->get();   //课程
+        foreach($culumData as $key=>$val){
+            $studyNum = userculum::where("culum_id",$val->culum_id)->count();
+            $val->studyNum =  $studyNum;
+        }
+
+        $view = view("index.course.cateCulum",['data'=>$culumData,'search'=>"",'cate_id'=>$cate_id,'page'=>$page,'total'=>$total]);
+        $content = response($view)->getContent();
+        return $content;
+
+    }
+
+    public function courseSearch(Request $request){       //课程搜索
+        $page = empty($request->input("page"))?1:$request->input("page");
+        $pageSize = 3;
+        $offset = ($page-1)*$pageSize;
+        $cate_id = $request->input("cate_id");
+        $search = $request->input("search");
+
+        if(!$cate_id){
+            return ["code"=>200,"msg"=>"非法操作"];
+        }
+        $culumData = culum::where("culum_show",1)->where("c_cate_id",$cate_id)->where("culum_name","like","%$search%");
+
+        $data = $culumData->get();
+        $total = ceil(count($data)/$pageSize);
+
+        $culumData = $culumData
+            ->offset($offset)
+            ->limit($pageSize)
+            ->get();   //课程
+        foreach($culumData as $key=>$val){
+            $studyNum = userculum::where("culum_id",$val->culum_id)->count();
+            $val->studyNum =  $studyNum;
+        }
+
+        $view = view("index.course.cateCulum",['data'=>$culumData,'cate_id'=>$cate_id,'page'=>$page,"search"=>$search,'total'=>$total]);
+        $content = response($view)->getContent();
+        return $content;
+
+    }
+
+
+
+
+
     //视频播放
     public function video(Request $request){
         return view("index.course.video");

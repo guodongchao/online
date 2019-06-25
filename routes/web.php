@@ -217,6 +217,14 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('coursecont','index\course\courseController@coursecont');  //详细课程
     Route::any('coursecont1','index\course\courseController@coursecont1');   //章节,问答,资料区
     Route::any('courselist','index\course\courseController@courselist');//课程展示
+    Route::any('courselistData','index\course\courseController@courselistData');//课程下某个分类下的科目
+    Route::any('courseSearch','index\course\courseController@courseSearch');//课程下某个分类下的科目
+
+
+
+
+
+
     Route::any('video','index\course\courseController@video');//视频播放
     Route::any('quest','index\course\courseController@quest');//课程下的问答
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
