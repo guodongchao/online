@@ -32,7 +32,7 @@
         </div>
         <div class="lgD">
             <img class="img1" src="img/logPwd.png" />
-            <input type="text" id="admin_pwd" placeholder="输入用户密码" />
+            <input type="password" id="admin_pwd" placeholder="输入用户密码" />
         </div>
         <div class="lgD logD2">
             <input type="hidden" id="sid" value="<?php echo $sid;?>"/>
