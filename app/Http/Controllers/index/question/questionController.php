@@ -40,7 +40,7 @@ class questionController extends Controller
         if($q_id==0.1){
             $q_id=0;
         }
-        $info1=Redis::zrange($key.$u_id.$c_id,0,0);
+        $info1=Redis::zrange($key.$u_id.$c_id,$q_id,$q_id);
         if($info1==false){
             $arr=question::where(['q_class'=>$c_id])->get()->toArray();
             $nums=count($arr);
