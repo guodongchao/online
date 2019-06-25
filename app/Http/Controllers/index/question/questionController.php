@@ -16,7 +16,9 @@ class questionController extends Controller
         return view("index.question.question1",['arr'=>$arr]);
     }
     public function question11(Request $request){
-        $u_id=1;
+//        $u_id=session('u_id');
+//        $u_id=1;
+        $u_id=session('u_id');
         $c_id=$request->input('c_id');
         $q_id=$request->input('q_id');
         $key='question';
@@ -78,7 +80,8 @@ class questionController extends Controller
         return view("index.question.question2",['arr'=>$arr]);
     }
     public function question22(Request $request){
-        $u_id=1;
+        //$u_id=1;
+        $u_id=session('u_id');
         $c_id=$request->input('c_id');
         $q_id=$request->input('q_id');
 
@@ -139,7 +142,8 @@ class questionController extends Controller
         return $info;
     }
     public function question23(Request $request){
-        $u_id=1;
+        //$u_id=1;
+        $u_id=session('u_id');
         $c_id=$request->input('c_id');
         $q_id=$request->input('q_id');
         $q_id=$q_id-1;
@@ -164,7 +168,8 @@ class questionController extends Controller
         Redis::zadd($key.$u_id.$c_id,$q_id+1,$val);
     }
     public function question24(Request $request){
-        $u_id=1;
+       // $u_id=1;
+        $u_id=session('u_id');
         $key='examination';
         $records='records';
         $type=$request->input('type');
