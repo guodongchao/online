@@ -191,6 +191,7 @@ Route::get('chapterUpdate','admin\Mation\MationController@chapterUpdate');
 Route::post('chapterUpdateDo','admin\Mation\MationController@chapterUpdateDo');
 Route::get('sectionUpdate','admin\Mation\MationController@sectionUpdate');
 Route::post('sectionUpdateDo','admin\Mation\MationController@sectionUpdateDo');
+Route::post('hourDel','admin\Mation\MationController@hourDel');
 
 
 
@@ -219,6 +220,14 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('coursecont','index\course\courseController@coursecont');  //详细课程
     Route::any('coursecont1','index\course\courseController@coursecont1');   //章节,问答,资料区
     Route::any('courselist','index\course\courseController@courselist');//课程展示
+    Route::any('courselistData','index\course\courseController@courselistData');//课程下某个分类下的科目
+    Route::any('courseSearch','index\course\courseController@courseSearch');//课程下某个分类下的科目
+
+
+
+
+
+
     Route::any('video','index\course\courseController@video');//视频播放
     Route::any('quest','index\course\courseController@quest');//课程下的问答
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
@@ -249,7 +258,10 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('question11','index\question\questionController@question11');
     Route::any('question2','index\question\questionController@question2');
     Route::any('question22','index\question\questionController@question22');
+    Route::any('question23','index\question\questionController@question23');
+    Route::any('question24','index\question\questionController@question24');
     Route::any('question3','index\question\questionController@question3');
+    Route::any('question33','index\question\questionController@question33');
     Route::any('question4','index\question\questionController@question4');
     //问答
     Route::any('comment','index\comment\commentController@comment');

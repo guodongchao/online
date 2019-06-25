@@ -41,7 +41,7 @@
 <ul class="tcourseul">
 	@foreach($culum as $k=>$v)
 	<li>
-	    <span class="courseimg tcourseimg"><a href="coursecont" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a></span>
+	    <span class="courseimg tcourseimg"><a href="coursecont" target="main" target="_blank"><img width="230" src="../admin/	{{$v['culum_img']}}"></a></span>
 	    <span class="tcoursetext">
 	       <h4><a href="coursecont" target="main" target="_blank" class="teatt">{{$v['culum_name']}}</a><a class="state">@if($v['culum_status']==1) 更新中 @else 已完结 @endif</a></h4>
 	       <p class="teadec">{{$v['culum_desc']}}</p>
