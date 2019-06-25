@@ -42,6 +42,8 @@ Route::any('weinxin','admin\weixin\weiXinController@weinxin');//微信配置
 
 //后台登陆
 Route::any('login','admin\login\login@login');
+Route::any('loginDo','admin\login\login@login_do');
+Route::any('codelist','admin\login\login@showCode');
 //管理员添加
 Route::any('admin','admin\login\login@admin');
 Route::any('adminDo','admin\login\login@admin_add');

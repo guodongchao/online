@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -28,20 +28,21 @@
         <!-- 输入框 -->
         <div class="lgD">
             <img class="img1" src="img/logName.png" />
-            <input type="text" placeholder="输入用户名" />
+            <input type="text" id="admin_name" placeholder="输入用户名" />
         </div>
         <div class="lgD">
             <img class="img1" src="img/logPwd.png" />
-            <input type="text" placeholder="输入用户密码" />
+            <input type="text" id="admin_pwd" placeholder="输入用户密码" />
         </div>
         <div class="lgD logD2">
-            <input class="getYZM" type="text" />
+            <input type="hidden" id="sid" value="<?php echo $sid;?>"/>
+            <input type="text" name="code" id="code" class="getYZM">
             <div class="logYZM">
-                <img class="yzm" src="img/logYZM.png" />
+                <img src="<?php echo $url;?>" id="img">
             </div>
         </div>
         <div class="logC">
-            <button>登 录</button>
+            <button id="btn">登 录</button>
         </div>
     </div>
 </div>
@@ -55,3 +56,32 @@
 <!-- 登录页面底部end -->
 </body>
 </html>
+<script>
+    $(function(){
+        //点击替换验证码
+        $('#img').click(function(){
+            $(this).prop('src',$(this).prop('src'));
+        })
+        //传递数据
+        $('#btn').click(function(){
+            var admin_name=$('#admin_name').val();
+            var admin_pwd=$('#admin_pwd').val();
+            var sid = $('#sid').val();
+            var code = $('#code').val();
+            console.log(sid)
+             console.log(code)
+            $.ajax({
+                url:'/admin/loginDo',
+                data:{sid:sid,code:code,admin_name:admin_name,admin_pwd:admin_pwd},
+                type:'post',
+                dataType:'json',
+                success:function (data){
+                    alert(data.msg)
+                    if(data.status==200){
+                        location.href ="/admin/index";
+                    }
+                }
+            });
+        })
+    })
+</script>
