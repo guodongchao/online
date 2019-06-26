@@ -17,6 +17,10 @@ class AdminToken
     public function handle($request, Closure $next)
     {
         $admin_id=session('admin_id');
+        $aurl= \Request::getRequestUri();
+        if(empty($admin_id)&&$aurl!='/admin/login'){
+            echo "<script> alert('请登录');parent.location.href='/admin/login'; </script>";exit;
+        }
         $where=[
             'admin_id'=>$admin_id,
         ];

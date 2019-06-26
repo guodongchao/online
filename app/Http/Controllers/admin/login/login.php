@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\models\admin;
 use App\models\role;
 use App\models\adminrole;
-class login extends Controller
+class login
 {
     //登陆视图
     public function login(){

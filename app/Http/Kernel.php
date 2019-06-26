@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'token'=> \App\Http\Middleware\CheckToken::class,
         'rbac'=> \App\Http\Middleware\AdminToken::class,
+        'islogin'=> \App\Http\Middleware\LoginToken::class,
     ];
 }
