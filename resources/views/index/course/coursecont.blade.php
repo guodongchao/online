@@ -33,7 +33,7 @@
     	<h2 class="courseh2">{{$culumdata['culum_name']}}</h2>
         <p class="courstime">总课时：<span class="course_tt">{{$num}}课时</span></p>
 		<p class="courstime">课程时长：<span class="course_tt">{{$time}}分钟</span></p>
-        <p class="courstime">学习人数：<span class="course_tt">{{$culumdata['study_num']}}人</span></p>
+        <p class="courstime">学习人数：<span class="course_tt">{{$usernum}}人</span></p>
 		<p class="courstime">讲师：{{$culumdata['teacher_name']}}</p>
 		<p class="courstime">课程评价：<img width="71" height="14" src="images/evaluate5.png">&nbsp;&nbsp;<span class="hidden-sm hidden-xs">5.0分（10人评价）</span></p>
         <!--<p><a class="state end">完结</a></p>-->      

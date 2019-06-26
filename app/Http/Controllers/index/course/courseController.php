@@ -44,9 +44,13 @@ class courseController extends Controller
         //总分钟
         $time = hour::where('culum_id',$culum_id)->pluck('show_time')->toarray();
         $time = array_sum($time);
+        //x学习人数
+        $usernaem = DB::table('user_culum')->where('culum_id',$culum_id)->get();
+        $usernum = count($usernaem);
+
 //        print_r($time);
 //        exit;
-        return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time]);
+        return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
     }
     public function coursecont1(Request $request){    //章节,问答,资料区
         $u_id =$request->input("u_id",1);
