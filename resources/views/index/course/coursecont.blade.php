@@ -31,13 +31,20 @@
             @endif
         </a>
     	<h2 class="courseh2">{{$culumdata['culum_name']}}</h2>
-        <p class="courstime">总课时：<span class="course_tt">30课时</span></p>
-		<p class="courstime">课程时长：<span class="course_tt">3小时20分</span></p>
+        <p class="courstime">总课时：<span class="course_tt">{{$num}}课时</span></p>
+		<p class="courstime">课程时长：<span class="course_tt">{{$time}}分钟</span></p>
         <p class="courstime">学习人数：<span class="course_tt">{{$culumdata['study_num']}}人</span></p>
 		<p class="courstime">讲师：{{$culumdata['teacher_name']}}</p>
 		<p class="courstime">课程评价：<img width="71" height="14" src="images/evaluate5.png">&nbsp;&nbsp;<span class="hidden-sm hidden-xs">5.0分（10人评价）</span></p>
         <!--<p><a class="state end">完结</a></p>-->      
-        <span class="coursebtn"><a class="btnlink" href="coursecont1" target="main">加入学习</a><a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a><a class="codol sc" href="#">收藏课程</a></span>
+        <span class="coursebtn">
+            @if($culumdata['culum_price']==0)
+                <a class="btnlink" href="coursecont1" target="main">加入学习</a>
+            @else
+                <a class="btnlink" href="coursecont1" target="main">{{$culumdata['culum_price']}}￥</a>
+            @endif
+            <a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a>
+            <a class="codol sc" href="#">收藏课程</a></span>
 		<div style="clear:both;"></div>
 		<div id="bds">
             <div class="bdsharebuttonbox">
@@ -89,15 +96,15 @@
 <div class="ctext">
     <div class="cr1">
     <h3 class="righttit">课程公告</h3>
-    <div class="gonggao">
-	<div class="clearh"></div>
-    <p>{{$culumdata['n_name']}}<br/>
-	<span class="gonggao_time"><?php echo date('Y-m-d',$culumdata['n_time'])?></span>
-	</p>
-	<div class="clearh"></div>
-
-	<div class="clearh"></div>
-    </div>
+        <div class="gonggao">
+            @foreach($name as $v)
+                <div class="clearh"></div>
+                <p>{{$v['n_name']}}<br/>
+                <span class="gonggao_time"><?php echo date('Y-m-d',time())?></span>
+                </p>
+            @endforeach
+                <div class="clearh"></div>
+        </div>
     </div>
 </div>
 
