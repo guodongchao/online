@@ -33,6 +33,6 @@ class teacherController extends Controller
     //优秀讲师
     public function teacherlist(Request $request){
         $arr=teacherdetails::where('teacher_status',1)->get()->toarray();
-        view("index.teacher.teacherlist",['teacher'=>$arr]);
+        return view("index.teacher.teacherlist",['teacher'=>$arr]);
     }
 }
