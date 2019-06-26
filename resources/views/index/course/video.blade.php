@@ -123,20 +123,21 @@ $(function(){
 					<div style="padding-left:15px;">                   
                     <div class="c_eform veform">
                     <div class="clearh" ></div>
-                        <input class="inputitle pingjia_con" type="text"  value="请输入问题标题" onblur="if (this.value =='') this.value='请输入问题标题';this.className='inputitle pingjia_con'" onclick="if (this.value=='请输入问题标题') this.value='';this.className='inputitle pingjia_con_on'"/>
-                        <textarea rows="7" class="pingjia_con" style="width:90%;"  onblur="if (this.value =='') this.value='请输入问题的详细内容';this.className='pingjia_con'" onclick="if (this.value=='请输入问题的详细内容') this.value='';this.className='pingjia_con_on'"></textarea><br/>
-                       <a href="#" class="fombtn" style="margin-right:30px;">发布</a>
+                        {{--<input class="inputitle pingjia_con" type="text"  value="请输入问题标题" onblur="if (this.value =='') this.value='请输入问题标题';this.className='inputitle pingjia_con'" onclick="if (this.value=='请输入问题标题') this.value='';this.className='inputitle pingjia_con_on'"/>--}}
+                        {{--<textarea rows="5" class="pingjia_con quest" style="width:90%;"  onblur="if (this.value =='') this.value='请输入问题的详细内容';this.className='pingjia_con'" onclick="if (this.value=='请输入问题的详细内容') this.value='';this.className='pingjia_con_on'"></textarea><br/>--}}
+                        <textarea rows="5" class="pingjia_con" id="quest" style="width:90%;" ></textarea><br/>
+                       <a href="#" class="fombtn sw" style="margin-right:30px;">发布</a>
                        <div class="clearh"></div>
                     </div>
 					<ul class="evalucourse" style="width:280px;">
-                    	<li>
-                        	<p class="vptext"><a target="_blank" class="peptitle" href="#">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>         <p class="peptime pswer"><span style="float:left;"><b class="coclass">候候&nbsp;&nbsp;</b>发表于 2015-05-8 </span><span class="pepask" style="float:right;">回答(<strong style="color:#3eb0e0;"><a href="#" class="bluelink" target="_blank">10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;浏览(<strong style="color:#3eb0e0;"><a href="#" class="bluelink" target="_blank">10</a></strong>)</span>					
-                            </p>                           
-                        </li>
-                        <li>
-                        	<p class="vptext"><a target="_blank" class="peptitle" href="#">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>         <p class="peptime pswer"><span style="float:left;"><b class="coclass">候候&nbsp;&nbsp;</b>发表于 2015-05-8 </span><span class="pepask" style="float:right;">回答(<strong style="color:#3eb0e0;"><a href="#" class="bluelink" target="_blank">10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;浏览(<strong style="color:#3eb0e0;"><a href="#" class="bluelink" target="_blank">10</a></strong>)</span>					
-                            </p>                           
-                        </li>                       
+						{{--聊天内容--}}
+                    	{{--<li>--}}
+                        	{{--<p class="vptext"><a target="_blank" class="peptitle" href="#">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>         <p class="peptime pswer"><span style="float:left;"><b class="coclass">候候&nbsp;&nbsp;</b></span>--}}
+
+                            {{--</p>                           --}}
+                        {{--</li>--}}
+
+
                     </ul>
                     
 				</div>
@@ -155,3 +156,68 @@ $(function(){
     </div>
 </body>
 </html>
+<script>
+	websocket = null;
+	$(document).ready(function(){
+
+		if ('WebSocket' in window) {
+			websocket = new WebSocket("ws://192.168.126.130:9501");
+		}
+		else {
+			alert('当前浏览器 Not support websocket')
+		}
+
+		websocket.onopen = function (evt) {
+//			var content = "";
+//			var status = 1;
+//			var data = {content:content,status:status};
+//			//要把json的对象转换为字符串
+//			var dataJson = JSON.stringify(data);
+//			websocket.send(dataJson);
+			console.log("连接")
+
+		};
+
+		websocket.onclose = function (evt) {
+			var content = "";
+			var status = 2;
+			var data = {content:content,status:status};
+			//要把json的对象转换为字符串
+			var dataJson = JSON.stringify(data);
+			websocket.send(dataJson);
+			console.log("断开socker链接");
+		};
+
+
+		websocket.onmessage = function (evt) {
+
+			var data = evt.data;
+			var jsonData = JSON.parse(data);
+			console.log(jsonData);
+			if(jsonData.content!=""){
+				var str="<li>" +
+						"<p class='vptext'><a class='peptitle' href='javascript:;'>"+jsonData.content+"</a></p>" +
+						"<p class='peptime pswer'>" +
+						"<span style='float:left;'><b class='coclass'>"+jsonData.u_name+"&nbsp;&nbsp;</b> </span></p>" +
+						"</li>"
+				$(str).insertBefore($(".evalucourse li"));
+//				$(".evalucourse").append(str);
+			}
+
+		};
+
+		// //点击发布问题事件
+		$(".sw").click(function(){
+			var content = $("#quest").val();
+			console.log(content);
+			var u_name = "张三";
+			var data = {content:content,u_name:u_name};
+			//要把json的对象转换为字符串
+			var dataJson = JSON.stringify(data);
+			websocket.send(dataJson);
+			$("#quest").val("");
+
+
+		})
+	})
+</script>
