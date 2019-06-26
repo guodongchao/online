@@ -253,6 +253,7 @@ class MationController extends Controller
     //章节展示
     public function chapterShow(Request $request){
         $culum_id = $request->input('culum_id');
+        session(['culum_id'=>$culum_id]);
         $culum_name = $request->input('culum_name');
         $cate_name = $request->input('cate_name');
 

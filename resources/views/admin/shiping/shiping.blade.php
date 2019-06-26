@@ -53,7 +53,7 @@
     <div class="preview">
 
     </div>
-    <input type="text" id="duration" value="">
+    <input type="hidden" id="duration" value="">
 </div>
 </body>
 </html>

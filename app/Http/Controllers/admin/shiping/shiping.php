@@ -54,7 +54,8 @@ class shiping extends Controller
            'section_id'=>$section_id,
            'video_desc'=>$video_desc,
            'create_time'=>time(),
-           'show_time'=>$show_time
+           'show_time'=>$show_time,
+           'culum_id'=>session('culum_id')
        ];
        $res = hour::insert($data);
         if($res){
