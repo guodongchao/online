@@ -33,7 +33,7 @@
                             <td>{{date('Y-m-d H:i:s',$v['last_login_time'])}}</td>
                         @endif
                         <td>
-                            <a href="/admin/admin_update/{{$v['admin_id']}}"><img class="operation" src="img/update.png"></a>
+                            <a href="/admin/admin_update?admin_id={{$v['admin_id']}}"><img class="operation" src="img/update.png"></a>
                             <img class="operation delban admin_del" src="img/delete.png" admin_id="{{$v['admin_id']}}">
                             <a href="/admin/adminrole/{{$v['admin_id']}}">角色</a>
                         </td>
@@ -64,6 +64,18 @@
                 if(data.code ==200){
                     location.href ="/admin/admin_show";
                 }
+            }
+        })
+    })
+    $(document).on('click','.update',function(){
+        var admin_id=$(this).attr('admin_id');
+        $.ajax({
+            url:"/admin/admin_update",
+            type:"post",
+            data:{admin_id:admin_id},
+            dataType:"json",
+            success:function(data){
+
             }
         })
     })

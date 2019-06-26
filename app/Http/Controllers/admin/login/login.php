@@ -14,9 +14,8 @@ class login extends Controller
     public function login(){
         session_start();
         $sid = session_id();
-        //$url = $_SERVER['SHOP_URL'].'/admin/codelist/'.$sid;
-
-        print_r($_SERVER);die;
+        $url = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/admin/codelist/'.$sid;
+        //print_r($url);die;
         $data = [
             'sid'   =>  $sid,
             'url'   =>  $url
@@ -79,14 +78,16 @@ class login extends Controller
         }
         $admin_name=$request->input('admin_name');
         $admin_pwd=$request->input('admin_pwd');
-        $adminInfo=admin::where(['admin_name'=>$admin_name])->first()->toarray();
-        if(md5($admin_pwd)!=$adminInfo['admin_pwd']){
+        $adminInfo=admin::where(['admin_name'=>$admin_name])->first();
+        if(md5($admin_pwd)!=$adminInfo->admin_pwd){
             $response = [
                 'status'    =>  400,
                 'msg'       =>  '账号或密码错误',
             ];
             return json_encode($response);die;
         }else{
+            $request->session()->put('admin_id',$adminInfo->admin_id);
+            $request->session()->put('admin_name',$admin_name);
             $response = [
                 'status'    =>  200,
                 'msg'       =>  '登陆成功',
@@ -166,7 +167,8 @@ class login extends Controller
         }
     }
     //管理员修改视图
-    public function admin_update($admin_id){
+    public function admin_update(Request $request){
+        $admin_id=$request->input('admin_id');
         $where=[
             'admin_id'=>$admin_id
         ];
@@ -220,5 +222,11 @@ class login extends Controller
             'adminInfo'=>$adminInfo,
         ];
         return view("admin.login.admin_role",$data);
+    }
+    //退出
+    public function adminquit(){
+        session()->flush('admin_name');
+        session()->flush('admin_id');
+        header('refresh:0.2,/admin/login');
     }
 }

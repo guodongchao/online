@@ -38,11 +38,15 @@ class articleController extends Controller
     public function articlelist(Request $request){
         $pageSize = 4;
         $mcate_id = $request->input('mcate_id');
+
         $catedata = DB::table('mation_cate')->where('is_del',1)->get();
         $mationdata=DB::table('mation')->where('mation.is_del',1);
         if(!empty($mcate_id)){
             $mationdata = $mationdata->where('mation_cate.mcate_id',$mcate_id);
+        }else{
+            $mcate_id = "";
         }
+
         $mationdata = $mationdata->join('mation_cate_rela','mation.mation_id','=','mation_cate_rela.mation_id')
             ->join('mation_cate','mation_cate_rela.mcate_id','=','mation_cate.mcate_id');
         $totalData = $mationdata->get();

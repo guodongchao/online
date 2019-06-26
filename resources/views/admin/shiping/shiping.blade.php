@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="content"  >
-    <p class="_p"><span>视频标题</span>：<input id="title" type="text" class="form-control" placeholder="请输入视频名称"></p>
+    <p class="_p"><span>课时名称</span>：<input id="title" type="text" class="form-control" placeholder="请输入课时名称"></p>
     <p class="_p">
         <input type="hidden" id="agvagva" value="{{$section_id}}">
         <input type="hidden" id="waqesdrfygu">
@@ -53,6 +53,7 @@
     <div class="preview">
 
     </div>
+    <input type="text" id="duration" value="">
 </div>
 </body>
 </html>
@@ -147,26 +148,40 @@
         //服务断接收完文件返回的结果  注意返回的字符串要去掉双引号
         if(evt.target.responseText){
              str = "/admin/shiping/"+evt.target.responseText;
+            $(".preview").append("<video class='video-active' id='video-active' controls='controls' autoplay='' name='media'><source src="+str+" type='video/mp4'></video>");
+            var s_time=0;
+            var num=0;
+            $("#video-active").on(
+                "timeupdate",
+                function(event){
+                    s_time=this.duration;
+                    num++;
+                    if(s_time>0&&num<2){
+                        var hour_name = $('#title').val();
+                        var section_id = $('#agvagva').val();
+                        var video_desc = $('#waqesdrfygu').val();
+                        var show_time=s_time;
+                        $.post(
+                            'hourInsert',
+                            {hour_name:hour_name,section_id:section_id,video_desc:video_desc,show_time:show_time},
+                            function(res){
+                                console.log(res)
+                                if(res.code==0){
+                                    alert('添加成功');
+                                    window.location.href = 'hourShow?section_id='+res.section_id;
+                                }else{
+                                    alert('添加失败');
+                                }
+                            },'json'
+                        )
+                    }
+                    // onTrackedVideoFrame(this.currentTime, this.duration);
+                });
 //             console.log(evt);
             $('#waqesdrfygu').val(str);
-            var hour_name = $('#title').val();
-            var section_id = $('#agvagva').val();
-            var video_desc = $('#waqesdrfygu').val();
-                $.post(
-                    'hourInsert',
-                    {hour_name:hour_name,section_id:section_id,video_desc:video_desc},
-                    function(res){
-                        console.log(res)
-                        if(res.code==0){
-                            alert('添加成功');
-                            window.location.href = 'hourShow?section_id='+res.section_id;
-                        }else{
-                            alert('添加失败');
-                        }
-                    },'json'
-                )
+
 //            alert("上传成功！");
-            $(".preview").append("<video  controls='' autoplay='' name='media'><source src="+str+" type='video/mp4'></video>");
+
         }else{
             alert("上传失败");
         }
@@ -174,5 +189,9 @@
     //上传失败
     function uploadFailed(evt) {
         alert("上传失败！");
+    }
+    function onTrackedVideoFrame(currentTime, duration){
+        $("#current").text(currentTime);
+        $("#duration").val(duration);
     }
 </script>

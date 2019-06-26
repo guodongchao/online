@@ -25,7 +25,7 @@
                         <td>{{$v['role_id']}}</td>
                         <td>{{$v['role_name']}}</td>
                         <td>
-                            <a href="/admin/role_update/{{$v['role_id']}}"><img class="operation" src="img/update.png"></a>
+                            <a href="/admin/role_update?role_id={{$v['role_id']}}"><img class="operation" src="img/update.png"></a>
                             <img class="operation delban role_del" src="img/delete.png" role_id="{{$v['role_id']}}">
                             <a href="/admin/rolepower/{{$v['role_id']}}">权限</a>
                         </td>

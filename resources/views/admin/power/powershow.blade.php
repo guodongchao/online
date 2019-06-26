@@ -34,7 +34,7 @@
                             <td>否</td>
                         @endif
                         <td>
-                            <a href="/admin/powerupdate/{{$v['power_id']}}"><img class="operation" src="img/update.png"></a>
+                            <a href="/admin/powerupdate?power_id={{$v['power_id']}}"><img class="operation" src="img/update.png"></a>
                             <img class="operation delban power_del" src="img/delete.png" power_id="{{$v['power_id']}}">
                         </td>
                     </tr>

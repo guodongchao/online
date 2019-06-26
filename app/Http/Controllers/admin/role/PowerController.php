@@ -85,7 +85,8 @@ class PowerController extends Controller
         }
     }
     //权限修改
-    public function powerUpdate($power_id){
+    public function powerUpdate(Request $request){
+        $power_id=$request->input('power_id');
         $actWhere=[
             'power_id'=>$power_id
         ];
