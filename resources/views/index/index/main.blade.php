@@ -16,24 +16,7 @@
             display: none;
         }
     </style>
-    <script type="text/javascript">
-        function nTabs(thisObj,Num){
-            if(thisObj.className == "current")return;
-            var tabObj = thisObj.parentNode.id;
-            var tabList = document.getElementById(tabObj).getElementsByTagName("li");
-            for(i=0; i <tabList.length; i++)
-            {
-                if (i == Num)
-                {
-                    thisObj.className = "current";
-                    document.getElementById(tabObj+"_Content"+i).style.display = "block";
-                }else{
-                    tabList[i].className = "normal";
-                    document.getElementById(tabObj+"_Content"+i).style.display = "none";
-                }
-            }
-        }
-    </script>
+
 
 </head>
 
@@ -358,13 +341,13 @@
             <div>
                 <ul id="myTab3">
                     @foreach($cateData as $k=>$v)
-                    <li class="current" onClick="nTabs(this,{{$k}});">{{$v['c_cate_name']}}</li>
+                    <li @if($k==0) class="current" val="{{$v['c_cate_id']}}" @else class="norma3" @endif onClick="nTabs(this,{{$k}});">{{$v['c_cate_name']}}</li>
                     @endforeach
                 </ul>
                 <div class="clearh"></div>
                 @foreach($cateData as $k=>$v)
                 <div>
-                    <ul class="courseul" id="myTab3_Content.{{$k}}" style="display: block;">
+                    <ul class="courseul" id="myTab3_Content{{$k}}" @if($k==0) style="display: block;" @else style="display: none;" @endif >
                         @foreach($v['culum'] as $kk=>$vv)
                         <li>
                             <div class="courselist">
@@ -386,7 +369,7 @@
 
 
         </div>
-        <span class="morecourse"><a href="courselist.html" class="btnlink">更多课程</a></span>
+        <span class="morecourse"><a href="javascript:;" class="btnlink">更多课程</a></span>
 
     </div>
     <div class="foot">
@@ -456,4 +439,28 @@
             },
             600);
     });
+</script>
+<script type="text/javascript">
+    function nTabs(thisObj,Num){
+        if(thisObj.className == "current")return;
+        var tabObj = thisObj.parentNode.id;
+        var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+        for(i=0; i <tabList.length; i++)
+        {
+            if (i == Num)
+            {
+                thisObj.className = "current";
+                document.getElementById(tabObj+"_Content"+i).style.display = "block";
+            }else{
+                tabList[i].className = "normal";
+                document.getElementById(tabObj+"_Content"+i).style.display = "none";
+            }
+        }
+    }
+    $(".btnlink").click(function(){
+        var c_cate_id =$(".current").attr("val");
+        window.location.href="courselist?c_cate_id="+c_cate_id;
+
+//
+    })
 </script>

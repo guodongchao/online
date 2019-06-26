@@ -29,15 +29,13 @@ class indexController extends Controller
                  ->limit(4)->get()->toArray();
         foreach($cateData as $key=>$val){
 
-            $cateData[$key]['culum'] = culum::where("culum_show",1)->where("c_cate_id",$val['c_cate_id'])->limit(6)->get()->toArray();
+            $cateData[$key]['culum'] = culum::where("culum_show",1)->where("c_cate_id",$val['c_cate_id'])->limit(8)->get()->toArray();
             foreach($cateData[$key]['culum'] as $k=>$v){
                 $cateData[$key]['culum'][$k]['num'] = userculum::where("culum_id",$v['culum_id'])->count();
 
             }
         }
 
-
-        dump($cateData);
         return view("index.index.main",['cateData'=>$cateData]);
     }
     //退出
