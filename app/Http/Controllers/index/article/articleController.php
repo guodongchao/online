@@ -46,7 +46,7 @@ class articleController extends Controller
         }else{
             $mcate_id = "";
         }
-        
+
         $mationdata = $mationdata->join('mation_cate_rela','mation.mation_id','=','mation_cate_rela.mation_id')
             ->join('mation_cate','mation_cate_rela.mcate_id','=','mation_cate.mcate_id');
         $totalData = $mationdata->get();
