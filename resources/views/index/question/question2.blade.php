@@ -92,6 +92,7 @@
                 <li class="currnav"><a class="mb4" href="question2" target="main">模拟考试</a></li>
                 <li><a class="mb12" href="question3" target="main">考试记录</a></li>
                 <li><a class="mb2" href="question4" target="main" target="_blank">错题集</a></li>
+                <li><a class="mb1" href="question5" target="main" target="_blank">收藏集</a></li>
             </ul>
 
         </div>

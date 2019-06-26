@@ -43,9 +43,7 @@ Route::any('weinxin','admin\weixin\weiXinController@weinxin');//微信配置
 //后台登陆
 Route::any('login','admin\login\login@login');
 Route::any('loginDo','admin\login\login@login_do');
-Route::any('codelist/{sid}','admin\login\login@showCode');
-//退出
-Route::any('adminquit','admin\login\login@adminquit');
+Route::any('codelist','admin\login\login@showCode');
 //管理员添加
 Route::any('admin','admin\login\login@admin');
 Route::any('adminDo','admin\login\login@admin_add');
@@ -54,7 +52,7 @@ Route::any('admin_show','admin\login\login@admin_show');
 //管理员删除
 Route::any('admin_del','admin\login\login@admin_del');
 //管理员修改
-Route::any('admin_update','admin\login\login@admin_update');
+Route::any('admin_update/{admin_id}','admin\login\login@admin_update');
 Route::any('admin_update_do','admin\login\login@admin_update_do');
 //管理员角色展示
 Route::any('adminrole/{admin_id}','admin\login\login@adminrole');
@@ -66,9 +64,9 @@ Route::any('role_show','admin\role\RoleController@rolelist');
 //角色删除
 Route::any('role_del','admin\role\RoleController@roleDel');
 //角色修改
-Route::any('role_update','admin\role\RoleController@roleUpdate');
+Route::any('role_update/{role_id}','admin\role\RoleController@roleUpdate');
 Route::any('roleUpdateDo','admin\role\RoleController@roleUpdateDo');
-//角色权限展示
+//管理员角色展示
 Route::any('rolepower/{role_id}','admin\role\RoleController@rolePower');
 //权限添加
 Route::any('poweradd','admin\role\PowerController@powerAdd');
@@ -78,7 +76,7 @@ Route::any('powershow','admin\role\PowerController@powerlist');
 //权限删除
 Route::any('powerdel','admin\role\PowerController@powerDel');
 //权限修改
-Route::any('powerupdate','admin\role\PowerController@powerUpdate');
+Route::any('powerupdate/{power_id}','admin\role\PowerController@powerUpdate');
 Route::any('powerUpdateDo','admin\role\PowerController@powerUpdateDo');
 //后台首页
 Route::get('index','admin\index\index@index');
@@ -180,31 +178,19 @@ Route::any('uploadShiping','admin\shiping\shiping@uploadShiping');
 Route::any('upd','admin\shiping\shiping@upd');
 Route::any('hourInsert','admin\shiping\shiping@hourInsert');
 
-//小结执行添加
-Route::post('sectionInsert','admin\Mation\MationController@sectionInsert');
-//章节展示
-Route::get('chapterShow','admin\Mation\MationController@chapterShow');
-//小结添加页面
-Route::get('sectionAdd','admin\Mation\MationController@sectionAdd');
-//小结展示
-Route::get('sectionShow','admin\Mation\MationController@sectionShow');
-//章节删除
-Route::post('chapterDel','admin\Mation\MationController@chapterDel');
-//课时展示页面
-Route::get('hourShow','admin\Mation\MationController@hourShow');
 
+Route::post('sectionInsert','admin\Mation\MationController@sectionInsert');
+Route::get('chapterShow','admin\Mation\MationController@chapterShow');
+Route::get('sectionAdd','admin\Mation\MationController@sectionAdd');
+Route::get('sectionShow','admin\Mation\MationController@sectionShow');
+Route::post('chapterDel','admin\Mation\MationController@chapterDel');
+Route::get('hourShow','admin\Mation\MationController@hourShow');
 Route::get('hourAdd','admin\Mation\MationController@hourAdd');
-//小结删除
 Route::post('sectionDels','admin\Mation\MationController@sectionDels');
-//章节修改页面
 Route::get('chapterUpdate','admin\Mation\MationController@chapterUpdate');
-//章节执行修改
 Route::post('chapterUpdateDo','admin\Mation\MationController@chapterUpdateDo');
-//小节修改页面
 Route::get('sectionUpdate','admin\Mation\MationController@sectionUpdate');
-//小节执行修改
 Route::post('sectionUpdateDo','admin\Mation\MationController@sectionUpdateDo');
-//课时删除
 Route::post('hourDel','admin\Mation\MationController@hourDel');
 
 
@@ -282,6 +268,10 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
 
     Route::any('question4','index\question\questionController@question4');
     Route::any('question44','index\question\questionController@question44');
+
+    Route::any('question5','index\question\questionController@question5');
+    Route::any('question55','index\question\questionController@question55');
+    Route::any('question56','index\question\questionController@question56');
 
     //问答
     Route::any('comment','index\comment\commentController@comment');
