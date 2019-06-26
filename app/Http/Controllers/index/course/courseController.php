@@ -49,10 +49,8 @@ class courseController extends Controller
         return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time]);
     }
     public function coursecont1(Request $request){    //章节,问答,资料区
-<<<<<<< HEAD
         $u_id =$request->input("u_id",1);
         $culum_id =$request->input("culum_id",1);   //课程id
-=======
         $u_id =$request->session()->get('u_id');
         $culum_id =$request->input("culum_id");   //课程id
 //
@@ -74,7 +72,6 @@ class courseController extends Controller
     }
     public function coursecont2(Request $request){
         $culum_id =$request->input("culum_id");   //课程id
->>>>>>> zhaoyifeng
         $quest_id = $request->input("quest_id");    //查看问题的id
         if($quest_id){
             $data = Redis::lrange($quest_id,0,-1);
@@ -88,7 +85,6 @@ class courseController extends Controller
         if(!isset($arr)){
             $arr=[];
         }
-<<<<<<< HEAD
         $culumdata = culum::where('culum_id',$culum_id)
             ->join('teacher_details','culum.teacher_id','=','teacher_details.teacher_id')
             ->first()->toArray();
@@ -113,11 +109,8 @@ class courseController extends Controller
                 $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
             }
         }
-        dump($chapter);
+//        dump($chapter);
         return view("index.course.coursecont1",['chapter'=>$chapter,'culum_cate'=>$culum_cate,'culumdata'=>$culumdata,'data'=>$arr,'beforQuest_id'=>$quest_id]);
-=======
-        return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
->>>>>>> zhaoyifeng
     }
     public function courselist(Request $request){       //课程展示(主要查询分类)
         $data = CourseCate::where("c_status",1)->get()->toArray();
