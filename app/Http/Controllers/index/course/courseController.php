@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\index\course;
-
+use App\models\collect;
+use Storage;
 use App\models\notice;
 use App\models\section;
 use Illuminate\Http\Request;
@@ -97,7 +98,6 @@ class courseController extends Controller
         $c_cate_id=$request->input('c_cate_id');
         return view("index.course.courselist",['c_cate_id'=>$c_cate_id,'cateData'=>$sortData]);
     }
-
     public function courselistData(Request $request){       //课程展示(中间位置)
         $page = empty($request->input("page"))?1:$request->input("page");
         $pageSize = 3;
@@ -125,7 +125,6 @@ class courseController extends Controller
         return $content;
 
     }
-
     public function courseSearch(Request $request){       //课程搜索
         $page = empty($request->input("page"))?1:$request->input("page");
         $pageSize = 3;
@@ -155,11 +154,6 @@ class courseController extends Controller
         return $content;
 
     }
-
-
-
-
-
     //视频播放
     public function video(Request $request){
         return view("index.course.video");
@@ -205,11 +199,9 @@ class courseController extends Controller
         }
 
     }
-
     public function questSecord(Request $request){   //第二次问题查看
         $quest_id = $request->input("quest_id");
         $culum_id = $request->input("culum_id");
-//        $beforQuest_id = $request->input("beforQuest_id");
         $u_id = $request->input("u_id",1);
         if(!$quest_id){
             $strKey = "clum_$culum_id";  //第一层
@@ -221,10 +213,6 @@ class courseController extends Controller
 
             $data = Redis::lrange($secKey,0,-1);
         }
-
-
-//        dump($data);
-
         if($data) {
             foreach ($data as $value) {
 
@@ -233,11 +221,25 @@ class courseController extends Controller
         }else{
             $arr = [];
         }
-//        dump($arr);
-//        dump($questData);
         $view = view("index.course.courseAjax",['data'=>$arr,'quest'=>$questData,'quest_id'=>$quest_id]);
         $content = response($view)->getContent();
         return $content;
+    }
+    //头像上传
+    public function uploadAjax(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $fileCharater = $request->file('file');
+            if ($fileCharater->isValid()) {
+                $ext = $fileCharater->getClientOriginalExtension();// 文件后缀
+                $path = $fileCharater->getRealPath();//获取文件的绝对路径
+                $filename = date('Ymdhis') . '.' . $ext;//定义文件名
+                Storage::disk('public')->put($filename, file_get_contents($path));
+                $file_path = "/admin/uploads/" . $filename;
+            }
+        }
+        return json_encode($file_path);
+
     }
     //我的信息
     public function mycourse(){
@@ -246,7 +248,73 @@ class courseController extends Controller
             'u_id'=>$uid
         ];
         $img = user::where($where)->pluck('u_img')->toarray();
-        return view("index.course.mycourse",['img'=>$img[0]]);
+        $userWhere=[
+            'u_id'=>$uid,
+            'user_culum_status'=>1,
+            'user_culum_del'=>1
+        ];
+        $userCulum=userculum::where($userWhere)->pluck('culum_id')->toarray();
+        $Info1=[];
+        foreach($userCulum as $k=>$v){
+            $culumwhere=[
+                'culum_id'=>$v
+            ];
+            $culumInfo=culum::where($culumwhere)->first();
+            $dateinfo['culum_name']=$culumInfo->culum_name;
+            $dateinfo['culum_img']=$culumInfo->culum_img;
+            $Info1[]=$dateinfo;
+        }
+        $user2Where=[
+            'u_id'=>$uid,
+            'user_culum_status'=>2,
+            'user_culum_del'=>1
+        ];
+        $userCulum2=userculum::where($user2Where)->pluck('culum_id')->toarray();
+        $count=count($userCulum2);
+        $Info2=[];
+        foreach($userCulum2 as $k=>$v){
+            $culumwheres=[
+                'culum_id'=>$v
+            ];
+            $culumInfos=culum::where($culumwheres)->first();
+            $dateinfo2['culum_name']=$culumInfos->culum_name;
+            $dateinfo2['culum_img']=$culumInfos->culum_img;
+            $Info2[]=$dateinfo2;
+        }
+        $collectWhere=[
+            'u_id'=>$uid,
+            'collect_status'=>1,
+        ];
+        $userCollect=collect::where($collectWhere)->pluck('culum_id')->toarray();
+        $count=count($userCollect);
+        if($count==1){
+            $Collect=[];
+            $collectwhere=[
+                'culum_id'=>$userCollect[0]
+            ];
+            $collectInfo=culum::where($collectwhere)->first();
+            $date['culum_name']=$collectInfo->culum_name;
+            $date['culum_img']=$collectInfo->culum_img;
+            $Collect[]=$date;
+        }else{
+            $Collect=[];
+            foreach($userCollect as $k=>$v){
+                $collectwhere=[
+                    'culum_id'=>$v
+                ];
+                $collectInfo=culum::where($collectwhere)->first();
+                $date['culum_name']=$collectInfo->culum_name;
+                $date['culum_img']=$collectInfo->culum_img;
+                $Collect[]=$date;
+            }
+        }
+        $data=[
+            'img'=>$img[0],
+            'culumInfo'=>$Info1,
+            'culuminfo'=>$Info2,
+            'collectInfo'=>$Collect
+        ];
+        return view("index.course.mycourse",$data);
     }
     //修改密码
     public function myrepassword(){
@@ -289,6 +357,7 @@ class courseController extends Controller
         ];
         return view('index.course.mysetting',$data);
     }
+    //修改信息执行
     public function detailDo(Request $request)
     {
         $u_id = $request->input('u_id');
