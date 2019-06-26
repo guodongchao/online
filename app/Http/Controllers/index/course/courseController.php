@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\index\course;
 
+use App\models\notice;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ use App\models\admin\CourseCate;
 use App\models\culum;
 use App\models\userculum;
 use App\models\chapter;
+use App\models\hour;
 
 class courseController extends Controller
 {
@@ -20,16 +22,30 @@ class courseController extends Controller
         $culum_id = $request->input("culum_id");
         $culumdata = culum::where('culum_id',$culum_id)
             ->join('teacher_details','culum.teacher_id','=','teacher_details.teacher_id')
-            ->join('notice','culum.c_cate_id','=','notice.c_cate_id')
             ->first()->toArray();
         //课程目录
         $muludata = chapter::where('culum.culum_id',$culum_id)
             ->where('chapter_status',1)
             ->join('culum','chapter.culum_id','=','culum.culum_id')
             ->get()->toArray();
+        //课程公告
+        $c_cate_id = notice::where('n_status',1)->get(['c_cate_id','n_name'])->toArray();
+//        print_r($c_cate_id);exit;
+        $name = [];
+        foreach($c_cate_id as $k=>$v){
+            if(substr_count($v['c_cate_id'],$culumdata['c_cate_id'])>0){
+                $name[]['n_name'] = $v['n_name'];
+            }
+        }
         //总课时
-        
-        return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata]);
+        $data = hour::where('culum_id',$culum_id)->get(['culum_id'])->toarray();
+        $num = count($data);
+        //总分钟
+        $time = hour::where('culum_id',$culum_id)->pluck('show_time')->toarray();
+        $time = array_sum($time);
+//        print_r($time);
+//        exit;
+        return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time]);
     }
     public function coursecont1(Request $request){    //章节,问答,资料区
         $u_id =$request->input("u_id",1);
