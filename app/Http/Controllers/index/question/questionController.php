@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\models\admin\CourseCate;
 use App\models\question;
 use App\models\records;
+use App\models\mistake;
 use Illuminate\Support\Facades\Redis;
 class questionController extends Controller
 {
@@ -171,6 +172,7 @@ class questionController extends Controller
        // $u_id=1;
         $u_id=session('u_id');
         $key='examination';
+        $keys='examinations';
         $records='records';
         $type=$request->input('type');
         $c_id=$request->input('c_id');
@@ -204,10 +206,12 @@ class questionController extends Controller
         $res=Redis::zadd($records.$u_id,$c_id,$arr);
         if($res){
             Redis::del($key.$u_id.$c_id);
+            Redis::del($keys.$u_id.$c_id);
         }
         }
         if($type==2){
             Redis::del($key.$u_id.$c_id);
+            Redis::del($keys.$u_id.$c_id);
         }
     }
     public function question3(Request $request){
@@ -232,9 +236,42 @@ class questionController extends Controller
         return $info;
 
     }
-    public function question4(Request $request){
-        $arr=CourseCate::get();
+    public function question34(Request $request){
+        $u_id=session('u_id');
+        $q_id=$request->input('q_id');
+        $radio=$request->input('radio');
+        $arr=question::where(['q_id'=>$q_id])->first();
+        //$hidden=$request->input('hidden');
+        $where=[
+          'q_name'    =>$arr->q_name,
+          'q_result'=>$arr->q_result,
+          'q_answer'=>$arr->q_answer,
+          't_result'=>$radio,
+          'u_id'    =>$u_id,
+          'm_time'  =>time()
+        ];
+        $res=mistake::insert($where);
+    }
+    public function question4(){
+        $u_id=session('u_id');
+        $arr=mistake::where(['is_status'=>1,'u_id'=>$u_id])->paginate(5);
         return view("index.question.question4",['arr'=>$arr]);
+    }
+    public function question44(Request $request){
+        $m_id=$request->input('m_id');
+        $res=mistake::where(['m_id'=>$m_id])->update(['is_status'=>2]);
+        if($res){
+            $info=[
+                'error'=>0,
+                'msg'  =>"OK"
+            ];
+        }else{
+            $info=[
+                'error'=>5000,
+                'msg'  =>"NO"
+            ];
+        }
+        return $info;
     }
 
 }

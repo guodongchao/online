@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/member.css"/>
 <script src="js/jquery-1.8.0.min.js"></script>
 <link rel="stylesheet" href="css/tab.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/css/css.css" />
 <script src="js/jquery.tabs.js"></script>
 <script src="js/mine.js"></script>
 <script type="text/javascript">
@@ -49,7 +50,7 @@ $(function(){
 		<li><a class="mb3" href="question1" target="main">模拟练习</a></li>
 		<li><a class="mb4" href="question2" target="main">模拟考试</a></li>
 		<li><a class="mb12" href="question3" target="main">考试记录</a></li>
-        <li  class="currnav"><a class="mb2" href="question4" target="main" target="_blank">错题集</a></li>
+        <li class="currnav"><a class="mb2" href="question4" target="main" target="_blank">错题集</a></li>
    </ul>
    
     </div>
@@ -59,120 +60,36 @@ $(function(){
 
 
 	<div class="membcont">
-<h3 class="mem-h3">我的课程</h3>
-<div class="box demo2" style="width:820px;">
-			<ul class="tab_menu" style="margin-left:30px;">
-				<li class="current">学习中</li>
-				<li>已学完</li>
-				<li>收藏</li>
-			</ul>
-			<div class="tab_box">
-				<div>
-					<ul class="memb_course">
-                    	
-                        <li>
-                            <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
-                            <div class="mpp">
-                                <div class="lv" style="width:20%;"></div>
-                            </div>
-                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
-                            </div>
-                        </li>
-<li>
-                            <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
-                            <div class="mpp">
-                                <div class="lv" style="width:20%;"></div>
-                            </div>
-                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
-                            </div>
-                        </li>
-<li>
-                            <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
-                            <div class="mpp">
-                                <div class="lv" style="width:20%;"></div>
-                            </div>
-                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
-                            </div>
-                        </li>
-                        
-                        
-						
-                        
-                       
-                        <div style="height:10px;" class="clearfix"></div>
-                    </ul>
-                    
-				</div>
-				<div class="hide">
-					<div>
-					<ul class="memb_course">
-                    	
-                        <li>
-                            <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="coursecont" target="main" class="blacklink">会计基础</a></p>
-							<div class="mpp">
-                                <div class="lv" style="width:100%;"></div>
-                            </div>
-                            <p class="goon"><a href="coursecont" target="main"><span>查看课程</span></a></p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="coursecont" target="main" class="blacklink">会计基础</a></p>
-							<div class="mpp">
-                                <div class="lv" style="width:100%;"></div>
-                            </div>
-                            <p class="goon"><a href="coursecont" target="main"><span>查看课程</span></a></p>
-                            </div>
-                        </li>
-                        
-                       
-                        <div class="clearfix" style="height:10px;"></div>
-                    </ul>
-                    
-				</div>
-				</div>
-				<div class="hide">
-					<div>
-					<ul class="memb_course">                   	
-                        <li>
-                            <div class="courseli mysc">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg" class="mm"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
-                            <div class="mpp">
-                                <div class="lv" style="width:20%;"></div>
-                            </div>
-                            <p class="goon"><a href="#"><span>继续学习</span></a></p>
-							<div class="mask"><span class="qxsc"  title="移除收藏">▬</span></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="courseli mysc">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg" class="mm"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
-                            <div class="mpp">
-                                <div class="lv" style="width:20%;"></div>
-                            </div>
-                            <p class="goon"><a href="#"><span>继续学习</span></a></p>
-							<div class="mask"><span class="qxsc"  title="移除收藏">▬</span></div>
-                            </div>
-                        </li>                                     
-                        <div class="clearfix" style="height:10px;"></div>
-                    </ul>
-				</div>
-				</div>
-				
-			</div>
-		</div>
-</div>
+<h3 class="mem-h3">我的记录</h3>
+
+
+    <div class="conShow">
+        <table border="1" cellspacing="0" cellpadding="0">
+            <tr>
+                <td width="200px" class="tdColor tdC">ID</td>
+                <td width="200px" class="tdColor">题库名称</td>
+                <td width="200px" class="tdColor">选择答案</td>
+                <td width="200px" class="tdColor">正确答案</td>
+                <td width="200px" class="tdColor">你的答案</td>
+                <td width="200px" class="tdColor">添加时间</td>
+                <td width="200px" class="tdColor">操作</td>
+            </tr>
+            @foreach($arr as $k=>$v)
+                <tr>
+                    <td width="200px" class="tdColor tdC">{{$v['m_id']}}</td>
+                    <td width="200px" class="tdColor">{{$v['q_name']}}</td>
+                    <td width="200px" class="tdColor">{{$v['q_answer']}}</td>
+                    <td width="200px" class="tdColor">{{$v['q_result']}}</td>
+                    <td width="200px" class="tdColor">{{$v['t_result']}}</td>
+                    <td width="200px" class="tdColor">{{ date('Y-m-d H:i:s',$v['m_time']) }}</td>
+                    <td width="200px" class="tdColor"> <p class="goon"><a href="javascript:;" onclick="del({{$v['m_id']}})" target="main"><span>删除</span></a></p></td>
+                </tr>
+            @endforeach
+        </table>
+        <div class="pull-right">{{$arr->links()}}</div>
+    </div>
+
+    </div>
 
 
 <div class="clearh"></div>
@@ -218,3 +135,20 @@ $(function(){
 </body>
 
 <!-- InstanceEnd --></html>
+<script>
+    function del(m_id){
+        var data={
+            m_id:m_id
+        }
+        $.ajax({
+            type: 'post',
+            data: data,
+            url: '/index/question44',
+            dataType: 'json',
+            success: function (msg) {
+                alert(msg.msg)
+                window.location.reload();
+            }
+        })
+    }
+</script>
