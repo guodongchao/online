@@ -72,7 +72,7 @@
 	<h3 class="leftit">课程目录</h3>
     <dl class="mulu">
         @foreach($muludata as $k=>$v)
-    	<dt><a href="coursecont1" target="main" class="graylink">第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}</a></dt>
+    	<dt><a href="coursecont1?culum_id={{$culumdata['culum_id']}}" target="main" class="graylink">第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}</a></dt>
         <dd>{{$v['chapter_desc']}}</dd>
         @endforeach
     </dl>
