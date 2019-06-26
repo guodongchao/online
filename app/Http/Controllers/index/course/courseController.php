@@ -162,7 +162,17 @@ class courseController extends Controller
 
     //视频播放
     public function video(Request $request){
-        return view("index.course.video");
+        $culum_id =$request->input("culum_id",1);
+        $chapter=chapter::where('culum_id',$culum_id)->get()->toarray();
+        foreach($chapter as $k=>$v){
+            $chapter[$k]['section']=section::where('chapter_id',$v['chapter_id'])->select('section_id','section_name')->get()->toarray();
+        }
+        foreach ($chapter as $k=>$v){
+            foreach ($v['section'] as $kk=>$vv){
+                $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->get()->toarray();
+            }
+        }
+        return view("index.course.video",['chapter'=>$chapter]);
     }
     public function quest(Request $request){      //提出问题
         $u_id =$request->input("u_id",1);

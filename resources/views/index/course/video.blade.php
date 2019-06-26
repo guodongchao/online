@@ -96,30 +96,15 @@ $(function(){
 			<div class="tab_box tabcard">
 				<div style="padding-bottom:30px;">
 					<dl class="mulu noo1">
-                        <dt>第一章&nbsp;&nbsp;总论</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时1：会计的概念与目标1</strong></dd></a>
-                        <dd><i class="forwa fn"></i><strong class="cataloglink">课时2：会计的概念与目标2</strong></dd>
-
-                        <dt>第二章&nbsp;&nbsp;会计要素与会计等式</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计要素</strong></dd>
-                        <dd><i class="forwa ff"></i><strong class="cataloglink">课时1：会计要素与会计等式1</strong></dd>
-                        <dd><i class="forwa nn"></i><strong class="cataloglink">课时2：会计要素与会计等式2</strong></dd>
-
-						<dt>第三章&nbsp;&nbsp;总论</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时1：会计的概念与目标1</strong></dd></a>
-                        <dd><i class="forwa nn"></i><strong class="cataloglink">课时2：会计的概念与目标2</strong></dd>
-
-						<dt>第四章&nbsp;&nbsp;总论</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时1：会计的概念与目标1</strong></dd></a>
-                        <dd><i class="forwa nn"></i><strong class="cataloglink">课时2：会计的概念与目标2</strong></dd>
-
-						<dt>第五章&nbsp;&nbsp;总论</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时1：会计的概念与目标1</strong></dd></a>
-                        <dd><i class="forwa nn"></i><strong class="cataloglink">课时2：会计的概念与目标2</strong></dd>
+                        @foreach($chapter as $k=>$v)
+                        <dt>第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}</dt>
+                        @foreach($v['section'] as $kk=>$vv)
+						<dd class="smalltitle"><strong>第{{$kk}}节&nbsp;&nbsp;{{$vv['section_name']}}</strong></dd>
+                            @foreach($vv['hour'] as $kkk=>$vvv)
+                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时{{$kkk+1}}：{{$vvv['hour_name']}}</strong></dd></a>
+                            @endforeach
+                            @endforeach
+                        @endforeach
                    </dl>	
 				   <div class="clearh"></div>
 				</div>

@@ -119,7 +119,7 @@ $(function(){
                         <p></p>
 	                  </div>
                     <div class="c_eform">                      
-                        <textarea rows="7" class="pingjia_con" onblur="if (this.value =='') this.value='评价详细内容';this.className='pingjia_con'" onclick="if (this.value=='评价详细内容') this.value='';this.className='pingjia_con_on'">评价详细内容</textarea>
+                        <textarea rows="7" class="pingjia_con" onblur="if (this.value =='') this.value='评价详细内容';this.className='pingjia_con'" onclick="if (this.value=='评价详细内容') this.value='';this.className='pingjia_con_on'"></textarea>
                        <a href="#" class="fombtn">发布评论</a>
                        <div class="clearh"></div>
                     </div>
