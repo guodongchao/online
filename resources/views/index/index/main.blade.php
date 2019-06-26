@@ -363,20 +363,9 @@
                 </ul>
                 <div class="clearh"></div>
                 @foreach($cateData as $k=>$v)
-                    @foreach($v['culum'] as $kk=>$vv)
                 <div>
                     <ul class="courseul" id="myTab3_Content.{{$k}}" style="display: block;">
-                        <li>
-                            <div class="courselist">
-                                <img width="263" style="border-radius:3px 3px 0 0;" src="images/c1.jpg" >
-                                <p class="courTit">HTTP下载课程</p>
-                                <div class="gray">
-                                    <span>1小时前更新</span>
-                                    <span class="sp1">1255555人学习</span>
-                                    <div style="clear:both"></div>
-                                </div>
-                            </div>
-                        </li>
+                        @foreach($v['culum'] as $kk=>$vv)
                         <li>
                             <div class="courselist">
                                 <img width="263" style="border-radius:3px 3px 0 0;" src="/admin{{$vv['culum_img']}}" >
@@ -387,81 +376,12 @@
                                     <div style="clear:both"></div>
                                 </div>
                             </div>
-                        </li>.
+                        </li>
+                        @endforeach
                         <div class="clearh"></div>
                     </ul>
                 </div>
-                    @endforeach
                 @endforeach
-
-                {{--<div>--}}
-                    {{--<ul class="courseul" id="myTab3_Content2" style="display: none;">--}}
-                        {{--<li>--}}
-                            {{--<div class="courselist">--}}
-                                {{--<img width="263" style="border-radius:3px 3px 0 0;" src="images/c1.jpg" >--}}
-                                {{--<p class="courTit">HTTP下载课程</p>--}}
-                                {{--<div class="gray">--}}
-                                    {{--<span>1小时前更新</span>--}}
-                                    {{--<span class="sp1">1255555人学习</span>--}}
-                                    {{--<div style="clear:both"></div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<li>--}}
-                            {{--<div class="courselist">--}}
-                                {{--<img width="263" style="border-radius:3px 3px 0 0;" src="images/c1.jpg" >--}}
-                                {{--<p class="courTit">HTTP下载课程</p>--}}
-                                {{--<div class="gray">--}}
-                                    {{--<span>1小时前更新</span>--}}
-                                    {{--<span class="sp1">1255555人学习</span>--}}
-                                    {{--<div style="clear:both"></div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<li>--}}
-                            {{--<div class="courselist">--}}
-                                {{--<img width="263" style="border-radius:3px 3px 0 0;" src="images/c1.jpg" >--}}
-                                {{--<p class="courTit">HTTP下载课程</p>--}}
-                                {{--<div class="gray">--}}
-                                    {{--<span>1小时前更新</span>--}}
-                                    {{--<span class="sp1">1255555人学习</span>--}}
-                                    {{--<div style="clear:both"></div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<div class="clearh"></div>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-                {{--<div>--}}
-                    {{--<ul class="courseul" id="myTab3_Content3" style="display: none;">--}}
-                        {{--<li>--}}
-                            {{--<div class="courselist">--}}
-                                {{--<img width="263" style="border-radius:3px 3px 0 0;" src="images/c1.jpg" >--}}
-                                {{--<p class="courTit">HTTP下载课程</p>--}}
-                                {{--<div class="gray">--}}
-                                    {{--<span>1小时前更新</span>--}}
-                                    {{--<span class="sp1">1255555人学习</span>--}}
-                                    {{--<div style="clear:both"></div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<li>--}}
-                            {{--<div class="courselist">--}}
-                                {{--<img width="263" style="border-radius:3px 3px 0 0;" src="images/c1.jpg" >--}}
-                                {{--<p class="courTit">HTTP下载课程</p>--}}
-                                {{--<div class="gray">--}}
-                                    {{--<span>1小时前更新</span>--}}
-                                    {{--<span class="sp1">1255555人学习</span>--}}
-                                    {{--<div style="clear:both"></div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<div class="clearh"></div>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-
-
             <div class="line no"></div>
 
 
