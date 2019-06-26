@@ -23,9 +23,9 @@
 	<h3 class="righttit">全部资讯</h3>
     <div class="clearh"></div>
     <span class="bread nob">
-        <a class="fombtn cur" href="articlelist?mcate_id=" target="main">全部资讯</a>
+        <a  @if($mcate_id=="") class="fombtn cur" @else class="fombtn" @endif href="articlelist?mcate_id=" target="main">全部资讯</a>
         @foreach($catedata as $v)
-            <a class="fombtn" href="articlelist?mcate_id={{$v->mcate_id}}" target="main">{{$v->mcate_name}}</a>
+            <a  @if($mcate_id==$v->mcate_id) class="fombtn cur" @else class="fombtn" @endif href="articlelist?mcate_id={{$v->mcate_id}}" target="main">{{$v->mcate_name}}</a>
         @endforeach
         {{--<a class="fombtn" href="articlelist" target="main">考试指导</a>--}}
         {{--<a class="fombtn" href="articlelist" target="main">精彩活动</a>--}}
@@ -53,11 +53,6 @@
             @if($page>1)
            <a href="#" class="page-number" page="{{$page-1}}" >上一页</a>
             @endif
-           {{--<a href="#" class="page-number" target="main">1</a>--}}
-           {{--<a href="#" class="page-number pageractive" target="main">2</a>--}}
-           {{--<a href="#" class="page-number" target="main">3</a>--}}
-            {{--<a href="#" class="page-number" target="main">...</a>--}}
-            {{--<a href="#" class="page-number" target="main">10</a>--}}
             @if($page<$total)
            <a href="javascript:;" class="page-number" page = {{$page+1}} >下一页</a>
             @endif
@@ -151,6 +146,7 @@
 
 <!-- InstanceEnd --></html>
 <script>
+
     $(document).on("click",".page-number",function(){
 //    $(".page-number").click(function(){
         var mcate_id = $(this).parent().attr("mcate_id");
