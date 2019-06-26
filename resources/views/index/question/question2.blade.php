@@ -330,6 +330,7 @@
                    var namedis=''
                     _tr+= "<input type='hidden'name='hidden' value='"+value.q_result+"'>"+
                             "<input type='hidden'name='hiddens' value='"+msg.c_id+"'>"+
+                            "<input type='hidden'name='q_id' value='"+value.q_id+"'>"+
                             "<h3 id='progres'>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
                             "<h3 id='progress'class='yuan'>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
                             "<h3>题目:"+value.q_name+"</h3>"+
@@ -406,6 +407,22 @@
         }
         if(hidden!=radio){
             alert("笨蛋,错了吧!")
+            var q_id=$("input[name='q_id']").val();
+            var data={
+                q_id:q_id,
+                radio:radio,
+                hidden:hidden
+            }
+
+            $.ajax({
+                type: 'post',
+                data: data,
+                url: '/index/question34',
+                dataType: 'json',
+                success: function (msg) {
+
+                }
+            })
         }
         if(hidden==radio){
             alert("恭喜,答对了!")

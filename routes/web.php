@@ -256,13 +256,19 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     //题库
     Route::any('question1','index\question\questionController@question1');
     Route::any('question11','index\question\questionController@question11');
+
     Route::any('question2','index\question\questionController@question2');
     Route::any('question22','index\question\questionController@question22');
     Route::any('question23','index\question\questionController@question23');
     Route::any('question24','index\question\questionController@question24');
+
     Route::any('question3','index\question\questionController@question3');
     Route::any('question33','index\question\questionController@question33');
+    Route::any('question34','index\question\questionController@question34');
+
     Route::any('question4','index\question\questionController@question4');
+    Route::any('question44','index\question\questionController@question44');
+
     //问答
     Route::any('comment','index\comment\commentController@comment');
     Route::any('comment_do','index\comment\commentController@comment_do');
