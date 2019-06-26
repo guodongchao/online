@@ -40,19 +40,40 @@
 <h3 class="righttit" style="padding-left:50px;">在教课程</h3>
 <ul class="tcourseul">
 	@foreach($culum as $k=>$v)
+		@if(count($v['hour'])!=0)
 	<li>
 	    <span class="courseimg tcourseimg"><a href="coursecont" target="main" target="_blank"><img width="230" src="../admin/	{{$v['culum_img']}}"></a></span>
 	    <span class="tcoursetext">
 	       <h4><a href="coursecont" target="main" target="_blank" class="teatt">{{$v['culum_name']}}</a><a class="state">@if($v['culum_status']==1) 更新中 @else 已完结 @endif</a></h4>
 	       <p class="teadec">{{$v['culum_desc']}}</p>
-	       <p class="courselabel clock">30课时 600分钟<span class="courselabel student">2555人学习</span><span class="courselabel pingjia">评价：<img width="71" height="14" src="images/evaluate.png" data-bd-imgshare-binded="1"></span></p>
+	       <p class="courselabel clock"> {{count($v['hour'])}}课时  {{$v['hour_time']}}分钟 <span class="courselabel student">{{$v['num']}}人学习</span><span class="courselabel pingjia"><img width="71" height="14" src="images/evaluate.png" data-bd-imgshare-binded="1"></span></p>
 	   </span>
 	   <div style="height:0" class="clearh"></div>
 	</li>
+		@endif
 	@endforeach
 <div class="clearh"></div>
 </ul>
 </div>
+<div class="clearh"></div>
+<div class="tcourselist" >
+		<h3 class="righttit" style="padding-left:50px;">即将开课</h3>
+		<ul class="tcourseul">
+			@foreach($culum as $k=>$v)
+				@if(count($v['hour'])==0)
+					<li>
+						<span class="courseimg tcourseimg"><a href="coursecont" target="main" target="_blank"><img width="230" src="../admin/	{{$v['culum_img']}}"></a></span>
+						<span class="tcoursetext">
+					   <h4><a href="coursecont" target="main" target="_blank" class="teatt">{{$v['culum_name']}}</a></h4>
+					   <p class="teadec">{{$v['culum_desc']}}</p>
+	   </span>
+						<div style="height:0" class="clearh"></div>
+					</li>
+				@endif
+			@endforeach
+			<div class="clearh"></div>
+		</ul>
+	</div>
 
 
 

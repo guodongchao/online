@@ -34,7 +34,7 @@
 
         <ul class="sortul">
          @foreach($val['son'] as$k=>$v)
-            <li @if($k==0 && $key==0 )class="course_curr"@endif c_cate_id="{{$v['c_cate_id']}}"><a href="javascript:;" class="culum" >{{$v['c_cate_name']}}</a></li>
+            <li  @if(!empty($c_cate_id)) @if($c_cate_id==$v['c_cate_id']) class="course_curr"  @endif @else @if($k==0 && $key==0)class="course_curr"  @endif @endif c_cate_id="{{$v['c_cate_id']}}"><a href="javascript:;" class="culum" >{{$v['c_cate_name']}}</a></li>
          @endforeach
         </ul>
     <div class="clearh"></div>
