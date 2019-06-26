@@ -39,9 +39,9 @@
         <!--<p><a class="state end">完结</a></p>-->      
         <span class="coursebtn">
             @if($culumdata['culum_price']==0)
-                <a class="btnlink" href="coursecont1" target="main">加入学习</a>
+                <a class="btnlink" href="coursecont1?culum_id={{$culumdata['culum_id']}}" target="main">加入学习</a>
             @else
-                <a class="btnlink" href="coursecont1" target="main">{{$culumdata['culum_price']}}￥</a>
+                <a class="btnlink" href="coursecont1?culum_id={{$culumdata['culum_id']}}" target="main">{{$culumdata['culum_price']}}￥</a>
             @endif
             <a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a>
             <a class="codol sc" href="#">收藏课程</a></span>
