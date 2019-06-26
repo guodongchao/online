@@ -153,8 +153,9 @@
             var num=0;
             $("#video-active").on(
                 "timeupdate",
-                function(event){
-                    s_time=this.duration;
+                function(event) {
+                    s_time = this.duration;
+                    //当前播放时间 this.currentTime;
                     num++;
                     if(s_time>0&&num<2){
                         var hour_name = $('#title').val();

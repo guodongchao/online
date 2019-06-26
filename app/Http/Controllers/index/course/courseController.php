@@ -79,13 +79,13 @@ class courseController extends Controller
         ];
         $culum_cate=culum::where($where)->limit(3)->get()->toarray();
         //章节小节
-        $chapter=chapter::where('culum_id',$culum_id)->get()->toarray();
+        $chapter=chapter::where('culum_id',$culum_id)->where('chapter_status',1)->get()->toarray();
         foreach($chapter as $k=>$v){
-            $chapter[$k]['section']=section::where('chapter_id',$v['chapter_id'])->select('section_id','section_name')->get()->toarray();
+            $chapter[$k]['section']=section::where('chapter_id',$v['chapter_id'])->where('is_del',1)->select('section_id','section_name')->get()->toarray();
         }
         foreach ($chapter as $k=>$v){
             foreach ($v['section'] as $kk=>$vv){
-                $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->get()->toarray();
+                $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
             }
         }
         dump($chapter);
@@ -163,13 +163,13 @@ class courseController extends Controller
     //视频播放
     public function video(Request $request){
         $culum_id =$request->input("culum_id",1);
-        $chapter=chapter::where('culum_id',$culum_id)->get()->toarray();
+        $chapter=chapter::where('culum_id',$culum_id)->where('chapter_status',1)->get()->toarray();
         foreach($chapter as $k=>$v){
-            $chapter[$k]['section']=section::where('chapter_id',$v['chapter_id'])->select('section_id','section_name')->get()->toarray();
+            $chapter[$k]['section']=section::where('chapter_id',$v['chapter_id'])->where('is_del',1)->select('section_id','section_name')->get()->toarray();
         }
         foreach ($chapter as $k=>$v){
             foreach ($v['section'] as $kk=>$vv){
-                $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->get()->toarray();
+                $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
             }
         }
         return view("index.course.video",['chapter'=>$chapter]);
