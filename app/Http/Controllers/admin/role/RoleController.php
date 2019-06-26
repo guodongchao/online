@@ -100,15 +100,16 @@ class RoleController extends Controller
         }
     }
     //角色修改
-    public function roleUpdate($rode_id){
+    public function roleUpdate(Request $request){
+        $role_id=$request->input('role_id');
         $where=[
-            'role_id'=>$rode_id
+            'role_id'=>$role_id
         ];
         $powerInfo=rolepower::where($where)->pluck('power_id')->toarray();
         $infopower = power::all()->toarray();
         $powerdata=$this->getSon($infopower);
         $data=[
-            'role_id'=>$rode_id,
+            'role_id'=>$role_id,
             'powerdata'=>$powerdata,
             'powerinfo'=>$powerInfo
         ];

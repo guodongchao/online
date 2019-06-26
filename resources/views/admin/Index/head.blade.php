@@ -15,12 +15,10 @@
         <img class="headLogo" src="/img/headLogo.png" />
     </div>
     <div class="headR">
-        <p class="p1">欢迎，</p>
+        <p class="p1">欢迎，<?php echo session('admin_name')?></p>
         <p class="p2">
-            <a href="{:U('/System/changePwd')}" class="resetPWD"
-               target="main">重置密码</a>&nbsp;&nbsp;<a
-                    href="{:U('/System/exit')}" class="goOut"
-                    onclick="{if(confirm(&quot;您确定退出吗?&quot;)){return true;}return false;}">退出</a>
+            <a href="" class="resetPWD" target="_parent">重置密码</a>&nbsp;&nbsp;
+            <a href="/admin/adminquit" target="_parent">退出</a>
         </p>
     </div>
     <!-- onclick="{if(confirm(&quot;确定退出吗&quot;)){return true;}return false;}" -->

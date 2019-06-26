@@ -48,11 +48,13 @@ class shiping extends Controller
        $hour_name = $request->input('hour_name');
        $section_id = $request->input('section_id');
        $video_desc = $request->input('video_desc');
+       $show_time=trim($request->input('show_time'));
        $data = [
            'hour_name'=>$hour_name,
            'section_id'=>$section_id,
            'video_desc'=>$video_desc,
-           'create_time'=>time()
+           'create_time'=>time(),
+           'show_time'=>$show_time
        ];
        $res = hour::insert($data);
         if($res){
