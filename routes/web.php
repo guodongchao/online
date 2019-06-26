@@ -36,6 +36,7 @@
 //    })->name('info.users');
 //});
 //后台登陆
+
 Route::any('admin/login','admin\login\login@login');
 Route::any('admin/loginDo','admin\login\login@login_do');
 //生成验证码
@@ -262,6 +263,10 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
 
     Route::any('question4','index\question\questionController@question4');
     Route::any('question44','index\question\questionController@question44');
+
+    Route::any('question5','index\question\questionController@question5');
+    Route::any('question55','index\question\questionController@question55');
+    Route::any('question56','index\question\questionController@question56');
 
     //问答
     Route::any('comment','index\comment\commentController@comment');

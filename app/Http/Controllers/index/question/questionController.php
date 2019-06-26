@@ -8,6 +8,7 @@ use App\models\admin\CourseCate;
 use App\models\question;
 use App\models\records;
 use App\models\mistake;
+use App\models\collection;
 use Illuminate\Support\Facades\Redis;
 class questionController extends Controller
 {
@@ -252,7 +253,7 @@ class questionController extends Controller
         ];
         $res=mistake::insert($where);
     }
-    public function question4(){
+    public function question4(Request $request){
         $u_id=session('u_id');
         $arr=mistake::where(['is_status'=>1,'u_id'=>$u_id])->paginate(5);
         return view("index.question.question4",['arr'=>$arr]);
@@ -260,6 +261,65 @@ class questionController extends Controller
     public function question44(Request $request){
         $m_id=$request->input('m_id');
         $res=mistake::where(['m_id'=>$m_id])->update(['is_status'=>2]);
+        if($res){
+            $info=[
+                'error'=>0,
+                'msg'  =>"OK"
+            ];
+        }else{
+            $info=[
+                'error'=>5000,
+                'msg'  =>"NO"
+            ];
+        }
+        return $info;
+    }
+    public function question5(){
+        $u_id=session('u_id');
+        $arr=collection::where(['is_status'=>1,'u_id'=>$u_id])->get();
+        foreach($arr as $k=>$v){
+                $v->q_name=question::where(['q_id'=>$v->q_id])->value("q_name");
+                $v->q_answer=question::where(['q_id'=>$v->q_id])->value("q_answer");
+                $v->q_result=question::where(['q_id'=>$v->q_id])->value("q_result");
+                $v->c_cate_name=CourseCate::where(['c_cate_id'=>question::where(['q_id'=>$v->q_id])->value("q_class")])->value("c_cate_name");
+        }
+        $arr=$arr->toArray();
+        return view("index.question.question5",['arr'=>$arr]);
+    }
+    public function question55(Request $request){
+        $u_id=session("u_id");
+        $q_id=$request->input('q_id');
+        $where=[
+          'u_id'    =>$u_id,
+          'q_id'    =>$q_id,
+          'c_time'  =>time(),
+        ];
+        $arr=collection::where(['u_id'=>$u_id,'q_id'=>$q_id])->first();
+        if($arr){
+            $info=[
+                'error'=>5000,
+                'msg'  =>"请勿重复收藏"
+            ];
+        }else{
+            $res=collection::insert($where);
+            if($res){
+                $info=[
+                    'error'=>0,
+                    'msg'  =>"OK"
+                ];
+            }else{
+                $info=[
+                    'error'=>5000,
+                    'msg'  =>"NO"
+                ];
+            }
+        }
+
+        return $info;
+    }
+    public function question56(Request $request){
+        $c_id=$request->input('c_id');
+        $res=collection::where(['c_id'=>$c_id])->update(['is_status'=>2]);
         if($res){
             $info=[
                 'error'=>0,

@@ -50,6 +50,7 @@ $(function(){
 		<li><a class="mb4" href="question2" target="main">模拟考试</a></li>
 		<li><a class="mb12" href="question3" target="main">考试记录</a></li>
         <li><a class="mb2" href="question4" target="main" target="_blank">错题集</a></li>
+        <li><a class="mb1" href="question5" target="main" target="_blank">收藏集</a></li>
    </ul>
    
     </div>
@@ -212,6 +213,7 @@ $(function(){
                 $.each(msg.data,function(i,value){
                     _tr+= "<input type='hidden'name='hidden' value='"+value.q_result+"'>"+
                          "<input type='hidden'name='hiddens' value='"+msg.c_id+"'>"+
+                         "<p class='goon'><a href='javascript:;' onclick='collention("+value.q_id+")' target='main'><span>收藏该题</span></a></p>"+
                          "<h3>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
                          "<h3>题目:"+value.q_name+"</h3>"+
                          "<h3 id='box'>"+  $.each(value.q_answer,function(ii,values){
@@ -259,6 +261,21 @@ $(function(){
             alert("恭喜,答对了!")
         }
         check_begin(c_id,q_id)
+    }
+    function collention(q_id){
+        var data={
+            q_id:q_id
+        }
+        $.ajax({
+            type:'post',
+            data:data,
+            url:"/index/question55",
+            dataType:'json',
+            success:function(msg){
+                alert(msg.msg)
+            }
+
+        })
     }
 </script>
 <!-- InstanceEnd --></html>

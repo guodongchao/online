@@ -39,7 +39,7 @@ $(function(){
 <div class="coursecont">
 <div class="coursepic1">
    <div class="coursetitle1">
-    	<h2 class="courseh21">会计财经法规与会计职业道德</h2>
+    	<h2 class="courseh21">{{$culumdata['culum_name']}}</h2>
 		<div  style="margin-top:-40px;margin-right:25px;float:right;">
 		<div class="bdsharebuttonbox">
 			<a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
@@ -56,12 +56,12 @@ $(function(){
 		</div>
    </div>
    <div class="course_img1">
-	   <img src="images/c1.jpg" height="140">	   
+	   <img src="../admin{{$culumdata['culum_img']}}" height="140">
    </div>
    <div class="course_xq">
-       <span class="courstime1"><p>课时<br/><span class="coursxq_num">100课时</span></p></span>
-	   <span class="courstime1"><p>学习人数<br/><span class="coursxq_num">25987人</span></p></span>
-	   <span class="courstime1"><p style="border:none;">课程时长<br/><span class="coursxq_num">3小时20分</span></p></span>
+       <span class="courstime1"><p>课时<br/><span class="coursxq_num">{{$culumdata['hour']}}课时</span></p></span>
+	   <span class="courstime1"><p>学习人数<br/><span class="coursxq_num">{{$culumdata['num']}}人</span></p></span>
+	   <span class="courstime1"><p style="border:none;">课程时长<br/><span class="coursxq_num">{{$culumdata['time']}}分</span></p></span>
    </div>
    <div class="course_xq2">
       <a class="course_learn"  href="video" target="main">开始学习</a>
@@ -88,30 +88,22 @@ $(function(){
 			<div class="tab_box">
 				<div>
 					<dl class="mulu noo">
+                    @foreach($chapter as $k=>$v)
 					<div>
-                        <dt class="mulu_title"><span class="mulu_img"></span>第一章&nbsp;&nbsp;总论
+                        <dt class="mulu_title"><span class="mulu_img"></span>第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}
 						<span class="mulu_zd">+</span></dt>
 						<div class="mulu_con">
-							<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-							<a href="video" target="main"><dd><strong class="cataloglink">课时1：会计的概念与目标1</strong><i class="fini nn"></i></dd></a>
-							<a href="video" target="main"><dd><strong class="cataloglink">课时2：会计的概念与目标2</strong><i class="fini fn"></i></dd></a>
-							<dd class="smalltitle"><strong>第二节&nbsp;&nbsp;会计的职能与方法</strong></dd>
-							<a href="video" target="main"><dd><strong class="cataloglink">课时1：会计的职能与方法1</strong><i class="fini nn"></i></dd></a>
-							<a href="video" target="main"><dd><strong class="cataloglink">课时2：会计的职能与方法2</strong><i class="fini fn"></i></dd></a>
-							<a href="video" target="main"><dd><strong class="cataloglink">课时1：会计的职能与方法3</strong><i class="fini ff"></i></dd></a>
+                            @foreach($v['section'] as $kk=>$vv)
+							<dd class="smalltitle"><strong>第{{$kk+1}}节&nbsp;&nbsp;{{$vv['section_name']}}</strong></dd>
+                            @foreach($vv['hour'] as $kkk=>$vvv)
+							<a href="video" target="main"><dd><strong class="cataloglink">课时{{$kkk+1}}：{{$vvv['hour_name']}}</strong><i class="fini nn"></i></dd></a>
+                            @endforeach
+                            @endforeach
 						</div>
 					</div>
-					<div>
-                        <dt class="mulu_title"><span class="mulu_img"></span>第二章&nbsp;&nbsp;会计要素与会计等式
-						<span class="mulu_zd">+</span></dt>
-						<div class="mulu_con">
-							<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计要素</strong></dd>
-							<a href="video" target="main"><dd><strong class="cataloglink">课时1：会计要素与会计等式1</strong><i class="fini nn"></i></dd></a>
-							<a href="video" target="main"><dd><strong class="cataloglink">课时2：会计要素与会计等式2</strong><i class="fini nn"></i></dd></a>
-						</div>
-					</div>
-                   </dl>                   
-				</div>
+					@endforeach
+                    </dl>
+                </div>
 				<div class="hide">
 					<div>
                     <div id="star">
@@ -211,11 +203,11 @@ $(function(){
     <h3 class="righttit">授课讲师</h3>
     <div class="teacher">
     <div class="teapic ppi">
-    <a href="teacher" target="main" target="_blank"><img src="images/teacher.png" width="80" class="teapicy" title="张民智"></a>
-     <h3 class="tname"><a href="teacher" target="main" class="peptitle" target="_blank">张民智</a><p style="font-size:14px;color:#666">会计讲师</p></h3>
+    <a href="teacher" target="main" target="_blank"><img src="../admin{{$culumdata['teacher_img']}}" width="80" class="teapicy" title=""></a>
+     <h3 class="tname"><a href="teacher" target="main" class="peptitle" target="_blank">{{$culumdata['teacher_name']}}</a><p style="font-size:14px;color:#666">{{$culumdata['teacher_type']}}</p></h3>
     </div>
     <div class="clearh"></div>
-    <p>十年以上Linux从业经验， 培训经验超过八年。在各 个知名培训机构做过金牌 讲师、学科负责人，培训 学员过万人。曾获红帽认 证讲师，微软认证讲师等 资质认证。教学以逻辑性 强、教学细致、知识点准 确著称。</p>
+    <p>{{$culumdata['teacher_desc']}}</p>
     </div>
     </div>
 </div>
@@ -239,21 +231,13 @@ $(function(){
     <div class="cr1">
     <h3 class="righttit">相关课程</h3>
     <div class="teacher">
+        @foreach($culum_cate as $k=>$v)
     <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c1.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="peptitle" target="_blank">财经法规与财经职业道德</a></h3>
+        <a href="#"  target="_blank"><img src="../admin{{$v['culum_img']}}" height="60" title="{{$v['culum_name']}}"></a>
+        <h3 class="courh3"><a href="coursecont?culum_id={{$v['culum_id']}}" class="peptitle" target="_blank">{{$v['culum_name']}}</a></h3>
     </div>
     <div class="clearh"></div>
-    <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c2.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="peptitle" target="_blank">财经法规与财经职业道德</a></h3>
-    </div>
-    <div class="clearh"></div>
-    <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c3.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="peptitle" target="_blank">财经法规与财经职业道德</a></h3>
-    </div>
-    <div class="clearh"></div>
+        @endforeach
     </div>
     </div>
 </div>

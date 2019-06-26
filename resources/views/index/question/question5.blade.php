@@ -50,8 +50,8 @@ $(function(){
 		<li><a class="mb3" href="question1" target="main">模拟练习</a></li>
 		<li><a class="mb4" href="question2" target="main">模拟考试</a></li>
 		<li><a class="mb12" href="question3" target="main">考试记录</a></li>
-        <li class="currnav"><a class="mb2" href="question4" target="main" target="_blank">错题集</a></li>
-        <li><a class="mb1" href="question5" target="main" target="_blank">收藏集</a></li>
+        <li><a class="mb2" href="question4" target="main" target="_blank">错题集</a></li>
+        <li class="currnav"><a class="mb1" href="question5" target="main" target="_blank">收藏集</a></li>
    </ul>
    
     </div>
@@ -61,33 +61,31 @@ $(function(){
 
 
 	<div class="membcont">
-<h3 class="mem-h3">我的记录</h3>
+<h3 class="mem-h3">我的收藏</h3>
 
 
     <div class="conShow">
         <table border="1" cellspacing="0" cellpadding="0">
             <tr>
                 <td width="200px" class="tdColor tdC">ID</td>
+                <td width="200px" class="tdColor">题库分类</td>
                 <td width="200px" class="tdColor">题库名称</td>
                 <td width="200px" class="tdColor">选择答案</td>
-                <td width="200px" class="tdColor">正确答案</td>
-                <td width="200px" class="tdColor">你的答案</td>
-                <td width="200px" class="tdColor">添加时间</td>
+                <td width="200px" class="tdColor">收藏时间</td>
                 <td width="200px" class="tdColor">操作</td>
             </tr>
             @foreach($arr as $k=>$v)
                 <tr>
-                    <td width="200px" class="tdColor tdC">{{$v['m_id']}}</td>
+                    <td width="200px" class="tdColor tdC">{{$v['c_id']}}</td>
+                    <td width="200px" class="tdColor">{{$v['c_cate_name']}}</td>
                     <td width="200px" class="tdColor">{{$v['q_name']}}</td>
                     <td width="200px" class="tdColor">{{$v['q_answer']}}</td>
-                    <td width="200px" class="tdColor">{{$v['q_result']}}</td>
-                    <td width="200px" class="tdColor">{{$v['t_result']}}</td>
-                    <td width="200px" class="tdColor">{{ date('Y-m-d H:i:s',$v['m_time']) }}</td>
-                    <td width="200px" class="tdColor"> <p class="goon"><a href="javascript:;" onclick="del({{$v['m_id']}})" target="main"><span>删除</span></a></p></td>
+                    <td width="200px" class="tdColor">{{ date('Y-m-d H:i:s',$v['c_time']) }}</td>
+                    <td width="200px" class="tdColor"> <p class="goon"><a href="javascript:;" onclick="del({{$v['c_id']}})" target="main"><span>删除</span></a></p></td>
                 </tr>
             @endforeach
         </table>
-        <div class="pull-right">{{$arr->links()}}</div>
+
     </div>
 
     </div>
@@ -137,14 +135,14 @@ $(function(){
 
 <!-- InstanceEnd --></html>
 <script>
-    function del(m_id){
+    function del(c_id){
         var data={
-            m_id:m_id
+            c_id:c_id
         }
         $.ajax({
             type: 'post',
             data: data,
-            url: '/index/question44',
+            url: '/index/question56',
             dataType: 'json',
             success: function (msg) {
                 alert(msg.msg)
