@@ -48,10 +48,28 @@ class courseController extends Controller
         return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time]);
     }
     public function coursecont1(Request $request){    //章节,问答,资料区
-        $u_id =$request->input("u_id",1);
-        $culum_id =$request->input("culum_id",1);   //课程id
-        $quest_id = $request->input("quest_id");    //查看问题的id
+        $u_id =$request->session()->get('u_id');
+        $culum_id =$request->input("culum_id");   //课程id
+//
+        if(empty($u_id)){
+            return json_encode(['code'=>1]);
+        }
+        $where = [
+            'u_id'=>$u_id,
+            'culum_id'=>$culum_id
+        ];
+        $usernaem = DB::table('user_culum')->where($where)->first();
+//        var_dump($usernaem);exit;
+        if(empty($usernaem)){
+            return json_encode(['code'=>2]);
+        }
 
+        return json_encode(['code'=>3,'culum_id'=>$culum_id]);
+//        return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
+    }
+    public function coursecont2(Request $request){
+        $culum_id =$request->input("culum_id");   //课程id
+        $quest_id = $request->input("quest_id");    //查看问题的id
         if($quest_id){
             $data = Redis::lrange($quest_id,0,-1);
 
@@ -67,7 +85,6 @@ class courseController extends Controller
         if(!isset($arr)){
             $arr=[];
         }
-
         return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
     public function courselist(Request $request){       //课程展示(主要查询分类)

@@ -39,9 +39,9 @@
         <!--<p><a class="state end">完结</a></p>-->      
         <span class="coursebtn">
             @if($culumdata['culum_price']==0)
-                <a class="btnlink" href="coursecont1?culum_id={{$culumdata['culum_id']}}" target="main">加入学习</a>
+                <span class="btnlink btn">加入学习</span>
             @else
-                <a class="btnlink" href="coursecont1?culum_id={{$culumdata['culum_id']}}" target="main">{{$culumdata['culum_price']}}￥</a>
+                <span class="btnlink btn">{{$culumdata['culum_price']}}￥</span>
             @endif
             <a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a>
             <a class="codol sc" href="#">收藏课程</a></span>
@@ -63,7 +63,7 @@
     </div>
     <div class="clearh"></div>
 </div>
-
+    <input type="hidden" id="gaeg" value="{{$culumdata['culum_id']}}">
 <div class="clearh"></div>
 <div class="coursetext">
 	<h3 class="leftit">课程简介</h3>
@@ -72,7 +72,7 @@
 	<h3 class="leftit">课程目录</h3>
     <dl class="mulu">
         @foreach($muludata as $k=>$v)
-    	<dt><a href="coursecont1?culum_id={{$culumdata['culum_id']}}" target="main" class="graylink">第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}</a></dt>
+    	<dt><a href="#" target="main" class="graylink btn">第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}</a></dt>
         <dd>{{$v['chapter_desc']}}</dd>
         @endforeach
     </dl>
@@ -177,3 +177,55 @@
 </body>
 
 <!-- InstanceEnd --></html>
+<script src="layui/layui.js"></script>
+<script>
+    $(function(){
+        layui.use(['layer','layedit'], function() {
+            var layer = layui.layer;
+            var layedit = layui.layedit;
+
+            $('.btn').click(function(){
+                var culum_id = $('#gaeg').val();
+                $.post(
+                    'coursecont1',
+                    {culum_id:culum_id},
+                    function(res){
+                        if(res.code==1) {
+                            layer.open({
+                                type:0,
+                                content:'还未登录，未登录',
+                                btn:['登录','取消'],
+                                btn1:function(){
+                                    location.href="login";
+                                    return true;
+                                },
+                                btn2:function(){
+//                                location.href="login";
+                                    return true;
+                                }
+
+                            })
+                        }else if(res.code==2){
+                            layer.open({
+                                type:0,
+                                content:'是否确认支付',
+                                btn:['确定','取消'],
+                                btn1:function(){
+                                    location.href="login";
+                                    return true;
+                                },
+                                btn2:function(){
+//                                location.href="login";
+                                    return true;
+                                }
+
+                            })
+                        }else{
+                            location.href="coursecont2?culum_id="+res.culum_id;
+                        }
+                    },'json'
+                )
+            })
+        })
+    })
+</script>
