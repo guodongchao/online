@@ -11,14 +11,25 @@ use Illuminate\Support\Facades\Redis;
 use App\models\admin\CourseCate;
 use App\models\culum;
 use App\models\userculum;
+use App\models\chapter;
 
 class courseController extends Controller
 {
     public function coursecont(Request $request){ //详细课程介绍
         //接课程的id
         $culum_id = $request->input("culum_id");
-
-        return view("index.course.coursecont");
+        $culumdata = culum::where('culum_id',$culum_id)
+            ->join('teacher_details','culum.teacher_id','=','teacher_details.teacher_id')
+            ->join('notice','culum.c_cate_id','=','notice.c_cate_id')
+            ->first()->toArray();
+        //课程目录
+        $muludata = chapter::where('culum.culum_id',$culum_id)
+            ->where('chapter_status',1)
+            ->join('culum','chapter.culum_id','=','culum.culum_id')
+            ->get()->toArray();
+        //总课时
+        
+        return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata]);
     }
     public function coursecont1(Request $request){    //章节,问答,资料区
         $u_id =$request->input("u_id",1);
