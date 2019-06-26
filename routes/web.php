@@ -41,13 +41,14 @@ Route::any('admin/login','admin\login\login@login');
 Route::any('admin/loginDo','admin\login\login@login_do');
 //生成验证码
 Route::any('admin/codelist/{sid}','admin\login\login@showCode');
-//后台首页
-Route::get('admin/index','admin\index\index@index');
-Route::get('admin/left','admin\index\index@left');
-Route::get('admin/head','admin\index\index@head');
-Route::get('admin/main','admin\index\index@main');
+
 
 Route::group(['prefix'=>'admin','middleware' =>['rbac']],function () {
+    //后台首页
+    Route::get('index','admin\index\index@index');
+    Route::get('left','admin\index\index@left');
+    Route::get('head','admin\index\index@head');
+    Route::get('main','admin\index\index@main');
 
     Route::any('weinxin','admin\weixin\weiXinController@weinxin');//微信配置
     //退出
