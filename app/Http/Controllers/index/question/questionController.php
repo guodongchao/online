@@ -21,6 +21,13 @@ class questionController extends Controller
 //        $u_id=session('u_id');
 //        $u_id=1;
         $u_id=session('u_id');
+        if(empty($u_id)){
+            $info=[
+                'error'=>5000,
+                'msg'   =>'请先登录'
+            ];
+            return $info;
+        }
         $c_id=$request->input('c_id');
         $q_id=$request->input('q_id');
         $key='question';
@@ -72,7 +79,9 @@ class questionController extends Controller
             'data'=>$data,
             'num' =>$num,
             "q_id"=>$q_id+1,
-            "c_id"=>$c_id
+            "c_id"=>$c_id,
+            'error'=>0,
+            'msg'   =>'OK'
         ];
 
         return $info;
@@ -84,6 +93,13 @@ class questionController extends Controller
     public function question22(Request $request){
         //$u_id=1;
         $u_id=session('u_id');
+        if(empty($u_id)){
+            $info=[
+                'error'=>5000,
+                'msg'   =>'请先登录'
+            ];
+            return $info;
+        }
         $c_id=$request->input('c_id');
         $q_id=$request->input('q_id');
 
@@ -138,7 +154,9 @@ class questionController extends Controller
             'data'=>$data,
             'num' =>$num,
             "q_id"=>$q_id+1,
-            "c_id"=>$c_id
+            "c_id"=>$c_id,
+            'error'=>0,
+            'msg'   =>'OK'
         ];
 
         return $info;
