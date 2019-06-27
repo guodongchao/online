@@ -61,7 +61,7 @@ $(function(){
 
 
 	<div class="membcont">
-<h3 class="mem-h3">我的记录</h3>
+<h3 class="mem-h3">错题集</h3>
 
 
     <div class="conShow">
