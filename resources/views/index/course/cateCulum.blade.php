@@ -1,7 +1,7 @@
 @foreach($data as $key=>$val)
     <li>
         <div class="courselist">
-            <a href="coursecont?culum_id={{$val->culum_id}}" target="main" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="../admin{{$val->culum_img}}" title="{{$val->culum_name}}"></a>
+            <a href="coursecont?culum_id={{$val->culum_id}}" target="main" target="_blank"><img style="border-radius:3px 3px 0 0;" width="240" src="../admin/{{$val->culum_img}}" title="{{$val->culum_name}}"></a>
             <p class="courTit"><a href="coursecont?culum_id={{$val->culum_id}}" target="main" target="_blank">{{$val->culum_name}}</a></p>
             <div class="gray">
                 <span>{{$val->culum_hours}}课时</span>

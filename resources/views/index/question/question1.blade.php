@@ -60,13 +60,13 @@ $(function(){
 
 
 	<div class="membcont">
-<h3 class="mem-h3">我的课程</h3>
+<h3 class="mem-h3">模拟练习</h3>
 <div class="box demo2" style="width:820px;">
-			<ul class="tab_menu" style="margin-left:30px;">
-				<li class="current">学习中</li>
-				<li>已学完</li>
-				<li>收藏</li>
-			</ul>
+			{{--<ul class="tab_menu" style="margin-left:30px;">--}}
+				{{--<li class="current">学习中</li>--}}
+				{{--<li>已学完</li>--}}
+				{{--<li>收藏</li>--}}
+			{{--</ul>--}}
 			<div class="tab_box" id="test">
 				<div>
 					<ul class="memb_course">
@@ -210,6 +210,10 @@ $(function(){
             url:'/index/question11',
             dataType:'json',
             success:function(msg){
+                if(msg.error==5000){
+                    alert(msg.msg);
+                    return false;
+                }
                 $.each(msg.data,function(i,value){
                     _tr+= "<input type='hidden'name='hidden' value='"+value.q_result+"'>"+
                          "<input type='hidden'name='hiddens' value='"+msg.c_id+"'>"+

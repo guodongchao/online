@@ -102,13 +102,13 @@
 
     <input type="hidden" id="score" value="0">
     <div class="membcont">
-        <h3 class="mem-h3">我的课程</h3>
+        <h3 class="mem-h3">模拟考试</h3>
         <div class="box demo2" style="width:820px;">
-            <ul class="tab_menu" style="margin-left:30px;">
-                <li class="current">学习中</li>
-                <li>已学完</li>
-                <li>收藏</li>
-            </ul>
+            {{--<ul class="tab_menu" style="margin-left:30px;">--}}
+                {{--<li class="current">学习中</li>--}}
+                {{--<li>已学完</li>--}}
+                {{--<li>收藏</li>--}}
+            {{--</ul>--}}
             <div id="remainTime" style="font-size:20px;font-weight:800;color:#FF9900" align="right"></div>
             <input type='hidden'name='num' value='10'>
             <input type='hidden'name='q_id' value='1'>
@@ -270,7 +270,7 @@
     }
     function check_begin(c_id,q_id){
         if(q_id==0){
-          //  alert(q_id)
+           // alert(q_id)
             check_time()
         }
         var _tr='';
@@ -327,6 +327,10 @@
             url:'/index/question22',
             dataType:'json',
             success:function(msg){
+                if(msg.error==5000){
+                    alert(msg.msg);
+                    return false;
+                }
                 $.each(msg.data,function(i,value){
                    var namedis=''
                     _tr+= "<input type='hidden'name='hidden' value='"+value.q_result+"'>"+
@@ -368,7 +372,6 @@
                         $(this).css('color','red');
                     }
                 })
-
                 if(msg.q_id==1){
                     $('#top').hide();
                 }
@@ -414,7 +417,7 @@
                 radio:radio,
                 hidden:hidden
             }
-
+        alert(radio)
             $.ajax({
                 type: 'post',
                 data: data,
