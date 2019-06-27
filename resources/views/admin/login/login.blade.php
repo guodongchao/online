@@ -68,8 +68,6 @@
             var admin_pwd=$('#admin_pwd').val();
             var sid = $('#sid').val();
             var code = $('#code').val();
-            console.log(sid)
-             console.log(code)
             $.ajax({
                 url:'/admin/loginDo',
                 data:{sid:sid,code:code,admin_name:admin_name,admin_pwd:admin_pwd},

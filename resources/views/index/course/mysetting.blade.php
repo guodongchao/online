@@ -35,7 +35,8 @@
             <div class="bbD">
                 <div class="bbDd">
                     <div class="bbDImg">+</div>
-                    <input type="hidden" class="uplo" value="">
+                    <input type="hidden" class="uplo" value="{{$userInfo['u_img']}}">
+                    {{--<img src="{{$userInfo['u_img']}}" width="30px" height="30px">--}}
                     <input type="file" class="file" id="file" name="file" />
                 </div>
             </div>
@@ -154,7 +155,7 @@
     $("#file").change(function(){
         $.ajaxFileUpload({
             type : "post",          //上传类型
-            url: '/admin/uploadajax',     //用于文件上传的服务器端请求地址
+            url: '/index/headajax',     //用于文件上传的服务器端请求地址
             secureuri: false,   //是否需要安全协议，一般设置为false
             fileElementId: 'file',  //文件上传域的ID
             dataType: 'json',   //返回值类型 一般设置为json

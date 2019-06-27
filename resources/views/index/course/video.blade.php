@@ -96,30 +96,15 @@ $(function(){
 			<div class="tab_box tabcard">
 				<div style="padding-bottom:30px;">
 					<dl class="mulu noo1">
-                        <dt>第一章&nbsp;&nbsp;总论</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时1：会计的概念与目标1</strong></dd></a>
-                        <dd><i class="forwa fn"></i><strong class="cataloglink">课时2：会计的概念与目标2</strong></dd>
-
-                        <dt>第二章&nbsp;&nbsp;会计要素与会计等式</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计要素</strong></dd>
-                        <dd><i class="forwa ff"></i><strong class="cataloglink">课时1：会计要素与会计等式1</strong></dd>
-                        <dd><i class="forwa nn"></i><strong class="cataloglink">课时2：会计要素与会计等式2</strong></dd>
-
-						<dt>第三章&nbsp;&nbsp;总论</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时1：会计的概念与目标1</strong></dd></a>
-                        <dd><i class="forwa nn"></i><strong class="cataloglink">课时2：会计的概念与目标2</strong></dd>
-
-						<dt>第四章&nbsp;&nbsp;总论</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时1：会计的概念与目标1</strong></dd></a>
-                        <dd><i class="forwa nn"></i><strong class="cataloglink">课时2：会计的概念与目标2</strong></dd>
-
-						<dt>第五章&nbsp;&nbsp;总论</dt>
-						<dd class="smalltitle"><strong>第一节&nbsp;&nbsp;会计的概念与目标</strong></dd>
-                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时1：会计的概念与目标1</strong></dd></a>
-                        <dd><i class="forwa nn"></i><strong class="cataloglink">课时2：会计的概念与目标2</strong></dd>
+                        @foreach($chapter as $k=>$v)
+                        <dt>第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}</dt>
+                        @foreach($v['section'] as $kk=>$vv)
+						<dd class="smalltitle"><strong>第{{$kk}}节&nbsp;&nbsp;{{$vv['section_name']}}</strong></dd>
+                            @foreach($vv['hour'] as $kkk=>$vvv)
+                        <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时{{$kkk+1}}：{{$vvv['hour_name']}}</strong></dd></a>
+                            @endforeach
+                            @endforeach
+                        @endforeach
                    </dl>	
 				   <div class="clearh"></div>
 				</div>
@@ -138,20 +123,21 @@ $(function(){
 					<div style="padding-left:15px;">                   
                     <div class="c_eform veform">
                     <div class="clearh" ></div>
-                        <input class="inputitle pingjia_con" type="text"  value="请输入问题标题" onblur="if (this.value =='') this.value='请输入问题标题';this.className='inputitle pingjia_con'" onclick="if (this.value=='请输入问题标题') this.value='';this.className='inputitle pingjia_con_on'"/>
-                        <textarea rows="7" class="pingjia_con" style="width:90%;"  onblur="if (this.value =='') this.value='请输入问题的详细内容';this.className='pingjia_con'" onclick="if (this.value=='请输入问题的详细内容') this.value='';this.className='pingjia_con_on'"></textarea><br/>
-                       <a href="#" class="fombtn" style="margin-right:30px;">发布</a>
+                        {{--<input class="inputitle pingjia_con" type="text"  value="请输入问题标题" onblur="if (this.value =='') this.value='请输入问题标题';this.className='inputitle pingjia_con'" onclick="if (this.value=='请输入问题标题') this.value='';this.className='inputitle pingjia_con_on'"/>--}}
+                        {{--<textarea rows="5" class="pingjia_con quest" style="width:90%;"  onblur="if (this.value =='') this.value='请输入问题的详细内容';this.className='pingjia_con'" onclick="if (this.value=='请输入问题的详细内容') this.value='';this.className='pingjia_con_on'"></textarea><br/>--}}
+                        <textarea rows="5" class="pingjia_con" id="quest" style="width:85%;" ></textarea><br/>
+                       <a href="#" class="fombtn sw" style="margin-right:30px;">发布</a>
                        <div class="clearh"></div>
                     </div>
-					<ul class="evalucourse" style="width:280px;">
+					<ul class="evalucourse" style="width:270px;">
+						{{--聊天内容--}}
                     	<li>
-                        	<p class="vptext"><a target="_blank" class="peptitle" href="#">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>         <p class="peptime pswer"><span style="float:left;"><b class="coclass">候候&nbsp;&nbsp;</b>发表于 2015-05-8 </span><span class="pepask" style="float:right;">回答(<strong style="color:#3eb0e0;"><a href="#" class="bluelink" target="_blank">10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;浏览(<strong style="color:#3eb0e0;"><a href="#" class="bluelink" target="_blank">10</a></strong>)</span>					
-                            </p>                           
+                        	<p class="vptext" style="height:0;padding-bottom:25%" ><a target="_blank" class="peptitle" href="#">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>         <p class="peptime pswer"><span style="float:left;"><b class="coclass">候候&nbsp;&nbsp;</b></span>
+
+                            </p>
                         </li>
-                        <li>
-                        	<p class="vptext"><a target="_blank" class="peptitle" href="#">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>         <p class="peptime pswer"><span style="float:left;"><b class="coclass">候候&nbsp;&nbsp;</b>发表于 2015-05-8 </span><span class="pepask" style="float:right;">回答(<strong style="color:#3eb0e0;"><a href="#" class="bluelink" target="_blank">10</a></strong>)&nbsp;&nbsp;&nbsp;&nbsp;浏览(<strong style="color:#3eb0e0;"><a href="#" class="bluelink" target="_blank">10</a></strong>)</span>					
-                            </p>                           
-                        </li>                       
+
+
                     </ul>
                     
 				</div>
@@ -170,3 +156,77 @@ $(function(){
     </div>
 </body>
 </html>
+<script>
+	websocket = null;
+	u_name = "张三";
+	$(document).ready(function(){
+
+		if ('WebSocket' in window) {
+			websocket = new WebSocket("ws://192.168.126.130:9501");
+		}
+		else {
+			alert('当前浏览器 Not support websocket')
+		}
+
+		websocket.onopen = function (evt) {
+//			var content = "";
+//			var status = 1;
+//			var data = {content:content,status:status};
+//			//要把json的对象转换为字符串
+//			var dataJson = JSON.stringify(data);
+//			websocket.send(dataJson);
+			console.log("连接")
+
+		};
+
+		websocket.onclose = function (evt) {
+			var content = "";
+			var status = 2;
+			var data = {content:content,status:status};
+			//要把json的对象转换为字符串
+			var dataJson = JSON.stringify(data);
+			websocket.send(dataJson);
+			console.log("断开socker链接");
+		};
+
+
+		websocket.onmessage = function (evt) {
+
+			var data = evt.data;
+			var jsonData = JSON.parse(data);
+			console.log(jsonData);
+			if(jsonData.content!=""){
+				if(jsonData.u_name==u_name){
+					var str="<li>" +
+							"<p class='vptext'><a class='' style='float:right;' href='javascript:;'>"+jsonData.content+"</a></p>" +
+							"<p class='peptime pswer'>" +
+							"<span style='float:right;'><b class='coclass'>"+jsonData.u_name+"&nbsp;&nbsp;</b> </span></p>" +
+							"</li>"
+				}else{
+					var str="<li>" +
+							"<p class='vptext'><a class='peptitle' href='javascript:;'>"+jsonData.content+"</a></p>" +
+							"<p class='peptime pswer'>" +
+							"<span style='float:left;'><b class='coclass'>"+jsonData.u_name+"&nbsp;&nbsp;</b> </span></p>" +
+							"</li>"
+				}
+
+				$(str).insertBefore($(".evalucourse li"));
+			}
+
+		};
+
+		// //点击发布问题事件
+		$(".sw").click(function(){
+			var content = $("#quest").val();
+			console.log(content);
+
+			var data = {content:content,u_name:u_name};
+			//要把json的对象转换为字符串
+			var dataJson = JSON.stringify(data);
+			websocket.send(dataJson);
+			$("#quest").val("");
+
+
+		})
+	})
+</script>
