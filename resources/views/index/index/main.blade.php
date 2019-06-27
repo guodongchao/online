@@ -341,7 +341,7 @@
             <div>
                 <ul id="myTab3">
                     @foreach($cateData as $k=>$v)
-                    <li @if($k==0) class="current" val="{{$v['c_cate_id']}}" @else class="norma3" @endif onClick="nTabs(this,{{$k}});">{{$v['c_cate_name']}}</li>
+                    <li @if($k==0) class="current"  @else class="norma3" @endif val="{{$v['c_cate_id']}}" onClick="nTabs(this,{{$k}});">{{$v['c_cate_name']}}</li>
                     @endforeach
                 </ul>
                 <div class="clearh"></div>
@@ -351,7 +351,7 @@
                         @foreach($v['culum'] as $kk=>$vv)
                         <li>
                             <div class="courselist">
-                                <img width="263" style="border-radius:3px 3px 0 0;" src="/admin{{$vv['culum_img']}}" >
+                                <a href="coursecont?culum_id={{$vv['culum_id']}}"><img width="263" style="border-radius:3px 3px 0 0;" src="/admin{{$vv['culum_img']}}" ></a>
                                 <p class="courTit">{{$vv['culum_name']}}</p>
                                 <div class="gray">
                                     <span>1小时前更新</span>
@@ -459,6 +459,7 @@
     }
     $(".btnlink").click(function(){
         var c_cate_id =$(".current").attr("val");
+
         window.location.href="courselist?c_cate_id="+c_cate_id;
 
 //
