@@ -106,9 +106,9 @@ class loginController extends Controller
                 'u_name'=>$account
             ];
         }
-        $data = user::where($where)->first()->toarray();
+        $data = user::where($where)->first();
         //var_dump($where);die;
-        if(empty($data) || $data['u_pwd']!==md5($u_pwd)){
+        if(empty($data) || $data->u_pwd!=md5($u_pwd)){
             $resopnse=[
                 'code'=>50001,
                 'msg'=>'账号或密码错误1！'

@@ -42,7 +42,7 @@ Route::any('admin/loginDo','admin\login\login@login_do');
 //生成验证码
 Route::any('admin/codelist/{sid}','admin\login\login@showCode');
 
-
+//,'middleware' =>['rbac']
 Route::group(['prefix'=>'admin','middleware' =>['rbac']],function () {
     //后台首页
     Route::get('index','admin\index\index@index');
@@ -224,10 +224,19 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('courselistData','index\course\courseController@courselistData');//课程下某个分类下的科目
     Route::any('courseSearch','index\course\courseController@courseSearch');//课程下某个分类下的科目
     Route::any('coursecont2','index\course\courseController@coursecont2');//课程下某个分类下的科目
-
     Route::any('video','index\course\courseController@video');//视频播放
     Route::any('quest','index\course\courseController@quest');//课程下的问答
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
+    //我的问答
+    Route::any('mycourse2','index\course\courseController@mycourse2');
+    //我的笔记
+    Route::any('mycourse3','index\course\courseController@mycourse3');
+    //笔记删除
+    Route::any('noteDel','index\course\courseController@noteDel');
+    //查看笔记
+    Route::any('noteShow','index\course\courseController@noteShow');
+    //我的作业
+    Route::any('mycourse4','index\course\courseController@mycourse4');
     //修改密码
     Route::any('myrepassword','index\course\courseController@myrepassword');
     Route::any('myrepasswordDo','index\course\courseController@myrepasswordDo');
