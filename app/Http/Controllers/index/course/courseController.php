@@ -283,6 +283,7 @@ class courseController extends Controller
             'u_id'=>$uid
         ];
         $img = user::where($where)->pluck('u_img')->toarray();
+        //学习中
         $userWhere=[
             'u_id'=>$uid,
             'user_culum_status'=>1,
@@ -299,13 +300,13 @@ class courseController extends Controller
             $dateinfo['culum_img']=$culumInfo->culum_img;
             $Info1[]=$dateinfo;
         }
+        //已学完
         $user2Where=[
             'u_id'=>$uid,
             'user_culum_status'=>2,
             'user_culum_del'=>1
         ];
         $userCulum2=userculum::where($user2Where)->pluck('culum_id')->toarray();
-        $count=count($userCulum2);
         $Info2=[];
         foreach($userCulum2 as $k=>$v){
             $culumwheres=[
@@ -316,32 +317,21 @@ class courseController extends Controller
             $dateinfo2['culum_img']=$culumInfos->culum_img;
             $Info2[]=$dateinfo2;
         }
+        //收藏
         $collectWhere=[
             'u_id'=>$uid,
             'collect_status'=>1,
         ];
         $userCollect=collect::where($collectWhere)->pluck('culum_id')->toarray();
-        $count=count($userCollect);
-        if($count==1){
-            $Collect=[];
+        $Collect=[];
+        foreach($userCollect as $k=>$v){
             $collectwhere=[
-                'culum_id'=>$userCollect[0]
+                'culum_id'=>$v
             ];
             $collectInfo=culum::where($collectwhere)->first();
             $date['culum_name']=$collectInfo->culum_name;
             $date['culum_img']=$collectInfo->culum_img;
             $Collect[]=$date;
-        }else{
-            $Collect=[];
-            foreach($userCollect as $k=>$v){
-                $collectwhere=[
-                    'culum_id'=>$v
-                ];
-                $collectInfo=culum::where($collectwhere)->first();
-                $date['culum_name']=$collectInfo->culum_name;
-                $date['culum_img']=$collectInfo->culum_img;
-                $Collect[]=$date;
-            }
         }
         $data=[
             'img'=>$img[0],
