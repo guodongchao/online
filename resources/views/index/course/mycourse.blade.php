@@ -58,73 +58,48 @@ $(function(){
 			<div class="tab_box">
 				<div>
 					<ul class="memb_course">
+                        @foreach($culumInfo as $k=>$v)
                         <li>
                             <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
-                            <div class="mpp">
-                                <div class="lv" style="width:20%;"></div>
-                            </div>
-                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
-                            <div class="mpp">
-                                <div class="lv" style="width:20%;"></div>
-                            </div>
-                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
+                                <a href="video" target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}"></a>
+                                <p class="memb_courname"><a href="video" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
+                                <div class="mpp">
+                                    <div class="lv" style="width:20%;"></div>
+                                </div>
+                                <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
                             </div>
                         </li>
-                        <li>
-                            <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
-                            <div class="mpp">
-                                <div class="lv" style="width:20%;"></div>
-                            </div>
-                            <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
-                            </div>
-                        </li>
+                        @endforeach
                         <div style="height:10px;" class="clearfix"></div>
                     </ul>
 				</div>
 				<div class="hide">
 					<div>
 					<ul class="memb_course">
+                        @foreach($culuminfo as $k=>$v)
                         <li>
                             <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="coursecont" target="main" class="blacklink">会计基础</a></p>
-							<div class="mpp">
-                                <div class="lv" style="width:100%;"></div>
-                            </div>
-                            <p class="goon"><a href="coursecont" target="main"><span>查看课程</span></a></p>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="courseli">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg"></a>
-                            <p class="memb_courname"><a href="coursecont" target="main" class="blacklink">会计基础</a></p>
-							<div class="mpp">
-                                <div class="lv" style="width:100%;"></div>
-                            </div>
-                            <p class="goon"><a href="coursecont" target="main"><span>查看课程</span></a></p>
+                                <a href="video" target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}"></a>
+                                <p class="memb_courname"><a href="coursecont" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
+                                <div class="mpp">
+                                    <div class="lv" style="width:100%;"></div>
+                                </div>
+                                <p class="goon"><a href="coursecont" target="main"><span>查看课程</span></a></p>
                             </div>
                         </li>
+                        @endforeach
                         <div class="clearfix" style="height:10px;"></div>
                     </ul>
 				</div>
 				</div>
 				<div class="hide">
 					<div>
-					<ul class="memb_course">                   	
+					<ul class="memb_course">
+                        @foreach($collectInfo as $k=>$v)
                         <li>
                             <div class="courseli mysc">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg" class="mm"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
+                            <a href="video" target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}" class="mm"></a>
+                            <p class="memb_courname"><a href="video" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
                             <div class="mpp">
                                 <div class="lv" style="width:20%;"></div>
                             </div>
@@ -132,17 +107,7 @@ $(function(){
 							<div class="mask"><span class="qxsc"  title="移除收藏">▬</span></div>
                             </div>
                         </li>
-                        <li>
-                            <div class="courseli mysc">
-                            <a href="video" target="main" target="_blank"><img width="230" src="images/c8.jpg" class="mm"></a>
-                            <p class="memb_courname"><a href="video" target="main" class="blacklink">会计基础</a></p>
-                            <div class="mpp">
-                                <div class="lv" style="width:20%;"></div>
-                            </div>
-                            <p class="goon"><a href="#"><span>继续学习</span></a></p>
-							<div class="mask"><span class="qxsc"  title="移除收藏">▬</span></div>
-                            </div>
-                        </li>                                     
+                        @endforeach
                         <div class="clearfix" style="height:10px;"></div>
                     </ul>
 				</div>
