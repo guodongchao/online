@@ -125,17 +125,17 @@ $(function(){
                     <div class="clearh" ></div>
                         {{--<input class="inputitle pingjia_con" type="text"  value="请输入问题标题" onblur="if (this.value =='') this.value='请输入问题标题';this.className='inputitle pingjia_con'" onclick="if (this.value=='请输入问题标题') this.value='';this.className='inputitle pingjia_con_on'"/>--}}
                         {{--<textarea rows="5" class="pingjia_con quest" style="width:90%;"  onblur="if (this.value =='') this.value='请输入问题的详细内容';this.className='pingjia_con'" onclick="if (this.value=='请输入问题的详细内容') this.value='';this.className='pingjia_con_on'"></textarea><br/>--}}
-                        <textarea rows="5" class="pingjia_con" id="quest" style="width:90%;" ></textarea><br/>
+                        <textarea rows="5" class="pingjia_con" id="quest" style="width:85%;" ></textarea><br/>
                        <a href="#" class="fombtn sw" style="margin-right:30px;">发布</a>
                        <div class="clearh"></div>
                     </div>
-					<ul class="evalucourse" style="width:280px;">
+					<ul class="evalucourse" style="width:270px;">
 						{{--聊天内容--}}
-                    	{{--<li>--}}
-                        	{{--<p class="vptext"><a target="_blank" class="peptitle" href="#">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>         <p class="peptime pswer"><span style="float:left;"><b class="coclass">候候&nbsp;&nbsp;</b></span>--}}
+                    	<li>
+                        	<p class="vptext" style="height:0;padding-bottom:25%" ><a target="_blank" class="peptitle" href="#">2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年?</a></p>         <p class="peptime pswer"><span style="float:left;"><b class="coclass">候候&nbsp;&nbsp;</b></span>
 
-                            {{--</p>                           --}}
-                        {{--</li>--}}
+                            </p>
+                        </li>
 
 
                     </ul>
@@ -158,6 +158,7 @@ $(function(){
 </html>
 <script>
 	websocket = null;
+	u_name = "张三";
 	$(document).ready(function(){
 
 		if ('WebSocket' in window) {
@@ -195,13 +196,21 @@ $(function(){
 			var jsonData = JSON.parse(data);
 			console.log(jsonData);
 			if(jsonData.content!=""){
-				var str="<li>" +
-						"<p class='vptext'><a class='peptitle' href='javascript:;'>"+jsonData.content+"</a></p>" +
-						"<p class='peptime pswer'>" +
-						"<span style='float:left;'><b class='coclass'>"+jsonData.u_name+"&nbsp;&nbsp;</b> </span></p>" +
-						"</li>"
+				if(jsonData.u_name==u_name){
+					var str="<li>" +
+							"<p class='vptext'><a class='' style='float:right;' href='javascript:;'>"+jsonData.content+"</a></p>" +
+							"<p class='peptime pswer'>" +
+							"<span style='float:right;'><b class='coclass'>"+jsonData.u_name+"&nbsp;&nbsp;</b> </span></p>" +
+							"</li>"
+				}else{
+					var str="<li>" +
+							"<p class='vptext'><a class='peptitle' href='javascript:;'>"+jsonData.content+"</a></p>" +
+							"<p class='peptime pswer'>" +
+							"<span style='float:left;'><b class='coclass'>"+jsonData.u_name+"&nbsp;&nbsp;</b> </span></p>" +
+							"</li>"
+				}
+
 				$(str).insertBefore($(".evalucourse li"));
-//				$(".evalucourse").append(str);
 			}
 
 		};
@@ -210,7 +219,7 @@ $(function(){
 		$(".sw").click(function(){
 			var content = $("#quest").val();
 			console.log(content);
-			var u_name = "张三";
+
 			var data = {content:content,u_name:u_name};
 			//要把json的对象转换为字符串
 			var dataJson = JSON.stringify(data);
