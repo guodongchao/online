@@ -127,6 +127,21 @@ class courseController extends Controller
     public function coursecont2(Request $request){
         $culum_id =$request->input("culum_id");   //课程id
         $quest_id = $request->input("quest_id");    //查看问题的id
+        $u_id =$request->session()->get('u_id');
+
+        if(empty($u_id)){
+            echo  "<script>alert('未登录，请先登录');location.href='login';</script>";exit;
+        }
+        $where = [
+            'u_id'=>$u_id,
+            'culum_id'=>$culum_id
+        ];
+        $usernaem = DB::table('user_culum')->where($where)->first();
+        if(empty($usernaem)){
+            echo  "<script>alert('未购买，请先购买');location.href='index';</script>";exit;
+        }
+
+
         if($quest_id){
             $data = Redis::lrange($quest_id,0,-1);
         }else{
