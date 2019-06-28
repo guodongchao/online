@@ -226,7 +226,7 @@
                                 content:'是否确认支付',
                                 btn:['确定','取消'],
                                 btn1:function(){
-                                    location.href="login";
+                                    location.href="pay";
                                     return true;
                                 },
                                 btn2:function(){
