@@ -23,6 +23,7 @@ class courseController extends Controller
     public function coursecont(Request $request){ //详细课程介绍
         //接课程的id
         $culum_id = $request->input("culum_id");
+        $u_id =$request->session()->get('u_id');
         $culumdata = culum::where('culum_id',$culum_id)
             ->join('teacher_details','culum.teacher_id','=','teacher_details.teacher_id')
             ->first()->toArray();
@@ -45,10 +46,67 @@ class courseController extends Controller
         //总分钟
         $time = hour::where('culum_id',$culum_id)->pluck('show_time')->toarray();
         $time = array_sum($time);
-        //x学习人数
+        //学习人数
         $usernaem = DB::table('user_culum')->where('culum_id',$culum_id)->get();
         $usernum = count($usernaem);
         return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
+        //是否收藏
+        if(!empty($u_id)){
+            $where = [
+                'u_id'=>$u_id,
+                'course_id'=>$culum_id,
+                'collect_status'=>1,
+            ];
+            $collect = collect::where($where)->first();
+//            echo $collect;
+            if($collect){
+                $codes = 1;
+            }else{
+                $codes = 2;
+            }
+        }else{
+            $codes = 2;
+        }
+
+        return view("index.course.coursecont",['codes'=>$codes,'culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
+    }
+    //收藏课程
+    public function shoucang(Request $request){
+        $u_id =$request->session()->get('u_id');
+        $culum_id =$request->input("culum_id");   //课程id
+        $code =$request->input("code");
+//        var_dump($u_id);exit;
+        if(empty($u_id)){
+            return  json_encode(['code'=>3]);
+        }
+        $wheres = [
+            'course_id'=>$culum_id,
+            'u_id'=>$u_id,
+        ];
+        if($code < 2){
+
+            $res = collect::where($wheres)->first();
+            if($res){
+                $where = [
+                    'collect_status'=>1
+                ];
+                $res = collect::where($wheres)->update($where);
+                return json_encode(['code'=>1]);
+            }
+            $where = [
+                'course_id'=>$culum_id,
+                'u_id'=>$u_id,
+                'collect_time'=>time()
+            ];
+            $res = collect::insert($where);
+            return json_encode(['code'=>1]);
+        }else{
+            $where = [
+                'collect_status'=>2
+            ];
+            $res = collect::where($wheres)->update($where);
+            return json_encode(['code'=>2]);
+        }
     }
     public function coursecont1(Request $request){    //章节,问答,资料区
         $u_id =$request->session()->get('u_id');
