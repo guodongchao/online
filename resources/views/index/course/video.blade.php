@@ -60,31 +60,23 @@ $(function(){
 
 <body>
    <div class="linevideo" style="overflow-x:hidden">
-    	<span class="returnindex"><a class="gray" href="coursecont1" target="main" style="font-size:14px;">返回课程</a></span>   
-        <span class="taskspan"><span class="ts">课时100</span>&nbsp;&nbsp;<b class="tasktit">会计的概念与目标1</b></span> 
+	   <input type="hidden" value="{{$u_name}}" class="u_name">
+    	<span class="returnindex"><a class="gray" href="javascript:;" culum_id="{{$hourData->culum_id}}" hour_id="{{$hourData->hour_id}}" target="main" style="font-size:14px;">返回课程</a></span>
+        <span class="taskspan"><span class="ts"><b class="tasktit">{{$hourData->hour_name}}</b></span></span>
         <div style="width:100%;margin-top:20px;">
-			<video width="auto" id="example_video_1" class="video-js vjs-default-skin  vjs-big-play-centered vvi " controls preload="none"  poster="images/c8.jpg" data-setup="{}"><!--poster是视频未播放前的展示图片-->
-			<source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />
-			<source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
-			<source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' />    
+			<video width="auto" id="example_video_1" class="video-js vjs-default-skin  vjs-big-play-centered vvi " controls  data-setup="{}"><!--poster是视频未播放前的展示图片-->
+			<source src="{{$hourData->video_desc}}" type='video/mp4' />
+
 			</video>
-			<p class="signp"><span class="sign">学过了</span><span class="nextcourse" title="下一课时">∨</span></p>
-        </div>       
-    </div>    
+			<p class="signp"><span class="sign" hour_id="{{$hourData->hour_id}}">学过了</span><span class="nextcourse" title="下一课时">∨</span></p>
+        </div>
+	   <input type="hidden" value="" id="total_time">
+	   <input type="hidden" value="" id="new_time">
+    </div>
   <div class="interact">
    		<span class="ii" title="展开或收起">></span>
         <div class="clearh"></div>
-        <!--<div class="coursmall">
-        
-        <img class="csimg" src="images/121.png" width="153" height="75">
-        <span class="lineevalue">
-        <p>计算机等级考试二级C语言</p>
-            <!--<p class="graytext"><img src="images/evaluate.png" width="71" height="14">(181份评价)</p>
-            <p class="graytext">讲师：王老师</p>
-            <p><a class="dowork" target="_blank" href="#">去做作业→</a></p>
-         </span>
-         <div class="clearh"></div>
-        </div>-->
+
   
           <div class="box1 demo2">
 			<ul class="tab_menu vmulu">
@@ -99,7 +91,7 @@ $(function(){
                         @foreach($chapter as $k=>$v)
                         <dt>第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}</dt>
                         @foreach($v['section'] as $kk=>$vv)
-						<dd class="smalltitle"><strong>第{{$kk}}节&nbsp;&nbsp;{{$vv['section_name']}}</strong></dd>
+						<dd class="smalltitle"><strong>第{{$kk+1}}节&nbsp;&nbsp;{{$vv['section_name']}}</strong></dd>
                             @foreach($vv['hour'] as $kkk=>$vvv)
                         <a href="#"><dd><i class="forwa nn"></i><strong class="cataloglink">课时{{$kkk+1}}：{{$vvv['hour_name']}}</strong></dd></a>
                             @endforeach
@@ -158,8 +150,19 @@ $(function(){
 </html>
 <script>
 	websocket = null;
-	u_name = "张三";
+	u_name = $(".u_name").val();
 	$(document).ready(function(){
+		$("#example_video_1").on(
+				"timeupdate",
+				function(event) {
+					s_time = this.duration;  //视频总长度
+					s_now = this.currentTime; //当前播放的视频长度
+					if(!isNaN(s_time)){
+						$("#total_time").val(s_time);
+						$("#new_time").val(s_now);
+					}
+					//当前播放时间 this.currentTime;
+		})
 
 		if ('WebSocket' in window) {
 			websocket = new WebSocket("ws://192.168.126.130:9501");
@@ -194,7 +197,7 @@ $(function(){
 
 			var data = evt.data;
 			var jsonData = JSON.parse(data);
-			console.log(jsonData);
+
 			if(jsonData.content!=""){
 				if(jsonData.u_name==u_name){
 					var str="<li>" +
@@ -228,5 +231,22 @@ $(function(){
 
 
 		})
+	})
+
+	$(".gray").click(function(){
+		var culum_id = $(this).attr("culum_id");
+		var hour_id = $(this).attr("hour_id");
+		var total_time = $("#total_time").val(s_time)
+		var new_time = $("#new_time").val(s_now);
+		var url="";
+		$.ajax({
+			type:"post",
+			data:{culum_id:culum_id,hour_id:hour_id,total_time:total_time,new_time:new_time},
+			url: url,
+			success:function(msg){
+
+			}
+		})
+		location.href="coursecont1?culum_id="+culum_id;
 	})
 </script>

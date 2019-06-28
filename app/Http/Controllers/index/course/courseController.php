@@ -16,6 +16,7 @@ use App\models\culum;
 use App\models\userculum;
 use App\models\chapter;
 use App\models\hour;
+use App\models\userhour;
 
 class courseController extends Controller
 {
@@ -76,8 +77,20 @@ class courseController extends Controller
 //        return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
     public function coursecont2(Request $request){
+        $u_id = session("u_id");
+        $u_name = session("u_name");
+        if(!$u_id){
+            return redirect("/index/login");
+        }
+
         $culum_id =$request->input("culum_id");   //课程id
         $quest_id = $request->input("quest_id");    //查看问题的id
+//        $this->canWatch($u_id,$culum_id);
+        $culumCan = userculum::where("u_id",$u_id)->where("culum_id",$culum_id)->first();
+        if(!$culumCan){
+            return redirect("/index/coursecont?culum_id=$culum_id");
+        }
+
         if($quest_id){
             $data = Redis::lrange($quest_id,0,-1);
         }else{
@@ -182,6 +195,13 @@ class courseController extends Controller
     //视频播放
     public function video(Request $request){
         $culum_id =$request->input("culum_id",1);
+        $u_name = session("u_name");
+        $u_id = session("u_id");
+
+        $culumCan = userculum::where("u_id",$u_id)->where("culum_id",$culum_id)->first();
+        if(!$culumCan){
+            return redirect("/index/coursecont?culum_id=$culum_id");
+        }
         $chapter=chapter::where('culum_id',$culum_id)->where('chapter_status',1)->get()->toarray();
         foreach($chapter as $k=>$v){
             $chapter[$k]['section']=section::where('chapter_id',$v['chapter_id'])->where('is_del',1)->select('section_id','section_name')->get()->toarray();
@@ -191,7 +211,26 @@ class courseController extends Controller
                 $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
             }
         }
-        return view("index.course.video",['chapter'=>$chapter]);
+        $myHouse = userhour::where("u_id",$u_id)->where("culum_id",$culum_id)->pluck("hour_id");
+//        dump($myHouse);
+        if(!$myHouse){
+            $hourData = hour::whereNotIn("hour_id",$myHouse)->limit(1)->first();
+        }else{
+            $hourData = hour::where("culum_id",$culum_id)->limit(1)->first();
+        }
+//        dump($hourData);
+//        userhour::where("")
+//        dump($chapter);
+        return view("index.course.video",['chapter'=>$chapter,'u_name'=>$u_name,'hourData'=>$hourData]);
+    }
+
+    public function canWatch($u_id,$culum_id){
+        $culumCan = userculum::where("u_id",$u_id)->where("culum_id",$culum_id)->first();
+        if(!$culumCan){
+            dump($u_id);
+            return redirect("/index/coursecont?culum_id=$culum_id");
+            die;
+        }
     }
     public function quest(Request $request){      //提出问题
         $u_id =$request->input("u_id",1);

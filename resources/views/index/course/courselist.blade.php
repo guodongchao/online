@@ -97,7 +97,6 @@
 <script>
     $(document).ready(function(){
        var c_cate_id = $(".course_curr").attr("c_cate_id");
-        alert(c_cate_id);
         var page=1;
         getCulum(c_cate_id,page);
 

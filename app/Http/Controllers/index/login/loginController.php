@@ -5,6 +5,7 @@ namespace App\Http\Controllers\index\login;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\models\user;
+use Illuminate\Support\Facades\Redis;
 class loginController extends Controller
 {
     //注册
@@ -106,23 +107,42 @@ class loginController extends Controller
                 'u_name'=>$account
             ];
         }
-        $data = user::where($where)->first()->toarray();
-        //var_dump($where);die;
-        if(empty($data) || $data['u_pwd']!==md5($u_pwd)){
-            $resopnse=[
-                'code'=>50001,
-                'msg'=>'账号或密码错误1！'
-            ];
-            echo json_encode($resopnse);die;
+
+
+        $data = user::where($where)->first();
+
+        if($data) {
+            $data = $data->toArray();
+            //var_dump($where);die;
+            if (empty($data) || $data['u_pwd'] !== md5($u_pwd)) {
+                $resopnse = [
+                    'code' => 50001,
+                    'msg' => '账号或密码错误1！'
+                ];
+                echo json_encode($resopnse);
+                die;
+            } else {
+                $request->session()->put('account', $account);
+                $request->session()->put('u_name', $data['u_name']);
+                $request->session()->put('u_id', $data['u_id']);
+                //            ini_set("session.save_handler","redis");
+                //            ini_set("session.save_path","tcp://188.131.235.77:6379");
+                //            session(["u_name"=>$data['u_id'],"u_id"=>$data['u_id']]);
+                $resopnse = [
+                    'code' => 200,
+                    'msg' => '登陆成功！'
+                ];
+
+                echo json_encode($resopnse);
+
+            }
         }else{
-            $request->session()->put('account',$account);
-            $request->session()->put('u_id',$data['u_id']);
-            $resopnse=[
-                'code'=>200,
-                'msg'=>'登陆成功！'
+            $resopnse = [
+                'code' => 50001,
+                'msg' => '账号或密码错误1！'
             ];
             echo json_encode($resopnse);
-
+            die;
         }
     }
 }
