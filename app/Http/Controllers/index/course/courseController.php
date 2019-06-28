@@ -16,13 +16,18 @@ use App\models\culum;
 use App\models\userculum;
 use App\models\chapter;
 use App\models\hour;
+<<<<<<< HEAD
 use App\models\userhour;
+=======
+use App\models\note;
+>>>>>>> 73498269d1964da1127fe6bdc549be2bedd9ffa5
 
 class courseController extends Controller
 {
     public function coursecont(Request $request){ //详细课程介绍
         //接课程的id
         $culum_id = $request->input("culum_id");
+        $u_id =$request->session()->get('u_id');
         $culumdata = culum::where('culum_id',$culum_id)
             ->join('teacher_details','culum.teacher_id','=','teacher_details.teacher_id')
             ->first()->toArray();
@@ -33,7 +38,6 @@ class courseController extends Controller
             ->get()->toArray();
         //课程公告
         $c_cate_id = notice::where('n_status',1)->get(['c_cate_id','n_name'])->toArray();
-//        print_r($c_cate_id);exit;
         $name = [];
         foreach($c_cate_id as $k=>$v){
             if(substr_count($v['c_cate_id'],$culumdata['c_cate_id'])>0){
@@ -46,20 +50,70 @@ class courseController extends Controller
         //总分钟
         $time = hour::where('culum_id',$culum_id)->pluck('show_time')->toarray();
         $time = array_sum($time);
-        //x学习人数
+        //学习人数
         $usernaem = DB::table('user_culum')->where('culum_id',$culum_id)->get();
         $usernum = count($usernaem);
+        //是否收藏
+        if(!empty($u_id)){
+            $where = [
+                'u_id'=>$u_id,
+                'course_id'=>$culum_id,
+                'collect_status'=>1,
+            ];
+            $collect = collect::where($where)->first();
+//            echo $collect;
+            if($collect){
+                $codes = 1;
+            }else{
+                $codes = 2;
+            }
+        }else{
+            $codes = 2;
+        }
 
-//        print_r($time);
-//        exit;
-        return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
+        return view("index.course.coursecont",['codes'=>$codes,'culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
     }
-    public function coursecont1(Request $request){    //章节,问答,资料区
-        $u_id =$request->input("u_id",1);
-        $culum_id =$request->input("culum_id",1);   //课程id
+    //收藏课程
+    public function shoucang(Request $request){
         $u_id =$request->session()->get('u_id');
         $culum_id =$request->input("culum_id");   //课程id
-//
+        $code =$request->input("code");
+//        var_dump($u_id);exit;
+        if(empty($u_id)){
+            return  json_encode(['code'=>3]);
+        }
+        $wheres = [
+            'course_id'=>$culum_id,
+            'u_id'=>$u_id,
+        ];
+        if($code < 2){
+
+            $res = collect::where($wheres)->first();
+            if($res){
+                $where = [
+                    'collect_status'=>1
+                ];
+                $res = collect::where($wheres)->update($where);
+                return json_encode(['code'=>1]);
+            }
+            $where = [
+                'course_id'=>$culum_id,
+                'u_id'=>$u_id,
+                'collect_time'=>time()
+            ];
+            $res = collect::insert($where);
+            return json_encode(['code'=>1]);
+        }else{
+            $where = [
+                'collect_status'=>2
+            ];
+            $res = collect::where($wheres)->update($where);
+            return json_encode(['code'=>2]);
+        }
+    }
+    public function coursecont1(Request $request){    //章节,问答,资料区
+        $u_id =$request->session()->get('u_id');
+        $culum_id =$request->input("culum_id");   //课程id
         if(empty($u_id)){
             return json_encode(['code'=>1]);
         }
@@ -68,11 +122,9 @@ class courseController extends Controller
             'culum_id'=>$culum_id
         ];
         $usernaem = DB::table('user_culum')->where($where)->first();
-//        var_dump($usernaem);exit;
         if(empty($usernaem)){
             return json_encode(['code'=>2]);
         }
-
         return json_encode(['code'=>3,'culum_id'=>$culum_id]);
 //        return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
@@ -85,12 +137,30 @@ class courseController extends Controller
 
         $culum_id =$request->input("culum_id");   //课程id
         $quest_id = $request->input("quest_id");    //查看问题的id
+<<<<<<< HEAD
 //        $this->canWatch($u_id,$culum_id);
         $culumCan = userculum::where("u_id",$u_id)->where("culum_id",$culum_id)->first();
         if(!$culumCan){
             return redirect("/index/coursecont?culum_id=$culum_id");
         }
 
+=======
+        $u_id =$request->session()->get('u_id');
+
+        if(empty($u_id)){
+            echo  "<script>alert('未登录，请先登录');location.href='login';</script>";exit;
+        }
+        $where = [
+            'u_id'=>$u_id,
+            'culum_id'=>$culum_id
+        ];
+        $usernaem = DB::table('user_culum')->where($where)->first();
+        if(empty($usernaem)){
+            echo  "<script>alert('未购买，请先购买');location.href='index';</script>";exit;
+        }
+
+
+>>>>>>> 73498269d1964da1127fe6bdc549be2bedd9ffa5
         if($quest_id){
             $data = Redis::lrange($quest_id,0,-1);
         }else{
@@ -315,7 +385,7 @@ class courseController extends Controller
         return json_encode($file_path);
 
     }
-    //我的信息
+    //我的课程
     public function mycourse(){
         $uid=session('u_id');
         $where=[
@@ -380,10 +450,71 @@ class courseController extends Controller
         ];
         return view("index.course.mycourse",$data);
     }
+    //我的问答
+    public function mycourse2(){
+        $uid=session('u_id');
+        $where=[
+            'u_id'=>$uid
+        ];
+        $img = user::where($where)->pluck('u_img')->toarray();
+        return view("index.course.mycourse2",['img'=>$img[0]]);
+    }
+    //我的笔记
+    public function mycourse3(){
+        $uid=session('u_id');
+        $where=[
+            'u_id'=>$uid
+        ];
+        $noteWhere=[
+            'u_id'=>$uid,
+            'status'=>1
+        ];
+        $img = user::where($where)->pluck('u_img')->toarray();
+        $noteInfo=note::where($noteWhere)->get();
+        $data=[
+            'img'=>$img[0],
+            'noteInfo'=>$noteInfo
+        ];
+        return view("index.course.mycourse3",$data);
+    }
+    //删除笔记
+    public function noteDel(Request $request){
+        $id = $request->input("id");
+        $where = [
+            'note_id'=>$id,
+        ];
+        $data=[
+            'status'=>0
+        ];
+        $res = note::where($where)->update($data);
+        if ($res){
+            return ["code"=>200,"msg"=>"删除成功"];
+        }else{
+            return ["code"=>100,"msg"=>"删除失败"];
+        }
+    }
+    //查看笔记
+    public function noteShow(Request $request){
+        $note_id = $request->input("note_id");
+        $where = [
+            'note_id'=>$note_id,
+        ];
+        $noteInfo = note::where($where)->first()->toarray();
+        return view("index.mine.noteshow",['noteInfo'=>$noteInfo]);
+    }
+    //我的作业
+    public function mycourse4(){
+        $uid=session('u_id');
+        $where=[
+            'u_id'=>$uid
+        ];
+        $img = user::where($where)->pluck('u_img')->toarray();
+        return view("index.course.mycourse4",['img'=>$img[0]]);
+    }
     //修改密码
     public function myrepassword(){
         $uid=session('u_id');
-        return view("index.course.myrepassword",['uid'=>$uid]);
+        return view("index.mine.myrepassword",['uid'=>$uid]);
     }
     //修改密码执行
     public function myrepasswordDo(Request $request){
@@ -419,7 +550,7 @@ class courseController extends Controller
             'userInfo'=>$userInfo,
             'detailInfo'=>$detailInfo
         ];
-        return view('index.course.mysetting',$data);
+        return view('index.mine.mysetting',$data);
     }
     //修改信息执行
     public function detailDo(Request $request)

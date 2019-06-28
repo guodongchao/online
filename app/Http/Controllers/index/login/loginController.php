@@ -107,6 +107,7 @@ class loginController extends Controller
                 'u_name'=>$account
             ];
         }
+<<<<<<< HEAD
 
 
         $data = user::where($where)->first();
@@ -136,6 +137,16 @@ class loginController extends Controller
                 echo json_encode($resopnse);
 
             }
+=======
+        $data = user::where($where)->first();
+        //var_dump($where);die;
+        if(empty($data) || $data->u_pwd!=md5($u_pwd)){
+            $resopnse=[
+                'code'=>50001,
+                'msg'=>'账号或密码错误1！'
+            ];
+            echo json_encode($resopnse);die;
+>>>>>>> 73498269d1964da1127fe6bdc549be2bedd9ffa5
         }else{
             $resopnse = [
                 'code' => 50001,
