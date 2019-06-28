@@ -224,6 +224,7 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('courselistData','index\course\courseController@courselistData');//课程下某个分类下的科目
     Route::any('courseSearch','index\course\courseController@courseSearch');//课程下某个分类下的科目
     Route::any('coursecont2','index\course\courseController@coursecont2');//课程下某个分类下的科目
+    Route::any('shoucang','index\course\courseController@shoucang');//课程下某个分类下的科目
 
     Route::any('video','index\course\courseController@video');//视频播放
     Route::any('quest','index\course\courseController@quest');//课程下的问答
