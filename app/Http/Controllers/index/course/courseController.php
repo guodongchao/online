@@ -16,11 +16,11 @@ use App\models\culum;
 use App\models\userculum;
 use App\models\chapter;
 use App\models\hour;
-<<<<<<< HEAD
+
 use App\models\userhour;
-=======
+
 use App\models\note;
->>>>>>> 73498269d1964da1127fe6bdc549be2bedd9ffa5
+
 
 class courseController extends Controller
 {
@@ -137,14 +137,14 @@ class courseController extends Controller
 
         $culum_id =$request->input("culum_id");   //课程id
         $quest_id = $request->input("quest_id");    //查看问题的id
-<<<<<<< HEAD
+
 //        $this->canWatch($u_id,$culum_id);
         $culumCan = userculum::where("u_id",$u_id)->where("culum_id",$culum_id)->first();
         if(!$culumCan){
             return redirect("/index/coursecont?culum_id=$culum_id");
         }
 
-=======
+
         $u_id =$request->session()->get('u_id');
 
         if(empty($u_id)){
@@ -160,7 +160,7 @@ class courseController extends Controller
         }
 
 
->>>>>>> 73498269d1964da1127fe6bdc549be2bedd9ffa5
+
         if($quest_id){
             $data = Redis::lrange($quest_id,0,-1);
         }else{
