@@ -49,7 +49,6 @@ class courseController extends Controller
         //学习人数
         $usernaem = DB::table('user_culum')->where('culum_id',$culum_id)->get();
         $usernum = count($usernaem);
-        return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
         //是否收藏
         if(!empty($u_id)){
             $where = [
