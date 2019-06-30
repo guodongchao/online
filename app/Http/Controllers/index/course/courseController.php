@@ -191,7 +191,7 @@ class courseController extends Controller
                 $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
             }
         }
-//        dump($chapter);
+        dump($chapter);
         return view("index.course.coursecont1",['chapter'=>$chapter,'culum_cate'=>$culum_cate,'culumdata'=>$culumdata,'data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
     public function courselist(Request $request){       //课程展示(主要查询分类)
@@ -260,10 +260,11 @@ class courseController extends Controller
     public function video(Request $request)
     {
         $culum_id = $request->input("culum_id", 1);
+        $hour_id = $request->input("hour_id");
         $u_name = session("u_name");
         $u_id = session("u_id");
         if (!$u_id) {
-            echo "<script>alert('未登录，请先登陆');location.href='login';</script>";
+            echo "<script>alert('未登录，请先登陆');parent.location.href='login';</script>";
             exit;
         }
         $culumCan = userculum::where("u_id", $u_id)->where("culum_id", $culum_id)->first();
@@ -279,30 +280,65 @@ class courseController extends Controller
                 $chapter[$k]['section'][$kk]['hour'] = hour::where('section_id', $vv['section_id'])->where('is_del', 1)->get()->toarray();
             }
         }
-        $myHouse = userhour::where("u_id", $u_id)->where("culum_id", $culum_id)->pluck("hour_id");
-//        dump($myHouse);
-        if (!$myHouse) {
-            $hourData = hour::whereNotIn("hour_id", $myHouse)->limit(1)->first();
-        } else {
-            $hourData = hour::where("culum_id", $culum_id)->limit(1)->first();
-        }
-        //观看课时时添加数据到我的课时user_hour
-        $arr = [
-            "u_id" => $u_id,
-            "hour_id" => $hourData->hour_id,
-            "culum_id" => $hourData->culum_id,
-        ];
+        if(!$hour_id) {        //通过点击学习进入
 
-        $res = userhour::insert($arr);
-        if ($res) {
-            return view("index.course.video", ['chapter' => $chapter, 'u_name' => $u_name, 'hourData' => $hourData]);
-        }else{
-            echo "<script>alert('抱歉！系统出现错误，请联系管理员');</script>";
-            exit;
+            $myHouse = userhour::where("u_id", $u_id)->where("culum_id", $culum_id)->pluck("hour_id");
+//
+            if ($myHouse) {
+                $hourData = hour::whereNotIn("hour_id", $myHouse)->limit(1)->first();
+
+                if (!$hourData) {
+                    $hourData = hour::where("culum_id", $culum_id)->limit(1)->first();
+                } else {
+                    $arr = [
+                        "u_id" => $u_id,
+                        "hour_id" => $hourData->hour_id,
+                        "culum_id" => $hourData->culum_id,
+                    ];
+
+                    $res = userhour::insert($arr);
+                }
+            } else {
+                $hourData = hour::where("culum_id", $culum_id)->limit(1)->first();
+                $arr = [
+                    "u_id" => $u_id,
+                    "hour_id" => $hourData->hour_id,
+                    "culum_id" => $hourData->culum_id,
+                ];
+
+                $res = userhour::insert($arr);
+            }
+        }else{   //通过选择学时视频进入
+            $myHouse = userhour::where("u_id", $u_id)->where("hour_id", $hour_id)->first();
+            if(!$myHouse){       //用户学时无该数据
+                $arr = [
+                    "u_id" => $u_id,
+                    "hour_id" => $hour_id,
+                    "culum_id" => $culum_id,
+                ];
+
+                $res = userhour::insert($arr);
+            }
+            $hourData = hour::where("hour_id", $hour_id)->first();
+
         }
+
+        return view("index.course.video", ['chapter' => $chapter, 'u_name' => $u_name, 'hourData' => $hourData]);
+
     }
 
-    public function changeHour($u_id,$culum_id){
+    public function changeHour(Request $request){
+        $culum_id = $request->input("culum_id");
+        $hour_id = $request->input("hour_id");
+        $new_time = $request->input("new_time");
+        $u_id = session("u_id");
+        if($new_time){
+            $where=[
+                "u_id"=>$u_id,
+                "hour_id"=>$hour_id
+            ];
+            userhour::where($where)->update(['new_time'=>$new_time]);
+        }
 
     }
     public function quest(Request $request){      //提出问题

@@ -157,10 +157,7 @@ $(function(){
 				function(event) {
 					s_time = this.duration;  //视频总长度
 					s_now = this.currentTime; //当前播放的视频长度
-					if(!isNaN(s_time)){
-						$("#total_time").val(s_time);
-						$("#new_time").val(s_now);
-					}
+//
 					//当前播放时间 this.currentTime;
 		})
 
@@ -236,17 +233,17 @@ $(function(){
 	$(".gray").click(function(){
 		var culum_id = $(this).attr("culum_id");
 		var hour_id = $(this).attr("hour_id");
-		var total_time = $("#total_time").val(s_time);
-		var new_time = $("#new_time").val(s_now);
 		var url="changeHour";
+
+		console.log(s_now);
 		$.ajax({
 			type:"post",
-			data:{culum_id:culum_id,hour_id:hour_id,total_time:total_time,new_time:new_time},
+			data:{culum_id:culum_id,hour_id:hour_id,new_time:s_now},
 			url: url,
 			success:function(msg){
 
 			}
 		})
-		location.href="coursecont1?culum_id="+culum_id;
+		location.href="coursecont2?culum_id="+culum_id;
 	})
 </script>
