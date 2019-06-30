@@ -131,8 +131,8 @@ class courseController extends Controller
     public function coursecont2(Request $request){
         $u_id = session("u_id");
         $u_name = session("u_name");
-        if(!$u_id){
-            return redirect("/index/login");
+        if(empty($u_id)){
+            echo  "<script>alert('未登录，请先登录');location.href='login';</script>";exit;
         }
 
         $culum_id =$request->input("culum_id");   //课程id
@@ -144,12 +144,6 @@ class courseController extends Controller
             return redirect("/index/coursecont?culum_id=$culum_id");
         }
 
-
-        $u_id =$request->session()->get('u_id');
-
-        if(empty($u_id)){
-            echo  "<script>alert('未登录，请先登录');location.href='login';</script>";exit;
-        }
         $where = [
             'u_id'=>$u_id,
             'culum_id'=>$culum_id
@@ -263,44 +257,53 @@ class courseController extends Controller
 
     }
     //视频播放
-    public function video(Request $request){
-        $culum_id =$request->input("culum_id",1);
+    public function video(Request $request)
+    {
+        $culum_id = $request->input("culum_id", 1);
         $u_name = session("u_name");
         $u_id = session("u_id");
-
-        $culumCan = userculum::where("u_id",$u_id)->where("culum_id",$culum_id)->first();
-        if(!$culumCan){
+        if (!$u_id) {
+            echo "<script>alert('未登录，请先登陆');location.href='login';</script>";
+            exit;
+        }
+        $culumCan = userculum::where("u_id", $u_id)->where("culum_id", $culum_id)->first();
+        if (!$culumCan) {
             return redirect("/index/coursecont?culum_id=$culum_id");
         }
-        $chapter=chapter::where('culum_id',$culum_id)->where('chapter_status',1)->get()->toarray();
-        foreach($chapter as $k=>$v){
-            $chapter[$k]['section']=section::where('chapter_id',$v['chapter_id'])->where('is_del',1)->select('section_id','section_name')->get()->toarray();
+        $chapter = chapter::where('culum_id', $culum_id)->where('chapter_status', 1)->get()->toarray();
+        foreach ($chapter as $k => $v) {
+            $chapter[$k]['section'] = section::where('chapter_id', $v['chapter_id'])->where('is_del', 1)->select('section_id', 'section_name')->get()->toarray();
         }
-        foreach ($chapter as $k=>$v){
-            foreach ($v['section'] as $kk=>$vv){
-                $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
+        foreach ($chapter as $k => $v) {
+            foreach ($v['section'] as $kk => $vv) {
+                $chapter[$k]['section'][$kk]['hour'] = hour::where('section_id', $vv['section_id'])->where('is_del', 1)->get()->toarray();
             }
         }
-        $myHouse = userhour::where("u_id",$u_id)->where("culum_id",$culum_id)->pluck("hour_id");
+        $myHouse = userhour::where("u_id", $u_id)->where("culum_id", $culum_id)->pluck("hour_id");
 //        dump($myHouse);
-        if(!$myHouse){
-            $hourData = hour::whereNotIn("hour_id",$myHouse)->limit(1)->first();
-        }else{
-            $hourData = hour::where("culum_id",$culum_id)->limit(1)->first();
+        if (!$myHouse) {
+            $hourData = hour::whereNotIn("hour_id", $myHouse)->limit(1)->first();
+        } else {
+            $hourData = hour::where("culum_id", $culum_id)->limit(1)->first();
         }
-//        dump($hourData);
-//        userhour::where("")
-//        dump($chapter);
-        return view("index.course.video",['chapter'=>$chapter,'u_name'=>$u_name,'hourData'=>$hourData]);
+        //观看课时时添加数据到我的课时user_hour
+        $arr = [
+            "u_id" => $u_id,
+            "hour_id" => $hourData->hour_id,
+            "culum_id" => $hourData->culum_id,
+        ];
+
+        $res = userhour::insert($arr);
+        if ($res) {
+            return view("index.course.video", ['chapter' => $chapter, 'u_name' => $u_name, 'hourData' => $hourData]);
+        }else{
+            echo "<script>alert('抱歉！系统出现错误，请联系管理员');</script>";
+            exit;
+        }
     }
 
-    public function canWatch($u_id,$culum_id){
-        $culumCan = userculum::where("u_id",$u_id)->where("culum_id",$culum_id)->first();
-        if(!$culumCan){
-            dump($u_id);
-            return redirect("/index/coursecont?culum_id=$culum_id");
-            die;
-        }
+    public function changeHour($u_id,$culum_id){
+
     }
     public function quest(Request $request){      //提出问题
         $u_id =$request->input("u_id",1);

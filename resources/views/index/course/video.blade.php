@@ -232,13 +232,13 @@ $(function(){
 
 		})
 	})
-
+	      //点击
 	$(".gray").click(function(){
 		var culum_id = $(this).attr("culum_id");
 		var hour_id = $(this).attr("hour_id");
-		var total_time = $("#total_time").val(s_time)
+		var total_time = $("#total_time").val(s_time);
 		var new_time = $("#new_time").val(s_now);
-		var url="";
+		var url="changeHour";
 		$.ajax({
 			type:"post",
 			data:{culum_id:culum_id,hour_id:hour_id,total_time:total_time,new_time:new_time},

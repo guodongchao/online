@@ -225,7 +225,7 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('courseSearch','index\course\courseController@courseSearch');//课程下某个分类下的科目
     Route::any('coursecont2','index\course\courseController@coursecont2');//课程下某个分类下的科目
 
-    Route::any('myHour','index\course\courseController@myHour');//观看某个课时的时间
+    Route::any('changeHour','index\course\courseController@changeHour');//观看某个课时的时间
 
 
 
