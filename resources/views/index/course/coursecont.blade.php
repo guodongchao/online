@@ -127,20 +127,14 @@
     <div class="cr1">
     <h3 class="righttit">相关课程</h3>
     <div class="teacher">
+        @foreach($dataculums as $v)
     <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c1.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="peptitle" target="_blank">财经法规与财经职业道德</a></h3>
+        <a href="#"  target="_blank"><img src="images/c1.jpg" height="60" title=""></a>
+        <h3 class="courh3"><a href="coursecont?culum_id={{$v['culum_id']}}" class="peptitle">{{$v['culum_name']}}</a></h3>
     </div>
+        @endforeach
     <div class="clearh"></div>
-    <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c2.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="peptitle" target="_blank">财经法规与财经职业道德</a></h3>
-    </div>
-    <div class="clearh"></div>
-    <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c3.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="peptitle" target="_blank">财经法规与财经职业道德</a></h3>
-    </div>
+
     <div class="clearh"></div>
     </div>
     </div>
@@ -221,20 +215,7 @@
 
                             })
                         }else if(res.code==2){
-                            layer.open({
-                                type:0,
-                                content:'是否确认支付',
-                                btn:['确定','取消'],
-                                btn1:function(){
-                                    location.href="pay";
-                                    return true;
-                                },
-                                btn2:function(){
-//                                location.href="login";
-                                    return true;
-                                }
-
-                            })
+                            location.href="createOrder?culum_id="+res.culum_id;
                         }else{
                             location.href="coursecont2?culum_id="+res.culum_id;
                         }

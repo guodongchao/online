@@ -70,8 +70,15 @@ class courseController extends Controller
         }else{
             $codes = 2;
         }
-
-        return view("index.course.coursecont",['codes'=>$codes,'culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
+        //相关课程
+        $c_parent_id = DB::table('course_cate')->where('c_cate_id',$culumdata['c_cate_id'])->value('c_parent_id');
+        $c_cate_id = DB::table('course_cate')->where('c_parent_id',$c_parent_id)->get(['c_cate_id'])->toArray();
+        $id = [];
+        foreach($c_cate_id as $k=>$v){
+            $id[] = $v->c_cate_id;
+        }
+        $dataculums = culum::whereIn('c_cate_id',$id)->where('culum_id','!=',$culum_id)->limit(4)->get()->toArray();
+        return view("index.course.coursecont",['dataculums'=>$dataculums,'codes'=>$codes,'culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
     }
     //收藏课程
     public function shoucang(Request $request){
@@ -123,7 +130,7 @@ class courseController extends Controller
         ];
         $usernaem = DB::table('user_culum')->where($where)->first();
         if(empty($usernaem)){
-            return json_encode(['code'=>2]);
+            return json_encode(['code'=>2,'culum_id'=>$culum_id]);
         }
         return json_encode(['code'=>3,'culum_id'=>$culum_id]);
 //        return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
