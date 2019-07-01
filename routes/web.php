@@ -206,6 +206,16 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('header1','index\index\indexController@header1');
     Route::any('header2','index\index\indexController@header2');
     Route::any('main','index\index\indexController@main');
+
+
+    Route::any('getImg','index\login\loginController@getImg');   //二维码登录
+
+
+
+
+
+
+
     //关于我们
     Route::any('page','index\page\pageController@page');
     Route::any('pagecontact','index\page\pageController@pagecontact');
