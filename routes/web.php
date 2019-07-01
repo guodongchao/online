@@ -295,7 +295,11 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
 
 
     //支付
+    Route::any('pay1','index\paymentController@pay1');
     Route::any('pay','index\paymentController@pay');
+    Route::any('aliReturn','index\paymentController@aliReturn');
+    Route::any('notify','index\paymentController@notify');
+    Route::any('createOrder','index\paymentController@createOrder');
 
 });
 

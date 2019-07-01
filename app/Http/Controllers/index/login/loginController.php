@@ -122,11 +122,9 @@ class loginController extends Controller
 
 
         $data = user::where($where)->first();
-
-        if ($data) {
-            $data = $data->toArray();
+        if($data) {
             //var_dump($where);die;
-            if (empty($data) || $data['u_pwd'] !== md5($u_pwd)) {
+            if (empty($data) || $data->u_pwd!=md5($u_pwd)) {
                 $resopnse = [
                     'code' => 50001,
                     'msg' => '账号或密码错误1！'
@@ -148,7 +146,6 @@ class loginController extends Controller
                 echo json_encode($resopnse);
 
             }
-
         }
     }
 }
