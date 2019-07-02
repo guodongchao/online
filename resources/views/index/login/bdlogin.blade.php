@@ -17,7 +17,7 @@
 <body>
 <div class="login" style="background:url(images/12.jpg) right center no-repeat #fff">
     <h2>微信绑定</h2>
-    <input type="hidden" id="openid" openid="{{$openid}}">
+
     <div>
         <p class="formrow">
             <label class="control-label" for="register_email">帐号</label>
