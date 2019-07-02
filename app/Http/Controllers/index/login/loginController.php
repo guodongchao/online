@@ -99,7 +99,6 @@ class loginController extends Controller
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$secret&code=$code&grant_type=authorization_code";
         $jsonData = file_get_contents($url);
         $data = json_decode($jsonData, true);
-        dump($data);
         $openid = $data['openid'];
         $token = $data['access_token'];
 //        二维码微信直接登录
@@ -121,14 +120,19 @@ class loginController extends Controller
         $userInfo = user::where("u_openid", $openid)->first();
 
         if (!$userInfo) {
-            echo "<script>alert('未绑定,请先绑定')</script>>";
-            return redirect("/index/bdlogin",['openid'=>$openid]);
+            //没绑定.存openid
+            Redis::set($state,$openid);
+//            $arr=['code'=>100,'msg'=>];
+//            echo "<script>alert('未绑定,请先绑定')</script>";
+//            return redirect("/index/bdlogin",['openid'=>$openid]);
         }else{
-            echo "<script>alert('登录成功')</script>>";
-            $request->session()->put('account',$userInfo->u_name);
-            $request->session()->put('u_name',$userInfo->u_name);
-            $request->session()->put('u_id', $userInfo->u_id);
-            return redirect("/index/index");
+            //绑定.存u_id
+            Redis::set("u_id",$userInfo->u_id);
+//            echo "<script>alert('登录成功')</script>>";
+//            $request->session()->put('account',$userInfo->u_name);
+//            $request->session()->put('u_name',$userInfo->u_name);
+//            $request->session()->put('u_id', $userInfo->u_id);
+//            return redirect("/index/index");
         }
 
 
@@ -194,14 +198,20 @@ class loginController extends Controller
     public function is_log(Request $request){
         $state = $request->input("state");
         $value = Redis::get($state);
+        $u_id =  Redis::get("u_id");
 
         if($value){
-            return ['code'=>100,"msg"=>$value];
-        }else{
-            return ["code"=>200,"msg"=>$state."eee"];
+            return ['code'=>200,"msg"=>"请先绑定.$value"];   //有值,去绑定页面
+        }
+        if($u_id){
+            return ["code"=>100,"msg"=>"登录成功"];    //u_id有值,已经绑定了
         }
 
     }
+    public function bdweixinView(Request $request){
+        return view("index.login.bdlogin");
+    }
+
 
     public function bdweixin(Request $request){
 

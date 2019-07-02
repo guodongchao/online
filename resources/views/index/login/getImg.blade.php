@@ -75,21 +75,23 @@
         colorLight : '#ffffff',
         correctLevel : QRCode.CorrectLevel.H
     });
-//    setInterval(function(){
-//        var state = $("#state").val();
-//        var url = "is_log";
-//        $.ajax({
-//            type:"post",
-//            data:{state:state},
-//            url:url,
-//            success:function(msg){
-//                console.log(msg.msg);
-//                if(msg.code==100){
-//                    window.location.href="index";
-//                }
-//            }
-//        })
-//    },3000)
+    setInterval(function(){
+        var state = $("#state").val();
+        var url = "is_log";
+        $.ajax({
+            type:"post",
+            data:{state:state},
+            url:url,
+            success:function(msg){
+                console.log(msg.msg);
+                if(msg.code==100){  //已绑定
+                    window.location.href="index";
+                }else if(msg.code==200){   //未绑定
+                    window.location.href="bdweixinView";
+                }
+            }
+        })
+    },3000)
 
 
 

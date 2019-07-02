@@ -214,6 +214,7 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
 
     //微信绑定账号
     Route::any('bdweixin','index\login\loginController@bdweixin');
+    Route::any('bdweixinView','index\login\loginController@bdweixinView');//绑定页面
 
 
 
