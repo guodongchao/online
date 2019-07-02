@@ -219,9 +219,9 @@ class loginController extends Controller
         $state = $request->input('state');
         $openid = Redis::get($state);
         $result = user::where("u_openid",$openid)->first();
-        dump($result);
+//        dump($result);
 
-        if(count($result)){
+        if($result){
             $resopnse = [
                 'code' => 101,
                 'msg' => '抱歉！该微信账号已绑定其他账号'
