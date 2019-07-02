@@ -207,9 +207,14 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('header2','index\index\indexController@header2');
     Route::any('main','index\index\indexController@main');
 
-
+    //微信二维码直接登录
     Route::any('getImg','index\login\loginController@getImg');   //二维码登录
     Route::any('is_log','index\login\loginController@is_log');   //二维码登录
+
+
+    //微信绑定账号
+    Route::any('bdweixin','index\login\loginController@bdweixin');
+
 
 
 

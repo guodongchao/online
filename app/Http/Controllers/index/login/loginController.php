@@ -101,21 +101,36 @@ class loginController extends Controller
         $data = json_decode($jsonData, true);
         $openid = $data['openid'];
         $token = $data['access_token'];
-        $userInfo = wx::where("openid", $openid)->first();
+//        二维码微信直接登录
+//        $userInfo = wx::where("openid", $openid)->first();
+//        if (!$userInfo) {
+//            $wx_id =  wx::insertGetId(['openid'=>$openid,'add_time'=>time()]);  //添加数据库
+//        }else{
+//            $wx_id = $userInfo->wx_id;
+//        }
+//        $url = "https://api.weixin.qq.com/sns/userinfo?access_token=$token&openid=$openid&lang=zh_CN";
+//        $userInfoJson = file_get_contents($url);
+//        $userInfo = json_decode($userInfoJson,true);
+//        $u_name = $userInfo['nickname'];
+//        $img = $userInfo['headimgurl'];
+//        session(['openid'=>$wx_id,'u_name'=>$u_name,'img'=>$img]);
+//        Redis::set($state,$wx_id);
+
+        //微信必须绑定微信才可
+        $userInfo = user::where("u_openid", $openid)->first();
 
         if (!$userInfo) {
-          $wx_id =  wx::insertGetId(['openid'=>$openid,'add_time'=>time()]);  //添加数据库
+            echo "<script>alert('未绑定,请先绑定')</script>>";
+            return redirect("/index/bdlogin",['openid'=>$openid]);
         }else{
-            $wx_id = $userInfo->wx_id;
+            echo "<script>alert('登录成功')</script>>";
+            $request->session()->put('account',$userInfo->u_name);
+            $request->session()->put('u_name',$userInfo->u_name);
+            $request->session()->put('u_id', $userInfo->u_id);
+            return redirect("/index/index");
         }
 
-        $url = "https://api.weixin.qq.com/sns/userinfo?access_token=$token&openid=$openid&lang=zh_CN";
-        $userInfoJson = file_get_contents($url);
-        $userInfo = json_decode($userInfoJson,true);
-        $u_name = $userInfo['nickname'];
-        $img = $userInfo['headimgurl'];
-        session(['openid'=>$wx_id,'u_name'=>$u_name,'img'=>$img]);
-        Redis::set($state,$wx_id);
+
 //        echo "<script>alert('登录成功')</script>>";
 //        return redirect("/index/index");
 
@@ -154,9 +169,7 @@ class loginController extends Controller
                 $request->session()->put('account', $account);
                 $request->session()->put('u_name', $data['u_name']);
                 $request->session()->put('u_id', $data['u_id']);
-                //            ini_set("session.save_handler","redis");
-                //            ini_set("session.save_path","tcp://188.131.235.77:6379");
-                //            session(["u_name"=>$data['u_id'],"u_id"=>$data['u_id']]);
+
                 $resopnse = [
                     'code' => 200,
                     'msg' => '登陆成功！'
@@ -180,12 +193,69 @@ class loginController extends Controller
     public function is_log(Request $request){
         $state = $request->input("state");
         $value = Redis::get($state);
-//        $value = session("$state");
+
         if($value){
             return ['code'=>100,"msg"=>$value];
         }else{
             return ["code"=>200,"msg"=>$state."eee"];
         }
 
+    }
+
+    public function bdweixin(Request $request){
+
+        $account = $request->input('u_name');
+        $u_pwd = $request->input('u_pwd');
+        $openid = $request->input('openid');
+        $result = user::where("u_openid",$openid)->first();
+        if($result){
+            $resopnse = [
+                'code' => 101,
+                'msg' => '抱歉！该微信账号已绑定其他账号'
+            ];
+            return $resopnse;
+        }
+        $e = strpos($account, '@');
+        if (!empty($e)) {
+            $where = [
+                'u_email' => $account
+            ];
+        } else {
+            $where = [
+                'u_name' => $account
+            ];
+        }
+
+
+        $data = user::where($where)->first();
+        if($data) {
+            //var_dump($where);die;
+            if (empty($data) || $data->u_pwd!=md5($u_pwd)) {
+                $resopnse = [
+                    'code' =>100,
+                    'msg' => '账号或密码错误1！'
+                ];
+               return $resopnse;
+            } else {
+                $res = user::where($where)->update(['u_openid'=>$openid]);
+                if($res) {
+                    $request->session()->put('account', $account);
+                    $request->session()->put('u_name', $data['u_name']);
+                    $request->session()->put('u_id', $data['u_id']);
+
+                    $resopnse = [
+                        'code' => 200,
+                        'msg' => '绑定成功！'
+                    ];
+                }else{
+                    $resopnse = [
+                        'code' => 102,
+                        'msg' => '网络错误！'
+                    ];
+                }
+                return $resopnse;
+
+            }
+        }
     }
 }
