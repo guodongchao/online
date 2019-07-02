@@ -209,6 +209,7 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
 
 
     Route::any('getImg','index\login\loginController@getImg');   //二维码登录
+    Route::any('is_log','index\login\loginController@is_log');   //二维码登录
 
 
 
