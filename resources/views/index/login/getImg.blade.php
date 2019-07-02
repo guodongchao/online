@@ -86,12 +86,10 @@
                 console.log(msg.msg);
                 if(msg.code==100){
                     window.location.href="index";
-                }else{
-                    window.location.href="login";
                 }
             }
         })
-    },1000)
+    },2000)
 
 
 
