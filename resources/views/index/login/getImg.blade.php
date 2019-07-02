@@ -83,7 +83,7 @@
             data:{state:state},
             url:url,
             success:function(msg){
-                alert(msg.msg);
+                console.log(msg.msg);
                 if(msg.code==100){
                     window.location.href="index";
                 }else{
