@@ -219,6 +219,8 @@ class loginController extends Controller
         $u_pwd = $request->input('u_pwd');
         $openid = $request->input('openid');
         $result = user::where("u_openid",$openid)->first();
+        dump($result);
+
         if(count($result)){
             $resopnse = [
                 'code' => 101,
