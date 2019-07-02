@@ -60,12 +60,9 @@ $(function(){
                         @foreach($culumInfo as $k=>$v)
                             <li>
                                 <div class="courseli">
-                                    <a href="video" target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}"></a>
-                                    <p class="memb_courname"><a href="video" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
-                                    <div class="mpp">
-                                        <div class="lv" style="width:20%;"></div>
-                                    </div>
-                                    <p class="goon"><a href="video" target="main"><span>继续学习</span></a></p>
+                                    <a href="coursecont2?culum_id={{$v['culum_id']}}"  target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}"></a>
+                                    <p class="memb_courname"><a href="coursecont2?culum_id={{$v['culum_id']}}" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
+                                    <p class="goon"><a href="coursecont2?culum_id={{$v['culum_id']}}" target="main"><span>继续学习</span></a></p>
                                 </div>
                             </li>
                         @endforeach
@@ -78,12 +75,9 @@ $(function(){
                             @foreach($culuminfo as $k=>$v)
                                 <li>
                                     <div class="courseli">
-                                        <a href="video" target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}"></a>
-                                        <p class="memb_courname"><a href="coursecont" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
-                                        <div class="mpp">
-                                            <div class="lv" style="width:100%;"></div>
-                                        </div>
-                                        <p class="goon"><a href="coursecont" target="main"><span>查看课程</span></a></p>
+                                        <a href="coursecont2?culum_id={{$v['culum_id']}}"  target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}"></a>
+                                        <p class="memb_courname"><a href="coursecont2?culum_id={{$v['culum_id']}}" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
+                                        <p class="goon"><a href="coursecont2?culum_id={{$v['culum_id']}}" target="main"><span>查看课程</span></a></p>
                                     </div>
                                 </li>
                             @endforeach
@@ -97,13 +91,10 @@ $(function(){
                             @foreach($collectInfo as $k=>$v)
                                 <li>
                                     <div class="courseli mysc">
-                                        <a href="video" target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}" class="mm"></a>
-                                        <p class="memb_courname"><a href="video" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
-                                        <div class="mpp">
-                                            <div class="lv" style="width:20%;"></div>
-                                        </div>
-                                        <p class="goon"><a href="#"><span>继续学习</span></a></p>
-                                        <div class="mask"><span class="qxsc"  title="移除收藏">▬</span></div>
+                                        <a href="coursecont?culum_id={{$v['culum_id']}}"  target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}" class="mm"></a>
+                                        <p class="memb_courname"><a href="coursecont?culum_id={{$v['culum_id']}}" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
+                                        <p class="goon"><a href="coursecont?culum_id={{$v['culum_id']}}"><span>查看</span></a></p>
+                                        <p class="mask"><span class="qxsc" >移除</span></p>
                                     </div>
                                 </li>
                             @endforeach

@@ -158,11 +158,9 @@ class loginController extends Controller
                 'u_name' => $account
             ];
         }
-
-
         $data = user::where($where)->first();
-        if($data) {
-            //var_dump($where);die;
+            if(empty($data) || $data->u_pwd!=md5($u_pwd)){
+
             if (empty($data) || $data->u_pwd!=md5($u_pwd)) {
                 $resopnse = [
                     'code' => 50001,
@@ -238,8 +236,6 @@ class loginController extends Controller
                 'u_name' => $account
             ];
         }
-
-
         $data = user::where($where)->first();
         if($data) {
             //var_dump($where);die;
@@ -267,7 +263,6 @@ class loginController extends Controller
                     ];
                 }
                 return $resopnse;
-
             }
         }
     }
