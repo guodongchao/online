@@ -99,6 +99,7 @@ class loginController extends Controller
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appid&secret=$secret&code=$code&grant_type=authorization_code";
         $jsonData = file_get_contents($url);
         $data = json_decode($jsonData, true);
+        dump($data);
         $openid = $data['openid'];
         $token = $data['access_token'];
 //        二维码微信直接登录
