@@ -114,7 +114,8 @@ class loginController extends Controller
         $userInfo = json_decode($userInfoJson,true);
         $u_name = $userInfo['nickname'];
         $img = $userInfo['headimgurl'];
-        session(['openid'=>$wx_id,'u_name'=>$u_name,'img'=>$img,"$state"=>$wx_id]);
+        session(['openid'=>$wx_id,'u_name'=>$u_name,'img'=>$img]);
+        Redis::set($state,$wx_id);
 //        echo "<script>alert('登录成功')</script>>";
 //        return redirect("/index/index");
 
@@ -178,7 +179,8 @@ class loginController extends Controller
 
     public function is_log(Request $request){
         $state = $request->input("state");
-        $value = session("$state");
+        $value = Redis::get($state);
+//        $value = session("$state");
         if($value){
             return ['code'=>100,"msg"=>$value];
         }else{
