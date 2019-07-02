@@ -17,7 +17,7 @@
 <body>
 <div class="login" style="background:url(images/12.jpg) right center no-repeat #fff">
     <h2>微信绑定</h2>
-
+    <input type="hidden" id="statu" value="{{$state}}">
     <div>
         <p class="formrow">
             <label class="control-label" for="register_email">帐号</label>
@@ -103,12 +103,12 @@
             alert('密码不能为空');
             return false;
         }
-        var openid=$('#openid').val();
-        console.log(openid)
+        var state=$('#state').val();
+        console.log(state)
         $.ajax({
             url:"/index/bdweixin",
             type:"post",
-            data:{u_name:u_name,u_pwd:u_pwd,openid:openid},
+            data:{u_name:u_name,u_pwd:u_pwd,state:state},
             success:function(data){
                 alert(data.msg);
                 if(data.code ==200){

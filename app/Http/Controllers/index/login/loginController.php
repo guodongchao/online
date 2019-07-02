@@ -199,7 +199,7 @@ class loginController extends Controller
         $u_id =  Redis::get("u_id");
 
         if($value){
-            return ['code'=>200,"msg"=>"请先绑定","data"=>$value];   //有值,去绑定页面
+            return ['code'=>200,"msg"=>"请先绑定","data"=>$state];   //有值,去绑定页面
         }
         if($u_id){
             return ["code"=>100,"msg"=>"登录成功"];    //u_id有值,已经绑定了
@@ -207,7 +207,8 @@ class loginController extends Controller
 
     }
     public function bdweixinView(Request $request){
-        return view("index.login.bdlogin");
+        $state = $request->input("id");
+        return view("index.login.bdlogin",['state'=>$state]);
     }
 
 
@@ -215,7 +216,8 @@ class loginController extends Controller
 
         $account = $request->input('u_name');
         $u_pwd = $request->input('u_pwd');
-        $openid = $request->input('id');
+        $state = $request->input('state');
+        $openid = Redis::get($state);
         $result = user::where("u_openid",$openid)->first();
         dump($result);
 
