@@ -182,7 +182,7 @@ class loginController extends Controller
         if($value){
             return ['code'=>100,"msg"=>$value];
         }else{
-            return ["code"=>200,"msg"=>$value."eee"];
+            return ["code"=>200,"msg"=>$state."eee"];
         }
 
     }
