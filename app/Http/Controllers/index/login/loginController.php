@@ -127,7 +127,7 @@ class loginController extends Controller
 //            return redirect("/index/bdlogin",['openid'=>$openid]);
         }else{
             //绑定.存u_id
-            Redis::set("u_id",$userInfo->u_id);
+            Redis::set($state."u_id",$userInfo->u_id);
 //            echo "<script>alert('登录成功')</script>>";
 //            $request->session()->put('account',$userInfo->u_name);
 //            $request->session()->put('u_name',$userInfo->u_name);
@@ -196,7 +196,7 @@ class loginController extends Controller
     public function is_log(Request $request){
         $state = $request->input("state");
         $value = Redis::get($state);
-        $u_id =  Redis::get("u_id");
+        $u_id =  Redis::get($state."u_id");
 
         if($value){
             return ['code'=>200,"msg"=>"请先绑定","data"=>$state];   //有值,去绑定页面
