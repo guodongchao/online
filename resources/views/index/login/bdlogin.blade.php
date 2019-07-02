@@ -103,7 +103,7 @@
             alert('密码不能为空');
             return false;
         }
-        var state=$('#state').val();
+        var state=$('#statu').val();
         console.log(state)
         $.ajax({
             url:"/index/bdweixin",
