@@ -180,9 +180,9 @@ class loginController extends Controller
         $state = $request->input("state");
         $value = session("$state");
         if($value){
-            return ['code'=>100,"msg"=>"登录成功"];
+            return ['code'=>100,"msg"=>$value];
         }else{
-            return ["code"=>200,"msg"=>"登录失败"];
+            return ["code"=>200,"msg"=>$value."eee"];
         }
 
     }
