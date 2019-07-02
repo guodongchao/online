@@ -290,6 +290,7 @@ class courseController extends Controller
             $culumInfo=culum::where($culumwhere)->first();
             $dateinfo['culum_name']=$culumInfo->culum_name;
             $dateinfo['culum_img']=$culumInfo->culum_img;
+            $dateinfo['culum_id']=$culumInfo->culum_id;
             $Info1[]=$dateinfo;
         }
         //已学完
@@ -307,6 +308,7 @@ class courseController extends Controller
             $culumInfos=culum::where($culumwheres)->first();
             $dateinfo2['culum_name']=$culumInfos->culum_name;
             $dateinfo2['culum_img']=$culumInfos->culum_img;
+            $dateinfo2['culum_id']=$culumInfos->culum_id;
             $Info2[]=$dateinfo2;
         }
         //收藏
@@ -323,6 +325,7 @@ class courseController extends Controller
             $collectInfo=culum::where($collectwhere)->first();
             $date['culum_name']=$collectInfo->culum_name;
             $date['culum_img']=$collectInfo->culum_img;
+            $date['culum_id']=$collectInfo->culum_id;
             $Collect[]=$date;
         }
         $data=[
