@@ -202,6 +202,8 @@ class loginController extends Controller
             return ['code'=>200,"msg"=>"请先绑定","data"=>$state];   //有值,去绑定页面
         }
         if($u_id){
+            $user = user::where("u_id",$u_id)->first();
+            session(["account"=>$user->u_name,'u_id'=>$user->u_id]);
             return ["code"=>100,"msg"=>"登录成功"];    //u_id有值,已经绑定了
         }
 
@@ -253,7 +255,7 @@ class loginController extends Controller
                     $request->session()->put('account', $account);
                     $request->session()->put('u_name', $data['u_name']);
                     $request->session()->put('u_id', $data['u_id']);
-
+                    Redis::del($state);
                     $resopnse = [
                         'code' => 200,
                         'msg' => '绑定成功！'
