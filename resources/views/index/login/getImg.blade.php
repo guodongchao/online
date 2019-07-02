@@ -87,7 +87,7 @@
                 if(msg.code==100){  //已绑定
                     window.location.href="index";
                 }else if(msg.code==200){   //未绑定
-                    window.location.href="bdweixinView";
+                    window.location.href="bdweixinView?id="+msg.data;
                 }
             }
         })
