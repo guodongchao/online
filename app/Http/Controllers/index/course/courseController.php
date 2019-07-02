@@ -16,13 +16,18 @@ use App\models\culum;
 use App\models\userculum;
 use App\models\chapter;
 use App\models\hour;
+
+use App\models\userhour;
+
 use App\models\note;
+
 
 class courseController extends Controller
 {
     public function coursecont(Request $request){ //详细课程介绍
         //接课程的id
         $culum_id = $request->input("culum_id");
+        $u_id =$request->session()->get('u_id');
         $culumdata = culum::where('culum_id',$culum_id)
             ->join('teacher_details','culum.teacher_id','=','teacher_details.teacher_id')
             ->first()->toArray();
@@ -45,10 +50,73 @@ class courseController extends Controller
         //总分钟
         $time = hour::where('culum_id',$culum_id)->pluck('show_time')->toarray();
         $time = array_sum($time);
-        //x学习人数
+        //学习人数
         $usernaem = DB::table('user_culum')->where('culum_id',$culum_id)->get();
         $usernum = count($usernaem);
-        return view("index.course.coursecont",['culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
+        //是否收藏
+        if(!empty($u_id)){
+            $where = [
+                'u_id'=>$u_id,
+                'course_id'=>$culum_id,
+                'collect_status'=>1,
+            ];
+            $collect = collect::where($where)->first();
+//            echo $collect;
+            if($collect){
+                $codes = 1;
+            }else{
+                $codes = 2;
+            }
+        }else{
+            $codes = 2;
+        }
+        //相关课程
+        $c_parent_id = DB::table('course_cate')->where('c_cate_id',$culumdata['c_cate_id'])->value('c_parent_id');
+        $c_cate_id = DB::table('course_cate')->where('c_parent_id',$c_parent_id)->get(['c_cate_id'])->toArray();
+        $id = [];
+        foreach($c_cate_id as $k=>$v){
+            $id[] = $v->c_cate_id;
+        }
+        $dataculums = culum::whereIn('c_cate_id',$id)->where('culum_id','!=',$culum_id)->limit(4)->get()->toArray();
+        return view("index.course.coursecont",['dataculums'=>$dataculums,'codes'=>$codes,'culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
+    }
+    //收藏课程
+    public function shoucang(Request $request){
+        $u_id =$request->session()->get('u_id');
+        $culum_id =$request->input("culum_id");   //课程id
+        $code =$request->input("code");
+//        var_dump($u_id);exit;
+        if(empty($u_id)){
+            return  json_encode(['code'=>3]);
+        }
+        $wheres = [
+            'course_id'=>$culum_id,
+            'u_id'=>$u_id,
+        ];
+        if($code < 2){
+
+            $res = collect::where($wheres)->first();
+            if($res){
+                $where = [
+                    'collect_status'=>1
+                ];
+                $res = collect::where($wheres)->update($where);
+                return json_encode(['code'=>1]);
+            }
+            $where = [
+                'course_id'=>$culum_id,
+                'u_id'=>$u_id,
+                'collect_time'=>time()
+            ];
+            $res = collect::insert($where);
+            return json_encode(['code'=>1]);
+        }else{
+            $where = [
+                'collect_status'=>2
+            ];
+            $res = collect::where($wheres)->update($where);
+            return json_encode(['code'=>2]);
+        }
     }
     public function coursecont1(Request $request){    //章节,问答,资料区
         $u_id =$request->session()->get('u_id');
@@ -62,14 +130,38 @@ class courseController extends Controller
         ];
         $usernaem = DB::table('user_culum')->where($where)->first();
         if(empty($usernaem)){
-            return json_encode(['code'=>2]);
+            return json_encode(['code'=>2,'culum_id'=>$culum_id]);
         }
         return json_encode(['code'=>3,'culum_id'=>$culum_id]);
 //        return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
     public function coursecont2(Request $request){
+        $u_id = session("u_id");
+        $u_name = session("u_name");
+        if(empty($u_id)){
+            echo  "<script>alert('未登录，请先登录');location.href='login';</script>";exit;
+        }
+
         $culum_id =$request->input("culum_id");   //课程id
         $quest_id = $request->input("quest_id");    //查看问题的id
+
+//        $this->canWatch($u_id,$culum_id);
+        $culumCan = userculum::where("u_id",$u_id)->where("culum_id",$culum_id)->first();
+        if(!$culumCan){
+            return redirect("/index/coursecont?culum_id=$culum_id");
+        }
+
+        $where = [
+            'u_id'=>$u_id,
+            'culum_id'=>$culum_id
+        ];
+        $usernaem = DB::table('user_culum')->where($where)->first();
+        if(empty($usernaem)){
+            echo  "<script>alert('未购买，请先购买');location.href='index';</script>";exit;
+        }
+
+
+
         if($quest_id){
             $data = Redis::lrange($quest_id,0,-1);
         }else{
@@ -106,7 +198,7 @@ class courseController extends Controller
                 $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
             }
         }
-//        dump($chapter);
+        dump($chapter);
         return view("index.course.coursecont1",['chapter'=>$chapter,'culum_cate'=>$culum_cate,'culumdata'=>$culumdata,'data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
     public function courselist(Request $request){       //课程展示(主要查询分类)
@@ -172,18 +264,89 @@ class courseController extends Controller
 
     }
     //视频播放
-    public function video(Request $request){
-        $culum_id =$request->input("culum_id",1);
-        $chapter=chapter::where('culum_id',$culum_id)->where('chapter_status',1)->get()->toarray();
-        foreach($chapter as $k=>$v){
-            $chapter[$k]['section']=section::where('chapter_id',$v['chapter_id'])->where('is_del',1)->select('section_id','section_name')->get()->toarray();
+    public function video(Request $request)
+    {
+        $culum_id = $request->input("culum_id", 1);
+        $hour_id = $request->input("hour_id");
+        $u_name = session("u_name");
+        $u_id = session("u_id");
+        if (!$u_id) {
+            echo "<script>alert('未登录，请先登陆');parent.location.href='login';</script>";
+            exit;
         }
-        foreach ($chapter as $k=>$v){
-            foreach ($v['section'] as $kk=>$vv){
-                $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
+        $culumCan = userculum::where("u_id", $u_id)->where("culum_id", $culum_id)->first();
+        if (!$culumCan) {
+            return redirect("/index/coursecont?culum_id=$culum_id");
+        }
+        $chapter = chapter::where('culum_id', $culum_id)->where('chapter_status', 1)->get()->toarray();
+        foreach ($chapter as $k => $v) {
+            $chapter[$k]['section'] = section::where('chapter_id', $v['chapter_id'])->where('is_del', 1)->select('section_id', 'section_name')->get()->toarray();
+        }
+        foreach ($chapter as $k => $v) {
+            foreach ($v['section'] as $kk => $vv) {
+                $chapter[$k]['section'][$kk]['hour'] = hour::where('section_id', $vv['section_id'])->where('is_del', 1)->get()->toarray();
             }
         }
-        return view("index.course.video",['chapter'=>$chapter]);
+        if(!$hour_id) {        //通过点击学习进入
+
+            $myHouse = userhour::where("u_id", $u_id)->where("culum_id", $culum_id)->pluck("hour_id");
+//
+            if ($myHouse) {
+                $hourData = hour::whereNotIn("hour_id", $myHouse)->limit(1)->first();
+
+                if (!$hourData) {
+                    $hourData = hour::where("culum_id", $culum_id)->limit(1)->first();
+                } else {
+                    $arr = [
+                        "u_id" => $u_id,
+                        "hour_id" => $hourData->hour_id,
+                        "culum_id" => $hourData->culum_id,
+                    ];
+
+                    $res = userhour::insert($arr);
+                }
+            } else {
+                $hourData = hour::where("culum_id", $culum_id)->limit(1)->first();
+                $arr = [
+                    "u_id" => $u_id,
+                    "hour_id" => $hourData->hour_id,
+                    "culum_id" => $hourData->culum_id,
+                ];
+
+                $res = userhour::insert($arr);
+            }
+        }else{   //通过选择学时视频进入
+            $myHouse = userhour::where("u_id", $u_id)->where("hour_id", $hour_id)->first();
+            if(!$myHouse){       //用户学时无该数据
+                $arr = [
+                    "u_id" => $u_id,
+                    "hour_id" => $hour_id,
+                    "culum_id" => $culum_id,
+                ];
+
+                $res = userhour::insert($arr);
+            }
+            $hourData = hour::where("hour_id", $hour_id)->first();
+
+        }
+
+        return view("index.course.video", ['chapter' => $chapter, 'u_name' => $u_name, 'hourData' => $hourData]);
+
+    }
+
+    public function changeHour(Request $request){
+        $culum_id = $request->input("culum_id");
+        $hour_id = $request->input("hour_id");
+        $new_time = $request->input("new_time");
+        $u_id = session("u_id");
+        if($new_time){
+            $where=[
+                "u_id"=>$u_id,
+                "hour_id"=>$hour_id
+            ];
+            userhour::where($where)->update(['new_time'=>$new_time]);
+        }
+
     }
     public function quest(Request $request){      //提出问题
         $u_id =$request->input("u_id",1);

@@ -44,7 +44,13 @@
                 <span class="btnlink btn">{{$culumdata['culum_price']}}￥</span>
             @endif
             <a class="codol fx" href="javascript:void(0);" onClick="$('#bds').toggle();">分享课程</a>
-            <a class="codol sc" href="#">收藏课程</a></span>
+
+            @if($codes >1)
+                <a class="codol sc fenxiang" style="cursor: pointer; color:red;">收藏课程</a>
+            @else
+                <a class="codol sc fenxiang" style="cursor: pointer; color: red; background-position: 0px -1800px;">取消收藏</a>
+            @endif
+        </span>
 		<div style="clear:both;"></div>
 		<div id="bds">
             <div class="bdsharebuttonbox">
@@ -71,10 +77,15 @@
 	<div class="clearh"></div>
 	<h3 class="leftit">课程目录</h3>
     <dl class="mulu">
-        @foreach($muludata as $k=>$v)
-    	<dt><a href="#" target="main" class="graylink btn">第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}</a></dt>
-        <dd>{{$v['chapter_desc']}}</dd>
-        @endforeach
+        @if(count($muludata)>0)
+            @foreach($muludata as $k=>$v)
+                <dt><a href="#" target="main" class="graylink btn">第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}</a></dt>
+                <dd>{{$v['chapter_desc']}}</dd>
+            @endforeach
+        @else
+            <dt><span>暂无数据</span></dt>
+        @endif
+
     </dl>
 </div>
 
@@ -97,12 +108,16 @@
     <div class="cr1">
     <h3 class="righttit">课程公告</h3>
         <div class="gonggao">
-            @foreach($name as $v)
-                <div class="clearh"></div>
-                <p>{{$v['n_name']}}<br/>
-                <span class="gonggao_time"><?php echo date('Y-m-d',time())?></span>
-                </p>
-            @endforeach
+            @if(count($name)>0)
+                @foreach($name as $v)
+                    <div class="clearh"></div>
+                    <p>{{$v['n_name']}}<br/>
+                    <span class="gonggao_time"><?php echo date('Y-m-d',time())?></span>
+                    </p>
+                @endforeach
+            @else
+                <p>暂无公告</p>
+            @endif
                 <div class="clearh"></div>
         </div>
     </div>
@@ -112,20 +127,14 @@
     <div class="cr1">
     <h3 class="righttit">相关课程</h3>
     <div class="teacher">
+        @foreach($dataculums as $v)
     <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c1.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="peptitle" target="_blank">财经法规与财经职业道德</a></h3>
+        <a href="#"  target="_blank"><img src="images/c1.jpg" height="60" title=""></a>
+        <h3 class="courh3"><a href="coursecont?culum_id={{$v['culum_id']}}" class="peptitle">{{$v['culum_name']}}</a></h3>
     </div>
+        @endforeach
     <div class="clearh"></div>
-    <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c2.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="peptitle" target="_blank">财经法规与财经职业道德</a></h3>
-    </div>
-    <div class="clearh"></div>
-    <div class="teapic">
-        <a href="#"  target="_blank"><img src="images/c3.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="peptitle" target="_blank">财经法规与财经职业道德</a></h3>
-    </div>
+
     <div class="clearh"></div>
     </div>
     </div>
@@ -196,7 +205,7 @@
                                 content:'还未登录，未登录',
                                 btn:['登录','取消'],
                                 btn1:function(){
-                                    location.href="login";
+                                    parent.location.href="http://www.online.com/index/login";
                                     return true;
                                 },
                                 btn2:function(){
@@ -206,20 +215,7 @@
 
                             })
                         }else if(res.code==2){
-                            layer.open({
-                                type:0,
-                                content:'是否确认支付',
-                                btn:['确定','取消'],
-                                btn1:function(){
-                                    location.href="login";
-                                    return true;
-                                },
-                                btn2:function(){
-//                                location.href="login";
-                                    return true;
-                                }
-
-                            })
+                            location.href="createOrder?culum_id="+res.culum_id;
                         }else{
                             location.href="coursecont2?culum_id="+res.culum_id;
                         }
@@ -227,5 +223,38 @@
                 )
             })
         })
+
+
+        $('.fenxiang').click(function(){
+            var _this = $(this);
+            var data = _this.html();
+            var culum_id = $('#gaeg').val();
+            console.log(data);
+//            alert(11);
+            if(data == '取消收藏'){
+                var code = 1;
+            }else{
+                var code = 2;
+            }
+            $.post(
+                'shoucang',
+                {culum_id:culum_id,code:code},
+                function(res){
+                    var code = res.code
+                    if(code==1){
+                        layer.msg('收藏成功');
+                    }else if(code==3){
+                        layer.msg('您未登录');
+//                        _this.html('收藏课程');
+                    }else{
+                        layer.msg('取消成功');
+//                        _this.html('收藏课程');
+//                        var a = _this.html();
+//                        console.log(a);
+                    }
+                },'json'
+            )
+        })
+
     })
 </script>

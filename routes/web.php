@@ -206,6 +206,23 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('header1','index\index\indexController@header1');
     Route::any('header2','index\index\indexController@header2');
     Route::any('main','index\index\indexController@main');
+
+    //微信二维码直接登录
+    Route::any('getImg','index\login\loginController@getImg');   //二维码登录
+    Route::any('is_log','index\login\loginController@is_log');   //二维码登录
+
+
+    //微信绑定账号
+    Route::any('bdweixin','index\login\loginController@bdweixin');
+    Route::any('bdweixinView','index\login\loginController@bdweixinView');//绑定页面
+
+
+
+
+
+
+
+
     //关于我们
     Route::any('page','index\page\pageController@page');
     Route::any('pagecontact','index\page\pageController@pagecontact');
@@ -224,6 +241,13 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('courselistData','index\course\courseController@courselistData');//课程下某个分类下的科目
     Route::any('courseSearch','index\course\courseController@courseSearch');//课程下某个分类下的科目
     Route::any('coursecont2','index\course\courseController@coursecont2');//课程下某个分类下的科目
+
+    Route::any('changeHour','index\course\courseController@changeHour');//观看某个课时的时间
+
+
+
+    Route::any('shoucang','index\course\courseController@shoucang');//课程下某个分类下的科目
+
     Route::any('video','index\course\courseController@video');//视频播放
     Route::any('quest','index\course\courseController@quest');//课程下的问答
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
@@ -284,6 +308,16 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     //问答
     Route::any('comment','index\comment\commentController@comment');
     Route::any('comment_do','index\comment\commentController@comment_do');
+
+
+
+    //支付
+    Route::any('pay1','index\paymentController@pay1');
+    Route::any('pay','index\paymentController@pay');
+    Route::any('aliReturn','index\paymentController@aliReturn');
+    Route::any('notify','index\paymentController@notify');
+    Route::any('createOrder','index\paymentController@createOrder');
+
 });
 
 

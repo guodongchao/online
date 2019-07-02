@@ -5,6 +5,7 @@ namespace App\Http\Controllers\index\article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\models\culum;
 
 class articleController extends Controller
 {
@@ -33,7 +34,8 @@ class articleController extends Controller
             ->join('mation','mation_cate_rela.mation_id','=','mation.mation_id')
             ->limit(6)
             ->get();
-        return view("index.article.article",['data'=>$data,'catesdata'=>$catesdata,'daid'=>$id]);
+        $dataculums = culum::where('is_del',1)->limit(4)->get()->toArray();
+        return view("index.article.article",['dataculums'=>$dataculums,'data'=>$data,'catesdata'=>$catesdata,'daid'=>$id]);
     }
     public function articlelist(Request $request){
         $pageSize = 4;
@@ -52,7 +54,8 @@ class articleController extends Controller
         $totalData = $mationdata->get();
         $mationdata = $mationdata->limit($pageSize)->get();
 
-
+        //相关课程
+        $dataculums = culum::where('is_del',1)->limit(4)->get()->toArray();
         $total = ceil(count($totalData)/$pageSize);
 
         $catesdata = DB::table('mation_cate_rela')
@@ -61,7 +64,7 @@ class articleController extends Controller
             ->join('mation','mation_cate_rela.mation_id','=','mation.mation_id')
             ->limit(6)
             ->get();
-        return view("index.article.articlelist",['page'=>1,'total'=>$total,'mcate_id'=>$mcate_id,'catedata'=>$catedata,'mationdata'=>$mationdata,'catesdata'=>$catesdata]);
+        return view("index.article.articlelist",['dataculums'=>$dataculums,'page'=>1,'total'=>$total,'mcate_id'=>$mcate_id,'catedata'=>$catedata,'mationdata'=>$mationdata,'catesdata'=>$catesdata]);
     }
 
     //上一篇
