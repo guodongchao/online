@@ -219,7 +219,7 @@ class loginController extends Controller
         $u_pwd = $request->input('u_pwd');
         $openid = $request->input('openid');
         $result = user::where("u_openid",$openid)->first();
-        if($result){
+        if(count($result)){
             $resopnse = [
                 'code' => 101,
                 'msg' => '抱歉！该微信账号已绑定其他账号'
