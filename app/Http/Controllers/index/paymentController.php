@@ -53,7 +53,7 @@ class PaymentController extends Controller
         $bizcont = [
             'subject'           => $order_info['culum_name'],
             'out_trade_no'      => time().$oid,
-            'total_amount'      => $order_info['culum_price'] ,
+            'total_amount'      => $order_info['culum_price'],
             'product_code'      => 'QUICK_WAP_WAY',
         ];
         //公共参数
