@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/member.css"/>
 <script src="js/jquery-1.8.0.min.js"></script>
 <link rel="stylesheet" href="css/tab.css" media="screen">
+<link rel="stylesheet" href="css/bootstrap.css">
 <script src="js/jquery.tabs.js"></script>
 <script src="js/mine.js"></script>
 <script type="text/javascript">
@@ -217,13 +218,13 @@ $(function(){
                 $.each(msg.data,function(i,value){
                     _tr+= "<input type='hidden'name='hidden' value='"+value.q_result+"'>"+
                          "<input type='hidden'name='hiddens' value='"+msg.c_id+"'>"+
-                         "<p class='goon'><a href='javascript:;' onclick='collention("+value.q_id+")' target='main'><span>收藏该题</span></a></p>"+
-                         "<h3>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
-                         "<h3>题目:"+value.q_name+"</h3>"+
+                         "<button type='button' class='btn btn-info'onclick='collention("+value.q_id+")'>收藏该题</button>"+
+                         "<h3 style='color: aquamarine'>进度:<b style='color: red'>"+msg.q_id+"</b>/"+msg.num+"</h3>"+
+                         "<h3 style='color: orange;'>问:"+value.q_name+"</h3>"+
                          "<h3 id='box'>"+  $.each(value.q_answer,function(ii,values){
                                  _input+="<tr><td><input type='radio'name='radio'value='"+values+"'>"+values+"</td></tr>"
                             }) +"</h3><br><br><br><br><br><br>"+
-                         "<h3><input type='submit'value='上一题' id='top' onclick='check_btns("+msg.q_id+")'> <input type='submit'value='确认(下一题)'id='button' onclick='check_btn("+msg.q_id+")'></h3>"
+                         "<h3><button type='button' class='btn btn-danger'id='top' onclick='check_btns("+msg.q_id+")'>上一题</button>  &nbsp;&nbsp;&nbsp;<button type='button' class='btn btn-success'id='button' onclick='check_btn("+msg.q_id+")' >下一题</button></h3>"
                 })
                 $('#test').html(_tr);
                 $('#box').html(_input);

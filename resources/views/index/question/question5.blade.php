@@ -9,9 +9,12 @@
 <script src="js/jquery-1.8.0.min.js"></script>
 <link rel="stylesheet" href="css/tab.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/css/css.css" />
+<link rel="stylesheet" href="css/bootstrap.css">
 <script src="js/jquery.tabs.js"></script>
 <script src="js/mine.js"></script>
+
 <script type="text/javascript">
+
 $(function(){
 
 	
@@ -81,7 +84,9 @@ $(function(){
                     <td width="200px" class="tdColor">{{$v['q_name']}}</td>
                     <td width="200px" class="tdColor">{{$v['q_answer']}}</td>
                     <td width="200px" class="tdColor">{{ date('Y-m-d H:i:s',$v['c_time']) }}</td>
-                    <td width="200px" class="tdColor"> <p class="goon"><a href="javascript:;" onclick="del({{$v['c_id']}})" target="main"><span>删除</span></a></p></td>
+                    <td width="200px" class="tdColor">
+                        <button type="button" class="btn btn-danger" onclick="del({{$v['c_id']}})"> 删除</button>
+                    </td>
                 </tr>
             @endforeach
         </table>
