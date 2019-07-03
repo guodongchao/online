@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/member.css"/>
     <script src="js/jquery-1.8.0.min.js"></script>
     <link rel="stylesheet" href="css/tab.css" media="screen">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <script src="js/jquery.tabs.js"></script>
     <script src="js/mine.js"></script>
     <script type="text/javascript">
@@ -336,9 +337,9 @@
                     _tr+= "<input type='hidden'name='hidden' value='"+value.q_result+"'>"+
                             "<input type='hidden'name='hiddens' value='"+msg.c_id+"'>"+
                             "<input type='hidden'name='q_id' value='"+value.q_id+"'>"+
-                            "<h3 id='progres'>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
-                            "<h3 id='progress'class='yuan'>进度:"+msg.q_id+"/"+msg.num+"</h3>"+
-                            "<h3>题目:"+value.q_name+"</h3>"+
+                            "<h3 id='progres' style='color: aquamarine'>进度:<b style='color: red'>"+msg.q_id+"</b>/"+msg.num+"</h3>"+
+                            "<h3 id='progress'class='yuan' >进度:"+msg.q_id+"/"+msg.num+"</h3>"+
+                            "<h3 style='color: orange;'>问:"+value.q_name+"</h3>"+
                             "<h3 class='boxx'>"+  $.each(value.q_answer,function(ii,values){
                                 if(values==value.t_result){
                                     check="checked";
@@ -350,10 +351,10 @@
                                 }else{
                                      namedis='';
                                 }
-                                _input+="<tr><td><input type='radio'name='radio'value='"+ values+ "' "+check+" "+namedis+">"+values+"</td></tr>"
+                                _input+="<tr><td><input type='radio'name='radio' class='radio' value='"+ values+ "' "+check+" "+namedis+">"+values+"</td></tr>"
 
                             }) +"</h3><br><br><br><br><br><br>"+
-                            "<h3><input type='submit'value='上一题' id='top' onclick='check_btns("+msg.q_id+")' "+namedis+" > <input type='submit'value='确认(下一题)'id='button'  onclick='check_btn("+msg.q_id+")'"+namedis+" ></h3>"
+                            "<h3><input type='submit'value='上一题' id='top' class='btn btn-danger' onclick='check_btns("+msg.q_id+")' "+namedis+" > <input type='submit'value='确认(下一题)'  class='btn btn-success' id='button'  onclick='check_btn("+msg.q_id+")'"+namedis+" ></h3>"
                 })
                 for(var i=1;i<=msg.num;i++){
                     _progress+="<a href='javascript:;' class='progress' style='margin-left:20px;' onclick='check_random("+i+")'>"+i+"</a>";

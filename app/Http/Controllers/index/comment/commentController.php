@@ -78,5 +78,23 @@ class commentController extends Controller
             ]);
         }
     }
+    //删除评论
+    public function comment_del(Request $request){
+        $comment_id=$request->input('comment_id');
+        $redis=new \redis();
+        $redis->connect('127.0.0.1','6379');
+        $res=$redis->del("$comment_id");
+        if($res){
+            return json_encode([
+                'code'=>1,
+                'msg'=>'删除成功'
+            ]);
+        }else{
+            return json_encode([
+                'code'=>2,
+                'msg'=>'删除失败'
+            ]);
+        }
+    }
 
 }
