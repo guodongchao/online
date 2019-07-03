@@ -41,6 +41,7 @@ class indexController extends Controller
     //退出
     public function quit(){
         session()->flush('acount');
-        header('refresh:0.2,/index/index');
+        session()->flush('u_id');
+        return ['code'=>1];
     }
 }

@@ -47,7 +47,7 @@
         <?php if(!empty(session('account'))){?>
             <span class="massage" style="z-index:999">
                 <a href="mycourse"  style="width:80px" class="link2 he ico" target="main"><?php echo session('account')?></a>
-                <a href="/index/quit"   style="width:70px" class="link2 he" target="main">退出</a>
+                <a href="javascript:;"   style="width:70px" class="link2 he quit" target="main">退出</a>
             </span>
         <?php }else{ ?>
             <span class="massage" style="z-index:999">
@@ -88,4 +88,17 @@
             },
             600);
     });
+    $(".quit").click(function(){
+        var url = "quit";
+        $.ajax({
+            type:"post",
+            url:url,
+            success:function(msg){
+                if(msg.code==1){
+                    parent.location.hred="index";
+                }
+            }
+
+        })
+    })
 </script>
