@@ -351,7 +351,7 @@
                         @foreach($v['culum'] as $kk=>$vv)
                         <li>
                             <div class="courselist">
-                                <a href="coursecont?culum_id={{$vv['culum_id']}}"><img width="263" style="border-radius:3px 3px 0 0;" src="/admin{{$vv['culum_img']}}" ></a>
+                                <a href="coursecont?culum_id={{$vv['culum_id']}}"><img width="263" style="border-radius:3px 3px 0 0;" src="/admin{{ltrim($vv['culum_img'],".")}}" ></a>
                                 <p class="courTit">{{$vv['culum_name']}}</p>
                                 <div class="gray">
                                     <span>1小时前更新</span>

@@ -89,7 +89,6 @@
             600);
     });
     $(".quit").click(function(){
-        alert(111);
         var url = "quit";
         $.ajax({
             type:"post",
