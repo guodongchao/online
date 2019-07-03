@@ -109,7 +109,8 @@
             data:{u_name:u_name,u_pwd:u_pwd},
             dataType:"json",
             success:function(data){
-                alert(data.msg);
+//                alert(data.msg);
+                console.log(data)
                 if(data.code ==200){
                     location.href ="/index/index";
                 }
