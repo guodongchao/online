@@ -318,7 +318,9 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('aliReturn','index\paymentController@aliReturn');
     Route::any('notify','index\paymentController@notify');
     Route::any('createOrder','index\paymentController@createOrder');
-
+    Route::any('show','index\index\indexController@show');
+    Route::any('addshow','index\index\indexController@addshow');
+    Route::any('result','index\index\indexController@result');
 });
 
 

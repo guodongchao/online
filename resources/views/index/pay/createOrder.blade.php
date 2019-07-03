@@ -88,7 +88,9 @@
                 var culum_id = $("[name='culum_id']").val();
                 var pay_type = $("[name='pay_type']:checked").val();
                 if(pay_type==2){
-                    location.href="pay?culum_id="+culum_id;
+                    location.href="show?culum_id="+culum_id;
+                }else{
+                    location.href="show?culum_id="+culum_id;
                 }
 
             });
