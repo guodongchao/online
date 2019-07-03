@@ -60,28 +60,22 @@
     </div>
 </div>
 
-<div class="ctext">
-    <div class="cr1">
-    <h3 class="righttit">推荐课程</h3>
-    <div class="teacher">
-    <div class="teapic">
-        <a href="#"  target="main"><img src="images/c1.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="ask_link" target="main">财经法规与财经职业道德</a></h3>
+    <div class="ctext">
+        <div class="cr1">
+            <h3 class="righttit">相关课程</h3>
+            <div class="teacher">
+                @foreach($dataculums as $v)
+                    <div class="teapic">
+                        <a href="#"  target="_blank"><img src="images/c1.jpg" height="60" title=""></a>
+                        <h3 class="courh3"><a href="coursecont?culum_id={{$v['culum_id']}}" class="peptitle" style="color:black">{{$v['culum_name']}}</a></h3>
+                    </div>
+                @endforeach
+                <div class="clearh"></div>
+
+                <div class="clearh"></div>
+            </div>
+        </div>
     </div>
-    <div class="clearh"></div>
-    <div class="teapic">
-        <a href="#"  target="main"><img src="images/c2.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="ask_link" target="main">财经法规与财经职业道德</a></h3>
-    </div>
-    <div class="clearh"></div>
-    <div class="teapic">
-        <a href="#"  target="main"><img src="images/c3.jpg" height="60" title="财经法规与财经职业道德"></a>
-        <h3 class="courh3"><a href="#" class="ask_link" target="main">财经法规与财经职业道德</a></h3>
-    </div>
-    <div class="clearh"></div>
-    </div>
-    </div>
-</div>
    
 </div>
 

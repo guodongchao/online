@@ -42,7 +42,7 @@ Route::any('admin/loginDo','admin\login\login@login_do');
 //生成验证码
 Route::any('admin/codelist/{sid}','admin\login\login@showCode');
 
-
+//,'middleware' =>['rbac']
 Route::group(['prefix'=>'admin','middleware' =>['rbac']],function () {
     //后台首页
     Route::get('index','admin\index\index@index');
@@ -206,6 +206,23 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('header1','index\index\indexController@header1');
     Route::any('header2','index\index\indexController@header2');
     Route::any('main','index\index\indexController@main');
+
+    //微信二维码直接登录
+    Route::any('getImg','index\login\loginController@getImg');   //二维码登录
+    Route::any('is_log','index\login\loginController@is_log');   //二维码登录
+
+
+    //微信绑定账号
+    Route::any('bdweixin','index\login\loginController@bdweixin');
+    Route::any('bdweixinView','index\login\loginController@bdweixinView');//绑定页面
+
+
+
+
+
+
+
+
     //关于我们
     Route::any('page','index\page\pageController@page');
     Route::any('pagecontact','index\page\pageController@pagecontact');
@@ -225,9 +242,25 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('courseSearch','index\course\courseController@courseSearch');//课程下某个分类下的科目
     Route::any('coursecont2','index\course\courseController@coursecont2');//课程下某个分类下的科目
 
+    Route::any('changeHour','index\course\courseController@changeHour');//观看某个课时的时间
+
+
+
+    Route::any('shoucang','index\course\courseController@shoucang');//课程下某个分类下的科目
+
     Route::any('video','index\course\courseController@video');//视频播放
     Route::any('quest','index\course\courseController@quest');//课程下的问答
     Route::any('questSecord','index\course\courseController@questSecord');//课程下的问答
+    //我的问答
+    Route::any('mycourse2','index\course\courseController@mycourse2');
+    //我的笔记
+    Route::any('mycourse3','index\course\courseController@mycourse3');
+    //笔记删除
+    Route::any('noteDel','index\course\courseController@noteDel');
+    //查看笔记
+    Route::any('noteShow','index\course\courseController@noteShow');
+    //我的作业
+    Route::any('mycourse4','index\course\courseController@mycourse4');
     //修改密码
     Route::any('myrepassword','index\course\courseController@myrepassword');
     Route::any('myrepasswordDo','index\course\courseController@myrepasswordDo');
@@ -275,6 +308,17 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     //问答
     Route::any('comment','index\comment\commentController@comment');
     Route::any('comment_do','index\comment\commentController@comment_do');
+    Route::any('comment_del','index\comment\commentController@comment_del');
+
+
+
+    //支付
+    Route::any('pay1','index\paymentController@pay1');
+    Route::any('pay','index\paymentController@pay');
+    Route::any('aliReturn','index\paymentController@aliReturn');
+    Route::any('notify','index\paymentController@notify');
+    Route::any('createOrder','index\paymentController@createOrder');
+
 });
 
 

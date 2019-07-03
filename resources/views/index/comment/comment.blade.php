@@ -146,9 +146,10 @@
 
 	@if(isset($arr))
 	@foreach($arr as $k=>$v)
+				@if(!empty($v['u_name']))
 	<div class="comment-wrap">
 		<div class="photo">
-			<div class="avatar" style="background-image: url({{$v['u_img']}})"></div>
+			@if(!empty($v['u_img']))<div class="avatar" style="background-image: url({{$v['u_img']}})"></div>@endif
 			<div class="avatar" style="margin: auto;">{{$v['u_name']}}</div>
 		</div>
 		<div class="comment-block">
@@ -157,6 +158,7 @@
 				<div class="comment-date"><?php echo date("Y-m-d H:i:s",$v['time'])?></div>
 				<div class="comment-date">&nbsp;&nbsp;&nbsp;&nbsp;（{{$v['count']}}条）</div>
 				<ul class="comment-actions">
+					<li class="reply"><a href="javascript:;" onclick="shanchu('{{$v['comment_id']}}')">删除</a></li>
 					@if(isset($all))
 					<li class="reply"><a href="comment?comment_id={{$v['comment_id']}}&com_id={{$all['comment_id']}}">查看</a></li>
 					<li class="reply"><a href="comment?comment_id={{$v['comment_id']}}&com_id={{$all['comment_id']}}">评论</a></li>
@@ -168,6 +170,7 @@
 			</div>
 		</div>
 	</div>
+				@endif
 	@endforeach
 		@endif
 </div>
@@ -197,5 +200,12 @@
 			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
 			var r = window.location.search.substr(1).match(reg);
 			if(r!=null)return  unescape(r[2]); return null;
+		}
+		//删除数据
+		function shanchu(comment_id) {
+			$.post("comment_del",{comment_id:comment_id},function (res) {
+				alert(res.msg);
+				history.go(0);
+			},'json');
 		}
 </script>

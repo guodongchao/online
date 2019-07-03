@@ -39,15 +39,15 @@ $(function(){
         </div>
         <div class="memb">
             <ul>
-                <li class="currnav"><a class="mb1" href="mycourse" target="main">我的课程</a></li>
-                <li ><a class="mb3" href="mycourse2" target="main">我的问答</a></li>
+                <li><a class="mb1" href="mycourse" target="main">我的课程</a></li>
+                <li class="currnav"><a class="mb3" href="mycourse2" target="main">我的问答</a></li>
                 <li><a class="mb4" href="mycourse3" target="main">我的笔记</a></li>
                 <li><a class="mb12" href="mycourse4" target="main">我的作业</a></li>
             </ul>
         </div>
     </div>
     <div class="membcont">
-        <h3 class="mem-h3">我的课程</h3>
+        <h3 class="mem-h3">我的问答</h3>
         <div class="box demo2" style="width:820px;">
             <ul class="tab_menu" style="margin-left:30px;">
                 <li class="current">学习中</li>
@@ -55,53 +55,7 @@ $(function(){
                 <li>收藏</li>
             </ul>
             <div class="tab_box">
-                <div>
-                    <ul class="memb_course">
-                        @foreach($culumInfo as $k=>$v)
-                            <li>
-                                <div class="courseli">
-                                    <a href="coursecont2?culum_id={{$v['culum_id']}}"  target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}"></a>
-                                    <p class="memb_courname"><a href="coursecont2?culum_id={{$v['culum_id']}}" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
-                                    <p class="goon"><a href="coursecont2?culum_id={{$v['culum_id']}}" target="main"><span>继续学习</span></a></p>
-                                </div>
-                            </li>
-                        @endforeach
-                        <div style="height:10px;" class="clearfix"></div>
-                    </ul>
-                </div>
-                <div class="hide">
-                    <div>
-                        <ul class="memb_course">
-                            @foreach($culuminfo as $k=>$v)
-                                <li>
-                                    <div class="courseli">
-                                        <a href="coursecont2?culum_id={{$v['culum_id']}}"  target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}"></a>
-                                        <p class="memb_courname"><a href="coursecont2?culum_id={{$v['culum_id']}}" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
-                                        <p class="goon"><a href="coursecont2?culum_id={{$v['culum_id']}}" target="main"><span>查看课程</span></a></p>
-                                    </div>
-                                </li>
-                            @endforeach
-                            <div class="clearfix" style="height:10px;"></div>
-                        </ul>
-                    </div>
-                </div>
-                <div class="hide">
-                    <div>
-                        <ul class="memb_course">
-                            @foreach($collectInfo as $k=>$v)
-                                <li>
-                                    <div class="courseli mysc">
-                                        <a href="coursecont?culum_id={{$v['culum_id']}}"  target="main" target="_blank"><img width="230" src="{{$v['culum_img']}}" class="mm"></a>
-                                        <p class="memb_courname"><a href="coursecont?culum_id={{$v['culum_id']}}" target="main" class="blacklink">{{$v['culum_name']}}</a></p>
-                                        <p class="goon"><a href="coursecont?culum_id={{$v['culum_id']}}"><span>查看</span></a></p>
-                                        <p class="mask"><span class="qxsc" >移除</span></p>
-                                    </div>
-                                </li>
-                            @endforeach
-                            <div class="clearfix" style="height:10px;"></div>
-                        </ul>
-                    </div>
-                </div>
+                weerrrt
             </div>
         </div>
     </div>

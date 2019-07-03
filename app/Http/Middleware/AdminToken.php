@@ -43,12 +43,19 @@ class AdminToken
             $powUrl=power::where($powurl)->pluck('power_url')->toarray();
             $url[]=$powUrl;
         }
-        $Rurl= \Request::getRequestUri();
+        $is_fo=strpos($_SERVER['REQUEST_URI'],"?");
+        if(empty($is_fo)){
+            $Rurl= \Request::getRequestUri();
+        }else{
+            $Rurl= substr($_SERVER['REQUEST_URI'],0,strpos($_SERVER['REQUEST_URI'],"?"));
+        }
+        //echo strpos($_SERVER['REQUEST_URI'],"?");die;
         foreach($url as $k=>$v){
             foreach($v as $key=>$value){
                 $url[$k]=$value;
             }
         }
+        //print_r($url);die;
         if(!in_array($Rurl,$url)){
             echo "<script> alert('无权访问');parent.location.href='/admin/index'; </script>";exit;
         }

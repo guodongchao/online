@@ -96,7 +96,7 @@ $(function(){
                             @foreach($v['section'] as $kk=>$vv)
 							<dd class="smalltitle"><strong>第{{$kk+1}}节&nbsp;&nbsp;{{$vv['section_name']}}</strong></dd>
                             @foreach($vv['hour'] as $kkk=>$vvv)
-							<a href="video" target="main"><dd><strong class="cataloglink">课时{{$kkk+1}}：{{$vvv['hour_name']}}</strong><i class="fini nn"></i></dd></a>
+							<a href="video?culum_id={{$vvv['culum_id']}}&hour_id={{$vvv['hour_id']}}" target="main"><dd><strong class="cataloglink">课时{{$kkk+1}}：{{$vvv['hour_name']}}</strong><i class="fini nn"></i></dd></a>
                             @endforeach
                             @endforeach
 						</div>

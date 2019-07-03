@@ -6,11 +6,13 @@
 <title>谋刻职业教育在线测评与学习平台</title>
 
 <link rel="stylesheet" href="css/course.css"/>
+<link rel="stylesheet" href="/layui/css/layui.css"/>
 <link rel="stylesheet" href="css/register-login.css"/>
 <script src="js/jquery-1.8.0.min.js"></script>
 <link rel="stylesheet" href="css/tab.css" media="screen">
 <script src="js/jquery.tabs.js"></script>
 <script src="js/mine.js"></script>
+<script src="/layui/layui.js"></script>
 </head>
 <body>
 <div class="login" style="background:url(images/12.jpg) right center no-repeat #fff">
@@ -43,7 +45,8 @@
     <span class="hezuo">使用合作网站账号登录</span>
     <div class="hezuoimg">
         <a href="#"><img src="images/hezuoqq.png" class="hzqq" title="QQ" width="40" height="40"/></a>
-        <a href="{{$url}}"><img src="images/weixin.png" class="hzwx" title="微信" width="40" height="40"/></a>
+        {{--<a href="{{$url}}"><img src="images/weixin.png" class="hzwx" title="微信" width="40" height="40"/></a>--}}
+        <a href="getImg" target="main"  id="getImg"><img src="images/weixin.png" class="hzwx" title="微信" width="40" height="40"/></a>
         <a href="#"><img src="images/hezuowb.png" class="hzwb" title="微博" width="40" height="40"/></a>
     </div>
     
@@ -113,4 +116,7 @@
             }
         })
     })
+
+
+
 </script>

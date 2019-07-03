@@ -46,13 +46,13 @@
         </ul>
         <?php if(!empty(session('account'))){?>
             <span class="massage" style="z-index:999">
-                <a href="mycourse"  style="width:80px" class="link2 he ico" target="_parent"><?php echo session('account')?></a>
-                <a href="/index/quit"   style="width:70px" class="link2 he" target="_parent">退出</a>
+                <a href="mycourse"  style="width:80px" class="link2 he ico" target="main"><?php echo session('account')?></a>
+                <a href="/index/quit"   style="width:70px" class="link2 he" target="main">退出</a>
             </span>
         <?php }else{ ?>
             <span class="massage" style="z-index:999">
-                <a href="/index/login"  style="width:70px" class="link2 he " target="_parent">登录</a>
-                <a href="/index/register"   style="width:70px" class="link2 he" target="_parent">注册</a>
+                <a href="/index/login"  style="width:70px" class="link2 he " target="main">登录</a>
+                <a href="/index/register"   style="width:70px" class="link2 he" target="main">注册</a>
             </span>
         <?php } ?>
     </div>
