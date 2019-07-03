@@ -96,7 +96,7 @@
             url:url,
             success:function(msg){
                 if(msg.code==1){
-                    parent.location.hred="index";
+                    parent.location.href="index";
                 }
             }
 
