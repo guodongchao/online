@@ -159,7 +159,6 @@ class loginController extends Controller
             ];
         }
         $data = user::where($where)->first();
-            if(empty($data) || $data->u_pwd!=md5($u_pwd)){
 
             if (empty($data) || $data->u_pwd!=md5($u_pwd)) {
                 $resopnse = [
@@ -181,8 +180,8 @@ class loginController extends Controller
                 echo json_encode($resopnse);
 
             }
-        }
     }
+
 
     public function getImg(Request $request){
         $state = MD5(time()).rand(1,10000);
