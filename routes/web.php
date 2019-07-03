@@ -308,6 +308,7 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     //问答
     Route::any('comment','index\comment\commentController@comment');
     Route::any('comment_do','index\comment\commentController@comment_do');
+    Route::any('comment_del','index\comment\commentController@comment_del');
 
 
 
