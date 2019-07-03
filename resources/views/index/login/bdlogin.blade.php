@@ -102,7 +102,8 @@
             success:function(data){
                 alert(data.msg);
                 if(data.code ==200){
-                    location.href ="/index/index";
+//                    location.href ="/index/index";
+                    location.href ="main";
                 }
             }
         })
