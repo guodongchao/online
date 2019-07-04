@@ -21,7 +21,7 @@
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="coursecont">
 <div class="coursepic">
-	<div class="course_img"><img src="/admin{{$culumdata['culum_img']}}" width="500"></div>
+	<div class="course_img"><img src="/admin{{ltrim($culumdata['culum_img'],".")}}" width="500"></div>
     <div class="coursetitle">
    		<a class="state">
             @if($culumdata['culum_status'] == 1)
@@ -205,7 +205,7 @@
                                 content:'还未登录，未登录',
                                 btn:['登录','取消'],
                                 btn1:function(){
-                                    parent.location.href="http://www.online.com/index/login";
+                                    location.href="login";
                                     return true;
                                 },
                                 btn2:function(){

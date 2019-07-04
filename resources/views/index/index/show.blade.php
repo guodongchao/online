@@ -149,13 +149,13 @@
                     <dt>商户订单号
 ：</dt>
                     <dd>
-                        <input id="WIDout_trade_no" value=""  name="WIDout_trade_no" />
+                        <input id="WIDout_trade_no" value="11"  name="WIDout_trade_no" />
                     </dd>
                     <hr class="one_line">
                     <dt>订单名称
 ：</dt>
                     <dd>
-                        <input id="WIDsubject" value=""  name="WIDsubject" />
+                        <input id="WIDsubject" value="11"  name="WIDsubject" />
                     </dd>
                     <hr class="one_line">
                     <dt>付款金额
