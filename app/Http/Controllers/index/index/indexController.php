@@ -133,7 +133,13 @@ class indexController extends Controller
 
                     $res2 = record::where( $where )->update(['status'=>2]);               //修改订单表中的数据
 
-                    $res3 = Order_info::where("order_sn",$out_trade_no)->update(['status'=>1]);             //修改订单详情表中的状态
+                    $data=record::where('order_sn',$out_trade_no)->first();
+                    $inserData=[
+                        'u_id'=>$data->u_id,
+                        'culum_id'=>$data->culum_id,
+                        'user_culum_time'=>time()
+                    ];
+                    userculum::insert($inserData);           //修改订单详情表中的状态
 
                     echo "success";       //请不要修改或删除
                 }else{
@@ -203,6 +209,7 @@ class indexController extends Controller
         date_default_timezone_set('prc');
         $xml=file_get_contents("php://input");
         $arr=json_decode(json_encode(simplexml_load_string($xml,'simpleXMLElement',LIBXML_NOCDATA)),true);
+        file_put_contents("/tmp/weixin1.log",$arr,FILE_APPEND);
         $sign=$arr['sign'];
         unset($arr['sign']);
         $newSign=$this->checkSign($arr);
@@ -210,6 +217,13 @@ class indexController extends Controller
         $order_sn=$arr['out_trade_no'];
         if($sign==$newSign){
             $res=record::where('order_sn',$order_sn)->update(['status'=>2]);
+            $data=record::where('order_sn',$order_sn)->first();
+            $inserData=[
+                'u_id'=>$data->u_id,
+                'culum_id'=>$data->culum_id,
+                'user_culum_time'=>time()
+            ];
+            userculum::insert($inserData);
         }
     }
     //获取sign
