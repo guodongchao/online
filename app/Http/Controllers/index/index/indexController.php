@@ -172,7 +172,7 @@ class indexController extends Controller
         $arr['create_time'] = time();
         $arr['pay_name'] = "微信";
         $arr['total'] = "0.01";
-
+        $order_sn = $arr['order_sn'];
         $res = record::insert($arr);
 
         $url="https://api.mch.weixin.qq.com/pay/unifiedorder";
@@ -203,7 +203,8 @@ class indexController extends Controller
         $info=$obj->sendPost($url,$arrInfo);
         $objXml=simplexml_load_string($info);
         $codeurl=$objXml->code_url;
-        return view('index.index.native',['codeurl'=>$codeurl,'order_sn'=>$arr['order_sn']]);
+        
+        return view('index.index.native',['codeurl'=>$codeurl,'order_sn'=>$order_sn]);
     }
     public function donative(){    //异步
         date_default_timezone_set('prc');
