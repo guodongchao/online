@@ -48,7 +48,7 @@
 
                 <tr>
                     <td>
-                        <img src="admin/{{ltrim($data->culum_img,".")}}" width="80" height="50" style="float: left">
+                        <img src="admin{{ltrim($data->culum_img,".")}}" width="80" height="50" style="float: left">
                         <span style="float: left;margin-left: 5px;">{{$data->culum_name}}</span>
                     </td>
                     <td style="text-align: center;color: #ff4e00;">
