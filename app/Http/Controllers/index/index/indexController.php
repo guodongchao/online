@@ -9,6 +9,7 @@ use App\models\admin\CourseCate;
 use App\models\culum;
 use App\models\userculum;
 
+
 class indexController extends Controller
 {
     public function index(){
@@ -53,8 +54,21 @@ class indexController extends Controller
 
     //支付订单展示
     public function show(Request $request){
-        $culum_id=$_REQUEST['culum_id'];
-        $data = culum::where('culum_id',$culum_id)->first()->toarray();
+        $arr['culum_id']=$_REQUEST['culum_id'];
+        $arr['u_id'] = session("u_id");
+        if(!$arr['u_id']){
+            echo "<script>alert('未登录,请先登录');location.href='login'</script>";
+            die;
+        }
+        $arr['order_sn']=MD5(rand(1,9999).time());
+        $data = culum::where('culum_id',$arr['culum_id'])->first()->toArray();
+        $arr['record_name ']= $data['culum_name'];
+        $arr['record_img'] = $data['culum_img'];
+        $arr['create_time'] = time();
+        $arr['pay_name'] = "支付宝";
+        $arr['total'] = $data['culum_price'];
+
+        $res = record::insert($arr);
         return view('index.index.show',['arr'=>$data]);
     }
     //支付执行
@@ -80,13 +94,16 @@ class indexController extends Controller
 
         $result=$payResponse->wapPay($payRequestBuilder,$config['return_url'],$config['notify_url']);
     }
+
+    public function sync(){
+        echo "<script>alert('支付成功');location.href='courselist'</script>";
+    }
     //异步
     public function result(){
         $arr=$_REQUEST;
 
         $configAll=app_path()."/extend/alipay/config.php";
-//        $add=app_path()."/extend/alipay/wappay/service/AlipayTradeService.php";
-//        require_once($add);
+
         $config=require_once($configAll);
         $alipaySevice = new \AlipayTradeService($config);
         $alipaySevice->writeLog(var_export($_REQUEST,true));
@@ -94,49 +111,64 @@ class indexController extends Controller
 
         $str=var_export($result,true);
         file_put_contents("/tmp/alipay.log",$str,FILE_APPEND);
+
         if($result) {//验证成功
 
+            $out_trade_no = $arr['out_trade_no'];                       //商户订单号
 
-            if(empty($arr)){
-//                echo '该订单号不存在';die;
-            }
-            //支付宝交易号
-            $total_amount = $_POST['total_amount'];
-            if($arr['order_amount']==$total_amount){
-//                echo '该订单的价格存在异常';die;
-            }
-//            $trade_no = $_POST['trade_no'];
-//
-//            //交易状态
-//            $trade_status = $_POST['trade_status'];
+            $order_amount = $arr['total_amount'];                         //交易金额
 
-
-
-            if($_POST['trade_status'] == 'TRADE_FINISHED') {
+            if($arr['trade_status'] == 'TRADE_FINISHED') {               //交易状态失败
 
             }
-            else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {
+            else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {                 //交易状态成功
 
+                $where = [
+                    "order_sn"=>$out_trade_no,
+                    "total"=>$order_amount
+                ];
+                $res = record::where($where)->first();
+
+                if($res){
+
+                    $res2 = record::where( $where )->update(['status'=>2]);               //修改订单表中的数据
+
+                    $res3 = Order_info::where("order_sn",$out_trade_no)->update(['status'=>1]);             //修改订单详情表中的状态
+
+                    echo "success";       //请不要修改或删除
+                }else{
+
+                }
             }
 
-
-            echo "success";		//请不要修改或删除
+            echo "success";       //请不要修改或删除
 
         }else {
             //验证失败
-            echo "fail";	//请不要修改或删除
+            echo "fail";   //请不要修改或删除
 
         }
+
     }
 
     //微信支付
     public function weixin_buy(Request $request){
-        $data=$request->input();
-//        $status=$data['pay_status'];
-//        $order_id=$data['order_id'];
-//        OrderModel::where('order_id',$order_id)->update(['Pay_id'=>$status]);
-//        $arr=OrderModel::where('order_id',$order_id)->first();
-        $order_sn=110;
+        $arr['culum_id']=$request->input("culum_id");
+        $arr['u_id'] = session("u_id");
+        if(!$arr['u_id']){
+            echo "<script>alert('未登录,请先登录');location.href='login'</script>";
+            die;
+        }
+        $arr['order_sn']=MD5(rand(1,9999).time());
+        $data = culum::where('culum_id',$arr['culum_id'])->first();
+        $arr['record_name ']= $data->culum_name;
+        $arr['record_img'] = $data->culum_img;
+        $arr['create_time'] = time();
+        $arr['pay_name'] = "微信";
+        $arr['total'] = "0.01";
+
+        $res = record::insert($arr);
+
         $url="https://api.mch.weixin.qq.com/pay/unifiedorder";
         $string=md5(time());
         $key="7c4a8d09ca3762af61e59520943AB26O";
@@ -149,7 +181,7 @@ class indexController extends Controller
             'nonce_str'=>$string,
             'sign_type'=>"MD5",
             'body'=>'您好',
-            'out_trade_no'=>$order_sn,
+            'out_trade_no'=>$arr['order_sn'],
             'total_fee'=>1,
             'spbill_create_ip'=>$ip,
             'notify_url'=>$notify_url,
@@ -167,7 +199,7 @@ class indexController extends Controller
         $codeurl=$objXml->code_url;
         return view('index.index.native',['codeurl'=>$codeurl]);
     }
-    public function donative(){
+    public function donative(){    //异步
         date_default_timezone_set('prc');
         $xml=file_get_contents("php://input");
         $arr=json_decode(json_encode(simplexml_load_string($xml,'simpleXMLElement',LIBXML_NOCDATA)),true);
@@ -177,7 +209,7 @@ class indexController extends Controller
         $newSign=strtoupper($newSign);
         $order_sn=$arr['out_trade_no'];
         if($sign==$newSign){
-            $res=DB::table('order')->where('order_sn',$order_sn)->update(['order_pay_status'=>2]);
+            $res=record::where('order_sn',$order_sn)->update(['status'=>2]);
         }
     }
     //获取sign

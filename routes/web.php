@@ -320,7 +320,8 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('createOrder','index\paymentController@createOrder');
     Route::any('show','index\index\indexController@show');
     Route::any('addshow','index\index\indexController@addshow');
-    Route::any('result','index\index\indexController@result');
+    Route::any('result','index\index\indexController@result');  //异步
+    Route::any('sync','index\index\indexController@sync');  //同步
     //微信支付
     Route::any('checkSign','index\index\indexController@checkSign');
     Route::any('weixin_buy','index\index\indexController@weixin_buy');
