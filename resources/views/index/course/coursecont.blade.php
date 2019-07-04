@@ -21,7 +21,7 @@
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div class="coursecont">
 <div class="coursepic">
-	<div class="course_img"><img src="/admin{{$culumdata['culum_img']}}" width="500"></div>
+	<div class="course_img"><img src="/admin{{ltrim($culumdata['culum_img'],".")}}" width="500"></div>
     <div class="coursetitle">
    		<a class="state">
             @if($culumdata['culum_status'] == 1)
