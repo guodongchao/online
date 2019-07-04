@@ -48,7 +48,7 @@
 
                 <tr>
                     <td>
-                        <img src="{{$data->culum_img}}" width="80" height="50" style="float: left">
+                        <img src="admin/{{ltrim($data->culum_img,".")}}" width="80" height="50" style="float: left">
                         <span style="float: left;margin-left: 5px;">{{$data->culum_name}}</span>
                     </td>
                     <td style="text-align: center;color: #ff4e00;">
@@ -90,7 +90,7 @@
                 if(pay_type==2){
                     location.href="show?culum_id="+culum_id;
                 }else{
-                    location.href="show?culum_id="+culum_id;
+                    location.href="weixin_buy?culum_id="+culum_id;
                 }
 
             });
