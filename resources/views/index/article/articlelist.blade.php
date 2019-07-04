@@ -82,7 +82,7 @@
             <div class="teacher">
                 @foreach($dataculums as $v)
                     <div class="teapic">
-                        <a href="#"  target="_blank"><img src="images/c1.jpg" height="60" title=""></a>
+                        <a href="#"  target="_blank"><img src="/admin{{ltrim($v['culum_img'],".")}}" height="60" title=""></a>
                         <h3 class="courh3"><a href="coursecont?culum_id={{$v['culum_id']}}" style="color:black" class="peptitle">{{$v['culum_name']}}</a></h3>
                     </div>
                 @endforeach
