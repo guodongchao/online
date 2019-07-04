@@ -10,7 +10,7 @@ $config = array (
 		'notify_url' => "http://dc.qianqianya.xyz/index/result",
 		
 		//同步跳转
-		'return_url' => "http://dc.qianqianya.xyz/index/index",
+		'return_url' => "http://dc.qianqianya.xyz/index/courselist",
 
 		//编码格式
 		'charset' => "UTF-8",
