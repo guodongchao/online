@@ -326,6 +326,7 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('checkSign','index\index\indexController@checkSign');
     Route::any('weixin_buy','index\index\indexController@weixin_buy');
     Route::any('donative','index\index\indexController@donative');
+    Route::any('checkPay','index\index\indexController@checkPay');//检测是否支付成功
 
 
 });

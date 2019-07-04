@@ -96,7 +96,7 @@ class indexController extends Controller
     }
 
     public function sync(){
-        echo "<script>alert('支付成功');location.href='courselist'</script>";
+        echo "<script>alert('支付成功');parent.location.href='courselist'</script>";
     }
     //异步
     public function result(){
@@ -203,7 +203,7 @@ class indexController extends Controller
         $info=$obj->sendPost($url,$arrInfo);
         $objXml=simplexml_load_string($info);
         $codeurl=$objXml->code_url;
-        return view('index.index.native',['codeurl'=>$codeurl]);
+        return view('index.index.native',['codeurl'=>$codeurl,'order_sn'=>$arr['order_sn']]);
     }
     public function donative(){    //异步
         date_default_timezone_set('prc');
@@ -234,5 +234,12 @@ class indexController extends Controller
         $str.="&key=$key";
         $sign=md5($str);
         return $sign;
+    }
+    public function checkPay(Request $request){
+        $order_sn = $request->input("order_sn");
+        $status = record::where("order_sn",$order_sn)->value('status');
+        if($status==2){
+            return ['code'=>100,'msg'=>"支付成功"];
+        }
     }
 }

@@ -12,6 +12,8 @@
 <body>
 <div id="qrcode"></div>
 <input type="hidden" value="{{$codeurl}}" id="url">
+<input type="hidden" value="{{$order_sn}}" id="order_sn">
+
 </body>
 </html>
 </body>
@@ -27,5 +29,21 @@
         colorLight : '#ffffff',
         correctLevel : QRCode.CorrectLevel.H
     });
-
+    setInterval(function(){
+        var order_sn = $("#order_sn").val();
+        var url="checkPay";
+        $.ajax({
+            type:"post",
+            url:url,
+            data:{order_sn:order_sn},
+            success:function(msg){
+                if(msg.code==100){
+                    alert(msg.msg);
+                    setTimeout(function(){
+                        parent.location.href="courselist";
+                    },2000)
+                }
+            }
+        })
+    },3000)
 </script>
