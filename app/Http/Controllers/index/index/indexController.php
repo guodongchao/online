@@ -96,7 +96,7 @@ class indexController extends Controller
     }
 
     public function sync(){
-        echo "<script>alert('支付成功');parent.location.href='courselist'</script>";
+        echo "<script>alert('支付成功');location.href='courselist'</script>";
     }
     //异步
     public function result(){
@@ -203,7 +203,7 @@ class indexController extends Controller
         $info=$obj->sendPost($url,$arrInfo);
         $objXml=simplexml_load_string($info);
         $codeurl=$objXml->code_url;
-        
+
         return view('index.index.native',['codeurl'=>$codeurl,'order_sn'=>$order_sn]);
     }
     public function donative(){    //异步

@@ -40,8 +40,8 @@
                 if(msg.code==100){
                     alert(msg.msg);
                     setTimeout(function(){
-                        parent.location.href="courselist";
-                    },2000)
+                        location.href="courselist";
+                    },1000)
                 }
             }
         })
