@@ -11,14 +11,16 @@
 </head>
 <body>
 <div id="qrcode"></div>
+<input type="hidden" value="{{$codeurl}}" id="url">
 </body>
 </html>
 </body>
 </html>
 <script>
     // 设置参数方式
+    var  codeurl = $("#url").val();
     var qrcode = new QRCode('qrcode', {
-        text: "{{$codeurl}}",
+        text: codeurl,
         width: 256,
         height: 256,
         colorDark : '#000000',
