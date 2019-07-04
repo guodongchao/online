@@ -62,7 +62,7 @@ class indexController extends Controller
         }
         $arr['order_sn']=MD5(rand(1,9999).time());
         $data = culum::where('culum_id',$arr['culum_id'])->first()->toArray();
-        $arr['record_name ']= $data['culum_name'];
+        $arr['record_name']= $data['culum_name'];
         $arr['record_img'] = $data['culum_img'];
         $arr['create_time'] = time();
         $arr['pay_name'] = "支付宝";
@@ -161,7 +161,7 @@ class indexController extends Controller
         }
         $arr['order_sn']=MD5(rand(1,9999).time());
         $data = culum::where('culum_id',$arr['culum_id'])->first();
-        $arr['record_name ']= $data->culum_name;
+        $arr['record_name']= $data->culum_name;
         $arr['record_img'] = $data->culum_img;
         $arr['create_time'] = time();
         $arr['pay_name'] = "微信";
