@@ -21,23 +21,28 @@ class indexController extends Controller
         return view("index.index.header2");
     }
     public function main(){
-        $where = [
-            'c_status'=>1,
-        ];
-       $cateData =  CourseCate::where("c_status",1)->where("c_parent_id","!=",0)
-                 ->orderBy("c_cate_sort","desc")
-                 ->select("c_cate_id","c_cate_name")
-                 ->limit(4)->get()->toArray();
-        foreach($cateData as $key=>$val){
+        if(file_exists("./online/main.html")){
+            $view=file_get_contents("./online/main.html");
+        }else{
+            $where = [
+                'c_status'=>1,
+            ];
+            $cateData =  CourseCate::where($where)->where("c_parent_id","!=",0)
+                ->orderBy("c_cate_sort","desc")
+                ->select("c_cate_id","c_cate_name")
+                ->limit(4)->get()->toArray();
+            foreach($cateData as $key=>$val){
 
-            $cateData[$key]['culum'] = culum::where("culum_show",1)->where("c_cate_id",$val['c_cate_id'])->limit(8)->get()->toArray();
-            foreach($cateData[$key]['culum'] as $k=>$v){
-                $cateData[$key]['culum'][$k]['num'] = userculum::where("culum_id",$v['culum_id'])->count();
+                $cateData[$key]['culum'] = culum::where("culum_show",1)->where("c_cate_id",$val['c_cate_id'])->limit(8)->get()->toArray();
+                foreach($cateData[$key]['culum'] as $k=>$v){
+                    $cateData[$key]['culum'][$k]['num'] = userculum::where("culum_id",$v['culum_id'])->count();
 
+                }
             }
+            $view=view("index.index.main",['cateData'=>$cateData]);
+            file_put_contents("./online/main.html",$view);
         }
-
-        return view("index.index.main",['cateData'=>$cateData]);
+        return $view;
     }
     //退出
     public function quit(){
@@ -123,7 +128,7 @@ class indexController extends Controller
 
         }
     }
-    
+
     //微信支付
     public function weixin_buy(Request $request){
         $data=$request->input();
