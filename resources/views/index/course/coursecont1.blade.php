@@ -80,9 +80,9 @@ $(function(){
 	<div class="box demo2" style="position:relative">
 			<ul class="tab_menu">
 				<li class="current course1">章节</li>
-				<li class="course1">评价</li>
+				{{--<li class="course1">评价</li>--}}
 				<li class="course1">问答</li>
-                <li class="course1">资料区</li>
+                {{--<li class="course1">资料区</li>--}}
 			</ul>
 			<!--<a class="fombtn" style=" position:absolute; z-index:3; top:-10px; width:80px; text-align:center;right:0px;" href="#">下载资料包</a>-->
 			<div class="tab_box">
@@ -217,10 +217,9 @@ $(function(){
     <h3 class="righttit" onclick="reglog_open();">最新学员</h3>
         <div class="teacher zxxy">
         <ul class="stuul">
-            <li><img src="images/0-0.JPG" width="60" title="张三李四"><p class="stuname">张三李四</p></li>
-            <li><img src="images/0-0.JPG" width="60" title="张三李四"><p class="stuname">张三李四</p></li>
-            <li><img src="images/0-0.JPG" width="60" title="张三李四"><p class="stuname">张三李四</p></li>
-            <li><img src="images/0-0.JPG" width="60" title="张三李四"><p class="stuname">张三李四</p></li>
+            @foreach($user_culum as $k=>$v)
+            <li><img src="../{{$v['u_img']}}" width="60" title="{{$v['u_name']}}"><p class="stuname">{{$v['u_name']}}</p></li>
+                @endforeach
         </ul>
         <div class="clearh"></div>
         </div>
