@@ -27,58 +27,59 @@ class courseController extends Controller
     public function coursecont(Request $request){ //详细课程介绍
         //接课程的id
         $culum_id = $request->input("culum_id");
-        $u_id =$request->session()->get('u_id');
-        $culumdata = culum::where('culum_id',$culum_id)
-            ->join('teacher_details','culum.teacher_id','=','teacher_details.teacher_id')
-            ->first()->toArray();
-        //课程目录
-        $muludata = chapter::where('culum.culum_id',$culum_id)
-            ->where('chapter_status',1)
-            ->join('culum','chapter.culum_id','=','culum.culum_id')
-            ->get()->toArray();
-        //课程公告
-        $c_cate_id = notice::where('n_status',1)->get(['c_cate_id','n_name'])->toArray();
-        $name = [];
-        foreach($c_cate_id as $k=>$v){
-            if(substr_count($v['c_cate_id'],$culumdata['c_cate_id'])>0){
-                $name[]['n_name'] = $v['n_name'];
+            $u_id = $request->session()->get('u_id');
+            $culumdata = culum::where('culum_id', $culum_id)
+                ->join('teacher_details', 'culum.teacher_id', '=', 'teacher_details.teacher_id')
+                ->first()->toArray();
+            //课程目录
+            $muludata = chapter::where('culum.culum_id', $culum_id)
+                ->where('chapter_status', 1)
+                ->join('culum', 'chapter.culum_id', '=', 'culum.culum_id')
+                ->get()->toArray();
+            //课程公告
+            $c_cate_id = notice::where('n_status', 1)->get(['c_cate_id', 'n_name'])->toArray();
+            $name = [];
+            foreach ($c_cate_id as $k => $v) {
+                if (substr_count($v['c_cate_id'], $culumdata['c_cate_id']) > 0) {
+                    $name[]['n_name'] = $v['n_name'];
+                }
             }
-        }
-        //总课时
-        $data = hour::where('culum_id',$culum_id)->get(['culum_id'])->toarray();
-        $num = count($data);
-        //总分钟
-        $time = hour::where('culum_id',$culum_id)->pluck('show_time')->toarray();
-        $time = array_sum($time);
-        //学习人数
-        $usernaem = DB::table('user_culum')->where('culum_id',$culum_id)->get();
-        $usernum = count($usernaem);
-        //是否收藏
-        if(!empty($u_id)){
-            $where = [
-                'u_id'=>$u_id,
-                'course_id'=>$culum_id,
-                'collect_status'=>1,
-            ];
-            $collect = collect::where($where)->first();
+            //总课时
+            $data = hour::where('culum_id', $culum_id)->get(['culum_id'])->toarray();
+            $num = count($data);
+            //总分钟
+            $time = hour::where('culum_id', $culum_id)->pluck('show_time')->toarray();
+            $time = array_sum($time);
+            //学习人数
+            $usernaem = DB::table('user_culum')->where('culum_id', $culum_id)->get();
+            $usernum = count($usernaem);
+            //是否收藏
+            if (!empty($u_id)) {
+                $where = [
+                    'u_id' => $u_id,
+                    'course_id' => $culum_id,
+                    'collect_status' => 1,
+                ];
+                $collect = collect::where($where)->first();
 //            echo $collect;
-            if($collect){
-                $codes = 1;
-            }else{
+                if ($collect) {
+                    $codes = 1;
+                } else {
+                    $codes = 2;
+                }
+            } else {
                 $codes = 2;
             }
-        }else{
-            $codes = 2;
-        }
-        //相关课程
-        $c_parent_id = DB::table('course_cate')->where('c_cate_id',$culumdata['c_cate_id'])->value('c_parent_id');
-        $c_cate_id = DB::table('course_cate')->where('c_parent_id',$c_parent_id)->get(['c_cate_id'])->toArray();
-        $id = [];
-        foreach($c_cate_id as $k=>$v){
-            $id[] = $v->c_cate_id;
-        }
-        $dataculums = culum::whereIn('c_cate_id',$id)->where('culum_id','!=',$culum_id)->limit(4)->get()->toArray();
-        return view("index.course.coursecont",['dataculums'=>$dataculums,'codes'=>$codes,'culumdata'=>$culumdata,'muludata'=>$muludata,'name'=>$name,'num'=>$num,'time'=>$time,'usernum'=>$usernum]);
+            //相关课程
+            $c_parent_id = DB::table('course_cate')->where('c_cate_id', $culumdata['c_cate_id'])->value('c_parent_id');
+            $c_cate_id = DB::table('course_cate')->where('c_parent_id', $c_parent_id)->get(['c_cate_id'])->toArray();
+            $id = [];
+            foreach ($c_cate_id as $k => $v) {
+                $id[] = $v->c_cate_id;
+            }
+            $dataculums = culum::whereIn('c_cate_id', $id)->where('culum_id', '!=', $culum_id)->limit(4)->get()->toArray();
+            return  view("index.course.coursecont", ['dataculums' => $dataculums, 'codes' => $codes, 'culumdata' => $culumdata, 'muludata' => $muludata, 'name' => $name, 'num' => $num, 'time' => $time, 'usernum' => $usernum]);
+
     }
     //收藏课程
     public function shoucang(Request $request){
@@ -141,7 +142,6 @@ class courseController extends Controller
         if(empty($u_id)){
             echo  "<script>alert('未登录，请先登录');location.href='login';</script>";exit;
         }
-
         $culum_id =$request->input("culum_id");   //课程id
         $quest_id = $request->input("quest_id");    //查看问题的id
 
@@ -159,8 +159,6 @@ class courseController extends Controller
         if(empty($usernaem)){
             echo  "<script>alert('未购买，请先购买');location.href='index';</script>";exit;
         }
-
-
 
         if($quest_id){
             $data = Redis::lrange($quest_id,0,-1);
@@ -198,14 +196,19 @@ class courseController extends Controller
                 $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
             }
         }
-        dump($chapter);
         return view("index.course.coursecont1",['chapter'=>$chapter,'culum_cate'=>$culum_cate,'culumdata'=>$culumdata,'data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
     public function courselist(Request $request){       //课程展示(主要查询分类)
-        $data = CourseCate::where("c_status",1)->get()->toArray();
-        $sortData = recursionSon($data);
-        $c_cate_id=$request->input('c_cate_id');
-        return view("index.course.courselist",['c_cate_id'=>$c_cate_id,'cateData'=>$sortData]);
+        if(file_exists("./online/courselist.html")){
+            $view=file_get_contents("./online/courselist.html");
+        }else {
+            $data = CourseCate::where("c_status", 1)->get()->toArray();
+            $sortData = recursionSon($data);
+            $c_cate_id = $request->input('c_cate_id');
+            $view = view("index.course.courselist", ['c_cate_id' => $c_cate_id, 'cateData' => $sortData]);
+            file_put_contents("./online/courselist.html", $view);
+        }
+        return $view;
     }
     public function courselistData(Request $request){       //课程展示(中间位置)
         $page = empty($request->input("page"))?1:$request->input("page");
