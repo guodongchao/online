@@ -196,7 +196,13 @@ class courseController extends Controller
                 $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
             }
         }
-        return view("index.course.coursecont1",['chapter'=>$chapter,'culum_cate'=>$culum_cate,'culumdata'=>$culumdata,'data'=>$arr,'beforQuest_id'=>$quest_id]);
+        $c_u_where=[
+            'user_culum_status'=>1,
+            'culum_id'=>$culum_id
+        ];
+        $culum_user=userculum::where($c_u_where)->pluck('u_id')->toarray();
+        $user_culum=user::wherein('u_id',$culum_user)->get()->toarray();
+        return view("index.course.coursecont1",['user_culum'=>$user_culum,'chapter'=>$chapter,'culum_cate'=>$culum_cate,'culumdata'=>$culumdata,'data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
     public function courselist(Request $request){       //课程展示(主要查询分类)
         if(file_exists("./online/courselist.html")){
