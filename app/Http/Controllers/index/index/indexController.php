@@ -180,7 +180,7 @@ class indexController extends Controller
         $key="7c4a8d09ca3762af61e59520943AB26O";
 //        $order_sn=date("YmdHim",time());
         $ip=$_SERVER['REMOTE_ADDR'];
-        $notify_url="http://teacher.dong7532.top/index/donative";
+        $notify_url="http://dc.qianqianya.xyz/index/donative";
         $arr=[
             'appid'=>'wxd5af665b240b75d4',
             'mch_id'=>1500086022,
