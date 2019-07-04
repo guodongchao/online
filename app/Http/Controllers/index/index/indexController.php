@@ -69,7 +69,7 @@ class indexController extends Controller
         $arr['total'] = $data['culum_price'];
 
         $res = record::insert($arr);
-        return view('index.index.show',['arr'=>$data]);
+        return view('index.index.show',['arr'=>$data,'order_sn'=>$arr['order_sn']]);
     }
     //支付执行
     public function addshow(Request $request){
