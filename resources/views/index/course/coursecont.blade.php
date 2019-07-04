@@ -205,7 +205,7 @@
                                 content:'还未登录，未登录',
                                 btn:['登录','取消'],
                                 btn1:function(){
-                                    parent.location.href="http://www.online.com/index/login";
+                                    location.href="login";
                                     return true;
                                 },
                                 btn2:function(){
