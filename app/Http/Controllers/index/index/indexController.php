@@ -123,4 +123,65 @@ class indexController extends Controller
 
         }
     }
+    
+    //微信支付
+    public function weixin_buy(Request $request){
+        $data=$request->input();
+//        $status=$data['pay_status'];
+//        $order_id=$data['order_id'];
+//        OrderModel::where('order_id',$order_id)->update(['Pay_id'=>$status]);
+//        $arr=OrderModel::where('order_id',$order_id)->first();
+        $order_sn=110;
+        $url="https://api.mch.weixin.qq.com/pay/unifiedorder";
+        $string=md5(time());
+        $key="7c4a8d09ca3762af61e59520943AB26O";
+//        $order_sn=date("YmdHim",time());
+        $ip=$_SERVER['REMOTE_ADDR'];
+        $notify_url="http://teacher.dong7532.top/index/donative";
+        $arr=[
+            'appid'=>'wxd5af665b240b75d4',
+            'mch_id'=>1500086022,
+            'nonce_str'=>$string,
+            'sign_type'=>"MD5",
+            'body'=>'您好',
+            'out_trade_no'=>$order_sn,
+            'total_fee'=>1,
+            'spbill_create_ip'=>$ip,
+            'notify_url'=>$notify_url,
+            'trade_type'=>"NATIVE"
+        ];
+        ksort($arr);
+        $str=urldecode(http_build_query($arr));
+        $str.="&key=$key";
+        $sign=md5($str);
+        $arr['sign']=$sign;
+        $obj=new \weixin();
+        $arrInfo=$obj->arr2Xml($arr);
+        $info=$obj->sendPost($url,$arrInfo);
+        $objXml=simplexml_load_string($info);
+        $codeurl=$objXml->code_url;
+        return view('index.index.native',['codeurl'=>$codeurl]);
+    }
+    public function donative(){
+        date_default_timezone_set('prc');
+        $xml=file_get_contents("php://input");
+        $arr=json_decode(json_encode(simplexml_load_string($xml,'simpleXMLElement',LIBXML_NOCDATA)),true);
+        $sign=$arr['sign'];
+        unset($arr['sign']);
+        $newSign=$this->checkSign($arr);
+        $newSign=strtoupper($newSign);
+        $order_sn=$arr['out_trade_no'];
+        if($sign==$newSign){
+            $res=DB::table('order')->where('order_sn',$order_sn)->update(['order_pay_status'=>2]);
+        }
+    }
+    //获取sign
+    public function checkSign($arr){
+        ksort($arr);
+        $str=urldecode(http_build_query($arr));
+        $key="7c4a8d09ca3762af61e59520943AB26O";
+        $str.="&key=$key";
+        $sign=md5($str);
+        return $sign;
+    }
 }

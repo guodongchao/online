@@ -321,6 +321,12 @@ Route::group(['prefix'=>'index','middleware' =>['blog']],function () {
     Route::any('show','index\index\indexController@show');
     Route::any('addshow','index\index\indexController@addshow');
     Route::any('result','index\index\indexController@result');
+    //微信支付
+    Route::any('checkSign','index\index\indexController@checkSign');
+    Route::any('weixin_buy','index\index\indexController@weixin_buy');
+    Route::any('donative','index\index\indexController@donative');
+
+
 });
 
 

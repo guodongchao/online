@@ -90,7 +90,7 @@
                 if(pay_type==2){
                     location.href="show?culum_id="+culum_id;
                 }else{
-                    location.href="show?culum_id="+culum_id;
+                    location.href="weixin_buy?culum_id="+culum_id;
                 }
 
             });
