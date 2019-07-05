@@ -83,7 +83,7 @@ $(function(){
 				<li class="current">目录</li>
 				<li>笔记</li>
 				<li>问答</li>
-                <li>作业</li>
+                {{--<li>作业</li>--}}
             </ul>
 			<div class="tab_box tabcard">
 				<div style="padding-bottom:30px;">

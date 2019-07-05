@@ -136,73 +136,81 @@ class courseController extends Controller
         return json_encode(['code'=>3,'culum_id'=>$culum_id]);
 //        return view("index.course.coursecont1",['data'=>$arr,'beforQuest_id'=>$quest_id]);
     }
-    public function coursecont2(Request $request){
+    public function coursecont2(Request $request)
+    {
         $u_id = session("u_id");
         $u_name = session("u_name");
-        if(empty($u_id)){
-            echo  "<script>alert('未登录，请先登录');location.href='login';</script>";exit;
+        if (empty($u_id)) {
+            echo "<script>alert('未登录，请先登录');location.href='login';</script>";
+            exit;
         }
-        $culum_id =$request->input("culum_id");   //课程id
+        $culum_id = $request->input("culum_id");   //课程id
         $quest_id = $request->input("quest_id");    //查看问题的id
-
+        if(file_exists("./online/coursecont2$culum_id.html")){
+            $view=file_get_contents("./online/coursecont2$culum_id.html");
+        }else{
 //        $this->canWatch($u_id,$culum_id);
-        $culumCan = userculum::where("u_id",$u_id)->where("culum_id",$culum_id)->first();
-        if(!$culumCan){
+        $culumCan = userculum::where("u_id", $u_id)->where("culum_id", $culum_id)->first();
+        if (!$culumCan) {
             return redirect("/index/coursecont?culum_id=$culum_id");
         }
 
         $where = [
-            'u_id'=>$u_id,
-            'culum_id'=>$culum_id
+            'u_id' => $u_id,
+            'culum_id' => $culum_id
         ];
         $usernaem = DB::table('user_culum')->where($where)->first();
-        if(empty($usernaem)){
-            echo  "<script>alert('未购买，请先购买');location.href='index';</script>";exit;
+        if (empty($usernaem)) {
+            echo "<script>alert('未购买，请先购买');location.href='index';</script>";
+            exit;
         }
 
-        if($quest_id){
-            $data = Redis::lrange($quest_id,0,-1);
-        }else{
+        if ($quest_id) {
+            $data = Redis::lrange($quest_id, 0, -1);
+        } else {
             $strKey = "clum_$culum_id";  //第一层
-            $data = Redis::lrange($strKey,0,-1);
+            $data = Redis::lrange($strKey, 0, -1);
         }
-        foreach($data as $key=>$val){
+        foreach ($data as $key => $val) {
             $arr[] = Redis::hgetall($val);
         }
-        if(!isset($arr)){
-            $arr=[];
+        if (!isset($arr)) {
+            $arr = [];
         }
-        $culumdata = culum::where('culum_id',$culum_id)
-            ->join('teacher_details','culum.teacher_id','=','teacher_details.teacher_id')
+        $culumdata = culum::where('culum_id', $culum_id)
+            ->join('teacher_details', 'culum.teacher_id', '=', 'teacher_details.teacher_id')
             ->first()->toArray();
         //总分钟
-        $time = hour::where('culum_id',$culum_id)->pluck('show_time')->toarray();
+        $time = hour::where('culum_id', $culum_id)->pluck('show_time')->toarray();
         $culumdata['time'] = array_sum($time);
         $culumdata['hour'] = count($time);
-        $culumdata['num']=userculum::where('culum_id',$culum_id)->count();
+        $culumdata['num'] = userculum::where('culum_id', $culum_id)->count();
         //相关课程
-        $where=[
-            'is_del'=>1,
-            'c_cate_id'=>$culumdata['c_cate_id']
+        $where = [
+            'is_del' => 1,
+            'c_cate_id' => $culumdata['c_cate_id']
         ];
-        $culum_cate=culum::where($where)->limit(3)->get()->toarray();
+        $culum_cate = culum::where($where)->limit(3)->get()->toarray();
         //章节小节
-        $chapter=chapter::where('culum_id',$culum_id)->where('chapter_status',1)->get()->toarray();
-        foreach($chapter as $k=>$v){
-            $chapter[$k]['section']=section::where('chapter_id',$v['chapter_id'])->where('is_del',1)->select('section_id','section_name')->get()->toarray();
+        $chapter = chapter::where('culum_id', $culum_id)->where('chapter_status', 1)->get()->toarray();
+        foreach ($chapter as $k => $v) {
+            $chapter[$k]['section'] = section::where('chapter_id', $v['chapter_id'])->where('is_del', 1)->select('section_id', 'section_name')->get()->toarray();
         }
-        foreach ($chapter as $k=>$v){
-            foreach ($v['section'] as $kk=>$vv){
-                $chapter[$k]['section'][$kk]['hour']=hour::where('section_id',$vv['section_id'])->where('is_del',1)->get()->toarray();
+        foreach ($chapter as $k => $v) {
+            foreach ($v['section'] as $kk => $vv) {
+                $chapter[$k]['section'][$kk]['hour'] = hour::where('section_id', $vv['section_id'])->where('is_del', 1)->get()->toarray();
             }
         }
-        $c_u_where=[
-            'user_culum_status'=>1,
-            'culum_id'=>$culum_id
+        $c_u_where = [
+            'user_culum_status' => 1,
+            'culum_id' => $culum_id
         ];
-        $culum_user=userculum::where($c_u_where)->pluck('u_id')->toarray();
-        $user_culum=user::wherein('u_id',$culum_user)->get()->toarray();
-        return view("index.course.coursecont1",['user_culum'=>$user_culum,'chapter'=>$chapter,'culum_cate'=>$culum_cate,'culumdata'=>$culumdata,'data'=>$arr,'beforQuest_id'=>$quest_id]);
+        $culum_user = userculum::where($c_u_where)->pluck('u_id')->toarray();
+        $user_culum = user::wherein('u_id', $culum_user)->get()->toarray();
+        $view = view("index.course.coursecont1", ['user_culum' => $user_culum, 'chapter' => $chapter, 'culum_cate' => $culum_cate, 'culumdata' => $culumdata, 'data' => $arr, 'beforQuest_id' => $quest_id]);
+        file_put_contents("./online/coursecont2$culum_id.html", $view);
+    }
+        return $view;
     }
     public function courselist(Request $request){       //课程展示(主要查询分类)
         if(file_exists("./online/courselist.html")){
