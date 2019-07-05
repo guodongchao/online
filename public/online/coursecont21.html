@@ -39,7 +39,7 @@ $(function(){
 <div class="coursecont">
 <div class="coursepic1">
    <div class="coursetitle1">
-    	<h2 class="courseh21">{{$culumdata['culum_name']}}</h2>
+    	<h2 class="courseh21">会计基础</h2>
 		<div  style="margin-top:-40px;margin-right:25px;float:right;">
 		<div class="bdsharebuttonbox">
 			<a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
@@ -56,12 +56,12 @@ $(function(){
 		</div>
    </div>
    <div class="course_img1">
-	   <img src="../admin{{$culumdata['culum_img']}}" height="140">
+	   <img src="../admin./uploads/20190619055659.jpg" height="140">
    </div>
    <div class="course_xq">
-       <span class="courstime1"><p>课时<br/><span class="coursxq_num">{{$culumdata['hour']}}课时</span></p></span>
-	   <span class="courstime1"><p>学习人数<br/><span class="coursxq_num">{{$culumdata['num']}}人</span></p></span>
-	   <span class="courstime1"><p style="border:none;">课程时长<br/><span class="coursxq_num">{{$culumdata['time']}}分</span></p></span>
+       <span class="courstime1"><p>课时<br/><span class="coursxq_num">2课时</span></p></span>
+	   <span class="courstime1"><p>学习人数<br/><span class="coursxq_num">3人</span></p></span>
+	   <span class="courstime1"><p style="border:none;">课程时长<br/><span class="coursxq_num">536分</span></p></span>
    </div>
    <div class="course_xq2">
       <a class="course_learn"  href="video" target="main">开始学习</a>
@@ -71,76 +71,84 @@ $(function(){
 
 <div class="clearh"></div>
 <div class="coursetext">
-    {{--存放用户的u_id,课程culum_id--}}
+    
     <input type="hidden" value="1" id="u_id">
     <input type="hidden" value="1" id="culum_id">
-    {{--<input type="hidden" value="{{$beforQuest_id}}" id="beforQuest_id" >--}}
+    
 
 
 	<div class="box demo2" style="position:relative">
 			<ul class="tab_menu">
 				<li class="current course1">章节</li>
-				{{--<li class="course1">评价</li>--}}
+				
 				<li class="course1">问答</li>
-                {{--<li class="course1">资料区</li>--}}
+                
 			</ul>
 			<!--<a class="fombtn" style=" position:absolute; z-index:3; top:-10px; width:80px; text-align:center;right:0px;" href="#">下载资料包</a>-->
 			<div class="tab_box">
 				<div>
 					<dl class="mulu noo">
-                    @foreach($chapter as $k=>$v)
-					<div>
-                        <dt class="mulu_title"><span class="mulu_img"></span>第{{$k+1}}章&nbsp;&nbsp;{{$v['chapter_name']}}
+                    					<div>
+                        <dt class="mulu_title"><span class="mulu_img"></span>第1章&nbsp;&nbsp;第一章
 						<span class="mulu_zd">+</span></dt>
 						<div class="mulu_con">
-                            @foreach($v['section'] as $kk=>$vv)
-							<dd class="smalltitle"><strong>第{{$kk+1}}节&nbsp;&nbsp;{{$vv['section_name']}}</strong></dd>
-                            @foreach($vv['hour'] as $kkk=>$vvv)
-							<a href="video?culum_id={{$vvv['culum_id']}}&hour_id={{$vvv['hour_id']}}" target="main"><dd><strong class="cataloglink">课时{{$kkk+1}}：{{$vvv['hour_name']}}</strong><i class="fini nn"></i></dd></a>
-                            @endforeach
-                            @endforeach
-						</div>
+                            							<dd class="smalltitle"><strong>第1节&nbsp;&nbsp;凤尾菇</strong></dd>
+                            							<a href="video?culum_id=1&hour_id=1" target="main"><dd><strong class="cataloglink">课时1：看了就爱上了的卡上的</strong><i class="fini nn"></i></dd></a>
+                            							<a href="video?culum_id=1&hour_id=2" target="main"><dd><strong class="cataloglink">课时2：大苏打撒旦</strong><i class="fini nn"></i></dd></a>
+                                                        							<dd class="smalltitle"><strong>第2节&nbsp;&nbsp;访问各位</strong></dd>
+                                                        						</div>
 					</div>
-					@endforeach
-                    </dl>
+										<div>
+                        <dt class="mulu_title"><span class="mulu_img"></span>第2章&nbsp;&nbsp;阿赫热帖
+						<span class="mulu_zd">+</span></dt>
+						<div class="mulu_con">
+                            						</div>
+					</div>
+										<div>
+                        <dt class="mulu_title"><span class="mulu_img"></span>第3章&nbsp;&nbsp;法尔噶尔
+						<span class="mulu_zd">+</span></dt>
+						<div class="mulu_con">
+                            						</div>
+					</div>
+					                    </dl>
                 </div>
-				{{--<div class="hide">--}}
-					{{--<div>--}}
-                    {{--<div id="star">--}}
-                        {{--<span class="startitle">请打分</span>--}}
-                        {{--<ul>--}}
-                            {{--<li><a href="javascript:;">1</a></li>--}}
-                            {{--<li><a href="javascript:;">2</a></li>--}}
-                            {{--<li><a href="javascript:;">3</a></li>--}}
-                            {{--<li><a href="javascript:;">4</a></li>--}}
-                            {{--<li><a href="javascript:;">5</a></li>--}}
-                        {{--</ul>--}}
-                        {{--<span></span>--}}
-                        {{--<p></p>--}}
-	                  {{--</div>--}}
-                    {{--<div class="c_eform">                      --}}
-                        {{--<textarea rows="7" class="pingjia_con" onblur="if (this.value =='') this.value='评价详细内容';this.className='pingjia_con'" onclick="if (this.value=='评价详细内容') this.value='';this.className='pingjia_con_on'"></textarea>--}}
-                       {{--<a href="#" class="fombtn">发布评论</a>--}}
-                       {{--<div class="clearh"></div>--}}
-                    {{--</div>--}}
-					{{--<ul class="evalucourse">--}}
-                    	{{--<li>--}}
-                        	{{--<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">--}}
-                            {{--<p class="pepname">候候候候</p>                           --}}
-                            {{--</span>--}}
-                            {{--<span class="pepcont"><p>2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013试真3年国家公。</p>--}}
-                            {{--<p class="peptime pswer">2015-01-02</p></span>--}}
-                        {{--</li>--}}
-                        {{--<li>--}}
-                        	{{--<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">--}}
-                            {{--<p class="pepname">候候15kpiii</p>                           --}}
-                            {{--</span>--}}
-                            {{--<span class="pepcont"><p>2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公务员考试真题2013年国家公。</p>--}}
-                            {{--<p class="peptime pswer">2015-01-02</p></span>--}}
-                        {{--</li>--}}
-                    {{--</ul>--}}
-				{{--</div>--}}
-				{{--</div>--}}
+				
+					
+                    
+                        
+                        
+                            
+                            
+                            
+                            
+                            
+                        
+                        
+                        
+	                  
+                    
+                        
+                       
+                       
+                    
+					
+                    	
+                        	
+                            
+                            
+                            
+                            
+                        
+                        
+                        	
+                            
+                            
+                            
+                            
+                        
+                    
+				
+				
                 <div class="hide answer">
 					<div>
                      <h3 class="pingjia">提问题</h3>
@@ -151,46 +159,44 @@ $(function(){
                        <div class="clearh"></div>
                     </div>
 					<ul class="evalucourse">
-                    @foreach($data as $key=>$val)
-                    	<li >
+                                        	<li >
                         	<span class="pephead"><img src="images/0-0.JPG" width="50" title="候候">
-							<p class="pepname">{{$val['u_name']}}</p>
+							<p class="pepname">lisi</p>
                             </span>
                             <span class="pepcont">
-                            <p><a href="#" class="peptitle" onclick="see($(this),'{{$val['quest_id']}}')">{{$val['quest_info']}}</a></p>
+                            <p><a href="#" class="peptitle" onclick="see($(this),'clum1uid114')">asdasddsa</a></p>
                             <p class="peptime pswer">
 
                                 <span class="pepask">
-                                    <strong><a class="bluelink" onclick="see($(this),'{{$val['quest_id']}}')" href="#">回答</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <strong><a class="bluelink" onclick="see($(this),'clum1uid114')" href="#">回答</a></strong>&nbsp;&nbsp;&nbsp;&nbsp;
                                     <strong><a class="bluelink" href="#">浏览</a></strong>
-                                </span>{{date("Y-m-d H:i",$val['time'])}}
+                                </span>2019-07-04 14:39
                             </p>
                             </span>
                         </li>
-                        @endforeach
-                    </ul>
+                                            </ul>
                     
 				</div>
 				</div>
-				{{--<div class="hide">--}}
-					{{--<div>--}}
-					{{--<ul class="notelist" >--}}
-       {{--<li>--}}
-	   {{--<p class="mbm mem_not"><a href="#" class="peptitle">1.rar</a></p>--}}
-       		{{--<p class="gray"><b class="coclass">课时：<a href="#" target="_blank">会计的概念与目标1</a></b><b class="cotime">上传时间：<b class="coclass" >2015-05-8</b></b></p>--}}
-            {{----}}
-       {{--</li>  --}}
-       {{--<li>--}}
-	   {{--<p class="mbm mem_not"><a href="#" class="peptitle">资料.rar</a></p>--}}
-       		{{--<p class="gray"><b class="coclass">课时：<a href="#" target="_blank">会计的概念与目标2</a></b><b class="cotime">上传时间：<b class="coclass" >2015-05-8</b></b></p>--}}
-            {{----}}
-       		{{----}}
-            {{----}}
-       {{--</li>                      --}}
-  {{--</ul>--}}
-                    {{----}}
-				{{--</div>--}}
-				{{--</div>--}}
+				
+					
+					
+       
+	   
+       		
+            
+       
+       
+	   
+       		
+            
+       		
+            
+       
+  
+                    
+				
+				
 				
 			</div>
 		</div>
@@ -203,11 +209,11 @@ $(function(){
     <h3 class="righttit">授课讲师</h3>
     <div class="teacher">
     <div class="teapic ppi">
-    <a href="teacher" target="main" target="_blank"><img src="../admin{{$culumdata['teacher_img']}}" width="80" class="teapicy" title=""></a>
-     <h3 class="tname"><a href="teacher" target="main" class="peptitle" target="_blank">{{$culumdata['teacher_name']}}</a><p style="font-size:14px;color:#666">{{$culumdata['teacher_type']}}</p></h3>
+    <a href="teacher" target="main" target="_blank"><img src="../admin/admin/uploads/20190626091523.jpg" width="80" class="teapicy" title=""></a>
+     <h3 class="tname"><a href="teacher" target="main" class="peptitle" target="_blank">张三</a><p style="font-size:14px;color:#666">Java</p></h3>
     </div>
     <div class="clearh"></div>
-    <p>{{$culumdata['teacher_desc']}}</p>
+    <p>恩爱胡歌阿哈尔行情和去啊</p>
     </div>
     </div>
 </div>
@@ -217,10 +223,10 @@ $(function(){
     <h3 class="righttit" onclick="reglog_open();">最新学员</h3>
         <div class="teacher zxxy">
         <ul class="stuul">
-            @foreach($user_culum as $k=>$v)
-            <li><img src="../{{$v['u_img']}}" width="60" title="{{$v['u_name']}}"><p class="stuname">{{$v['u_name']}}</p></li>
-                @endforeach
-        </ul>
+                        <li><img src="..//admin/uploads/20190619055936.jpg" width="60" title="lisi"><p class="stuname">lisi</p></li>
+                            <li><img src="..//admin/uploads/20190625091147.jpg" width="60" title="admin"><p class="stuname">admin</p></li>
+                            <li><img src="../" width="60" title="xiaoxiao"><p class="stuname">xiaoxiao</p></li>
+                        </ul>
         <div class="clearh"></div>
         </div>
     </div>
@@ -230,14 +236,22 @@ $(function(){
     <div class="cr1">
     <h3 class="righttit">相关课程</h3>
     <div class="teacher">
-        @foreach($culum_cate as $k=>$v)
-    <div class="teapic">
-        <a href="#"  target="_blank"><img src="../admin{{$v['culum_img']}}" height="60" title="{{$v['culum_name']}}"></a>
-        <h3 class="courh3"><a href="coursecont?culum_id={{$v['culum_id']}}" class="peptitle" target="_blank">{{$v['culum_name']}}</a></h3>
+            <div class="teapic">
+        <a href="#"  target="_blank"><img src="../admin./uploads/20190619055659.jpg" height="60" title="会计基础"></a>
+        <h3 class="courh3"><a href="coursecont?culum_id=1" class="peptitle" target="_blank">会计基础</a></h3>
     </div>
     <div class="clearh"></div>
-        @endforeach
+            <div class="teapic">
+        <a href="#"  target="_blank"><img src="../admin./uploads/20190620090314.jpg" height="60" title="会计基础1"></a>
+        <h3 class="courh3"><a href="coursecont?culum_id=4" class="peptitle" target="_blank">会计基础1</a></h3>
     </div>
+    <div class="clearh"></div>
+            <div class="teapic">
+        <a href="#"  target="_blank"><img src="../admin./uploads/20190626070337.jpg" height="60" title="会计基础2"></a>
+        <h3 class="courh3"><a href="coursecont?culum_id=6" class="peptitle" target="_blank">会计基础2</a></h3>
+    </div>
+    <div class="clearh"></div>
+            </div>
     </div>
 </div>
    
